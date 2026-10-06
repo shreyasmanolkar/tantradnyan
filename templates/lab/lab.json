@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "replace-with-unique-lab-id",
+  "topic": "replace-with-catalog-topic-id",
+  "title": "Replace with the observable question",
+  "entry": "index.html",
+  "limitations": ["Replace with the model's scope and omissions."]
+}
