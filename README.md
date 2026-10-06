@@ -12,7 +12,7 @@ This repository is a living laboratory, knowledge base, and collection of execut
 - [Initial roadmap](ROADMAP.md) and [first 20 projects](projects/README.md).
 - [Contribution workflow](CONTRIBUTING.md) and [reusable templates](templates/README.md).
 - [Initial verification and its limits](docs/VALIDATION.md).
-- [AWS domain](domains/aws/README.md) — imported foundations, service architecture, operations, and hands-on labs.
+- [AWS domain](domains/aws/README.md) — first-principles guide, twenty local service models, and hands-on cloud experiments.
 - [Sync engines](domains/sync-engines/README.md) — first-principles guide and twenty Node.js labs.
 
 ## Try a learning loop

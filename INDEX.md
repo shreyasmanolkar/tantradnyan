@@ -375,4 +375,4 @@ Trace identity, networking, compute, durable state, deployment, and recovery thr
 
 | Topic | Status | Entry prerequisites | Lab |
 | --- | --- | --- | --- |
-| <a id="aws-service-lifecycle"></a>[Building and operating services on AWS](domains/aws/service-lifecycle/README.md) (`aws-service-lifecycle`) | growing | — | — |
+| <a id="aws-service-lifecycle"></a>[AWS services from first principles](domains/aws/curriculum/README.md) (`aws-service-lifecycle`) | growing | — | — |
