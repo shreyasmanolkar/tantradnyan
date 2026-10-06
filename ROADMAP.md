@@ -4,7 +4,7 @@ Use readiness criteria rather than calendar deadlines. At most two topics and on
 
 | Phase | Work | Exit evidence |
 | --- | --- | --- |
-| 0 — Establish the loop | Use the three starter labs; predict each output before manipulating it; record one surprise | One personal explanation, one reproduced failure, and three new questions |
+| 0 — Establish the loop | Use the two interactive starter labs; predict each output before manipulating it; record one surprise | One personal explanation, one reproduced failure, and three new questions |
 | 1 — Bits, state, and constraints | Binary representation, truth tables, half/full adders, CPU instructions; CSS box constraints as a parallel accessible investigation | Predict an instruction trace, implement an adder, and explain wrapping and overflow |
 | 2 — Programs as data | Tokenizer, expression parser, evaluator, stack VM; connect compiled instructions to the CPU model | Run a small language and trace one expression through every representation |
 | 3 — Processes and communication | Shell, memory arena, HTTP server; inspect syscalls and DNS resolution | Explain process boundaries, allocation lifetime, framing, and a partial read |
@@ -17,7 +17,7 @@ Phases are suggested dependencies, not prerequisites for all curiosity. Start wi
 
 ## Current state
 
-The architecture, catalog, templates, generated navigation, and three starter labs exist. Starter milestone artifacts are available; learner outcomes remain unverified. The first 20 projects are scoped proposals, with links to the starter mechanisms where applicable.
+The architecture, catalog, templates, generated navigation, and two interactive starter labs exist. The sync-engine curriculum and imported AWS service-lifecycle material provide additional learning routes. Milestone artifacts are available; learner outcomes remain unverified. The first 20 projects are scoped proposals, with links to existing mechanisms where applicable.
 
 ## Next bounded build
 
