@@ -3,22 +3,6 @@
 
 These routes follow questions rather than enforce a course sequence. Entry prerequisites are shown at each stop; fill a gap when needed. Available artifacts are not verified learner outcomes.
 
-## From CSS centering to CPU execution
-
-Follow deeper questions across the stack; this route is not a claim that CSS requires CPU internals.
-
-| Stop | Topic | Entry prerequisites | Content status |
-| --- | --- | --- | --- |
-| 1 | [CSS centering](../domains/web-platform/css-centering/README.md) | — | seed |
-| 2 | [CSS box model](../INDEX.md#box-model) | [HTML and DOM](../INDEX.md#html-and-dom) | planned |
-| 3 | [Layout algorithms](../INDEX.md#layout) | [CSS box model](../INDEX.md#box-model) | planned |
-| 4 | [Browser rendering](../INDEX.md#browser-rendering) | [Layout algorithms](../INDEX.md#layout), [CSS cascade and selectors](../INDEX.md#css-cascade) | planned |
-| 5 | [JavaScript runtime and event loop](../INDEX.md#javascript-runtime) | [Interpreters](../INDEX.md#interpreters) | planned |
-| 6 | [Processes and lifecycle](../INDEX.md#processes) | [System calls and privilege](../INDEX.md#system-calls) | planned |
-| 7 | [Virtual memory](../INDEX.md#virtual-memory) | [Address translation and TLBs](../INDEX.md#address-translation), [Processes and lifecycle](../INDEX.md#processes) | planned |
-| 8 | [Address translation and TLBs](../INDEX.md#address-translation) | [Binary representation and arithmetic](../INDEX.md#binary-representation) | planned |
-| 9 | [Instruction execution](../domains/computer-architecture/instruction-execution/README.md) | [Binary representation and arithmetic](../INDEX.md#binary-representation) | seed |
-
 ## Build a computer and explore an OS
 
 Connect physical state to instruction execution and protected software.
@@ -104,7 +88,6 @@ Trace a request through framing, addressing, transport, names, and application s
 | 8 | [TLS](../INDEX.md#tls) | [Byte streams and framing](../INDEX.md#byte-streams), [Public-key cryptography](../INDEX.md#public-key-cryptography) | planned |
 | 9 | [HTTP](../INDEX.md#http) | [Byte streams and framing](../INDEX.md#byte-streams) | planned |
 | 10 | [Proxies, load balancing, and CDNs](../INDEX.md#proxies-and-cdns) | [HTTP](../INDEX.md#http), [DNS](../INDEX.md#dns) | planned |
-| 11 | [Browser networking and caching](../INDEX.md#browser-networking) | [HTTP](../INDEX.md#http), [DNS](../INDEX.md#dns) | planned |
 
 ## Build an inspectable agent harness
 
@@ -171,21 +154,6 @@ Levels are optional lenses; they are not required folder names.
 | 3 — Internals | Reproduce loss, duplication, stale writes, write skew, offline recovery and ordinary process restart. | available | [README.md](../domains/sync-engines/experiments/README.md) |
 | 4 — Production architecture | Compare documented product accounts with explicitly proposed architectures and scaling choices. | available | [README.md](../domains/sync-engines/references/README.md) |
 | 5 — Integrated build | Build a persistent single-authority WebSocket field-map engine and reason about its declared boundaries. | available | [engine.mjs](../domains/sync-engines/sync-engine-lab/shared/engine.mjs), [README.md](../domains/sync-engines/sync-engine-lab/20-production-sync-engine/README.md) |
-
-### CSS centering
-
-[CSS centering](../domains/web-platform/css-centering/README.md)
-
-| Level | Outcome | State | Artifacts |
-| --- | --- | --- | --- |
-| 0 — Intuition | Predict the visible result before manipulating the starter lab. | available | [README.md](../domains/web-platform/css-centering/README.md) |
-| 1 — Fundamentals | Explain the state, transition rules, invariant, and assumptions. | available | [README.md](../domains/web-platform/css-centering/README.md) |
-| 2 — Small implementation | Run and inspect the smallest implementation of the mechanism. | available | [index.html](../domains/web-platform/css-centering/interactive/index.html) |
-| 3 — Internals | Reproduce a boundary or incorrect-rule counterexample and explain it. | available | [README.md](../domains/web-platform/css-centering/README.md) |
-| 4 — Production architecture | Compare the toy guarantees with documented real-system constraints. | planned | — |
-| 5 — Integrated build | Model constrained layout including padding and max-width, then compare it to the browser. | planned | — |
-| 6 — Real implementations | Trace a relevant production source path at a pinned revision. | planned | — |
-| 7 — Research | Pose a new falsifiable question or reproduce a research result. | planned | — |
 
 ### AWS services from first principles
 

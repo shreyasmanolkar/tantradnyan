@@ -2,7 +2,7 @@
 
 Recorded 2026-10-06 UTC (2026-10-07 in Asia/Kolkata). The repository was a newly scaffolded, uncommitted working tree with no existing commit ID.
 
-This is a historical record of the initial scaffold. The original synchronization domain and counter lab have since been removed; their observations below describe that earlier state. Current topics and runnable artifacts are listed in the [index](../INDEX.md).
+This is a historical record of the initial scaffold. The original synchronization domain and counter lab, and the web-platform domain and CSS centering lab, have since been removed; their observations below describe that earlier state. Current topics and runnable artifacts are listed in the [index](../INDEX.md).
 
 ## Environment and checks
 
@@ -21,7 +21,7 @@ This is a historical record of the initial scaffold. The original synchronizatio
 | Counter replicas | Disconnect client 1; edit clients 0/1; queue online states; reconnect; duplicate/deliver snapshots; block delivery with an offline endpoint | Updated states converge to totals `[2,2,2]`; duplicate snapshots do not add increments; disconnected endpoints pause delivery |
 | Atlas | Existing-content filter; planned-topic selection; search; lab launches; SVG Enter handler; select each of 243 topics | Filter shows 3 starter topics; planned node has no launch link; CPU has 8 milestones; every topic renders its connections without an uncaught exception |
 
-To reproduce the retained CSS and CPU browser cases manually, open the linked labs from the root README, perform these actions, and inspect the displayed state and computed geometry. The counter and initial atlas observations are historical; their original setup no longer describes the current catalog. The review used temporary CDP automation and screenshots under `/tmp`; those are not required repository dependencies.
+To reproduce the retained CPU browser cases manually, open the linked lab from the root README, perform these actions, and inspect the displayed state. The CSS, counter and initial atlas observations are historical; their original setup no longer describes the current catalog. The review used temporary CDP automation and screenshots under `/tmp`; those are not required repository dependencies.
 
 ## Verification limits
 

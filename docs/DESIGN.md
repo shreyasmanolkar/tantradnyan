@@ -30,7 +30,7 @@ tantradnyan/
   experiments/README.md      pointers to experiments; code stays with its owner
 ```
 
-**One canonical home per topic.** CPU caches belong to computer architecture; OS and database topics link to them. Memory allocation lives in programming languages/runtimes, with links from OS virtual memory and C systems programming. HTTP lives in networking; web platform topics link to it. Thread scheduling lives in operating systems; language concurrency explains what a runtime adds. Store a concept once and describe each domain's use of it locally.
+**One canonical home per topic.** CPU caches belong to computer architecture; OS and database topics link to them. Memory allocation lives in programming languages/runtimes, with links from OS virtual memory and C systems programming. HTTP lives in networking; application topics link to it. Thread scheduling lives in operating systems; language concurrency explains what a runtime adds. Store a concept once and describe each domain's use of it locally.
 
 **A shallow domain/topic layout.** Taxonomy groups are metadata, so adding quantum computing, robotics, or another cross-cutting area does not require moving existing topics. Create deeper local folders only when a topic has substantial internal structure. A topic can be split later by assigning new stable IDs and keeping an old-path pointer.
 
@@ -42,7 +42,7 @@ tantradnyan/
 
 ## 3. Taxonomy
 
-The [generated taxonomy](TAXONOMY.md) covers foundations; physical hardware; digital logic; architecture; operating systems; networking; distributed systems; databases; sync engines; languages and runtimes; developer tools; web platform; applications; software engineering; security; graphics; AI and ML; scientific computing; embedded systems and robotics; quantum computing; and AWS service operations.
+The [generated taxonomy](TAXONOMY.md) covers foundations; physical hardware; digital logic; architecture; operating systems; networking; distributed systems; databases; sync engines; languages and runtimes; developer tools; applications; software engineering; security; graphics; AI and ML; scientific computing; embedded systems and robotics; quantum computing; and AWS service operations.
 
 This separates concerns that are often conflated:
 
@@ -118,12 +118,12 @@ Use `prerequisites` for directional entry requirements. These edges must form a 
 
 ```mermaid
 flowchart LR
-    question[Why does margin auto center?] --> layout[Box constraints]
-    layout --> rendering[Browser layout and rendering]
-    rendering --> algorithms[Tree traversal and dependency invalidation]
-    rendering --> runtime[Runtime and scheduling]
-    runtime --> processes[Processes and virtual memory]
-    processes --> architecture[Instructions and address translation]
+    question[What changes when a CPU executes ADD?] --> instructions[Instructions and registers]
+    instructions --> logic[Arithmetic and digital logic]
+    instructions --> assembly[Assembly and machine code]
+    assembly --> syscalls[System calls]
+    syscalls --> processes[Processes and virtual memory]
+    processes --> translation[Address translation]
 ```
 
 This diagram describes a route for deeper questions, not mandatory prerequisites. The generated atlas lets you search topics, filter domains and status, inspect prerequisite/related edges, see topics that depend on a selection, and launch existing labs. Keyboard-accessible controls and an adjacency list complement the SVG view. Planned nodes open a description rather than a nonexistent folder.
@@ -132,7 +132,7 @@ Avoid a graph where every topic links to everything. Add an edge only when you c
 
 ## 8. Interactive lab system
 
-Default to static HTML, CSS, and plain JavaScript. Use actual platform behavior when that is the question: the CSS lab asks the browser to lay out a real element. Use a modeled state machine when control is needed: the CPU lab advances an explicit machine; the CRDT lab applies algebraic merge rules.
+Default to static HTML, CSS, and plain JavaScript. Use actual platform behavior when that is the question, such as browser layout measurements. Use a modeled state machine when control is needed: the CPU lab advances an explicit machine; the sync-engine CRDT lab applies algebraic merge rules.
 
 Every lab should offer a small initial scenario, named state, a useful manipulation, visible consequences, a reset, and stated limitations. Separate rendering from the model when there is a model. A headless experiment and a browser must use the same transition code so the visualization does not accidentally teach a different algorithm.
 
@@ -252,15 +252,9 @@ Choose a repository license before inviting external reuse. This starter does no
 
 ## 18. Concrete topic shapes
 
-The two existing interactive starter topics demonstrate small, useful environments:
+The existing interactive CPU starter topic demonstrates a small, useful environment:
 
 ```text
-domains/web-platform/css-centering/
-  README.md                      equation, failure cases, browser experiment
-  AGENTS.md -> .agent/instructions.md
-  interactive/index.html         actual browser layout and measurements
-  interactive/lab.json           discovery and explicit scope
-
 domains/computer-architecture/instruction-execution/
   README.md                      state, ISA, trace, limitations
   AGENTS.md -> .agent/instructions.md

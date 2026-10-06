@@ -287,31 +287,6 @@ Canonical prefix: `domains/developer-tools/`.
 - [Profiling](../INDEX.md#profiling) — `profiling` (planned).
 - [Reproducible builds](../INDEX.md#reproducible-builds) — `reproducible-builds` (planned).
 
-## Web platform and browsers
-
-Explain document semantics, layout, script execution, and browser behavior.
-
-Canonical prefix: `domains/web-platform/`.
-
-### Documents and styling
-
-- [HTML and DOM](../INDEX.md#html-and-dom) — `html-and-dom` (planned).
-- [CSS cascade and selectors](../INDEX.md#css-cascade) — `css-cascade` (planned).
-- [CSS box model](../INDEX.md#box-model) — `box-model` (planned).
-- [CSS centering](../domains/web-platform/css-centering/README.md) — `css-centering` (seed).
-- [Layout algorithms](../INDEX.md#layout) — `layout` (planned).
-- [Web accessibility](../INDEX.md#accessibility) — `accessibility` (planned).
-
-### Browser internals
-
-- [Browser rendering](../INDEX.md#browser-rendering) — `browser-rendering` (planned).
-- [JavaScript runtime and event loop](../INDEX.md#javascript-runtime) — `javascript-runtime` (planned).
-- [Browser networking and caching](../INDEX.md#browser-networking) — `browser-networking` (planned).
-- [Browser security boundaries](../INDEX.md#browser-security) — `browser-security` (planned).
-- [Web storage](../INDEX.md#web-storage) — `web-storage` (planned).
-- [Workers and parallelism](../INDEX.md#web-workers) — `web-workers` (planned).
-- [Web components](../INDEX.md#web-components) — `web-components` (planned).
-
 ## Application mechanisms
 
 Integrate systems into useful behavior with explicit user-facing constraints.
