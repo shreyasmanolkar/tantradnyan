@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CSS centering constraints · Tantradnyan</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0 auto;max-width:1050px;padding:24px;background:#111827;color:#e2e8f0;font:16px/1.5 system-ui}a{color:#5eead4}h1{margin-bottom:4px}h2{font-size:1.1rem}main{display:grid;grid-template-columns:300px 1fr;gap:20px}.panel{min-width:0;border:1px solid #475569;padding:18px;background:#1e293b;border-radius:12px}label{display:block;margin-top:12px}input[type=range],select{width:100%}button,select{font:inherit;padding:8px;background:#0f172a;color:#e2e8f0;border:1px solid #64748b;border-radius:5px}button{margin-top:16px;cursor:pointer}input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid #5eead4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.5 ui-monospace,monospace}.viewport{overflow:auto;max-width:100%;padding-bottom:10px}#parent{width:420px;height:220px;background:repeating-linear-gradient(90deg,#26374a 0px,#26374a 19px,#34475c 20px);outline:2px solid #94a3b8;position:relative}#child{height:64px;width:180px;padding:12px;border:2px solid #5eead4;background:#134e4a;color:white;margin-left:auto;margin-right:auto}.wide{grid-column:1/-1}@media(max-width:800px){main{grid-template-columns:1fr}}
+</style></head><body>
+<a href="../README.md">Topic explanation</a> · <a href="../../../../interactive/atlas.html">Knowledge map</a>
+<h1>How does a div get centered?</h1><p>Change the constraints and inspect the browser's actual geometry. Predict the remaining width before moving a slider.</p>
+<main><section class="panel"><h2>Constraints</h2>
+<label for="mode">Formatting context</label><select id="mode"><option value="block">Block: margin-left/right auto</option><option value="flex">Flex: justify-content center</option><option value="grid">Grid: place-items center</option></select>
+<label for="parentWidth">Parent width: <output id="pw"></output> px</label><input id="parentWidth" type="range" min="180" max="650" value="420">
+<label for="childWidth">Child border-box width: <output id="cw"></output> px</label><input id="childWidth" type="range" min="60" max="650" value="180">
+<label><input id="autoWidth" type="checkbox"> Child width: auto</label><label><input id="autoMargin" type="checkbox" checked> Horizontal margins: auto</label><button id="reset">Reset</button></section>
+<section class="panel"><h2>Actual browser layout</h2><div class="viewport"><div id="parent"><div id="child">The child box</div></div></div><p id="observation" role="status" aria-live="polite"></p><pre id="measure"></pre></section>
+<section class="panel wide"><h2>CSS applied to the two boxes</h2><pre id="css"></pre><p>The parent has no padding or border. The child's reported width includes its padding and border because it uses <code>box-sizing: border-box</code>. The geometry shows signed gaps, which may differ from computed margins when a box overflows or alignment positions it.</p></section></main>
+<p>Scope: one block child; horizontal writing mode; left-to-right direction. Flex and grid have their own sizing and alignment rules. This lab uses the browser itself, rather than a hand-written approximation of CSS.</p>
+<script>
+'use strict';const el=id=>document.getElementById(id);
+function update(){
+ const mode=el('mode').value,pw=Number(el('parentWidth').value),cw=Number(el('childWidth').value),auto=el('autoWidth').checked,margins=el('autoMargin').checked;
+ el('pw').textContent=pw;el('cw').textContent=cw;el('childWidth').disabled=auto;
+ const parent=el('parent'),child=el('child');
+ parent.style.width=pw+'px';parent.style.display=mode;parent.style.justifyContent=mode==='flex'?'center':'';parent.style.alignItems=mode==='grid'?'center':'';parent.style.justifyItems=mode==='grid'?'center':'';
+ child.style.width=auto?'auto':cw+'px';child.style.marginLeft=child.style.marginRight=margins?'auto':'0';child.style.flexShrink='0';
+ const p=parent.getBoundingClientRect(),c=child.getBoundingClientRect(),computed=getComputedStyle(child);
+ const left=c.left-p.left,right=p.right-c.right,remaining=p.width-c.width;
+ el('measure').textContent=`Parent content width: ${p.width.toFixed(2)} px\nChild border-box width: ${c.width.toFixed(2)} px\nRemaining width: ${remaining.toFixed(2)} px\nLeft geometric gap: ${left.toFixed(2)} px\nRight geometric gap: ${right.toFixed(2)} px\nTop gap: ${(c.top-p.top).toFixed(2)} px\nComputed horizontal margins: ${computed.marginLeft} / ${computed.marginRight}`;
+ el('observation').textContent=mode==='block'?(remaining<0?'The child overflows. Auto margins do not split negative free width equally in this block context.':auto?'Auto width fills the available width here; auto horizontal margins resolve to zero.':margins?'Remaining nonnegative width is split equally between the two auto margins.':'Both specified margins are zero. In left-to-right block flow, the right used margin absorbs the remaining constraint.'):mode==='flex'?'Flex uses its own main-axis rules. Auto margins consume positive free space before justify-content; this lab disables flex shrinking.':'Grid uses its own item sizing and alignment rules. Auto margins can absorb free space; place-items also centers vertically.';
+ el('css').textContent=`.parent { width: ${pw}px; height: 220px; display: ${mode};${mode==='flex'?' justify-content: center;':mode==='grid'?' place-items: center;':''} }\n.child { box-sizing: border-box; width: ${auto?'auto':cw+'px'}; height: 64px; padding: 12px; border: 2px solid; margin-left: ${margins?'auto':'0'}; margin-right: ${margins?'auto':'0'};${mode==='flex'?' flex-shrink: 0;':''} }`;
+}
+for(const id of ['mode','parentWidth','childWidth','autoWidth','autoMargin'])el(id).addEventListener('input',update);
+el('reset').onclick=()=>{el('mode').value='block';el('parentWidth').value='420';el('childWidth').value='180';el('autoWidth').checked=false;el('autoMargin').checked=true;update();};
+window.addEventListener('resize',update);update();
+</script></body></html>

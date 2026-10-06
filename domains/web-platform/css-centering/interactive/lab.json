@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "css-centering-lab",
+  "topic": "css-centering",
+  "title": "Observe real CSS centering constraints",
+  "entry": "index.html",
+  "limitations": ["One block in a left-to-right horizontal writing mode; browser layout is measured, not simulated; excludes margin collapse, inline formatting, and absolute positioning."]
+}
