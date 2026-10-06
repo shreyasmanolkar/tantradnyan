@@ -12,7 +12,7 @@
 'use strict';
 const catalog=__CATALOG_JSON__;
 const el=id=>document.getElementById(id), byId=new Map(catalog.topics.map(t=>[t.id,t]));
-let selected='css-centering';
+let selected='instruction-execution';
 for(const domain of catalog.domains){const option=document.createElement('option');option.value=domain.id;option.textContent=domain.title;el('domain').append(option);}
 function dependents(id){return catalog.topics.filter(t=>t.prerequisites.includes(id)).map(t=>t.id);}
 function related(id){return [...new Set([...byId.get(id).related,...catalog.topics.filter(t=>t.related.includes(id)).map(t=>t.id)])];}

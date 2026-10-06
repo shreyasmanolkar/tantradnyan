@@ -1,12 +1,12 @@
 # First 20 foundational projects
 
-Choose a route through these projects based on your questions. The order below gradually increases the number of mechanisms in one build. These are **scoped proposals**; the starter CPU and layout models provide useful components for projects 2 and 3. The [sync-engine curriculum](../domains/sync-engines/README.md) provides bounded models for projects 19 and 20.
+Choose a route through these projects based on your questions. The order below gradually increases the number of mechanisms in one build. These are **scoped proposals**; the starter CPU model provides useful components for project 2. The [sync-engine curriculum](../domains/sync-engines/README.md) provides bounded models for projects 19 and 20.
 
 | # | Project / intended folder | Prerequisite topic IDs | Smallest useful build | Experiment and completion evidence |
 | --- | --- | --- | --- | --- |
 | 1 | Adder from gates / `adder-from-gates` | `binary-representation`, `boolean-logic`, `combinational-logic` | Half adder → full adder → 8-bit ripple carry | Exhaustive input checks; distinguish carry from signed overflow; inspect carry propagation |
 | 2 | Tiny CPU / `tiny-cpu` | `instruction-execution`, `registers-and-alu`, `assembly` | Extend the starter ISA with compare/branch or an assembler | Trace a loop; wrapping, invalid instruction, stack bounds; compare an instruction with RISC-V semantics |
-| 3 | CSS constraint explorer / `css-constraints` | `css-centering`, `box-model`, `layout` | Extend the existing actual-layout lab with padding or max-width | Predict used width/margins, compare browser measurements, explain overflow and the formatting context |
+| 3 | CSS constraint explorer / `css-constraints` | CSS box constraints (outside the current catalog) | Build a standalone browser layout lab with padding or max-width | Predict used width/margins, compare browser measurements, explain overflow and the formatting context |
 | 4 | Hash table / `hash-table` | `complexity`, `hash-tables` | Chaining, then resize | Force collisions; compare load factors; verify all keys survive resizing |
 | 5 | Expression language / `expression-language` | `lexing`, `parsing`, `trees-and-graphs` | Tokenize → parse → AST → evaluate | Ambiguous precedence and malformed input fixtures; trace `1 + 2 * 3` through representations |
 | 6 | Tiny Lisp / `tiny-lisp` | `lisp`, `interpreters`, `closures` | Reader, environments, evaluator, lexical closures | Shadowing and recursive-call examples; explain environment capture and deferred features |
