@@ -4,8 +4,8 @@ Use readiness criteria rather than calendar deadlines. At most two topics and on
 
 | Phase | Work | Exit evidence |
 | --- | --- | --- |
-| 0 — Establish the loop | Use the two interactive starter labs; predict each output before manipulating it; record one surprise | One personal explanation, one reproduced failure, and three new questions |
-| 1 — Bits, state, and constraints | Binary representation, truth tables, half/full adders, CPU instructions; CSS box constraints as a parallel accessible investigation | Predict an instruction trace, implement an adder, and explain wrapping and overflow |
+| 0 — Establish the loop | Use the interactive CPU starter lab; predict each output before manipulating it; record one surprise | One personal explanation, one reproduced failure, and three new questions |
+| 1 — Bits, state, and constraints | Binary representation, truth tables, half/full adders, CPU instructions | Predict an instruction trace, implement an adder, and explain wrapping and overflow |
 | 2 — Programs as data | Tokenizer, expression parser, evaluator, stack VM; connect compiled instructions to the CPU model | Run a small language and trace one expression through every representation |
 | 3 — Processes and communication | Shell, memory arena, HTTP server; inspect syscalls and DNS resolution | Explain process boundaries, allocation lifetime, framing, and a partial read |
 | 4 — Durable state | Append-only KV, page/index model, WAL recovery, bounded database | Inject modeled crashes and identify exactly which acknowledgments survive |
@@ -13,12 +13,12 @@ Use readiness criteria rather than calendar deadlines. At most two topics and on
 | 6 — Integrated systems | Choose a compiler, xv6 exploration/toy OS, collaborative editor, distributed task engine, or agent harness | Meet a narrow system contract, document failures, then inspect a real implementation |
 | Ongoing — Follow curiosity | GPU, security, formal verification, robotics, quantum computing, or a newly discovered domain | One bounded question with a reproducible artifact before broadening scope |
 
-Phases are suggested dependencies, not prerequisites for all curiosity. Start with CSS, Lisp, electronics, or databases if that is the question you want to pursue. The catalog shows gaps to fill when a mechanism needs more background.
+Phases are suggested dependencies, not prerequisites for all curiosity. Start with Lisp, electronics, or databases if that is the question you want to pursue. The catalog shows gaps to fill when a mechanism needs more background.
 
 ## Current state
 
-The architecture, catalog, templates, generated navigation, and two interactive starter labs exist. The sync-engine curriculum and imported AWS service-lifecycle material provide additional learning routes. Milestone artifacts are available; learner outcomes remain unverified. The first 20 projects are scoped proposals, with links to existing mechanisms where applicable.
+The architecture, catalog, templates, generated navigation, and interactive CPU starter lab exist. The sync-engine curriculum and imported AWS service-lifecycle material provide additional learning routes. Milestone artifacts are available; learner outcomes remain unverified. The first 20 projects are scoped proposals, with links to existing mechanisms where applicable.
 
 ## Next bounded build
 
-Choose project 1 (adder), 2 (CPU extension), or 3 (CSS constraint walkthrough) from [the project list](projects/README.md). Finish its acceptance evidence and record a new question before adding another implementation language or framework.
+Choose project 1 (adder) or 2 (CPU extension) from [the project list](projects/README.md). Finish its acceptance evidence and record a new question before adding another implementation language or framework.

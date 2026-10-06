@@ -4,7 +4,7 @@ Keep the original question even when its assumptions turn out to be wrong. Statu
 
 | ID | Question | Home | State | Evidence / next observation |
 | --- | --- | --- | --- | --- |
-| Q-001 | Why do two auto margins center a block? | [CSS centering](domains/web-platform/css-centering/README.md) | investigating | Derive the width constraint, then compare browser measurements |
+| Q-001 | Why do two auto margins center a block? | [Historical CSS observations](docs/VALIDATION.md) | investigating | Topic removed from the catalog; original next observation: derive the width constraint, then compare browser measurements |
 | Q-002 | What changes when a CPU executes ADD? | [Instruction execution](domains/computer-architecture/instruction-execution/README.md) | investigating | Predict PC, register, and wrapping behavior before stepping |
 | Q-003 | Why can replicas merge the same counter state twice safely? | [Sync-engine CRDT lab](domains/sync-engines/sync-engine-lab/14-crdt/README.md) | investigating | Compare componentwise max with addition |
 | Q-004 | When does an acknowledged write survive a power loss? | Topic ID `write-ahead-logging` (planned) | open | Separate OS buffering, stable storage, and device assumptions |

@@ -2,7 +2,7 @@
 
 Start with a question. Explain the mechanism, predict an outcome, build the smallest useful model, try to break it, and compare it with a real system.
 
-This repository is a living laboratory, knowledge base, and collection of executable explanations. The catalog maps the intended scope; **two starter topics contain interactive labs**, alongside the sync-engine curriculum and AWS learning material. Planned topics are explicitly marked so a map never implies that a textbook has already been written.
+This repository is a living laboratory, knowledge base, and collection of executable explanations. The catalog maps the intended scope; **the CPU starter topic contains an interactive lab**, alongside the sync-engine curriculum and AWS learning material. Planned topics are explicitly marked so a map never implies that a textbook has already been written.
 
 ## Start here
 
@@ -19,7 +19,6 @@ This repository is a living laboratory, knowledge base, and collection of execut
 
 | Question | Explanation and next steps | Interactive lab |
 | --- | --- | --- |
-| How does `margin: auto` center a div? | [CSS centering](domains/web-platform/css-centering/README.md) | [Manipulate real layout](domains/web-platform/css-centering/interactive/index.html) |
 | How does a CPU execute an instruction? | [Instruction execution](domains/computer-architecture/instruction-execution/README.md) | [Step a tiny CPU](domains/computer-architecture/instruction-execution/interactive/index.html) |
 
 Open the HTML files directly in a browser. They need no package installation, remote assets, or backend. Alternatively, from the repository root:
