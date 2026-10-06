@@ -1,0 +1,2 @@
+const labs=["01-networking", "02-tcp", "03-udp", "04-websocket", "05-concurrency", "06-cas", "07-versioning", "08-optimistic-concurrency", "09-state-sync", "10-delta-sync", "11-operation-log", "12-event-sourcing", "13-ot", "14-crdt", "15-offline-sync", "16-chat", "17-collaborative-editor", "18-multiplayer", "19-server-authoritative-game", "20-production-sync-engine"];
+for(const lab of labs){const {run}=await import('./'+lab+'/src/demo.mjs');console.log(JSON.stringify({lab,result:await run()}));}
