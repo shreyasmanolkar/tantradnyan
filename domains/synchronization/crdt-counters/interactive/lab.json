@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "id": "crdt-counters-lab",
+  "topic": "crdt-counters",
+  "title": "Disconnect replicas and observe convergence",
+  "entry": "index.html",
+  "model": "../implementations/javascript/model.js",
+  "limitations": ["Fixed unique writer identities; state-based grow-only counters; no persistence, dynamic membership, decrement, or text editing semantics."]
+}
