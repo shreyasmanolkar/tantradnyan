@@ -1,0 +1,2 @@
+# Lab ranges: resolve, scan and lock exact versions/hashes before production.
+psycopg[binary,pool]>=3.2,<4

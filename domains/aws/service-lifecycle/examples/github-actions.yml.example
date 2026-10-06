@@ -1,0 +1,108 @@
+# Copy deliberately into a learner-controlled repo's .github/workflows/ after setup.
+# Replace BOTH action placeholders with reviewed full commit SHAs before running.
+# Requires existing lab stacks through stage 9; it does not bootstrap accounts/IAM.
+name: AWS lab reviewed release
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+concurrency:
+  group: aws101-sandbox-release
+  cancel-in-progress: false
+
+env:
+  AWS_REGION: ${{ vars.AWS_REGION }}
+  AWS_LAB_PREFIX: aws101
+  AWS_PAGER: ""
+  EXPECTED_ACCOUNT: ${{ vars.AWS_ACCOUNT_ID }}
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    environment: sandbox-plan
+    outputs:
+      change_set: ${{ steps.release.outputs.change_set }}
+      image_uri: ${{ steps.release.outputs.image_uri }}
+    steps:
+      - uses: actions/checkout@REVIEWED_CHECKOUT_COMMIT_SHA
+        with:
+          persist-credentials: false
+      - uses: aws-actions/configure-aws-credentials@REVIEWED_AWS_CREDENTIALS_COMMIT_SHA
+        with:
+          role-to-assume: ${{ vars.AWS_PLAN_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          allowed-account-ids: ${{ env.EXPECTED_ACCOUNT }}
+      - name: Local acceptance check
+        run: python3 examples/smoke.py
+      - name: Build, scan and prepare exact change set
+        id: release
+        shell: bash
+        env:
+          CERT_ARN: ${{ vars.AWS_CERTIFICATE_ARN }}
+          CFN_EXECUTION_ROLE_ARN: ${{ vars.AWS_CFN_EXECUTION_ROLE_ARN }}
+        run: |
+          set -euo pipefail
+          source examples/lab.sh
+          test "$(aws sts get-caller-identity --query Account --output text)" = "$EXPECTED_ACCOUNT"
+          test -n "$CERT_ARN"
+          test -n "$CFN_EXECUTION_ROLE_ARN"
+          load_foundation
+          DB_HOST=$(out "$AWS_LAB_PREFIX-data" DbHost)
+          DB_SECRET_ARN=$(out "$AWS_LAB_PREFIX-data" DbSecretArn)
+          TAG="$GITHUB_SHA-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          REGISTRY=${REPOSITORY_URI%%/*}
+          aws ecr get-login-password | docker login --username AWS --password-stdin "$REGISTRY"
+          docker buildx build --platform linux/amd64 --load -t "$REPOSITORY_URI:$TAG" examples
+          docker push "$REPOSITORY_URI:$TAG"
+          DIGEST=$(aws ecr describe-images --repository-name "$REPOSITORY" --image-ids "imageTag=$TAG" --query 'imageDetails[0].imageDigest' --output text)
+          aws ecr wait image-scan-complete --repository-name "$REPOSITORY" --image-id "imageDigest=$DIGEST"
+          aws ecr describe-image-scan-findings --repository-name "$REPOSITORY" --image-id "imageDigest=$DIGEST" > /tmp/scan.json
+          # This gate assumes basic scanning; adapt for registry-level enhanced scanning.
+          jq -e '(.imageScanStatus.status == "COMPLETE") and (((.imageScanFindings.findingSeverityCounts.CRITICAL // 0) + (.imageScanFindings.findingSeverityCounts.HIGH // 0)) == 0)' /tmp/scan.json
+          IMAGE_URI="$REPOSITORY_URI@$DIGEST"
+          plan_service
+          echo "change_set=$CHANGE_SET" >> "$GITHUB_OUTPUT"
+          echo "image_uri=$IMAGE_URI" >> "$GITHUB_OUTPUT"
+          echo "Review CloudFormation change set: $CHANGE_SET" >> "$GITHUB_STEP_SUMMARY"
+          echo "Immutable image: $IMAGE_URI" >> "$GITHUB_STEP_SUMMARY"
+          docker logout "$REGISTRY"
+
+  apply:
+    needs: plan
+    runs-on: ubuntu-latest
+    # Configure REQUIRED REVIEWERS and restricted deployment branches here.
+    # Review the plan job's exact change-set ARN before approving this job.
+    environment: sandbox
+    steps:
+      - uses: actions/checkout@REVIEWED_CHECKOUT_COMMIT_SHA
+        with:
+          persist-credentials: false
+      - uses: aws-actions/configure-aws-credentials@REVIEWED_AWS_CREDENTIALS_COMMIT_SHA
+        with:
+          role-to-assume: ${{ vars.AWS_APPLY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          allowed-account-ids: ${{ env.EXPECTED_ACCOUNT }}
+      - name: Execute reviewed change set and verify target health/revision
+        shell: bash
+        env:
+          CHANGE_SET: ${{ needs.plan.outputs.change_set }}
+          IMAGE_URI: ${{ needs.plan.outputs.image_uri }}
+        run: |
+          set -euo pipefail
+          source examples/lab.sh
+          test "$(aws sts get-caller-identity --query Account --output text)" = "$EXPECTED_ACCOUNT"
+          aws cloudformation describe-change-set --change-set-name "$CHANGE_SET"
+          aws cloudformation execute-change-set --change-set-name "$CHANGE_SET"
+          aws cloudformation wait stack-update-complete --stack-name "$AWS_LAB_PREFIX-service"
+          load_service
+          aws ecs wait services-stable --cluster "$CLUSTER" --services "$SERVICE"
+          RUNNING_REVISION=$(aws ecs describe-services --cluster "$CLUSTER" --services "$SERVICE" --query 'services[0].taskDefinition' --output text)
+          test "$RUNNING_REVISION" = "$TASK_DEFINITION"
+          RUNNING_IMAGE=$(aws ecs describe-task-definition --task-definition "$RUNNING_REVISION" --query 'taskDefinition.containerDefinitions[?name==`api`].image | [0]' --output text)
+          test "$RUNNING_IMAGE" = "$IMAGE_URI"
+          aws elbv2 describe-target-health --target-group-arn "$TARGET_GROUP_ARN" > /tmp/targets.json
+          jq -e '(.TargetHealthDescriptions | length) >= 2 and all(.TargetHealthDescriptions[]; .TargetHealth.State == "healthy")' /tmp/targets.json
+          # Hosted runner is intentionally NOT allowed through the client /32 SG.
+          # Run external HTTPS/business probes from your authorized monitor/client;
+          # add that independent result as a promotion gate for production.

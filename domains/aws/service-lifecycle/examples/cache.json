@@ -1,0 +1,65 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Optional billable lab cache: TLS + SG isolation; add RBAC/user group before production",
+  "Parameters": {
+    "VpcId": {
+      "Type": "AWS::EC2::VPC::Id"
+    },
+    "AppSG": {
+      "Type": "AWS::EC2::SecurityGroup::Id"
+    },
+    "PrivateSubnets": {
+      "Type": "List<AWS::EC2::Subnet::Id>"
+    }
+  },
+  "Resources": {
+    "CacheSG": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "VpcId": {
+          "Ref": "VpcId"
+        },
+        "GroupDescription": "Lab cache accepts only application SG",
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 6379,
+            "ToPort": 6380,
+            "SourceSecurityGroupId": {
+              "Ref": "AppSG"
+            }
+          }
+        ]
+      }
+    },
+    "Cache": {
+      "Type": "AWS::ElastiCache::ServerlessCache",
+      "Properties": {
+        "Engine": "valkey",
+        "ServerlessCacheName": {
+          "Ref": "AWS::StackName"
+        },
+        "SubnetIds": {
+          "Ref": "PrivateSubnets"
+        },
+        "SecurityGroupIds": [
+          {
+            "Ref": "CacheSG"
+          }
+        ]
+      }
+    }
+  },
+  "Outputs": {
+    "CacheHost": {
+      "Value": {
+        "Fn::GetAtt": ["Cache", "Endpoint.Address"]
+      }
+    },
+    "CachePort": {
+      "Value": {
+        "Fn::GetAtt": ["Cache", "Endpoint.Port"]
+      }
+    }
+  }
+}
