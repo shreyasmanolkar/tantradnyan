@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "id": "instruction-execution-lab",
+  "topic": "instruction-execution",
+  "title": "Step a tiny CPU",
+  "entry": "index.html",
+  "model": "../implementations/javascript/model.js",
+  "limitations": ["Custom byte ISA, instruction-index PC, separate data memory and stack; no encoding, timing, pipeline, interrupts, or cache."]
+}

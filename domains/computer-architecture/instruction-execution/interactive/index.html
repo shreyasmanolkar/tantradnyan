@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Step a tiny CPU · Tantradnyan</title>
+<style>
+:root{color-scheme:dark;--bg:#111827;--panel:#1e293b;--line:#475569;--ink:#e2e8f0;--accent:#5eead4}*{box-sizing:border-box}body{margin:0 auto;max-width:1100px;padding:24px;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui}a{color:var(--accent)}h1{margin-bottom:4px}h2{font-size:1.1rem}main{display:grid;grid-template-columns:1fr 1fr;gap:18px}.panel{background:var(--panel);border:1px solid var(--line);padding:18px;border-radius:12px}textarea{width:100%;height:260px}textarea,input,button{font:inherit;border:1px solid var(--line);border-radius:5px;background:#0f172a;color:var(--ink);padding:7px}button{cursor:pointer;margin:8px 6px 8px 0}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--accent)}.regs,.memory{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.memory{grid-template-columns:repeat(8,1fr)}label{display:block;font-size:13px}input{width:100%}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.5 ui-monospace,monospace}.status{min-height:26px;color:#fcd34d}.memory label{font-size:11px}.wide{grid-column:1/-1}@media(max-width:760px){main{grid-template-columns:1fr}.memory{grid-template-columns:repeat(4,1fr)}}
+</style></head><body>
+<a href="../README.md">Topic explanation</a> · <a href="../../../../interactive/atlas.html">Knowledge map</a>
+<h1>Step a tiny CPU</h1><p>Predict one instruction's effect. Step it, then compare PC, registers, memory, and stack.</p>
+<main>
+<section class="panel"><h2>Program</h2><label for="source">One instruction per line; decimal operands; # starts a comment</label><textarea id="source" spellcheck="false"></textarea><button id="load">Load / reset</button><button id="step">Step</button><button id="run">Run up to 256 steps</button><p id="status" class="status" role="status" aria-live="polite"></p><pre id="program"></pre></section>
+<section class="panel"><h2>Machine state</h2><label for="pc">Program counter (instruction index)</label><input id="pc" type="number" min="0" step="1"><p id="summary"></p><div id="registers" class="regs"></div><h2>Stack</h2><pre id="stack"></pre><h2>Rules</h2><p>Registers and memory are bytes (0–255). ADD and SUB wrap modulo 256. R0–R3 are ordinary registers. The stack holds at most 16 bytes.</p><p><code>MOV r byte · ADD r r · SUB r r · LOAD r address · STORE r address · PUSH r · POP r · JNZ r index · HALT</code></p></section>
+<section class="panel wide"><h2>Data memory: 32 editable bytes</h2><div id="memory" class="memory"></div></section>
+<section class="panel wide"><h2>Last 50 transitions</h2><pre id="trace">No instructions executed.</pre></section>
+</main><p>Model limits: this is a custom ISA with separate program, data memory, and stack. PC counts instructions. It models state changes, with no instruction encoding, hardware timing, caches, pipeline, privilege, or interrupts.</p>
+<script src="../implementations/javascript/model.js"></script>
+<script>
+'use strict';
+const el = id => document.getElementById(id);
+let state = TinyCPU.create(), events = [];
+el('source').value = TinyCPU.SAMPLE;
+function error(message) { el('status').textContent = message; }
+function editable(container, values, prefix, update) {
+  container.replaceChildren();
+  values.forEach((value,index) => {
+    const label = document.createElement('label'); label.textContent = prefix + index;
+    const input = document.createElement('input'); input.type='number'; input.min='0'; input.max='255'; input.step='1'; input.value=value;
+    input.addEventListener('change', () => {try {update(index,TinyCPU.integer(Number(input.value),0,255,'Byte')); error('Manual edit applied; predict the next instruction.');} catch(e){error(e.message);} render();});
+    label.append(input); container.append(label);
+  });
+}
+function render() {
+  el('pc').value=state.pc; el('pc').max=state.program.length-1;
+  el('summary').textContent=`${state.halted?'HALTED':'READY'} · ${state.steps} instructions · SP ${TinyCPU.STACK_SIZE-state.stack.length}`;
+  el('program').textContent=state.program.map((p,i)=>`${i===state.pc?'→':' '} ${String(i).padStart(3)}  ${p.text}`).join('\n');
+  editable(el('registers'),state.registers,'R',(i,v)=>{state.registers[i]=v;});
+  editable(el('memory'),state.memory,'Address ',(i,v)=>{state.memory[i]=v;});
+  el('stack').textContent=state.stack.length?`bottom [ ${state.stack.join(', ')} ] top`:'Empty';
+  el('trace').textContent=events.length?events.map(e=>`#${e.step} PC ${e.before.pc}: ${e.instruction}\n  PC → ${e.after.pc}; registers [${e.before.registers}] → [${e.after.registers}]; SP ${e.before.sp} → ${e.after.sp}${e.detail?'\n  '+e.detail:''}`).join('\n'):'No instructions executed.';
+}
+function advance() { const result=TinyCPU.step(state); state=result.state; events.push(result.event); if(events.length>50)events.shift(); }
+el('load').onclick=()=>{try{state=TinyCPU.create(el('source').value);events=[];error('Loaded. Registers, memory, and stack reset.');render();}catch(e){error(e.message);}};
+el('step').onclick=()=>{try{advance();error(state.halted?'HALT executed.':'One transition committed.');}catch(e){error(e.message);}render();};
+el('run').onclick=()=>{try{let n=0;while(!state.halted&&n<256){advance();n++;}error(state.halted?`Halted after ${n} additional steps.`:'256-step limit reached; state preserved.');}catch(e){error(e.message);}render();};
+el('pc').onchange=()=>{try{state.pc=TinyCPU.integer(Number(el('pc').value),0,state.program.length-1,'PC');state.halted=false;error('PC edited; CPU resumed.');}catch(e){error(e.message);}render();};
+render();
+</script></body></html>
