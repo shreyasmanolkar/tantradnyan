@@ -1,6 +1,6 @@
 # First 20 foundational projects
 
-Choose a route through these projects based on your questions. The order below gradually increases the number of mechanisms in one build. These are **scoped proposals**; the starter CPU, layout, and counter models provide useful components for projects 2, 3, and 19.
+Choose a route through these projects based on your questions. The order below gradually increases the number of mechanisms in one build. These are **scoped proposals**; the starter CPU and layout models provide useful components for projects 2 and 3. The [sync-engine curriculum](../domains/sync-engines/README.md) provides bounded models for projects 19 and 20.
 
 | # | Project / intended folder | Prerequisite topic IDs | Smallest useful build | Experiment and completion evidence |
 | --- | --- | --- | --- | --- |
@@ -22,8 +22,8 @@ Choose a route through these projects based on your questions. The order below g
 | 16 | Tiny compiler / `tiny-compiler` | `parsing`, `compiler-ir`, `code-generation`, `virtual-machines` | Compile the expression language to the stack VM | Interpreter/compiler differential fixtures; trace one AST through IR into executable bytecode |
 | 17 | Scheduler simulator / `scheduler-simulator` | `scheduling`, `queues`, `processes` | FCFS, round robin, explicit arrival and burst times | Compare response/wait/turnaround; expose starvation; avoid claiming hardware context-switch timings |
 | 18 | Reliable delivery simulator / `reliable-delivery` | `byte-streams`, `tcp`, `discrete-event-simulation` | Sequence numbers, ACKs, timeout/retry on a modeled lossy link | Replay loss, duplicates, reorder, and delayed ACKs; bounded delivery properties; explain why this is not a full TCP stack |
-| 19 | CRDT replica laboratory / `crdt-replicas` | `crdt-counters`, `causal-order`, `replication` | Extend the starter counter to a PN-counter or observed-remove set | Merge order/duplication properties; show an incorrect merge counterexample; identify delivery/identity assumptions |
-| 20 | Offline sync prototype / `offline-sync` | `sync-engines`, `crdt-counters`, `persistent-client-state`, `conflict-resolution` | Persistent client state, outbound queue, reconnect with one explicit conflict rule | Offline updates, duplicate delivery, client restart, and reconnect; prove a narrow convergence claim; defer text intention semantics |
+| 19 | CRDT replica laboratory / `crdt-replicas` | `causal-order`, `replication`, `sync-engines` | Build a G-Counter, then a PN-counter or observed-remove set using the curriculum's CRDT lab | Merge order/duplication properties; show an incorrect merge counterexample; identify delivery/identity assumptions |
+| 20 | Offline sync prototype / `offline-sync` | `sync-engines`, `files-and-pages`, `idempotency`, `consistency-models` | Persistent client state, outbound queue, reconnect with one explicit conflict rule | Offline updates, duplicate delivery, client restart, and reconnect; prove a narrow convergence claim; defer text intention semantics |
 
 ## Combining these into larger systems
 

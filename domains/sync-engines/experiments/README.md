@@ -34,11 +34,11 @@ Observed in [run 20261006T210329Z-curriculum-validation](results/20261006T210329
 
 The source/runtime/environment are recorded with the run. Test-runner wall-clock durations are incidental functional-check output; they are not performance results. These observations verify bounded code properties, not learner mastery, universal convergence under invalid states, unrestricted OT correctness or production capacity.
 
-## Catalog validation boundary
+## Catalog validation boundary at the recorded run
 
-The repository-wide catalog already referenced a missing `domains/synchronization/crdt-counters` topic, implementation, browser manifest and historical experiment result before this curriculum's catalog update. `scripts/lab.py build` refuses generation while those catalog artifacts are absent; `check --generated` also reports pre-existing local references to them. The new guide uses its requested path and a catalog entry-point page at `domains/synchronization/sync-engines`. No missing historical result was fabricated and no learner verification states were changed.
+At the recorded run, the repository-wide catalog referenced a missing `domains/synchronization/crdt-counters` topic, implementation, browser manifest and historical experiment result. `scripts/lab.py build` refused generation while those artifacts were absent; `check --generated` reported local references to them. The guide used its requested path and a catalog entry-point page at `domains/synchronization/sync-engines`. No missing historical result was fabricated and no learner verification states were changed.
 
-The final run records the exact build/check errors and confirms separately that the new curriculum has no broken local file links. Regeneration remains blocked by the existing missing topic.
+The recorded run retains those exact build/check errors and its separate curriculum link check. On 2026-10-07, the former synchronization domain and its obsolete catalog topics were removed; the retained curriculum now has its [catalog entry](../curriculum/README.md) under the sync-engines domain. The historical logs describe the earlier repository state.
 
 ## Explanation and limits
 
