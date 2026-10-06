@@ -1,0 +1,89 @@
+{
+  "utc": "2026-10-06T22:00:05.521995+00:00",
+  "task_date": "2026-10-07",
+  "python": "3.14.7 (main, Aug 14 2026, 15:35:28) [Clang 22.1.3 ]",
+  "sqlite": "3.53.1",
+  "platform": "Linux-7.1.8-arch1-3-x86_64-with-glibc2.44",
+  "baseline_git_revision": "5ba42d98a5509121ff031c016d43a5daa28cffc0",
+  "source_state": "working-tree additions; exact source hashes in sources.sha256",
+  "logical_clock": "seconds; sequential fixed event inputs; no random generator",
+  "scope": "functional model/SDK-fake/template-reference and catalog checks only; no AWS calls, cloud deployment or load measurement",
+  "commands": [
+    {
+      "log": "models-tests.log",
+      "command": [
+        "/home/shreyas/.local/share/mise/installs/python/latest/bin/python3",
+        "-B",
+        "run.py",
+        "test"
+      ],
+      "cwd": "domains/aws/aws-service-lab",
+      "exit_code": 0
+    },
+    {
+      "log": "demos.log",
+      "command": [
+        "/home/shreyas/.local/share/mise/installs/python/latest/bin/python3",
+        "-B",
+        "run.py",
+        "demo"
+      ],
+      "cwd": "domains/aws/aws-service-lab",
+      "exit_code": 0
+    },
+    {
+      "log": "failures.log",
+      "command": [
+        "/home/shreyas/.local/share/mise/installs/python/latest/bin/python3",
+        "-B",
+        "run.py",
+        "experiments"
+      ],
+      "cwd": "domains/aws/aws-service-lab",
+      "exit_code": 0
+    },
+    {
+      "log": "handler-tests.log",
+      "command": [
+        "/home/shreyas/.local/share/mise/installs/python/latest/bin/python3",
+        "-B",
+        "cloud/test_handler.py"
+      ],
+      "cwd": "domains/aws/aws-service-lab",
+      "exit_code": 0
+    },
+    {
+      "log": "template-freshness.log",
+      "command": [
+        "/home/shreyas/.local/share/mise/installs/python/latest/bin/python3",
+        "-B",
+        "cloud/build_template.py",
+        "--check"
+      ],
+      "cwd": "domains/aws/aws-service-lab",
+      "exit_code": 0
+    },
+    {
+      "log": "template-references.log",
+      "command": [
+        "/home/shreyas/.local/share/mise/installs/python/latest/bin/python3",
+        "-B",
+        "cloud/check_templates.py"
+      ],
+      "cwd": "domains/aws/aws-service-lab",
+      "exit_code": 0
+    },
+    {
+      "log": "catalog-build.log",
+      "command": ["python3", "scripts/lab.py", "build"],
+      "cwd": ".",
+      "exit_code": 0
+    },
+    {
+      "log": "catalog-check.log",
+      "command": ["python3", "scripts/lab.py", "check", "--generated"],
+      "cwd": ".",
+      "exit_code": 0
+    }
+  ]
+}

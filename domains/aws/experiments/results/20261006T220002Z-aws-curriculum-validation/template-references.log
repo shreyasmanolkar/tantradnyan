@@ -1,0 +1,3 @@
+PASS: serverless.json: JSON, logical references and any inline Python
+PASS: events.json: JSON, logical references and any inline Python
+Scope excludes CloudFormation schema, regional availability, permissions and deployment.

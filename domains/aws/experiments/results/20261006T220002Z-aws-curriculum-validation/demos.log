@@ -1,0 +1,245 @@
+demo: 01-control-plane
+{
+  "accepted": "pending",
+  "failed": "failed",
+  "recovered": "ready",
+  "resources": 1,
+  "same_id_after_retry": true
+}
+demo: 02-identity-and-permissions
+{
+  "allowed": "allow",
+  "expired": true,
+  "explicit": "explicit-deny",
+  "wrong_prefix": "implicit-deny"
+}
+demo: 03-network-paths
+{
+  "broken": "return-acl",
+  "fixed": "connected",
+  "specific_route": "local"
+}
+demo: 04-dns-and-edge
+{
+  "bad_tls": "certificate-name-mismatch",
+  "before": "old-alb",
+  "cached": "old-alb",
+  "fresh": "new-alb",
+  "unhealthy": "503"
+}
+demo: 05-object-storage
+{
+  "current_missing": true,
+  "old_version": "v1",
+  "stale_rejected": true,
+  "stored_versions": 3
+}
+demo: 06-block-storage
+{
+  "buffered_write_lost": true,
+  "live": {
+    "0": "later-page"
+  },
+  "snapshot": {
+    "0": "committed-page"
+  },
+  "snapshot_unchanged": true
+}
+demo: 07-compute-and-scaling
+{
+  "capped": 10,
+  "normal_slots": 4,
+  "one_az_slots": 2,
+  "required": 4
+}
+demo: 08-container-scheduling
+{
+  "cutover_after_health": true,
+  "cutover_before_health": false,
+  "pending": [
+    "task-2"
+  ],
+  "placed": [
+    [
+      "task-0",
+      "host"
+    ],
+    [
+      "task-1",
+      "host"
+    ]
+  ]
+}
+demo: 09-serverless-invocations
+{
+  "cache_after_recycle": {},
+  "first": "cold",
+  "fourth": "cold",
+  "second": "throttled",
+  "third": "warm",
+  "warm_cache": true
+}
+demo: 10-conditional-database
+{
+  "after_replication": {
+    "value": "paid",
+    "version": 2
+  },
+  "before_replication": null,
+  "conflict": true,
+  "hot_key_partition": 0,
+  "strong": {
+    "value": "paid",
+    "version": 2
+  }
+}
+demo: 11-transactions-and-recovery
+{
+  "first": "committed",
+  "live_total": 9,
+  "restored_total": 7,
+  "retry": "duplicate"
+}
+demo: 12-queues-and-workers
+{
+  "dead_letters": [
+    "poison"
+  ],
+  "fresh_ack": true,
+  "hidden": null,
+  "receives": 2,
+  "stale_ack": false
+}
+demo: 13-pubsub-and-events
+{
+  "audit_still_has_copy": 1,
+  "billing_consumed": 0,
+  "partial": {
+    "delivered": [
+      "billing"
+    ],
+    "failed": [
+      "audit"
+    ]
+  },
+  "retry": {
+    "delivered": [
+      "audit"
+    ],
+    "failed": []
+  },
+  "shipping_matched": false
+}
+demo: 14-streams-and-checkpoints
+{
+  "after_checkpoint": [
+    {
+      "key": "customer-1",
+      "sequence": 1,
+      "value": "b"
+    }
+  ],
+  "first": [
+    {
+      "key": "customer-1",
+      "sequence": 0,
+      "value": "a"
+    }
+  ],
+  "independent_consumer": [
+    {
+      "key": "customer-1",
+      "sequence": 0,
+      "value": "a"
+    },
+    {
+      "key": "customer-1",
+      "sequence": 1,
+      "value": "b"
+    }
+  ],
+  "replayed_before_checkpoint": [
+    {
+      "key": "customer-1",
+      "sequence": 0,
+      "value": "a"
+    }
+  ]
+}
+demo: 15-cache-and-invalidation
+{
+  "guarded_fresh": "new",
+  "naive_stale": "old",
+  "ttl_recovers": "new"
+}
+demo: 16-secrets-and-keys
+{
+  "correct_context": "synthetic data",
+  "current_generation": 2,
+  "task_generation": 1,
+  "task_refresh_required": true,
+  "wrong_context_rejected": true
+}
+demo: 17-observability-and-slos
+{
+  "alarm": "ALARM",
+  "budget": {
+    "allowed_failures": 10.000000000000009,
+    "availability": 0.995,
+    "burn": 0.49999999999999956
+  },
+  "mean_ms": 19.9,
+  "missing": "INSUFFICIENT_DATA",
+  "p100_ms": 1000,
+  "p99_ms": 10
+}
+demo: 18-iac-and-deployments
+{
+  "applied": {
+    "service": {
+      "image": "b",
+      "type": "compute"
+    },
+    "table": {
+      "primary_key": "tenant",
+      "type": "database"
+    }
+  },
+  "changes": [
+    {
+      "kind": "update",
+      "resource": "service"
+    },
+    {
+      "kind": "replace",
+      "resource": "table"
+    }
+  ],
+  "drift_rejected": true
+}
+demo: 19-cost-and-resilience
+{
+  "app_a_failure": true,
+  "database_failure": false,
+  "illustrative_units_cost": "0.26",
+  "nat_failure": false,
+  "restore_gap": {
+    "lost_count": 1,
+    "missing_operations": [
+      "op-2"
+    ]
+  }
+}
+demo: 20-operated-service
+{
+  "effects": 1,
+  "queue_empty": true,
+  "queued_after_lost_confirmation": 2,
+  "result": {
+    "input_digest": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+    "key": "asset-a",
+    "output": "HELLO"
+  },
+  "submit_retry": "duplicate",
+  "worker_replay": "duplicate"
+}

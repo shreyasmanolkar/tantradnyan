@@ -1,0 +1,325 @@
+experiments: 01-control-plane
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "accepted": "pending",
+    "failed": "failed",
+    "recovered": "ready",
+    "resources": 1,
+    "same_id_after_retry": true
+  },
+  "stage": "01-control-plane"
+}
+experiments: 02-identity-and-permissions
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "allowed": "allow",
+    "expired": true,
+    "explicit": "explicit-deny",
+    "wrong_prefix": "implicit-deny"
+  },
+  "stage": "02-identity-and-permissions"
+}
+experiments: 03-network-paths
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "broken": "return-acl",
+    "fixed": "connected",
+    "specific_route": "local"
+  },
+  "stage": "03-network-paths"
+}
+experiments: 04-dns-and-edge
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "bad_tls": "certificate-name-mismatch",
+    "before": "old-alb",
+    "cached": "old-alb",
+    "fresh": "new-alb",
+    "unhealthy": "503"
+  },
+  "stage": "04-dns-and-edge"
+}
+experiments: 05-object-storage
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "current_missing": true,
+    "old_version": "v1",
+    "stale_rejected": true,
+    "stored_versions": 3
+  },
+  "stage": "05-object-storage"
+}
+experiments: 06-block-storage
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "buffered_write_lost": true,
+    "live": {
+      "0": "later-page"
+    },
+    "snapshot": {
+      "0": "committed-page"
+    },
+    "snapshot_unchanged": true
+  },
+  "stage": "06-block-storage"
+}
+experiments: 07-compute-and-scaling
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "capped": 10,
+    "normal_slots": 4,
+    "one_az_slots": 2,
+    "required": 4
+  },
+  "stage": "07-compute-and-scaling"
+}
+experiments: 08-container-scheduling
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "cutover_after_health": true,
+    "cutover_before_health": false,
+    "pending": [
+      "task-2"
+    ],
+    "placed": [
+      [
+        "task-0",
+        "host"
+      ],
+      [
+        "task-1",
+        "host"
+      ]
+    ]
+  },
+  "stage": "08-container-scheduling"
+}
+experiments: 09-serverless-invocations
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "cache_after_recycle": {},
+    "first": "cold",
+    "fourth": "cold",
+    "second": "throttled",
+    "third": "warm",
+    "warm_cache": true
+  },
+  "stage": "09-serverless-invocations"
+}
+experiments: 10-conditional-database
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "after_replication": {
+      "value": "paid",
+      "version": 2
+    },
+    "before_replication": null,
+    "conflict": true,
+    "hot_key_partition": 0,
+    "strong": {
+      "value": "paid",
+      "version": 2
+    }
+  },
+  "stage": "10-conditional-database"
+}
+experiments: 11-transactions-and-recovery
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "first": "committed",
+    "live_total": 9,
+    "restored_total": 7,
+    "retry": "duplicate"
+  },
+  "stage": "11-transactions-and-recovery"
+}
+experiments: 12-queues-and-workers
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "dead_letters": [
+      "poison"
+    ],
+    "fresh_ack": true,
+    "hidden": null,
+    "receives": 2,
+    "stale_ack": false
+  },
+  "stage": "12-queues-and-workers"
+}
+experiments: 13-pubsub-and-events
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "audit_still_has_copy": 1,
+    "billing_consumed": 0,
+    "partial": {
+      "delivered": [
+        "billing"
+      ],
+      "failed": [
+        "audit"
+      ]
+    },
+    "retry": {
+      "delivered": [
+        "audit"
+      ],
+      "failed": []
+    },
+    "shipping_matched": false
+  },
+  "stage": "13-pubsub-and-events"
+}
+experiments: 14-streams-and-checkpoints
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "after_checkpoint": [
+      {
+        "key": "customer-1",
+        "sequence": 1,
+        "value": "b"
+      }
+    ],
+    "first": [
+      {
+        "key": "customer-1",
+        "sequence": 0,
+        "value": "a"
+      }
+    ],
+    "independent_consumer": [
+      {
+        "key": "customer-1",
+        "sequence": 0,
+        "value": "a"
+      },
+      {
+        "key": "customer-1",
+        "sequence": 1,
+        "value": "b"
+      }
+    ],
+    "replayed_before_checkpoint": [
+      {
+        "key": "customer-1",
+        "sequence": 0,
+        "value": "a"
+      }
+    ]
+  },
+  "stage": "14-streams-and-checkpoints"
+}
+experiments: 15-cache-and-invalidation
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "guarded_fresh": "new",
+    "naive_stale": "old",
+    "ttl_recovers": "new"
+  },
+  "stage": "15-cache-and-invalidation"
+}
+experiments: 16-secrets-and-keys
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "correct_context": "synthetic data",
+    "current_generation": 2,
+    "task_generation": 1,
+    "task_refresh_required": true,
+    "wrong_context_rejected": true
+  },
+  "stage": "16-secrets-and-keys"
+}
+experiments: 17-observability-and-slos
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "alarm": "ALARM",
+    "budget": {
+      "allowed_failures": 10.000000000000009,
+      "availability": 0.995,
+      "burn": 0.49999999999999956
+    },
+    "mean_ms": 19.9,
+    "missing": "INSUFFICIENT_DATA",
+    "p100_ms": 1000,
+    "p99_ms": 10
+  },
+  "stage": "17-observability-and-slos"
+}
+experiments: 18-iac-and-deployments
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "applied": {
+      "service": {
+        "image": "b",
+        "type": "compute"
+      },
+      "table": {
+        "primary_key": "tenant",
+        "type": "database"
+      }
+    },
+    "changes": [
+      {
+        "kind": "update",
+        "resource": "service"
+      },
+      {
+        "kind": "replace",
+        "resource": "table"
+      }
+    ],
+    "drift_rejected": true
+  },
+  "stage": "18-iac-and-deployments"
+}
+experiments: 19-cost-and-resilience
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "app_a_failure": true,
+    "database_failure": false,
+    "illustrative_units_cost": "0.26",
+    "nat_failure": false,
+    "restore_gap": {
+      "lost_count": 1,
+      "missing_operations": [
+        "op-2"
+      ]
+    }
+  },
+  "stage": "19-cost-and-resilience"
+}
+experiments: 20-operated-service
+{
+  "fixture": "worked-example-and-deliberate-failure",
+  "observation": {
+    "effects": 1,
+    "queue_empty": true,
+    "queued_after_lost_confirmation": 2,
+    "result": {
+      "input_digest": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+      "key": "asset-a",
+      "output": "HELLO"
+    },
+    "submit_retry": "duplicate",
+    "worker_replay": "duplicate"
+  },
+  "stage": "20-operated-service"
+}
