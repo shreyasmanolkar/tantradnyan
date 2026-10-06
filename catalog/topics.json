@@ -135,21 +135,13 @@
       ]
     },
     {
-      "id": "synchronization",
-      "title": "Synchronization and collaborative state",
-      "purpose": "Explain offline edits, conflicts, user intentions, and reconvergence.",
+      "id": "sync-engines",
+      "title": "Sync engines and shared state",
+      "purpose": "Derive synchronization protocols from local state, concurrent operations, transport, ordering, and explicit merge rules.",
       "groups": [
         {
-          "id": "replicas",
-          "title": "Replica state"
-        },
-        {
-          "id": "sync",
-          "title": "Synchronization engines"
-        },
-        {
-          "id": "worlds",
-          "title": "Shared worlds"
+          "id": "curriculum",
+          "title": "First-principles curriculum"
         }
       ]
     },
@@ -327,6 +319,17 @@
         {
           "id": "systems",
           "title": "Physical and logical systems"
+        }
+      ]
+    },
+    {
+      "id": "aws",
+      "title": "AWS and cloud service operations",
+      "purpose": "Trace identity, networking, compute, durable state, deployment, and recovery through an operated AWS service.",
+      "groups": [
+        {
+          "id": "service-lifecycle",
+          "title": "Building and operating services"
         }
       ]
     }
@@ -2440,166 +2443,11 @@
       "labs": []
     },
     {
-      "id": "crdt-counters",
-      "title": "CRDT counters",
-      "domain": "synchronization",
-      "group": "replicas",
-      "path": "domains/synchronization/crdt-counters",
-      "status": "seed",
-      "question": "Why does componentwise maximum converge despite duplicate and reordered delivery?",
-      "prerequisites": [
-        "arrays-and-lists"
-      ],
-      "related": [
-        "replication",
-        "causal-order",
-        "sync-engines",
-        "consistency-models"
-      ],
-      "tags": [
-        "replicas"
-      ],
-      "milestones": [
-        {
-          "level": 0,
-          "outcome": "Predict the visible result before manipulating the starter lab.",
-          "state": "available",
-          "artifacts": [
-            "domains/synchronization/crdt-counters/README.md"
-          ]
-        },
-        {
-          "level": 1,
-          "outcome": "Explain the state, transition rules, invariant, and assumptions.",
-          "state": "available",
-          "artifacts": [
-            "domains/synchronization/crdt-counters/README.md"
-          ]
-        },
-        {
-          "level": 2,
-          "outcome": "Run and inspect the smallest implementation of the mechanism.",
-          "state": "available",
-          "artifacts": [
-            "domains/synchronization/crdt-counters/implementations/javascript/model.js"
-          ]
-        },
-        {
-          "level": 3,
-          "outcome": "Reproduce a boundary or incorrect-rule counterexample and explain it.",
-          "state": "available",
-          "artifacts": [
-            "domains/synchronization/crdt-counters/experiments/delivery-order/README.md"
-          ]
-        },
-        {
-          "level": 4,
-          "outcome": "Compare the toy guarantees with documented real-system constraints.",
-          "state": "planned",
-          "artifacts": []
-        },
-        {
-          "level": 5,
-          "outcome": "Build persistent replicas with reconnect and stable identity semantics.",
-          "state": "planned",
-          "artifacts": []
-        },
-        {
-          "level": 6,
-          "outcome": "Trace a relevant production source path at a pinned revision.",
-          "state": "planned",
-          "artifacts": []
-        },
-        {
-          "level": 7,
-          "outcome": "Pose a new falsifiable question or reproduce a research result.",
-          "state": "planned",
-          "artifacts": []
-        }
-      ],
-      "labs": [
-        "domains/synchronization/crdt-counters/interactive/lab.json"
-      ]
-    },
-    {
-      "id": "crdt-sets",
-      "title": "CRDT sets",
-      "domain": "synchronization",
-      "group": "replicas",
-      "path": "domains/synchronization/crdt-sets",
-      "status": "planned",
-      "question": "What state and rules explain crdt sets, and what does the simplest implementation omit?",
-      "prerequisites": [
-        "crdt-counters"
-      ],
-      "related": [],
-      "tags": [
-        "replicas"
-      ],
-      "milestones": [],
-      "labs": []
-    },
-    {
-      "id": "sequence-crdts",
-      "title": "Sequence CRDTs",
-      "domain": "synchronization",
-      "group": "replicas",
-      "path": "domains/synchronization/sequence-crdts",
-      "status": "planned",
-      "question": "What state and rules explain sequence crdts, and what does the simplest implementation omit?",
-      "prerequisites": [
-        "causal-order",
-        "crdt-counters"
-      ],
-      "related": [],
-      "tags": [
-        "replicas"
-      ],
-      "milestones": [],
-      "labs": []
-    },
-    {
-      "id": "operational-transformation",
-      "title": "Operational transformation",
-      "domain": "synchronization",
-      "group": "replicas",
-      "path": "domains/synchronization/operational-transformation",
-      "status": "planned",
-      "question": "What state and rules explain operational transformation, and what does the simplest implementation omit?",
-      "prerequisites": [
-        "causal-order"
-      ],
-      "related": [],
-      "tags": [
-        "replicas"
-      ],
-      "milestones": [],
-      "labs": []
-    },
-    {
-      "id": "conflict-resolution",
-      "title": "Conflict resolution and semantics",
-      "domain": "synchronization",
-      "group": "replicas",
-      "path": "domains/synchronization/conflict-resolution",
-      "status": "planned",
-      "question": "What state and rules explain conflict resolution and semantics, and what does the simplest implementation omit?",
-      "prerequisites": [
-        "consistency-models"
-      ],
-      "related": [],
-      "tags": [
-        "replicas"
-      ],
-      "milestones": [],
-      "labs": []
-    },
-    {
       "id": "sync-engines",
       "title": "Sync engines",
-      "domain": "synchronization",
-      "group": "sync",
-      "path": "domains/synchronization/sync-engines",
+      "domain": "sync-engines",
+      "group": "curriculum",
+      "path": "domains/sync-engines/curriculum",
       "status": "growing",
       "question": "How do independent, intermittently connected processes reconcile concurrent local changes under explicit consistency and failure contracts?",
       "prerequisites": [
@@ -2607,9 +2455,9 @@
         "idempotency"
       ],
       "related": [
-        "collaborative-editing",
-        "persistent-client-state",
-        "conflict-resolution"
+        "consistency-models",
+        "causal-order",
+        "failure-models"
       ],
       "tags": [
         "sync"
@@ -2657,134 +2505,6 @@
           ]
         }
       ],
-      "labs": []
-    },
-    {
-      "id": "persistent-client-state",
-      "title": "Persistent client state",
-      "domain": "synchronization",
-      "group": "sync",
-      "path": "domains/synchronization/persistent-client-state",
-      "status": "planned",
-      "question": "What state and rules explain persistent client state, and what does the simplest implementation omit?",
-      "prerequisites": [
-        "files-and-pages"
-      ],
-      "related": [],
-      "tags": [
-        "sync"
-      ],
-      "milestones": [],
-      "labs": []
-    },
-    {
-      "id": "change-tracking",
-      "title": "Change tracking and subscriptions",
-      "domain": "synchronization",
-      "group": "sync",
-      "path": "domains/synchronization/change-tracking",
-      "status": "planned",
-      "question": "What state and rules explain change tracking and subscriptions, and what does the simplest implementation omit?",
-      "prerequisites": [
-        "sync-engines"
-      ],
-      "related": [],
-      "tags": [
-        "sync"
-      ],
-      "milestones": [],
-      "labs": []
-    },
-    {
-      "id": "realtime-presence",
-      "title": "Realtime presence and ephemeral state",
-      "domain": "synchronization",
-      "group": "sync",
-      "path": "domains/synchronization/realtime-presence",
-      "status": "planned",
-      "question": "What state and rules explain realtime presence and ephemeral state, and what does the simplest implementation omit?",
-      "prerequisites": [
-        "failure-models"
-      ],
-      "related": [],
-      "tags": [
-        "sync"
-      ],
-      "milestones": [],
-      "labs": []
-    },
-    {
-      "id": "collaborative-editing",
-      "title": "Collaborative editing",
-      "domain": "synchronization",
-      "group": "sync",
-      "path": "domains/synchronization/collaborative-editing",
-      "status": "planned",
-      "question": "What state and rules explain collaborative editing, and what does the simplest implementation omit?",
-      "prerequisites": [
-        "sync-engines",
-        "sequence-crdts"
-      ],
-      "related": [],
-      "tags": [
-        "sync"
-      ],
-      "milestones": [],
-      "labs": []
-    },
-    {
-      "id": "multiplayer-networking",
-      "title": "Multiplayer networking",
-      "domain": "synchronization",
-      "group": "worlds",
-      "path": "domains/synchronization/multiplayer-networking",
-      "status": "planned",
-      "question": "What state and rules explain multiplayer networking, and what does the simplest implementation omit?",
-      "prerequisites": [
-        "udp",
-        "distributed-time"
-      ],
-      "related": [],
-      "tags": [
-        "worlds"
-      ],
-      "milestones": [],
-      "labs": []
-    },
-    {
-      "id": "prediction-and-reconciliation",
-      "title": "Prediction and reconciliation",
-      "domain": "synchronization",
-      "group": "worlds",
-      "path": "domains/synchronization/prediction-and-reconciliation",
-      "status": "planned",
-      "question": "What state and rules explain prediction and reconciliation, and what does the simplest implementation omit?",
-      "prerequisites": [
-        "multiplayer-networking"
-      ],
-      "related": [],
-      "tags": [
-        "worlds"
-      ],
-      "milestones": [],
-      "labs": []
-    },
-    {
-      "id": "interpolation",
-      "title": "Interpolation and lag compensation",
-      "domain": "synchronization",
-      "group": "worlds",
-      "path": "domains/synchronization/interpolation",
-      "status": "planned",
-      "question": "What state and rules explain interpolation and lag compensation, and what does the simplest implementation omit?",
-      "prerequisites": [
-        "multiplayer-networking"
-      ],
-      "related": [],
-      "tags": [
-        "worlds"
-      ],
-      "milestones": [],
       "labs": []
     },
     {
@@ -5002,6 +4722,91 @@
       ],
       "milestones": [],
       "labs": []
+    },
+    {
+      "id": "aws-service-lifecycle",
+      "title": "Building and operating services on AWS",
+      "domain": "aws",
+      "group": "service-lifecycle",
+      "path": "domains/aws/service-lifecycle",
+      "status": "growing",
+      "question": "How does a local program become a reachable AWS service with explicit identity, network paths, durable state, deployment controls, and recovery procedures?",
+      "prerequisites": [],
+      "related": [
+        "deployment",
+        "observability",
+        "reliability",
+        "distributed-queues",
+        "idempotency",
+        "database-recovery"
+      ],
+      "tags": [
+        "aws",
+        "cloud",
+        "iam",
+        "networking",
+        "containers",
+        "infrastructure-as-code",
+        "operations"
+      ],
+      "milestones": [
+        {
+          "level": 0,
+          "outcome": "Predict the identity, resource settings, and object round trip in the first S3 exercise.",
+          "state": "available",
+          "artifacts": [
+            "domains/aws/service-lifecycle/00-getting-started.md"
+          ]
+        },
+        {
+          "level": 1,
+          "outcome": "Explain AWS account, authorization, and packet-path boundaries before choosing services.",
+          "state": "available",
+          "artifacts": [
+            "domains/aws/service-lifecycle/01-foundations.md"
+          ]
+        },
+        {
+          "level": 2,
+          "outcome": "Run and inspect a diagnostic Python API with local acceptance checks.",
+          "state": "available",
+          "artifacts": [
+            "domains/aws/service-lifecycle/examples/api.py",
+            "domains/aws/service-lifecycle/examples/smoke.py",
+            "domains/aws/service-lifecycle/examples/README.md"
+          ]
+        },
+        {
+          "level": 3,
+          "outcome": "Use lab procedures to investigate denied access, duplicate delivery, task failures, and restore behavior; record actual observations separately.",
+          "state": "available",
+          "artifacts": [
+            "domains/aws/service-lifecycle/04-hands-on-labs.md",
+            "domains/aws/service-lifecycle/03-operations-and-reference.md"
+          ]
+        },
+        {
+          "level": 4,
+          "outcome": "Justify compute, storage, delivery, and deployment choices against explicit workload requirements and dated primary sources.",
+          "state": "available",
+          "artifacts": [
+            "domains/aws/service-lifecycle/02-architecture-and-services.md",
+            "domains/aws/service-lifecycle/05-sources-and-currency.md"
+          ]
+        },
+        {
+          "level": 5,
+          "outcome": "Follow a bounded VPC, ECR, Fargate, ALB, and PostgreSQL build with explicit acceptance and teardown instructions.",
+          "state": "available",
+          "artifacts": [
+            "domains/aws/service-lifecycle/04-hands-on-labs.md",
+            "domains/aws/service-lifecycle/examples/foundation.json",
+            "domains/aws/service-lifecycle/examples/service.json",
+            "domains/aws/service-lifecycle/examples/data.json"
+          ]
+        }
+      ],
+      "labs": []
     }
   ],
   "tracks": [
@@ -5087,13 +4892,7 @@
         "distributed-time",
         "causal-order",
         "consistency-models",
-        "crdt-counters",
-        "crdt-sets",
-        "sequence-crdts",
-        "operational-transformation",
-        "persistent-client-state",
-        "sync-engines",
-        "collaborative-editing"
+        "sync-engines"
       ]
     },
     {
