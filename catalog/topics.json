@@ -4725,12 +4725,12 @@
     },
     {
       "id": "aws-service-lifecycle",
-      "title": "Building and operating services on AWS",
+      "title": "AWS services from first principles",
       "domain": "aws",
       "group": "service-lifecycle",
-      "path": "domains/aws/service-lifecycle",
+      "path": "domains/aws/curriculum",
       "status": "growing",
-      "question": "How does a local program become a reachable AWS service with explicit identity, network paths, durable state, deployment controls, and recovery procedures?",
+      "question": "How do identity, packet paths, durable state, capacity, retries and recovery compose an operated AWS service?",
       "prerequisites": [],
       "related": [
         "deployment",
@@ -4755,7 +4755,8 @@
           "outcome": "Predict the identity, resource settings, and object round trip in the first S3 exercise.",
           "state": "available",
           "artifacts": [
-            "domains/aws/service-lifecycle/00-getting-started.md"
+            "domains/aws/service-lifecycle/00-getting-started.md",
+            "domains/aws/aws-service-lab/01-control-plane/README.md"
           ]
         },
         {
@@ -4763,26 +4764,32 @@
           "outcome": "Explain AWS account, authorization, and packet-path boundaries before choosing services.",
           "state": "available",
           "artifacts": [
-            "domains/aws/service-lifecycle/01-foundations.md"
+            "domains/aws/service-lifecycle/01-foundations.md",
+            "domains/aws/GUIDE.md"
           ]
         },
         {
           "level": 2,
-          "outcome": "Run and inspect a diagnostic Python API with local acceptance checks.",
+          "outcome": "Run twenty bounded Python service models and inspect a diagnostic API with local acceptance checks.",
           "state": "available",
           "artifacts": [
             "domains/aws/service-lifecycle/examples/api.py",
             "domains/aws/service-lifecycle/examples/smoke.py",
-            "domains/aws/service-lifecycle/examples/README.md"
+            "domains/aws/service-lifecycle/examples/README.md",
+            "domains/aws/aws-service-lab/README.md",
+            "domains/aws/aws-service-lab/run.py"
           ]
         },
         {
           "level": 3,
-          "outcome": "Use lab procedures to investigate denied access, duplicate delivery, task failures, and restore behavior; record actual observations separately.",
+          "outcome": "Expose stale writes, permission/path failures, redelivery, cache races, checkpoint replay and recovery; compare with manual cloud exercises.",
           "state": "available",
           "artifacts": [
             "domains/aws/service-lifecycle/04-hands-on-labs.md",
-            "domains/aws/service-lifecycle/03-operations-and-reference.md"
+            "domains/aws/service-lifecycle/03-operations-and-reference.md",
+            "domains/aws/experiments/README.md",
+            "domains/aws/CLOUD-LABS.md",
+            "domains/aws/EXERCISES.md"
           ]
         },
         {
@@ -4791,18 +4798,22 @@
           "state": "available",
           "artifacts": [
             "domains/aws/service-lifecycle/02-architecture-and-services.md",
-            "domains/aws/service-lifecycle/05-sources-and-currency.md"
+            "domains/aws/service-lifecycle/05-sources-and-currency.md",
+            "domains/aws/references/README.md"
           ]
         },
         {
           "level": 5,
-          "outcome": "Follow a bounded VPC, ECR, Fargate, ALB, and PostgreSQL build with explicit acceptance and teardown instructions.",
+          "outcome": "Build a file-backed idempotent workflow and follow bounded container/serverless/event deployments with explicit acceptance and teardown instructions.",
           "state": "available",
           "artifacts": [
             "domains/aws/service-lifecycle/04-hands-on-labs.md",
             "domains/aws/service-lifecycle/examples/foundation.json",
             "domains/aws/service-lifecycle/examples/service.json",
-            "domains/aws/service-lifecycle/examples/data.json"
+            "domains/aws/service-lifecycle/examples/data.json",
+            "domains/aws/aws-service-lab/20-operated-service/src/model.py",
+            "domains/aws/aws-service-lab/cloud/serverless.json",
+            "domains/aws/aws-service-lab/cloud/events.json"
           ]
         }
       ],
