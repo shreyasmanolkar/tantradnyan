@@ -1,0 +1,30 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {run as routing} from '../../01-networking/src/routing-model.mjs';
+import {run as carriers} from '../../04-websocket/src/http-carriers.mjs';
+import {run as channels} from '../../04-websocket/src/channel-model.mjs';
+import {experiment} from '../../05-concurrency/src/workers.mjs';
+import {run as math} from '../../07-versioning/src/math-model.mjs';
+import {run as quorum} from '../../11-operation-log/src/quorum-model.mjs';
+import {run as effects} from '../../14-crdt/src/operation-based.mjs';
+import {run as transport} from '../../02-tcp/src/transport-model.mjs';
+import {run as reliable} from '../../03-udp/src/reliable-model.mjs';
+import {gIncrement,gValue,orEmpty,orAdd,orValue,mapWrite,mapValue} from '../crdt.mjs';
+import {SyncClient} from '../engine.mjs';
+test('longest-prefix forwarding uses most specific route',()=>routing());
+test('polling, long polling and SSE use the same history cursor',{timeout:10000},async()=>{await carriers();});
+test('stream isolation delivers unrelated cursor before document gap repair',()=>channels());
+test('two real workers reproduce lost update and atomic correction',{timeout:10000},async()=>{
+  assert.equal(await experiment(false),1);assert.equal(await experiment(true),2);
+});
+test('dependency sort rejects cycles and vector order remains partial',()=>math());
+test('fixed majority ACK rejects obsolete owner epoch',()=>quorum());
+test('commutative operation effects still require dedup',()=>effects());
+test('ordered transport waits for a missing segment and suppresses duplicate data',()=>transport());
+test('selective ACK retries survive lost data and lost ACKs',()=>reliable());
+test('dictionary-like names are ordinary CRDT data or explicitly rejected by protocol',()=>{
+  assert.equal(gValue(gIncrement({},'constructor',2)),2);
+  assert.deepEqual(orValue(orAdd(orEmpty(),'__proto__','A:1')),['__proto__']);
+  assert.deepEqual(mapValue(mapWrite({},'constructor',3,[1,'A'])),{constructor:3});
+  const client=new SyncClient('A');assert.throws(()=>client.mutate('__proto__',1),/invalid/);assert.equal(client.data.pending.length,0);
+});
