@@ -1,0 +1,25 @@
+Command exit code: 1
+ERROR: crdt-counters: active topic has no README
+ERROR: crdt-counters: missing artifact domains/synchronization/crdt-counters/README.md
+ERROR: crdt-counters: missing artifact domains/synchronization/crdt-counters/README.md
+ERROR: crdt-counters: missing artifact domains/synchronization/crdt-counters/implementations/javascript/model.js
+ERROR: crdt-counters: missing artifact domains/synchronization/crdt-counters/experiments/delivery-order/README.md
+ERROR: crdt-counters: cannot read lab manifest: [Errno 2] No such file or directory: '/home/shreyas/Work/learning/tantradnyan/domains/synchronization/crdt-counters/interactive/lab.json'
+ERROR: README.md: missing or external local target domains/synchronization/crdt-counters/README.md
+ERROR: README.md: missing or external local target domains/synchronization/crdt-counters/interactive/index.html
+ERROR: QUESTIONS.md: missing or external local target domains/synchronization/crdt-counters/README.md
+ERROR: INDEX.md: missing or external local target domains/synchronization/crdt-counters/README.md
+ERROR: INDEX.md: missing or external local target domains/synchronization/crdt-counters/interactive/index.html
+ERROR: INDEX.md: missing or external local target domains/synchronization/crdt-counters/README.md
+ERROR: INDEX.md: missing or external local target domains/synchronization/crdt-counters/README.md
+ERROR: docs/TAXONOMY.md: missing or external local target ../domains/synchronization/crdt-counters/README.md
+ERROR: docs/LEARNING-PATHS.md: missing or external local target ../domains/synchronization/crdt-counters/README.md
+ERROR: docs/LEARNING-PATHS.md: missing or external local target ../domains/synchronization/crdt-counters/README.md
+ERROR: docs/LEARNING-PATHS.md: missing or external local target ../domains/synchronization/crdt-counters/README.md
+ERROR: docs/LEARNING-PATHS.md: missing or external local target ../domains/synchronization/crdt-counters/README.md
+ERROR: docs/LEARNING-PATHS.md: missing or external local target ../domains/synchronization/crdt-counters/README.md
+ERROR: docs/LEARNING-PATHS.md: missing or external local target ../domains/synchronization/crdt-counters/README.md
+ERROR: docs/LEARNING-PATHS.md: missing or external local target ../domains/synchronization/crdt-counters/implementations/javascript/model.js
+ERROR: docs/LEARNING-PATHS.md: missing or external local target ../domains/synchronization/crdt-counters/experiments/delivery-order/README.md
+ERROR: docs/VALIDATION.md: missing or external local target ../domains/synchronization/crdt-counters/experiments/delivery-order/results/20261006T194732Z-initial-validation/README.md
+ERROR: experiments/README.md: missing or external local target ../domains/synchronization/crdt-counters/experiments/delivery-order/README.md

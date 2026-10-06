@@ -1,0 +1,57 @@
+Command exit code: 0
+
+> test
+> node --test --test-concurrency=1 */tests/*.test.mjs shared/tests/*.test.mjs
+
+✔ Why can delivery order differ from send order? (5.114831ms)
+✔ Why is a TCP data callback not a message? (14.328625ms)
+✔ How does fresh state survive old or missing datagrams? (7.199023ms)
+✔ What does WebSocket framing add to TCP? (26.383056ms)
+✔ Can a single event loop lose a write? (0.779219ms)
+✔ Why must the version check and write be indivisible? (1.022408ms)
+✔ Which timestamps detect concurrency? (0.897325ms)
+✔ Why does avoiding write/write conflicts still permit write skew? (1.322538ms)
+✔ Why does copying the entire object lose unrelated edits? (1.179075ms)
+✔ When is a delta independently mergeable? (1.914618ms)
+✔ How do stable IDs make retries safe? (5.067288ms)
+✔ What must replay know besides event bytes? (0.920455ms)
+✔ How can both clients delete the original B while preserving X? (0.741073ms)
+✔ Which algebra makes replay and reordering harmless? (5.841892ms)
+✔ What survives a client process restart before delivery? (2.436909ms)
+✔ Why should typing expire while message history persists? (2.300159ms)
+✔ How do stable anchors avoid shifting text offsets? (2.089784ms)
+✔ What does a late input change in a deterministic simulation? (0.748419ms)
+✔ How do retries avoid applying the same input twice? (0.963054ms)
+✔ Which invariants survive loss, offline edits, replay and restart? (6.92099ms)
+✔ OT pair diamond for every valid single-character operation pair on ABC (1.295112ms)
+✔ CRDT merge laws for eight types including delay and duplicate delivery (5.108813ms)
+✔ OR-Set removes only observed tags; 2P-Set can never re-add (0.239435ms)
+✔ text deletion can precede insertion; missing ancestors are repaired (0.268101ms)
+✔ framing survives every split point and rejects oversized headers (0.828694ms)
+✔ seeded event schedules are reproducible; disconnected endpoints drop deliveries (0.827211ms)
+✔ durable dedup after file-backed restart and compaction (1.350014ms)
+✔ same ID changed payload is rejected; ACK failure cannot precede commit (0.291378ms)
+✔ newer snapshot prevents a delayed old snapshot rolling state backward (0.296044ms)
+✔ leases fence a paused old owner and retries are bounded (0.245018ms)
+✔ mutex releases on exception (0.29392ms)
+✔ 20 loss/reordering schedules converge, including 100 writers (2106.340631ms)
+✔ real WebSocket recovery after offline edit and actual server process restart (212.275076ms)
+✔ longest-prefix forwarding uses most specific route (0.81506ms)
+✔ polling, long polling and SSE use the same history cursor (47.210153ms)
+✔ stream isolation delivers unrelated cursor before document gap repair (0.275904ms)
+✔ two real workers reproduce lost update and atomic correction (60.065979ms)
+✔ dependency sort rejects cycles and vector order remains partial (1.23923ms)
+✔ fixed majority ACK rejects obsolete owner epoch (0.208434ms)
+✔ commutative operation effects still require dedup (0.215873ms)
+✔ ordered transport waits for a missing segment and suppresses duplicate data (0.203814ms)
+✔ selective ACK retries survive lost data and lost ACKs (0.701801ms)
+✔ dictionary-like names are ordinary CRDT data or explicitly rejected by protocol (0.605472ms)
+ℹ tests 43
+ℹ suites 0
+ℹ pass 43
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3550.566652
+
