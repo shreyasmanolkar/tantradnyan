@@ -86,13 +86,7 @@ Separate convergence, user intention, persistence, and delivery guarantees.
 | 3 | [Clocks and distributed time](../INDEX.md#distributed-time) | [Failure models and partial failure](../INDEX.md#failure-models) | planned |
 | 4 | [Causal order and logical clocks](../INDEX.md#causal-order) | [Clocks and distributed time](../INDEX.md#distributed-time) | planned |
 | 5 | [Consistency models](../INDEX.md#consistency-models) | [Failure models and partial failure](../INDEX.md#failure-models) | planned |
-| 6 | [CRDT counters](../domains/synchronization/crdt-counters/README.md) | [Arrays and linked lists](../INDEX.md#arrays-and-lists) | seed |
-| 7 | [CRDT sets](../INDEX.md#crdt-sets) | [CRDT counters](../domains/synchronization/crdt-counters/README.md) | planned |
-| 8 | [Sequence CRDTs](../INDEX.md#sequence-crdts) | [Causal order and logical clocks](../INDEX.md#causal-order), [CRDT counters](../domains/synchronization/crdt-counters/README.md) | planned |
-| 9 | [Operational transformation](../INDEX.md#operational-transformation) | [Causal order and logical clocks](../INDEX.md#causal-order) | planned |
-| 10 | [Persistent client state](../INDEX.md#persistent-client-state) | [Files, records, and pages](../INDEX.md#files-and-pages) | planned |
-| 11 | [Sync engines](../INDEX.md#sync-engines) | [Replication](../INDEX.md#replication), [Idempotency and retry semantics](../INDEX.md#idempotency) | planned |
-| 12 | [Collaborative editing](../INDEX.md#collaborative-editing) | [Sync engines](../INDEX.md#sync-engines), [Sequence CRDTs](../INDEX.md#sequence-crdts) | planned |
+| 6 | [Sync engines](../domains/sync-engines/curriculum/README.md) | [Replication](../INDEX.md#replication), [Idempotency and retry semantics](../INDEX.md#idempotency) | growing |
 
 ## From a packet to a web application
 
@@ -166,20 +160,17 @@ Levels are optional lenses; they are not required folder names.
 | 6 — Real implementations | Trace a relevant production source path at a pinned revision. | planned | — |
 | 7 — Research | Pose a new falsifiable question or reproduce a research result. | planned | — |
 
-### CRDT counters
+### Sync engines
 
-[CRDT counters](../domains/synchronization/crdt-counters/README.md)
+[Sync engines](../domains/sync-engines/curriculum/README.md)
 
 | Level | Outcome | State | Artifacts |
 | --- | --- | --- | --- |
-| 0 — Intuition | Predict the visible result before manipulating the starter lab. | available | [README.md](../domains/synchronization/crdt-counters/README.md) |
-| 1 — Fundamentals | Explain the state, transition rules, invariant, and assumptions. | available | [README.md](../domains/synchronization/crdt-counters/README.md) |
-| 2 — Small implementation | Run and inspect the smallest implementation of the mechanism. | available | [model.js](../domains/synchronization/crdt-counters/implementations/javascript/model.js) |
-| 3 — Internals | Reproduce a boundary or incorrect-rule counterexample and explain it. | available | [README.md](../domains/synchronization/crdt-counters/experiments/delivery-order/README.md) |
-| 4 — Production architecture | Compare the toy guarantees with documented real-system constraints. | planned | — |
-| 5 — Integrated build | Build persistent replicas with reconnect and stable identity semantics. | planned | — |
-| 6 — Real implementations | Trace a relevant production source path at a pinned revision. | planned | — |
-| 7 — Research | Pose a new falsifiable question or reproduce a research result. | planned | — |
+| 1 — Fundamentals | Explain state, transitions, consistency, ordering and merge assumptions from first principles. | available | [GUIDE.md](../domains/sync-engines/GUIDE.md) |
+| 2 — Small implementation | Run twenty bounded Node.js models, including OT, eight CRDTs, clocks, sockets and game prediction. | available | [README.md](../domains/sync-engines/sync-engine-lab/README.md) |
+| 3 — Internals | Reproduce loss, duplication, stale writes, write skew, offline recovery and ordinary process restart. | available | [README.md](../domains/sync-engines/experiments/README.md) |
+| 4 — Production architecture | Compare documented product accounts with explicitly proposed architectures and scaling choices. | available | [README.md](../domains/sync-engines/references/README.md) |
+| 5 — Integrated build | Build a persistent single-authority WebSocket field-map engine and reason about its declared boundaries. | available | [engine.mjs](../domains/sync-engines/sync-engine-lab/shared/engine.mjs), [README.md](../domains/sync-engines/sync-engine-lab/20-production-sync-engine/README.md) |
 
 ### CSS centering
 
@@ -195,3 +186,16 @@ Levels are optional lenses; they are not required folder names.
 | 5 — Integrated build | Model constrained layout including padding and max-width, then compare it to the browser. | planned | — |
 | 6 — Real implementations | Trace a relevant production source path at a pinned revision. | planned | — |
 | 7 — Research | Pose a new falsifiable question or reproduce a research result. | planned | — |
+
+### Building and operating services on AWS
+
+[Building and operating services on AWS](../domains/aws/service-lifecycle/README.md)
+
+| Level | Outcome | State | Artifacts |
+| --- | --- | --- | --- |
+| 0 — Intuition | Predict the identity, resource settings, and object round trip in the first S3 exercise. | available | [00-getting-started.md](../domains/aws/service-lifecycle/00-getting-started.md) |
+| 1 — Fundamentals | Explain AWS account, authorization, and packet-path boundaries before choosing services. | available | [01-foundations.md](../domains/aws/service-lifecycle/01-foundations.md) |
+| 2 — Small implementation | Run and inspect a diagnostic Python API with local acceptance checks. | available | [api.py](../domains/aws/service-lifecycle/examples/api.py), [smoke.py](../domains/aws/service-lifecycle/examples/smoke.py), [README.md](../domains/aws/service-lifecycle/examples/README.md) |
+| 3 — Internals | Use lab procedures to investigate denied access, duplicate delivery, task failures, and restore behavior; record actual observations separately. | available | [04-hands-on-labs.md](../domains/aws/service-lifecycle/04-hands-on-labs.md), [03-operations-and-reference.md](../domains/aws/service-lifecycle/03-operations-and-reference.md) |
+| 4 — Production architecture | Justify compute, storage, delivery, and deployment choices against explicit workload requirements and dated primary sources. | available | [02-architecture-and-services.md](../domains/aws/service-lifecycle/02-architecture-and-services.md), [05-sources-and-currency.md](../domains/aws/service-lifecycle/05-sources-and-currency.md) |
+| 5 — Integrated build | Follow a bounded VPC, ECR, Fargate, ALB, and PostgreSQL build with explicit acceptance and teardown instructions. | available | [04-hands-on-labs.md](../domains/aws/service-lifecycle/04-hands-on-labs.md), [foundation.json](../domains/aws/service-lifecycle/examples/foundation.json), [service.json](../domains/aws/service-lifecycle/examples/service.json), [data.json](../domains/aws/service-lifecycle/examples/data.json) |

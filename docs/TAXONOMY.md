@@ -221,33 +221,15 @@ Canonical prefix: `domains/databases/`.
 - [Distributed databases](../INDEX.md#distributed-databases) — `distributed-databases` (planned).
 - [SQLite, PostgreSQL, and RocksDB internals](../INDEX.md#database-internals) — `database-internals` (planned).
 
-## Synchronization and collaborative state
+## Sync engines and shared state
 
-Explain offline edits, conflicts, user intentions, and reconvergence.
+Derive synchronization protocols from local state, concurrent operations, transport, ordering, and explicit merge rules.
 
-Canonical prefix: `domains/synchronization/`.
+Canonical prefix: `domains/sync-engines/`.
 
-### Replica state
+### First-principles curriculum
 
-- [CRDT counters](../domains/synchronization/crdt-counters/README.md) — `crdt-counters` (seed).
-- [CRDT sets](../INDEX.md#crdt-sets) — `crdt-sets` (planned).
-- [Sequence CRDTs](../INDEX.md#sequence-crdts) — `sequence-crdts` (planned).
-- [Operational transformation](../INDEX.md#operational-transformation) — `operational-transformation` (planned).
-- [Conflict resolution and semantics](../INDEX.md#conflict-resolution) — `conflict-resolution` (planned).
-
-### Synchronization engines
-
-- [Sync engines](../INDEX.md#sync-engines) — `sync-engines` (planned).
-- [Persistent client state](../INDEX.md#persistent-client-state) — `persistent-client-state` (planned).
-- [Change tracking and subscriptions](../INDEX.md#change-tracking) — `change-tracking` (planned).
-- [Realtime presence and ephemeral state](../INDEX.md#realtime-presence) — `realtime-presence` (planned).
-- [Collaborative editing](../INDEX.md#collaborative-editing) — `collaborative-editing` (planned).
-
-### Shared worlds
-
-- [Multiplayer networking](../INDEX.md#multiplayer-networking) — `multiplayer-networking` (planned).
-- [Prediction and reconciliation](../INDEX.md#prediction-and-reconciliation) — `prediction-and-reconciliation` (planned).
-- [Interpolation and lag compensation](../INDEX.md#interpolation) — `interpolation` (planned).
+- [Sync engines](../domains/sync-engines/curriculum/README.md) — `sync-engines` (growing).
 
 ## Programming languages, compilers, and runtimes
 
@@ -506,3 +488,13 @@ Canonical prefix: `domains/quantum-computing/`.
 
 - [Quantum error correction](../INDEX.md#quantum-error-correction) — `quantum-error-correction` (planned).
 - [Quantum hardware](../INDEX.md#quantum-hardware) — `quantum-hardware` (planned).
+
+## AWS and cloud service operations
+
+Trace identity, networking, compute, durable state, deployment, and recovery through an operated AWS service.
+
+Canonical prefix: `domains/aws/`.
+
+### Building and operating services
+
+- [Building and operating services on AWS](../domains/aws/service-lifecycle/README.md) — `aws-service-lifecycle` (growing).

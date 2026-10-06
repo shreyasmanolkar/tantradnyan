@@ -42,11 +42,11 @@ tantradnyan/
 
 ## 3. Taxonomy
 
-The [generated taxonomy](TAXONOMY.md) covers foundations; physical hardware; digital logic; architecture; operating systems; networking; distributed systems; databases; synchronization; languages and runtimes; developer tools; web platform; applications; software engineering; security; graphics; AI and ML; scientific computing; embedded systems and robotics; and quantum computing.
+The [generated taxonomy](TAXONOMY.md) covers foundations; physical hardware; digital logic; architecture; operating systems; networking; distributed systems; databases; sync engines; languages and runtimes; developer tools; web platform; applications; software engineering; security; graphics; AI and ML; scientific computing; embedded systems and robotics; quantum computing; and AWS service operations.
 
 This separates concerns that are often conflated:
 
-- Distributed systems studies time, failure, replication, and agreement. Synchronization studies user edits, offline operation, conflicts, intention, and reconnect behavior.
+- Distributed systems studies time, failure, replication, and agreement. The sync-engine curriculum derives user edits, offline operation, conflicts, intention, and reconnect behavior from those mechanisms.
 - Databases studies durable state, indexing, querying, and transactions. Applications studies product mechanisms such as search, editors, authentication flows, and multiplayer worlds.
 - AI and ML studies learning and inference. AI agent harnesses live in software engineering because tool execution, context, authorization, recovery, and evaluation are software system concerns.
 - Security and reliability cross the entire stack. Give them explicit homes and link their mechanisms into the topics that need them.
@@ -199,7 +199,7 @@ Projects are optional learning routes, not claims that every learner should buil
 
 ## 14. Naming and versioning
 
-- Directories and topic IDs use lowercase kebab-case: `virtual-memory`, `crdt-counters`, `tiny-lisp`.
+- Directories and topic IDs use lowercase kebab-case: `virtual-memory`, `sync-engines`, `tiny-lisp`.
 - IDs describe concepts, not their current folder hierarchy. Use a qualified ID if two mechanisms otherwise collide.
 - Use conventional navigation names: `README.md`, `GUIDE.md`, `SPEC.md`, `ROADMAP.md`, `COMPARISON.md`, and `AGENTS.md`.
 - Experiment names describe the question: `duplicate-state-delivery`, `cache-stride`, `wal-crash-window`.
@@ -252,7 +252,7 @@ Choose a repository license before inviting external reuse. This starter does no
 
 ## 18. Concrete topic shapes
 
-The three existing starter topics demonstrate small, useful environments:
+The two existing interactive starter topics demonstrate small, useful environments:
 
 ```text
 domains/web-platform/css-centering/
@@ -268,13 +268,9 @@ domains/computer-architecture/instruction-execution/
   experiments/instruction-trace/{README.md,run.js}
   interactive/{index.html,lab.json}
 
-domains/synchronization/crdt-counters/
-  README.md                      vector state, ownership, max merge
-  AGENTS.md -> .agent/instructions.md
-  implementations/javascript/model.js
-  experiments/delivery-order/{README.md,run.js}
-  interactive/{index.html,lab.json}
 ```
+
+The [sync-engine curriculum](../domains/sync-engines/README.md) owns its guide, Node.js lab stages, references, and recorded experiments under `domains/sync-engines/`. The [AWS curriculum](../domains/aws/README.md) keeps its imported chapters and example files together under `domains/aws/service-lifecycle/`.
 
 Larger examples below are designs for future work, not existing implementations:
 
