@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local credentials and environment files
+.env
+.env.*
+!.env.example
+
+# Local infrastructure state and generated output
+.terraform/
+*.tfstate
+*.tfstate.*
+cdk.out/
+.aws-sam/
+dist/
+build/

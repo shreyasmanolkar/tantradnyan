@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "source": {
+    "repository": "/home/shreyas/Work/learning/aws",
+    "revision": "1cc1b8971b2df911bb7f905f24907197ea65fd25",
+    "revision_date": "2026-10-04"
+  },
+  "import_date": "2026-10-07",
+  "documentation_research_snapshot": "2026-10-04",
+  "policy": "Tracked regular files copied unchanged; Git metadata and ignored files excluded.",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 272,
+      "sha256": "fe9c01d09a0d464f647c5aaad8e9ce82c0779e4a24736debf26b66e0972b08e1",
+      "git_mode": "100644"
+    },
+    {
+      "path": "00-getting-started.md",
+      "bytes": 5371,
+      "sha256": "68c47e88f4b2f0497deb1850afd7b93b5c5b20c482ca93c9b457b8794f8c7b5c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "01-foundations.md",
+      "bytes": 25729,
+      "sha256": "a99c2bdba51ec67a3df9b4f804b053a485a2b1f018a3f49201cf2c570d16d9bd",
+      "git_mode": "100644"
+    },
+    {
+      "path": "02-architecture-and-services.md",
+      "bytes": 28908,
+      "sha256": "bb9d575d459e2148ba2ffd197cd4724b604c7ffa69804abf47e28d24d732e3d1",
+      "git_mode": "100644"
+    },
+    {
+      "path": "03-operations-and-reference.md",
+      "bytes": 42218,
+      "sha256": "ebc9f19807e06675ba3a5432c3b9547ce1605a630f9b237425d1ac09149b784a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "04-hands-on-labs.md",
+      "bytes": 43881,
+      "sha256": "909423835bd491e0be6cae9032ed26e3b014eea7a3a1bd07d7af8540f06a0b44",
+      "git_mode": "100644"
+    },
+    {
+      "path": "05-sources-and-currency.md",
+      "bytes": 18074,
+      "sha256": "45024ffd3adc2db69b91f1576d50db597911e4b8075461345b5cf2995eca0089",
+      "git_mode": "100644"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3956,
+      "sha256": "2fc95126822a6ce88eb5f4c2b50cebf3432b685ffbb4d4ccc1e2ce72c613d07b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "examples/.dockerignore",
+      "bytes": 68,
+      "sha256": "cfc85125a1fd18bf20e53336f400467ffcc1f44e915cf9c5b58016a2bf395f1c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "examples/Dockerfile",
+      "bytes": 531,
+      "sha256": "eb14217458e861c7c7a8b2d3eee7287ff9e66f4421636f88248e08d0ceff5b37",
+      "git_mode": "100644"
+    },
+    {
+      "path": "examples/README.md",
+      "bytes": 6740,
+      "sha256": "bec4571635ea8a5414a0653f3d3424aa0514553857c6ffb127836bcf31ce2d7a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "examples/api.py",
+      "bytes": 3393,
+      "sha256": "80ebcd65a49bc4cb561b30aa971a15a0712e53224fde05cff9288d3b260163b4",
+      "git_mode": "100644"
+    },
+    {
+      "path": "examples/async.json",
+      "bytes": 3605,
+      "sha256": "6549a5b11f8d35f8d0b7216fec7f5a3761567126db6c4c3578506313135fa281",
+      "git_mode": "100644"
+    },
+    {
+      "path": "examples/cache.json",
+      "bytes": 1445,
+      "sha256": "5ee36c6c2a92146b38bd8e446d122bc445399c9b44ec6dc100cec3e06d4b502a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "examples/cache_probe.py",
+      "bytes": 579,
+      "sha256": "537615f694824765b0c7d3bb8673d57da4057ea3e38bb9ff4522b0ca520ce247",
+      "git_mode": "100644"
+    },
+    {
+      "path": "examples/data.json",
+      "bytes": 7567,
+      "sha256": "972e4c3573a04019cf517d7e348e0b648386f6c47da206b3bb4b91f8b0722d0d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "examples/db_init.py",
+      "bytes": 1499,
+      "sha256": "d77e0f24667a8cf0cf41fbaeab018365f99ef09bdca0c8468b913c10d925dd96",
+      "git_mode": "100644"
+    },
+    {
+      "path": "examples/foundation.json",
+      "bytes": 10107,
+      "sha256": "2231390ee736a2e202efc9a7c846d17d5945afcf36b013466f871edec6840d82",
+      "git_mode": "100644"
+    },
+    {
+      "path": "examples/github-actions.yml.example",
+      "bytes": 5557,
+      "sha256": "617d0f5cd62258ee842e511364b74cb493699afff54735752ca7841828c2dfe7",
+      "git_mode": "100644"
+    },
+    {
+      "path": "examples/lab.sh",
+      "bytes": 3755,
+      "sha256": "3abf652a5f524a66ce2589246bfe4f3a79624eec8fe2dbea39ebe6711cffc2f8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "examples/requirements.txt",
+      "bytes": 107,
+      "sha256": "4f418d73b44c90d5c0e429bdb825d49d936636e5b892a10ab2c118cfc03c42ae",
+      "git_mode": "100644"
+    },
+    {
+      "path": "examples/service.json",
+      "bytes": 12345,
+      "sha256": "3d08f515d4edaded94b1d864136fa461a7d40571731e5b2785ac5346e6223ba4",
+      "git_mode": "100644"
+    },
+    {
+      "path": "examples/smoke.py",
+      "bytes": 2123,
+      "sha256": "7ad81a15e62eaf9dd427ed7be23c086803dc7019483c5f6c67d3f59808db5ce1",
+      "git_mode": "100644"
+    }
+  ]
+}
