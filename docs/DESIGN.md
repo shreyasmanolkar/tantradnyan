@@ -270,7 +270,7 @@ domains/computer-architecture/instruction-execution/
 
 ```
 
-The [sync-engine curriculum](../domains/sync-engines/README.md) owns its guide, Node.js lab stages, references, and recorded experiments under `domains/sync-engines/`. The [AWS curriculum](../domains/aws/README.md) keeps its imported chapters and example files together under `domains/aws/service-lifecycle/`.
+The [sync-engine curriculum](../domains/sync-engines/README.md) owns its guide, Node.js lab stages, references, and recorded experiments under `domains/sync-engines/`. The [AWS curriculum](../domains/aws/README.md) adds a guide, twenty Python mechanism labs, real-service workbook, references and recorded local checks under `domains/aws/`, while keeping its original imported chapters and examples together under `domains/aws/service-lifecycle/`.
 
 Larger examples below are designs for future work, not existing implementations:
 

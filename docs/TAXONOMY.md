@@ -497,4 +497,4 @@ Canonical prefix: `domains/aws/`.
 
 ### Building and operating services
 
-- [Building and operating services on AWS](../domains/aws/service-lifecycle/README.md) — `aws-service-lifecycle` (growing).
+- [AWS services from first principles](../domains/aws/curriculum/README.md) — `aws-service-lifecycle` (growing).
