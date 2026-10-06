@@ -1,19 +1,42 @@
-# AWS — build, operate, and recover a service
+# AWS from first principles
 
 **Question:** how does a local program become a reachable AWS service with explicit identity, network paths, durable state, deployment controls, and recovery procedures?
 
-The [service-lifecycle curriculum](service-lifecycle/README.md) imports the existing AWS learning repository as one coherent topic. Its six chapters, 18 hands-on labs, Python examples, CloudFormation templates, and inactive CI example stay together so their relative paths keep working. The [import record](service-lifecycle/IMPORT.md) identifies the source revision and validation boundaries.
+Start with the [single master guide](GUIDE.md). It derives AWS service choices from identity, packet paths, durable state, capacity, retries, reconciliation, observation and recovery.
+
+The [20-stage Python lab](aws-service-lab/README.md) contains inspectable implementations, 81 specific exercises, property checks and deliberate failures. The [cloud workbook](CLOUD-LABS.md) compares those mechanisms with real IAM, S3, SQS, DynamoDB, Lambda, SNS, EventBridge and Kinesis operations. [Exercise review and five design challenges](EXERCISES.md) require reasoning about state, boundaries, failures, cost and cleanup.
+
+The original [service-lifecycle curriculum](service-lifecycle/README.md) keeps its six chapters, 18 cloud labs, Python API, container image, CloudFormation examples and inactive CI workflow together. The [import record](service-lifecycle/IMPORT.md) preserves its source revision and dated research context. New material extends that baseline without rewriting the original 23 source files.
 
 ## Start here
 
 | Route | Start | Requirements and observable result |
 | --- | --- | --- |
+| First principles, no AWS account | [Master guide](GUIDE.md), [local lab](aws-service-lab/README.md) | Python 3.10+, no dependencies; observe permission denial, stale writes, redelivery, checkpoint replay, cache races and file-backed recovery |
+| Targeted real-service comparisons | [Cloud workbook](CLOUD-LABS.md) | CLI/jq and selected sandbox permissions; compare toy assumptions to actual service responses and collect your own evidence |
 | Local only | [Local API lab](service-lifecycle/04-hands-on-labs.md#4--run-and-inspect-the-local-api), [example files](service-lifecycle/examples/README.md) | Python 3; inspect HTTP responses, request IDs, JSON logs, health, and graceful shutdown without an AWS account |
 | First cloud exercise | [Getting started](service-lifecycle/00-getting-started.md) | Authorized sandbox identity and AWS CLI v2; create a private bucket, round-trip an object, inspect settings, and clean up |
 | Focused storage and messaging | [S3/SQS track](service-lifecycle/04-hands-on-labs.md#focused-s3-and-sqs-track) | CLI, Bash, Python, jq, curl, and sandbox provisioning permissions; observe object versions, queue delivery, and duplicate work |
 | Full service lifecycle | [Curriculum index](service-lifecycle/README.md), then [container setup](service-lifecycle/04-hands-on-labs.md#full-container-track-setup-and-change-loop) | Adds Docker/buildx, infrastructure permissions, and a controlled DNS domain for HTTPS; deploy, observe, inject failures, restore, and tear down |
 
-### Working directory
+### Local model commands
+
+From this repository's root:
+
+```bash
+cd domains/aws/aws-service-lab
+python3 run.py demo
+python3 run.py experiments
+python3 run.py test
+python3 run.py demo --stage 12
+python3 -B cloud/test_handler.py
+python3 -B cloud/build_template.py --check
+python3 -B cloud/check_templates.py
+```
+
+No AWS APIs or network listeners are used by these checks. SQLite and capstone state use private temporary directories. Model time and illustrative billing rates are explicit inputs, not AWS latency or price measurements. The secrets/key model performs no encryption.
+
+### Cloud lab working directory
 
 From this repository's root:
 
@@ -32,6 +55,8 @@ python3 examples/smoke.py
 This command launches the diagnostic API on localhost and checks its responses, logs, and shutdown. It does not validate deployed infrastructure. The [examples guide](service-lifecycle/examples/README.md) explains the model's limits.
 
 ## Read the mechanism, then observe it
+
+The [master curriculum](GUIDE.md) and each [stage walkthrough](aws-service-lab/README.md#progression) add prediction, inspectable transitions, a controlled failure, modification exercises and an AWS counterpart. The table below maps the original deployment/reference material that the new curriculum builds on.
 
 | Chapter | Learning question | Evidence to collect |
 | --- | --- | --- |
@@ -82,8 +107,9 @@ These catalog links include planned topics; they are optional deeper questions, 
 
 ## Repository integration
 
-- Canonical catalog topic: `aws-service-lifecycle`, at `domains/aws/service-lifecycle/`.
+- Canonical catalog topic: `aws-service-lifecycle`, with its [curriculum entry](curriculum/README.md). The master guide and lab stay under `domains/aws/`; the imported source stays at `domains/aws/service-lifecycle/`.
 - The original 23 tracked files were copied unchanged from revision `1cc1b8971b2df911bb7f905f24907197ea65fd25`; Git metadata, ignored files, and credentials were excluded.
 - The source's documentation research snapshot remains **2026-10-04**. Importing it does not refresh pricing, lifecycle, support, or regional guidance.
 - `examples/github-actions.yml.example` remains inactive. Its commands assume the original standalone repository root; see [workflow integration notes](service-lifecycle/IMPORT.md#ci-working-directory) before adapting it to this monorepo.
 - Available explanations and lab instructions are recorded as artifacts. Cloud deployment and learner outcomes remain unverified.
+- [Experiment evidence](experiments/README.md) records local checks and their limitations; [the source map](references/README.md) links the public service contracts consulted for this extension.
