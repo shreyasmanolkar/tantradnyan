@@ -2600,8 +2600,8 @@
       "domain": "synchronization",
       "group": "sync",
       "path": "domains/synchronization/sync-engines",
-      "status": "planned",
-      "question": "What state and rules explain sync engines, and what does the simplest implementation omit?",
+      "status": "growing",
+      "question": "How do independent, intermittently connected processes reconcile concurrent local changes under explicit consistency and failure contracts?",
       "prerequisites": [
         "replication",
         "idempotency"
@@ -2614,7 +2614,49 @@
       "tags": [
         "sync"
       ],
-      "milestones": [],
+      "milestones": [
+        {
+          "level": 1,
+          "outcome": "Explain state, transitions, consistency, ordering and merge assumptions from first principles.",
+          "state": "available",
+          "artifacts": [
+            "domains/sync-engines/GUIDE.md"
+          ]
+        },
+        {
+          "level": 2,
+          "outcome": "Run twenty bounded Node.js models, including OT, eight CRDTs, clocks, sockets and game prediction.",
+          "state": "available",
+          "artifacts": [
+            "domains/sync-engines/sync-engine-lab/README.md"
+          ]
+        },
+        {
+          "level": 3,
+          "outcome": "Reproduce loss, duplication, stale writes, write skew, offline recovery and ordinary process restart.",
+          "state": "available",
+          "artifacts": [
+            "domains/sync-engines/experiments/README.md"
+          ]
+        },
+        {
+          "level": 4,
+          "outcome": "Compare documented product accounts with explicitly proposed architectures and scaling choices.",
+          "state": "available",
+          "artifacts": [
+            "domains/sync-engines/references/README.md"
+          ]
+        },
+        {
+          "level": 5,
+          "outcome": "Build a persistent single-authority WebSocket field-map engine and reason about its declared boundaries.",
+          "state": "available",
+          "artifacts": [
+            "domains/sync-engines/sync-engine-lab/shared/engine.mjs",
+            "domains/sync-engines/sync-engine-lab/20-production-sync-engine/README.md"
+          ]
+        }
+      ],
       "labs": []
     },
     {
