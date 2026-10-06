@@ -1,0 +1,224 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Disposable fanout/routing/replay learning stack. One provisioned Kinesis shard bills while idle; delete after practice.",
+  "Resources": {
+    "Topic": {
+      "Type": "AWS::SNS::Topic"
+    },
+    "BillingQueue": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "SqsManagedSseEnabled": true,
+        "MessageRetentionPeriod": 86400
+      }
+    },
+    "AuditQueue": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "SqsManagedSseEnabled": true,
+        "MessageRetentionPeriod": 86400
+      }
+    },
+    "Bus": {
+      "Type": "AWS::Events::EventBus",
+      "Properties": {
+        "Name": {
+          "Fn::Sub": "${AWS::StackName}-bus"
+        }
+      }
+    },
+    "Rule": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "EventBusName": {
+          "Ref": "Bus"
+        },
+        "EventPattern": {
+          "source": [
+            "aws.learning"
+          ],
+          "detail-type": [
+            "AssetReady"
+          ]
+        },
+        "Targets": [
+          {
+            "Id": "AuditQueue",
+            "Arn": {
+              "Fn::GetAtt": [
+                "AuditQueue",
+                "Arn"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "Stream": {
+      "Type": "AWS::Kinesis::Stream",
+      "Properties": {
+        "ShardCount": 1,
+        "RetentionPeriodHours": 24,
+        "StreamModeDetails": {
+          "StreamMode": "PROVISIONED"
+        },
+        "StreamEncryption": {
+          "EncryptionType": "KMS",
+          "KeyId": "alias/aws/kinesis"
+        }
+      }
+    },
+    "BillingSubscription": {
+      "Type": "AWS::SNS::Subscription",
+      "Properties": {
+        "TopicArn": {
+          "Ref": "Topic"
+        },
+        "Protocol": "sqs",
+        "Endpoint": {
+          "Fn::GetAtt": [
+            "BillingQueue",
+            "Arn"
+          ]
+        },
+        "RawMessageDelivery": true
+      }
+    },
+    "BillingQueuePolicy": {
+      "Type": "AWS::SQS::QueuePolicy",
+      "Properties": {
+        "Queues": [
+          {
+            "Ref": "BillingQueue"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "sns.amazonaws.com"
+              },
+              "Action": "sqs:SendMessage",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "BillingQueue",
+                  "Arn"
+                ]
+              },
+              "Condition": {
+                "ArnEquals": {
+                  "aws:SourceArn": {
+                    "Ref": "Topic"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "AuditSubscription": {
+      "Type": "AWS::SNS::Subscription",
+      "Properties": {
+        "TopicArn": {
+          "Ref": "Topic"
+        },
+        "Protocol": "sqs",
+        "Endpoint": {
+          "Fn::GetAtt": [
+            "AuditQueue",
+            "Arn"
+          ]
+        },
+        "RawMessageDelivery": true
+      }
+    },
+    "AuditQueuePolicy": {
+      "Type": "AWS::SQS::QueuePolicy",
+      "Properties": {
+        "Queues": [
+          {
+            "Ref": "AuditQueue"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "sns.amazonaws.com"
+              },
+              "Action": "sqs:SendMessage",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "AuditQueue",
+                  "Arn"
+                ]
+              },
+              "Condition": {
+                "ArnEquals": {
+                  "aws:SourceArn": {
+                    "Ref": "Topic"
+                  }
+                }
+              }
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "events.amazonaws.com"
+              },
+              "Action": "sqs:SendMessage",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "AuditQueue",
+                  "Arn"
+                ]
+              },
+              "Condition": {
+                "ArnEquals": {
+                  "aws:SourceArn": {
+                    "Fn::GetAtt": [
+                      "Rule",
+                      "Arn"
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "Outputs": {
+    "TopicArn": {
+      "Value": {
+        "Ref": "Topic"
+      }
+    },
+    "BillingQueueUrl": {
+      "Value": {
+        "Ref": "BillingQueue"
+      }
+    },
+    "AuditQueueUrl": {
+      "Value": {
+        "Ref": "AuditQueue"
+      }
+    },
+    "BusName": {
+      "Value": {
+        "Ref": "Bus"
+      }
+    },
+    "StreamName": {
+      "Value": {
+        "Ref": "Stream"
+      }
+    }
+  }
+}

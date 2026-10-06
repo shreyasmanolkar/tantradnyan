@@ -1,0 +1,136 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Disposable Lambda/DynamoDB conditional-write learning lab. No public endpoint or event source.",
+  "Resources": {
+    "Receipts": {
+      "Type": "AWS::DynamoDB::Table",
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Delete",
+      "Properties": {
+        "BillingMode": "PAY_PER_REQUEST",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "PK",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "PK",
+            "KeyType": "HASH"
+          }
+        ],
+        "SSESpecification": {
+          "SSEEnabled": true
+        }
+      }
+    },
+    "Logs": {
+      "Type": "AWS::Logs::LogGroup",
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Delete",
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Sub": "/aws/lambda/${AWS::StackName}-handler"
+        },
+        "RetentionInDays": 1
+      }
+    },
+    "ExecutionRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "ReceiptAndLogs",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "dynamodb:PutItem",
+                    "dynamodb:GetItem"
+                  ],
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "Receipts",
+                      "Arn"
+                    ]
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                  ],
+                  "Resource": {
+                    "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/${AWS::StackName}-handler:*"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "Function": {
+      "Type": "AWS::Lambda::Function",
+      "DependsOn": "Logs",
+      "Properties": {
+        "FunctionName": {
+          "Fn::Sub": "${AWS::StackName}-handler"
+        },
+        "Runtime": "python3.13",
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "ExecutionRole",
+            "Arn"
+          ]
+        },
+        "Timeout": 10,
+        "MemorySize": 128,
+        "Environment": {
+          "Variables": {
+            "TABLE_NAME": {
+              "Ref": "Receipts"
+            }
+          }
+        },
+        "Code": {
+          "ZipFile": "\"\"\"Synthetic conditional-write lab. The one DynamoDB item IS the whole effect.\"\"\"\nimport hashlib\nimport json\nimport os\n\n\ndef handler(event, context):\n    import boto3  # supplied by the managed runtime for this inline learning lab\n    identifier, value = event.get(\"id\"), event.get(\"value\")\n    if not isinstance(identifier, str) or not 1 <= len(identifier) <= 128:\n        raise ValueError(\"id must be a bounded string\")\n    if not isinstance(value, str) or len(value.encode()) > 4096:\n        raise ValueError(\"value must be at most 4096 UTF-8 bytes\")\n    payload_hash = hashlib.sha256(value.encode()).hexdigest()\n    client = boto3.client(\"dynamodb\")\n    table = os.environ[\"TABLE_NAME\"]\n    item = {\"PK\": {\"S\": identifier}, \"value\": {\"S\": value}, \"payload_hash\": {\"S\": payload_hash}}\n    created = False\n    try:\n        client.put_item(TableName=table, Item=item, ConditionExpression=\"attribute_not_exists(PK)\")\n        created = True\n    except client.exceptions.ConditionalCheckFailedException:\n        stored = client.get_item(TableName=table, Key={\"PK\": {\"S\": identifier}}, ConsistentRead=True).get(\"Item\")\n        if not stored or stored[\"payload_hash\"][\"S\"] != payload_hash:\n            raise ValueError(\"id reused for different content or receipt disappeared\")\n    # Do not log the value, event, credentials, or secret material.\n    print(json.dumps({\"request_id\": context.aws_request_id, \"created\": created}))\n    if created and event.get(\"fail_after_write\") is True:\n        raise RuntimeError(\"injected failure after the durable write\")\n    return {\"id\": identifier, \"status\": \"created\" if created else \"duplicate\", \"payload_hash\": payload_hash}\n"
+        }
+      }
+    }
+  },
+  "Outputs": {
+    "TableName": {
+      "Value": {
+        "Ref": "Receipts"
+      }
+    },
+    "FunctionName": {
+      "Value": {
+        "Ref": "Function"
+      }
+    },
+    "LogGroup": {
+      "Value": {
+        "Ref": "Logs"
+      }
+    }
+  }
+}
