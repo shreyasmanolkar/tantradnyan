@@ -1,0 +1,15 @@
+# Project-scoped Codex MCP servers (trusted projects only).
+# Codex does not load the repo-root `.mcp.json` for MCP; that file is for
+# Claude Code-compatible clients. Keep secrets out of this file: Context7
+# reads CONTEXT7_API_KEY from the host environment.
+
+[mcp_servers.context7]
+url = "https://mcp.context7.com/mcp"
+bearer_token_env_var = "CONTEXT7_API_KEY"
+startup_timeout_sec = 20
+
+[mcp_servers.playwright]
+command = "npx"
+args = ["-y", "@playwright/mcp@latest"]
+startup_timeout_sec = 30
+tool_timeout_sec = 120
