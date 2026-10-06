@@ -90,3 +90,9 @@ PY
 ```
 
 A difference can be an intentional curriculum change. Inspect it against the original revision; preserve this historical baseline rather than treating a new hash as evidence of the original import.
+
+## Curriculum extension — 2026-10-07
+
+The domain now adds a [first-principles master guide](../GUIDE.md), [twenty local Python labs](../aws-service-lab/README.md), [cloud workbook](../CLOUD-LABS.md), [exercise review](../EXERCISES.md), and [source map](../references/README.md) beside this imported tree. The canonical catalog entry points to `domains/aws/curriculum/`; this directory still owns the original source material and its working-directory conventions.
+
+The 23 files listed in `IMPORT.json` remain unchanged. Local model observations and SDK-fake/template checks are documented in the [new evidence record](../experiments/README.md); they do not revise the earlier import observations or imply execution of cloud labs.
