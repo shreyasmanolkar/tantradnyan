@@ -1,0 +1,7 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>IAM request laboratory</title>
+<h1>IAM request laboratory</h1><p>Observe identity, session, tenant authorization and revocation separately. Local fixtures: alice@example.invalid / bob@example.invalid; password: example-only long passphrase. Development only; all state disappears on restart.</p>
+<form id="login"><label>Email <input id="email" type="email" value="alice@example.invalid" autocomplete="username" required></label><label>Password <input id="password" type="password" autocomplete="current-password" required></label><button>Sign in</button></form>
+<p><a href="/oidc/login">Sign in through the local OIDC provider</a> (start npm run oidc first; use account alice).</p>
+<label for="tenant">Tenant</label><select id="tenant"><option>a</option><option>b</option></select><label for="document">Document</label><select id="document"><option>doc-a</option><option>doc-b</option></select>
+<button id="me">Inspect session</button><button id="read">Read document</button><button id="logout">Revoke session</button>
+<p role="status" id="status">No requests yet.</p><pre id="trace" aria-label="Request trace"></pre><script src="/app.js"></script></html>
