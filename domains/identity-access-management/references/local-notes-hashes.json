@@ -1,0 +1,13 @@
+{
+  "scope": "supplied transcript files preserved during IAM implementation; review snapshot",
+  "files": {
+    "docs/references/api-authentication-concepts.md": "5dc4a70f865eb2d5d9d8859743a141ec7ee35667e785274fa68a818ed609706d",
+    "docs/references/iam.md": "f60dbf2f40b3c76e5d8369aab318980f4f0ec4dcb687d6b9930ca5fee601f528",
+    "docs/references/jwt-tokens.md": "96e78876eadfb6b6e51fad927f7a7a4bdb7cb7371e37f5fabf567ba9b6b5c6ea",
+    "docs/references/oauth-2.0.md": "77dd8f8cdb85c83fe1b5031c3106426bd8e11798a9df24713edab804c08b838a",
+    "docs/references/pkce.md": "6a9dd3d4cefcc9f7e7627879533e7257f3f5b6a45c713053c11c0cb3be3cd8d8",
+    "docs/references/saml.md": "6cb6ae8b5821df54327105901961afe4acd2e52dae9c69350ac995920927ab09",
+    "docs/references/scim.md": "6d6b23867c34e5b492624fc63c3da2f0abd07bfa3739f9440264a4fd7b44ce92",
+    "docs/references/sso.md": "5333d1052bcea91269fe3ff4d6a4371b1bf7d2f8ef7bb813aa80fca027fb0f75"
+  }
+}
