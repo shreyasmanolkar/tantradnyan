@@ -303,7 +303,6 @@ Canonical prefix: `domains/applications/`.
 ### Application services
 
 - [Search and inverted indexes](../INDEX.md#search-systems) — `search-systems` (planned).
-- [Authentication and identity](../INDEX.md#authentication) — `authentication` (planned).
 - [Event-driven applications](../INDEX.md#event-driven-applications) — `event-driven-applications` (planned).
 - [API design](../INDEX.md#api-design) — `api-design` (planned).
 - [Notifications and delivery semantics](../INDEX.md#notifications) — `notifications` (planned).
@@ -473,3 +472,27 @@ Canonical prefix: `domains/aws/`.
 ### Building and operating services
 
 - [AWS services from first principles](../domains/aws/curriculum/README.md) — `aws-service-lifecycle` (growing).
+
+## Identity and access management
+
+Derive request identity, authorization, delegation, federation and lifecycle across SaaS, APIs, workloads and enterprise trust boundaries.
+
+Canonical prefix: `domains/identity-access-management/`.
+
+### Identity and request security
+
+- [IAM foundations and authentication](../domains/identity-access-management/curriculum/README.md) — `authentication` (growing).
+- [Browser sessions and request security](../domains/identity-access-management/iam-browser-sessions/README.md) — `iam-browser-sessions` (growing).
+- [Authorization and tenant isolation](../domains/identity-access-management/iam-authorization/README.md) — `iam-authorization` (growing).
+
+### Delegation and federation
+
+- [OAuth, PKCE and token lifecycle](../domains/identity-access-management/iam-delegation-tokens/README.md) — `iam-delegation-tokens` (growing).
+- [OIDC, SAML and enterprise SSO](../domains/identity-access-management/iam-federation/README.md) — `iam-federation` (growing).
+
+### Enterprise lifecycle and architecture
+
+- [SCIM and identity lifecycle](../domains/identity-access-management/iam-provisioning/README.md) — `iam-provisioning` (growing).
+- [Workload identity and SaaS architecture](../domains/identity-access-management/iam-workload-architecture/README.md) — `iam-workload-architecture` (growing).
+- [IAM threats, audit and operations](../domains/identity-access-management/iam-operations/README.md) — `iam-operations` (growing).
+- [Integrated IAM and protected SaaS](../domains/identity-access-management/iam-integration/README.md) — `iam-saas-integration` (growing).

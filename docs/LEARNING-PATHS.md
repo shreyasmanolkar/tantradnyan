@@ -124,6 +124,22 @@ Separate learning mathematics, representation, evaluation, and execution costs.
 | 10 | [GPU programming](../INDEX.md#gpu-programming) | [GPU architecture](../INDEX.md#gpu-architecture) | planned |
 | 11 | [Inference systems](../INDEX.md#inference-systems) | [Neural networks](../INDEX.md#neural-networks), [Performance engineering](../INDEX.md#performance-engineering) | planned |
 
+## From request identity to enterprise IAM
+
+Authenticate evidence, authorize current tenant resources, delegate APIs, federate login, provision identities and audit/revoke authority.
+
+| Stop | Topic | Entry prerequisites | Content status |
+| --- | --- | --- | --- |
+| 1 | [IAM foundations and authentication](../domains/identity-access-management/curriculum/README.md) | — | growing |
+| 2 | [Browser sessions and request security](../domains/identity-access-management/iam-browser-sessions/README.md) | [IAM foundations and authentication](../domains/identity-access-management/curriculum/README.md) | growing |
+| 3 | [Authorization and tenant isolation](../domains/identity-access-management/iam-authorization/README.md) | [IAM foundations and authentication](../domains/identity-access-management/curriculum/README.md) | growing |
+| 4 | [OAuth, PKCE and token lifecycle](../domains/identity-access-management/iam-delegation-tokens/README.md) | [IAM foundations and authentication](../domains/identity-access-management/curriculum/README.md), [Authorization and tenant isolation](../domains/identity-access-management/iam-authorization/README.md) | growing |
+| 5 | [OIDC, SAML and enterprise SSO](../domains/identity-access-management/iam-federation/README.md) | [Browser sessions and request security](../domains/identity-access-management/iam-browser-sessions/README.md), [OAuth, PKCE and token lifecycle](../domains/identity-access-management/iam-delegation-tokens/README.md) | growing |
+| 6 | [SCIM and identity lifecycle](../domains/identity-access-management/iam-provisioning/README.md) | [Authorization and tenant isolation](../domains/identity-access-management/iam-authorization/README.md) | growing |
+| 7 | [Workload identity and SaaS architecture](../domains/identity-access-management/iam-workload-architecture/README.md) | [OAuth, PKCE and token lifecycle](../domains/identity-access-management/iam-delegation-tokens/README.md), [Authorization and tenant isolation](../domains/identity-access-management/iam-authorization/README.md) | growing |
+| 8 | [IAM threats, audit and operations](../domains/identity-access-management/iam-operations/README.md) | [IAM foundations and authentication](../domains/identity-access-management/curriculum/README.md) | growing |
+| 9 | [Integrated IAM and protected SaaS](../domains/identity-access-management/iam-integration/README.md) | [OIDC, SAML and enterprise SSO](../domains/identity-access-management/iam-federation/README.md), [SCIM and identity lifecycle](../domains/identity-access-management/iam-provisioning/README.md), [Authorization and tenant isolation](../domains/identity-access-management/iam-authorization/README.md) | growing |
+
 ## Evidence milestones
 
 Levels are optional lenses; they are not required folder names.
@@ -155,6 +171,15 @@ Levels are optional lenses; they are not required folder names.
 | 4 — Production architecture | Compare documented product accounts with explicitly proposed architectures and scaling choices. | available | [README.md](../domains/sync-engines/references/README.md) |
 | 5 — Integrated build | Build a persistent single-authority WebSocket field-map engine and reason about its declared boundaries. | available | [engine.mjs](../domains/sync-engines/sync-engine-lab/shared/engine.mjs), [README.md](../domains/sync-engines/sync-engine-lab/20-production-sync-engine/README.md) |
 
+### IAM foundations and authentication
+
+[IAM foundations and authentication](../domains/identity-access-management/curriculum/README.md)
+
+| Level | Outcome | State | Artifacts |
+| --- | --- | --- | --- |
+| 1 — Fundamentals | Explain resources, principals, authenticators, assurance and authentication versus authorization. | available | [GUIDE.md](../domains/identity-access-management/GUIDE.md) |
+| 2 — Small implementation | Run bounded cryptography/password/session/policy models and explain counterexamples. | available | [README.md](../domains/identity-access-management/iam-first-principles/README.md) |
+
 ### AWS services from first principles
 
 [AWS services from first principles](../domains/aws/curriculum/README.md)
@@ -167,3 +192,67 @@ Levels are optional lenses; they are not required folder names.
 | 3 — Internals | Expose stale writes, permission/path failures, redelivery, cache races, checkpoint replay and recovery; compare with manual cloud exercises. | available | [04-hands-on-labs.md](../domains/aws/service-lifecycle/04-hands-on-labs.md), [03-operations-and-reference.md](../domains/aws/service-lifecycle/03-operations-and-reference.md), [README.md](../domains/aws/experiments/README.md), [CLOUD-LABS.md](../domains/aws/CLOUD-LABS.md), [EXERCISES.md](../domains/aws/EXERCISES.md) |
 | 4 — Production architecture | Justify compute, storage, delivery, and deployment choices against explicit workload requirements and dated primary sources. | available | [02-architecture-and-services.md](../domains/aws/service-lifecycle/02-architecture-and-services.md), [05-sources-and-currency.md](../domains/aws/service-lifecycle/05-sources-and-currency.md), [README.md](../domains/aws/references/README.md) |
 | 5 — Integrated build | Build a file-backed idempotent workflow and follow bounded container/serverless/event deployments with explicit acceptance and teardown instructions. | available | [04-hands-on-labs.md](../domains/aws/service-lifecycle/04-hands-on-labs.md), [foundation.json](../domains/aws/service-lifecycle/examples/foundation.json), [service.json](../domains/aws/service-lifecycle/examples/service.json), [data.json](../domains/aws/service-lifecycle/examples/data.json), [model.py](../domains/aws/aws-service-lab/20-operated-service/src/model.py), [serverless.json](../domains/aws/aws-service-lab/cloud/serverless.json), [events.json](../domains/aws/aws-service-lab/cloud/events.json) |
+
+### Browser sessions and request security
+
+[Browser sessions and request security](../domains/identity-access-management/iam-browser-sessions/README.md)
+
+| Level | Outcome | State | Artifacts |
+| --- | --- | --- | --- |
+| 2 — Small implementation | How do session rotation, browser cookie boundaries, CSRF and invalidation maintain bounded authenticated continuity? | available | [model.mjs](../domains/identity-access-management/iam-first-principles/03-session-authentication/src/model.mjs), [review.mjs](../domains/identity-access-management/iam-first-principles/browser/review.mjs) |
+
+### Authorization and tenant isolation
+
+[Authorization and tenant isolation](../domains/identity-access-management/iam-authorization/README.md)
+
+| Level | Outcome | State | Artifacts |
+| --- | --- | --- | --- |
+| 2 — Small implementation | Which current role, attribute or relationship permits this principal/action/resource in this tenant? | available | [model.mjs](../domains/identity-access-management/iam-first-principles/05-authorization/src/model.mjs), [DATA-MODEL.md](../domains/identity-access-management/DATA-MODEL.md) |
+
+### OAuth, PKCE and token lifecycle
+
+[OAuth, PKCE and token lifecycle](../domains/identity-access-management/iam-delegation-tokens/README.md)
+
+| Level | Outcome | State | Artifacts |
+| --- | --- | --- | --- |
+| 2 — Small implementation | How can a client obtain bounded delegated API authority without receiving the user password? | available | [model.mjs](../domains/identity-access-management/iam-first-principles/10-pkce/src/model.mjs), [model.mjs](../domains/identity-access-management/iam-first-principles/07-jwt/src/model.mjs) |
+
+### OIDC, SAML and enterprise SSO
+
+[OIDC, SAML and enterprise SSO](../domains/identity-access-management/iam-federation/README.md)
+
+| Level | Outcome | State | Artifacts |
+| --- | --- | --- | --- |
+| 2 — Small implementation | How does an application validate independently administered issuer assertions and create its own session? | available | [model.mjs](../domains/identity-access-management/iam-first-principles/11-oidc-relying-party/src/model.mjs), [signed.test.mjs](../domains/identity-access-management/iam-first-principles/18-saml-sso/tests/signed.test.mjs) |
+
+### SCIM and identity lifecycle
+
+[SCIM and identity lifecycle](../domains/identity-access-management/iam-provisioning/README.md)
+
+| Level | Outcome | State | Artifacts |
+| --- | --- | --- | --- |
+| 2 — Small implementation | How does an enterprise lifecycle change become a bounded local access change? | available | [model.mjs](../domains/identity-access-management/iam-first-principles/19-scim-provisioning/src/model.mjs), [DESIGN-CHALLENGES.md](../domains/identity-access-management/DESIGN-CHALLENGES.md) |
+
+### Workload identity and SaaS architecture
+
+[Workload identity and SaaS architecture](../domains/identity-access-management/iam-workload-architecture/README.md)
+
+| Level | Outcome | State | Artifacts |
+| --- | --- | --- | --- |
+| 2 — Small implementation | How do services and multi-tenant applications bind caller identity, delegation, resource policy and revocation? | available | [model.mjs](../domains/identity-access-management/iam-first-principles/20-workload-identity/src/model.mjs), [DESIGN-CHALLENGES.md](../domains/identity-access-management/DESIGN-CHALLENGES.md) |
+
+### IAM threats, audit and operations
+
+[IAM threats, audit and operations](../domains/identity-access-management/iam-operations/README.md)
+
+| Level | Outcome | State | Artifacts |
+| --- | --- | --- | --- |
+| 2 — Small implementation | Which evidence and operational controls reveal compromise, stale access and revocation failures? | available | [THREATS.md](../domains/identity-access-management/THREATS.md), [README.md](../domains/identity-access-management/experiments/README.md) |
+
+### Integrated IAM and protected SaaS
+
+[Integrated IAM and protected SaaS](../domains/identity-access-management/iam-integration/README.md)
+
+| Level | Outcome | State | Artifacts |
+| --- | --- | --- | --- |
+| 5 — Integrated build | Do independent authentication, federation, lifecycle and tenant policy invariants compose on real requests? | available | [README.md](../projects/iam-saas/README.md), [model.test.mjs](../domains/identity-access-management/iam-first-principles/22-integrated-iam-service/tests/model.test.mjs) |
