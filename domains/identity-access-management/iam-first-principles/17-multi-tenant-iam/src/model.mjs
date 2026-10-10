@@ -1,0 +1,4 @@
+import {decide,fixture} from '../../05-authorization/src/model.mjs';
+export function switchTenant(principal,tenant,memberships){if(!memberships.some(m=>m.userId===principal.id&&m.tenant===tenant&&m.active))throw new Error('no membership');return {userId:principal.id,tenant};}
+export function setRole({actor,target,role,tenant,memberships}){const m=memberships.find(m=>m.userId===actor.id&&m.tenant===tenant&&m.active);if(!actor.active||m?.role!=='owner'||!['viewer','editor','admin'].includes(role)||actor.id===target)throw new Error('role escalation denied');const row=memberships.find(m=>m.userId===target&&m.tenant===tenant&&m.active);if(!row)throw new Error('no target membership');row.role=role;}
+export function demo(){const f=fixture(),before=decide(f);f.memberships[0].active=false;return {before,after:decide(f)};}
