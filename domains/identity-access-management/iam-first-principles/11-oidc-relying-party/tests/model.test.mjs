@@ -1,0 +1,5 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+
+import {makeProvider} from '../src/provider.mjs';import {connect,begin,finish} from '../src/model.mjs';import {createServer} from 'node:http';
+test('actual provider discovery and transaction binding; fabricated callback is rejected',async()=>{const server=createServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));const issuer=`http://127.0.0.1:${server.address().port}`,provider=makeProvider(issuer);server.on('request',provider.callback());try{const config=await connect(issuer),a=await begin(config,'http://127.0.0.1:3000/oidc/callback'),b=await begin(config,'http://127.0.0.1:3000/oidc/callback');assert.notEqual(a.transaction.state,b.transaction.state);assert.equal(a.url.searchParams.get('code_challenge_method'),'S256');assert.equal(a.url.searchParams.get('nonce'),a.transaction.nonce);await assert.rejects(finish(config,'http://127.0.0.1:3000/oidc/callback?code=fake&state=wrong',a.transaction));await assert.rejects(finish(config,'http://127.0.0.1:3000/oidc/callback',null));}finally{server.closeAllConnections();await new Promise(r=>server.close(r));}});
