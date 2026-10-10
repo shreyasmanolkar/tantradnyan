@@ -242,6 +242,10 @@ def local_links():
     for folder in ['docs', 'catalog', 'templates', 'domains', 'projects', 'experiments', '.agent']:
         files.extend((ROOT / folder).rglob('*.md'))
     for source in files:
+        # Installed dependencies own their documentation; published packages may
+        # omit files linked by it. Validate authored repository docs only.
+        if 'node_modules' in source.relative_to(ROOT).parts:
+            continue
         content = source.read_text(encoding='utf-8')
         content = re.sub(r'```.*?```', '', content, flags=re.S)
         content = re.sub(r'`[^`]*`', '', content)
