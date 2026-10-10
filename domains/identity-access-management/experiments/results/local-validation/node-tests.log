@@ -1,0 +1,39 @@
+
+> test
+> node --test */tests/*.test.mjs
+
+✔ signature rejects altered authority; AEAD recovers exact plaintext (5.972144ms)
+✔ independent salts, correct credential, wrong credential and bounded input (372.911648ms)
+✔ rotation invalidates pre-login ID, logout and absolute timeout win over activity (3.058916ms)
+✔ cookie host boundary and CSRF require both origin and session-bound proof (1.699146ms)
+✔ deny by default, tenant, principal status and live membership precede permissions (1.209832ms)
+✔ key identifies integration, audience and revocation are separate checks (2.839753ms)
+✔ decode is not trust: reject tamper, issuer, audience, expiry, nbf, algorithm and ID-token substitution (90.610579ms)
+✔ overlap works and trusted remote JWKS resolves kid without trusting token URLs (185.9629ms)
+✔ exact redirect, approved scope, expiry, client binding and one-time consumption (4.246732ms)
+✔ RFC 7636 vector and intercepted-code rejection (4.833983ms)
+oidc-provider WARNING: Unsupported runtime. Use Node.js v22.x LTS, or a later LTS release.
+oidc-provider WARNING: a quick start development-only in-memory adapter is used, you MUST change it in order to not lose all stateful provider data upon restart and to be able to share these between processes
+oidc-provider WARNING: quick start development-only signing keys are used, you are expected to provide your own in the configuration "jwks" property
+oidc-provider WARNING: a quick start development-only feature devInteractions is enabled, you are expected to disable these interactions and provide your own
+✔ actual provider discovery and transaction binding; fabricated callback is rejected (51.697242ms)
+✔ client principal is not a human; secret grants only registered scope/audience (2.741468ms)
+✔ introspection returns inactive for revoked, expired, unknown and wrong-resource tokens (3.686324ms)
+✔ refresh reuse revokes family; JWT remains valid until an online policy check or expiry (72.12057ms)
+✔ inheritance and cycle detection, assignment is its own privileged action (2.35944ms)
+✔ ABAC binds tenant and fresh step-up; ReBAC traversal is bounded (0.875116ms)
+✔ cross tenant, stale membership, revocation, escalation, switching, suspension and unauthorized admin (1.914724ms)
+✔ unsigned and malformed assertions fail closed under signed/correlated SP configuration (13.875425ms)
+✔ signed assertion accepted; replay, recipient, audience, issuer, expiration and tamper rejected (188.692976ms)
+✔ SCIM users/groups, filters, pagination, atomic PATCH, ETag and scoped deactivation (4.679768ms)
+✔ request-bound proof rejects replay, mutation, stale timestamp and wrong audience (5.832338ms)
+✔ allowlisted fields omit secrets, CRLF cannot inject lines, edit detected (2.050043ms)
+✔ HTTP login, CSRF, tenant authorization, code/refresh flow, key rotation, provisioning and logout (1010.933494ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1272.640056

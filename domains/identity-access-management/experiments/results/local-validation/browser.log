@@ -1,0 +1,6 @@
+
+> browser
+> node browser/review.mjs
+
+PASS browser: password login, HttpOnly/Lax cookie, authorized read, tenant denial, logout
+PASS browser: full local OIDC authorization-code + PKCE + nonce/state login returned linked Alice session; no page errors

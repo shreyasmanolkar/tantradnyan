@@ -1,0 +1,13 @@
+{
+  "scope": "working tree IAM curriculum implementation",
+  "utc": "2026-10-10T22:07:36Z",
+  "git_base": "fd2b6eeaeee9c9d0e0bb91e687da8ca289c67eac",
+  "node": "v26.7.0",
+  "npm": "11.19.0",
+  "platform": "Linux-7.1.8-arch1-3-x86_64-with-glibc2.44",
+  "database": "isolated PostgreSQL 17.4 scratch container, unique schema per test",
+  "browser": "installed Chromium via playwright-core, loopback HTTP",
+  "clock": "logical seconds in models; real provider/browser clocks",
+  "secret_policy": "no credential values recorded",
+  "workload": "negative fixture tests, protocol round-trips, no benchmark"
+}

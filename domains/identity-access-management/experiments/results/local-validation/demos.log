@@ -1,0 +1,26 @@
+
+> demo
+> node run-all.mjs
+
+{"stage":"01-cryptography","result":{"signatureValid":true,"tamperValid":false,"decrypted":"tenant-a:document:read","hash":"8a6186d39b4cf059ba6cc1f9edb09345d28f20319449a2ea8aab462ca6ba135e","mac":"a22f3ff401acbc0690cf5081c130e190e4f1d94ba4cedad676bc3bba1a1ff9bc","entropyBits":256}}
+{"stage":"02-password-authentication","result":{"correct":true,"incorrect":false}}
+{"stage":"03-session-authentication","result":{"oldValid":false,"before":true,"after":false}}
+{"stage":"04-cookie-security","result":{"cookieAttributes":"__Host-iam=[redacted]; Path=/; HttpOnly; SameSite=Lax; Secure; Max-Age=3600","foreignOriginAllowed":false}}
+{"stage":"05-authorization","result":{"read":{"allow":true,"reason":"current tenant role"},"write":{"allow":false,"reason":"default deny"},"crossTenant":{"allow":false,"reason":"tenant mismatch"}}}
+{"stage":"06-api-keys","result":{"valid":true,"revoked":true}}
+{"stage":"07-jwt","result":{"untrustedSubject":"alice","verifiedSubject":"alice"}}
+{"stage":"08-jwks-and-key-rotation","result":{"overlapAccepts":true,"retiredRejects":true}}
+{"stage":"09-oauth-authorization-code","result":{"states":["authenticated + consent","issued bound code","validated verifier","atomically consumed"],"redirectRule":"exact registered URI"}}
+{"stage":"10-pkce","result":{"interceptedDenied":true,"legitimate":"alice"}}
+{"stage":"11-oidc-relying-party","result":{"implementation":"openid-client + local oidc-provider","identityKey":["issuer","subject"],"validation":["signature","issuer","audience","expiry","state","nonce","PKCE"]}}
+{"stage":"12-client-credentials","result":{"id":"worker","kind":"service","audience":"urn:docs","scopes":["document:read"]}}
+{"stage":"13-token-introspection","result":{"before":true,"after":false}}
+{"stage":"14-token-revocation","result":{"reuse":true,"childRevoked":true}}
+{"stage":"15-rbac","result":{"editor":["write","read"],"adminMayCreateOwner":false}}
+{"stage":"16-abac","result":{"inheritedRead":true,"unknownRead":false}}
+{"stage":"17-multi-tenant-iam","result":{"before":{"allow":true,"reason":"current tenant role"},"after":{"allow":false,"reason":"no current membership"}}}
+{"stage":"18-saml-sso","result":{"validation":"node-saml: signature + conditions + audience + recipient + request correlation","unsignedResponse":"rejected by tests","production":"tenant-specific pinned metadata/certificates"}}
+{"stage":"19-scim-provisioning","result":{"active":false,"revocationEvents":1}}
+{"stage":"20-workload-identity","result":{"first":true,"replay":false}}
+{"stage":"21-audit-logging","result":{"before":true,"after":false,"fields":["time","event","actor","outcome","prev","mac"]}}
+{"stage":"22-integrated-iam-service","result":{"components":["credential verifier","session store","local OAuth teaching endpoints","mature OIDC RP","live authorization","SCIM connector","audit"],"serve":"npm run serve"}}

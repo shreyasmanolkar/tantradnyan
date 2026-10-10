@@ -1,0 +1,28 @@
+{
+  "name": "iam-first-principles",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.14"
+  },
+  "scripts": {
+    "test": "node --test */tests/*.test.mjs",
+    "demo": "node run-all.mjs",
+    "serve": "node ../../../projects/iam-saas/server.mjs",
+    "oidc": "node 11-oidc-relying-party/src/provider.mjs",
+    "test:postgres": "node --test 17-multi-tenant-iam/tests/postgres.integration.mjs",
+    "browser": "node browser/review.mjs"
+  },
+  "dependencies": {
+    "@node-saml/node-saml": "^5.0.0",
+    "@xmldom/xmldom": "^0.9.12",
+    "jose": "^6.0.0",
+    "oidc-provider": "^9.0.0",
+    "openid-client": "^6.0.0",
+    "pg": "^8.0.0",
+    "xml-crypto": "^6.0.0"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.64.0"
+  }
+}
