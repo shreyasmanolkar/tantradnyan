@@ -317,6 +317,25 @@
           "title": "Building and operating services"
         }
       ]
+    },
+    {
+      "id": "identity-access-management",
+      "title": "Identity and access management",
+      "purpose": "Derive request identity, authorization, delegation, federation and lifecycle across SaaS, APIs, workloads and enterprise trust boundaries.",
+      "groups": [
+        {
+          "id": "foundations",
+          "title": "Identity and request security"
+        },
+        {
+          "id": "protocols",
+          "title": "Delegation and federation"
+        },
+        {
+          "id": "enterprise",
+          "title": "Enterprise lifecycle and architecture"
+        }
+      ]
     }
   ],
   "topics": [
@@ -3117,21 +3136,41 @@
     },
     {
       "id": "authentication",
-      "title": "Authentication and identity",
-      "domain": "applications",
-      "group": "services",
-      "path": "domains/applications/authentication",
-      "status": "planned",
-      "question": "What state and rules explain authentication and identity, and what does the simplest implementation omit?",
-      "prerequisites": [
-        "threat-modeling",
-        "public-key-cryptography"
+      "title": "IAM foundations and authentication",
+      "domain": "identity-access-management",
+      "group": "foundations",
+      "path": "domains/identity-access-management/curriculum",
+      "status": "growing",
+      "question": "What evidence and state establish a principal without confusing identity, authentication, authorization or lifecycle?",
+      "prerequisites": [],
+      "related": [
+        "cryptographic-primitives",
+        "public-key-cryptography",
+        "threat-modeling"
       ],
-      "related": [],
       "tags": [
-        "services"
+        "iam",
+        "identity",
+        "authentication"
       ],
-      "milestones": [],
+      "milestones": [
+        {
+          "level": 1,
+          "outcome": "Explain resources, principals, authenticators, assurance and authentication versus authorization.",
+          "state": "available",
+          "artifacts": [
+            "domains/identity-access-management/GUIDE.md"
+          ]
+        },
+        {
+          "level": 2,
+          "outcome": "Run bounded cryptography/password/session/policy models and explain counterexamples.",
+          "state": "available",
+          "artifacts": [
+            "domains/identity-access-management/iam-first-principles/README.md"
+          ]
+        }
+      ],
       "labs": []
     },
     {
@@ -4503,6 +4542,251 @@
         }
       ],
       "labs": []
+    },
+    {
+      "id": "iam-browser-sessions",
+      "title": "Browser sessions and request security",
+      "domain": "identity-access-management",
+      "group": "foundations",
+      "path": "domains/identity-access-management/iam-browser-sessions",
+      "status": "growing",
+      "question": "How do session rotation, browser cookie boundaries, CSRF and invalidation maintain bounded authenticated continuity?",
+      "prerequisites": [
+        "authentication"
+      ],
+      "related": [
+        "http"
+      ],
+      "tags": [
+        "iam"
+      ],
+      "milestones": [
+        {
+          "level": 2,
+          "outcome": "How do session rotation, browser cookie boundaries, CSRF and invalidation maintain bounded authenticated continuity?",
+          "state": "available",
+          "artifacts": [
+            "domains/identity-access-management/iam-first-principles/03-session-authentication/src/model.mjs",
+            "domains/identity-access-management/iam-first-principles/browser/review.mjs"
+          ]
+        }
+      ],
+      "labs": []
+    },
+    {
+      "id": "iam-authorization",
+      "title": "Authorization and tenant isolation",
+      "domain": "identity-access-management",
+      "group": "foundations",
+      "path": "domains/identity-access-management/iam-authorization",
+      "status": "growing",
+      "question": "Which current role, attribute or relationship permits this principal/action/resource in this tenant?",
+      "prerequisites": [
+        "authentication"
+      ],
+      "related": [
+        "transactions"
+      ],
+      "tags": [
+        "iam"
+      ],
+      "milestones": [
+        {
+          "level": 2,
+          "outcome": "Which current role, attribute or relationship permits this principal/action/resource in this tenant?",
+          "state": "available",
+          "artifacts": [
+            "domains/identity-access-management/iam-first-principles/05-authorization/src/model.mjs",
+            "domains/identity-access-management/DATA-MODEL.md"
+          ]
+        }
+      ],
+      "labs": []
+    },
+    {
+      "id": "iam-delegation-tokens",
+      "title": "OAuth, PKCE and token lifecycle",
+      "domain": "identity-access-management",
+      "group": "protocols",
+      "path": "domains/identity-access-management/iam-delegation-tokens",
+      "status": "growing",
+      "question": "How can a client obtain bounded delegated API authority without receiving the user password?",
+      "prerequisites": [
+        "authentication",
+        "iam-authorization"
+      ],
+      "related": [
+        "protocol-security"
+      ],
+      "tags": [
+        "iam"
+      ],
+      "milestones": [
+        {
+          "level": 2,
+          "outcome": "How can a client obtain bounded delegated API authority without receiving the user password?",
+          "state": "available",
+          "artifacts": [
+            "domains/identity-access-management/iam-first-principles/10-pkce/src/model.mjs",
+            "domains/identity-access-management/iam-first-principles/07-jwt/src/model.mjs"
+          ]
+        }
+      ],
+      "labs": []
+    },
+    {
+      "id": "iam-federation",
+      "title": "OIDC, SAML and enterprise SSO",
+      "domain": "identity-access-management",
+      "group": "protocols",
+      "path": "domains/identity-access-management/iam-federation",
+      "status": "growing",
+      "question": "How does an application validate independently administered issuer assertions and create its own session?",
+      "prerequisites": [
+        "iam-browser-sessions",
+        "iam-delegation-tokens"
+      ],
+      "related": [
+        "public-key-cryptography"
+      ],
+      "tags": [
+        "iam"
+      ],
+      "milestones": [
+        {
+          "level": 2,
+          "outcome": "How does an application validate independently administered issuer assertions and create its own session?",
+          "state": "available",
+          "artifacts": [
+            "domains/identity-access-management/iam-first-principles/11-oidc-relying-party/src/model.mjs",
+            "domains/identity-access-management/iam-first-principles/18-saml-sso/tests/signed.test.mjs"
+          ]
+        }
+      ],
+      "labs": []
+    },
+    {
+      "id": "iam-provisioning",
+      "title": "SCIM and identity lifecycle",
+      "domain": "identity-access-management",
+      "group": "enterprise",
+      "path": "domains/identity-access-management/iam-provisioning",
+      "status": "growing",
+      "question": "How does an enterprise lifecycle change become a bounded local access change?",
+      "prerequisites": [
+        "iam-authorization"
+      ],
+      "related": [
+        "idempotency"
+      ],
+      "tags": [
+        "iam"
+      ],
+      "milestones": [
+        {
+          "level": 2,
+          "outcome": "How does an enterprise lifecycle change become a bounded local access change?",
+          "state": "available",
+          "artifacts": [
+            "domains/identity-access-management/iam-first-principles/19-scim-provisioning/src/model.mjs",
+            "domains/identity-access-management/DESIGN-CHALLENGES.md"
+          ]
+        }
+      ],
+      "labs": []
+    },
+    {
+      "id": "iam-workload-architecture",
+      "title": "Workload identity and SaaS architecture",
+      "domain": "identity-access-management",
+      "group": "enterprise",
+      "path": "domains/identity-access-management/iam-workload-architecture",
+      "status": "growing",
+      "question": "How do services and multi-tenant applications bind caller identity, delegation, resource policy and revocation?",
+      "prerequisites": [
+        "iam-delegation-tokens",
+        "iam-authorization"
+      ],
+      "related": [
+        "failure-models"
+      ],
+      "tags": [
+        "iam"
+      ],
+      "milestones": [
+        {
+          "level": 2,
+          "outcome": "How do services and multi-tenant applications bind caller identity, delegation, resource policy and revocation?",
+          "state": "available",
+          "artifacts": [
+            "domains/identity-access-management/iam-first-principles/20-workload-identity/src/model.mjs",
+            "domains/identity-access-management/DESIGN-CHALLENGES.md"
+          ]
+        }
+      ],
+      "labs": []
+    },
+    {
+      "id": "iam-operations",
+      "title": "IAM threats, audit and operations",
+      "domain": "identity-access-management",
+      "group": "enterprise",
+      "path": "domains/identity-access-management/iam-operations",
+      "status": "growing",
+      "question": "Which evidence and operational controls reveal compromise, stale access and revocation failures?",
+      "prerequisites": [
+        "authentication"
+      ],
+      "related": [
+        "threat-modeling"
+      ],
+      "tags": [
+        "iam"
+      ],
+      "milestones": [
+        {
+          "level": 2,
+          "outcome": "Which evidence and operational controls reveal compromise, stale access and revocation failures?",
+          "state": "available",
+          "artifacts": [
+            "domains/identity-access-management/THREATS.md",
+            "domains/identity-access-management/experiments/README.md"
+          ]
+        }
+      ],
+      "labs": []
+    },
+    {
+      "id": "iam-saas-integration",
+      "title": "Integrated IAM and protected SaaS",
+      "domain": "identity-access-management",
+      "group": "enterprise",
+      "path": "domains/identity-access-management/iam-integration",
+      "status": "growing",
+      "question": "Do independent authentication, federation, lifecycle and tenant policy invariants compose on real requests?",
+      "prerequisites": [
+        "iam-federation",
+        "iam-provisioning",
+        "iam-authorization"
+      ],
+      "related": [
+        "iam-operations"
+      ],
+      "tags": [
+        "iam"
+      ],
+      "milestones": [
+        {
+          "level": 5,
+          "outcome": "Do independent authentication, federation, lifecycle and tenant policy invariants compose on real requests?",
+          "state": "available",
+          "artifacts": [
+            "projects/iam-saas/README.md",
+            "domains/identity-access-management/iam-first-principles/22-integrated-iam-service/tests/model.test.mjs"
+          ]
+        }
+      ],
+      "labs": []
     }
   ],
   "tracks": [
@@ -4625,6 +4909,22 @@
         "ml-evaluation",
         "gpu-programming",
         "inference-systems"
+      ]
+    },
+    {
+      "id": "iam-first-principles",
+      "title": "From request identity to enterprise IAM",
+      "purpose": "Authenticate evidence, authorize current tenant resources, delegate APIs, federate login, provision identities and audit/revoke authority.",
+      "topics": [
+        "authentication",
+        "iam-browser-sessions",
+        "iam-authorization",
+        "iam-delegation-tokens",
+        "iam-federation",
+        "iam-provisioning",
+        "iam-workload-architecture",
+        "iam-operations",
+        "iam-saas-integration"
       ]
     }
   ]
