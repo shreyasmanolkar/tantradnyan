@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+node_modules/
+target/
+dist/
+build/
+docs-site/.next/
+docs-site/.source/
+.venv/
+.env
+.env.*
+!.env.example
+*.vcd
+*.fst
+*.pcap
+*.pcapng
+# Curated evidence can be explicitly force-added with provenance and size rationale.
