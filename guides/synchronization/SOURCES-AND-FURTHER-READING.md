@@ -1,6 +1,6 @@
 # Sources and Further Reading
 
-Evidence checked 2026-10-13. This covers installments 1–4, not yet the full course source list. Dates below are publication dates, not search-engine crawl dates. No claim of formal ASD-STE100 compliance is made; its controlled dictionary was not consulted.
+Status: ready. Release reviewed 2026-10-14 by Codex (AI technical/editorial review). This source list covers all eighteen guides. Entries distinguish primary evidence inspected from recommended further reading; original per-installment access notes remain historical records. Dates below are publication dates, not search-engine crawl dates. No claim of formal ASD-STE100 compliance is made; its controlled dictionary was not consulted.
 
 ## Ordering and concurrent observations
 
@@ -10,7 +10,7 @@ Evidence checked 2026-10-13. This covers installments 1–4, not yet the full co
 
 ## Availability, replication and coordination
 
-4. Seth Gilbert and Nancy Lynch, [Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services](https://www.cs.princeton.edu/courses/archive/spr22/cos418/papers/cap.pdf) (2002). Formal model behind CAP. Search located original-paper text; full-text open failed during this installment. Recheck before detailed proof review.
+4. Seth Gilbert and Nancy Lynch, [Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services](https://groups.csail.mit.edu/tds/papers/Gilbert/Brewer6.pdf) (2002). Formal model behind CAP. Search located original-paper text; full-text open failed during this installment. Recheck before detailed proof review.
 5. Daniel Abadi, [Consistency Tradeoffs in Modern Distributed Database System Design](https://www.cs.umd.edu/~abadi/papers/abadi-pacelc.pdf) (2012). PACELC makes ordinary-operation latency a separate design question from partition behavior.
 6. Diego Ongaro and John Ousterhout, [In Search of an Understandable Consensus Algorithm, extended version](https://raft.github.io/raft.pdf) (2014). Leader election, replicated logs, commitment, recovery and safety. Start with the replicated-state-machine model; read restrictions before implementing a leader protocol.
 7. Giuseppe DeCandia et al., [Dynamo: Amazon's Highly Available Key-value Store](https://www.amazon.science/publications/dynamo-amazons-highly-available-key-value-store) (2007); [responsible-team discussion](https://www.allthingsdistributed.com/2007/10/amazons_dynamo.html). Historical evidence for partitioning, versioning and reconciliation. Dynamo is not interchangeable with the current DynamoDB service.
@@ -153,7 +153,7 @@ Checked 2026-10-14. Read security boundaries before selecting mechanisms; read t
 - [OpenTelemetry primer](https://opentelemetry.io/docs/concepts/observability-primer/): signals and distributed context; application identities and invariant checks still need explicit design.
 - [Jepsen linearizability model](https://jepsen.io/consistency/models/linearizable): concise history contract for appropriate objects; no Jepsen cluster run is claimed here.
 
-See [security evidence](14-security/RESEARCH.md), [production evidence](15-production/RESEARCH.md) and [Project G](../../examples/synchronization/g-fault-harness/README.md) for exact local validation and remaining review gaps.
+See [security evidence](14-security/RESEARCH.md), [production evidence](15-production/RESEARCH.md) and [Project G](../../playground/synchronization/g-fault-harness/README.md) for exact local validation and remaining review gaps.
 
 ## Consolidation reading route: installment 11
 
@@ -162,3 +162,5 @@ Checked 2026-10-14. The [handbook](16-handbook/README.md) links code and exact p
 Revisited primary sources: [PostgreSQL 18 isolation](https://www.postgresql.org/docs/18/transaction-iso.html) for domain transaction decisions, [Yjs updates](https://docs.yjs.dev/api/document-updates) for library/provider boundaries, [Figma's 2019 report](https://www.figma.com/blog/how-figmas-multiplayer-technology-works/) for explicitly historical field-level synchronization, [RFC 8085](https://www.rfc-editor.org/rfc/rfc8085.html) for Internet UDP obligations and [FoundationDB's 2021 paper](https://www.foundationdb.org/files/fdb-paper.pdf) for simulation scope. The original CRDT-paper HAL fetch was denied this turn and is not represented as a newly reviewed proof.
 
 Efficient further study: reproduce one causal/conflict history, read its original proof/model, inspect a library implementation, trace durable recovery, then compare a dated engineering report. Record each source's assumptions, version/date, decision boundary and missing evidence before transferring its claims to a new application.
+
+Release evidence: the author-hosted [CAP paper](https://groups.csail.mit.edu/tds/papers/Gilbert/Brewer6.pdf) and [CRDT RR-7506 report](https://www.lip6.fr/Marc.Shapiro/papers/2011/Comprehensive-CRDTs-RR7506-2011-01.pdf) were accessible and checked on 2026-10-14, resolving the foundational access gap. See [the review record](REVIEW.md). Open issues: none blocking the educational source list; recommended unread works remain clearly identified as further reading.

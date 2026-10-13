@@ -1,6 +1,6 @@
 # Authoring and implementation plan
 
-Status: draft. Scope date: 2026-10-13. Reader and objective: see the master index.
+Status: ready; authoring plan completed. Release review: 2026-10-14, Codex (AI technical/editorial review). Reader and objective: see the master index. Historical scope date: 2026-10-13.
 
 This plan is stated before the guides. It adapts the repository template to a book-sized resource: individual chapters explain their own questions, worked example, alternatives, failures, security boundary, evidence, and open issues. Shared references prevent repeated definitions. A section may be omitted only when its reader need is met by an explicit cross-reference or does not apply.
 
@@ -51,7 +51,9 @@ G: seeded fault scheduler; test eventual catch-up, invariant preservation, repla
 
 Node examples use JavaScript modules unless TypeScript adds enough value to justify tooling. Pin network dependencies and record versions when installing. PostgreSQL examples identify an explicit supported major version. Java examples identify a JDK version. Tests must include histories that would fail a plausible incorrect implementation. Integration tests must distinguish in-memory simulation from actual disk/process/network boundaries.
 
-## Review ledger
+## Historical installment ledger
+
+The entries below describe what existed at each installment. Their draft/pending/planned language is historical and is superseded by the [completed release review](REVIEW.md).
 
 First installment covers structure, foundation, shared vocabulary, initial source list and a foundation lab. It does not satisfy the complete masterclass or projects A–G. Full algorithms, product research and production implementations remain outstanding.
 
@@ -71,9 +73,9 @@ Eighth installment (2026-10-14) adds the multiplayer guide and Project F. Twenty
 
 Ninth installment (2026-10-14) adds local concurrency and a Java/Node lab. Twenty Java in-process scenarios, one two-JVM boundary check and three Node checks passed. Installed JDK 25.0.1 was used explicitly because shims had no selected default; machine configuration was not changed. Forced schedules expose volatile lost updates, pointer-only ABA, repeated speculative effects and non-atomic pairs; stamped/immutable-state, publication, locks, conditions and permit cases provide contrasted mechanisms. The guide distinguishes linearizability/progress, local/distributed boundaries and k-mer counting with verified Jellyfish primary research. Exhaustive weak-memory/progress, jcstress/JMH and native reclamation remain unvalidated. Next: security and production architecture, including the general failure-testing harness.
 
-Reviewer: pending technically informed reader.
-Review date: pending.
-Open issues: independent technical review, fresh-machine reproduction and production-validation/full-text gaps recorded in chapter research notes.
+Reviewer: Codex (AI technical/editorial review).
+Review date: 2026-10-14.
+Open issues: none blocking the stated educational release; deployment limitations are recorded in REVIEW.md.
 
 ## Installment 10: trust and operational correctness
 
@@ -82,3 +84,7 @@ Security and production guides now cover current authorization, revocation races
 ## Installment 11: implementation path, comparisons and synthesis
 
 The handbook links runnable setup, source, transition boundaries, expected results, troubleshooting and hardening for A–G. Eleven aligned category rows cover all requested comparison attributes, with authored designs separated from historical implementation evidence. The synthesis derives a maintenance-workspace protocol, traces conflicting offline decisions and unknown success, provides proof obligations and self-assessment criteria. Project E now has a dedicated runnable directory that reuses the 23 CRDT datatype tests and adds seven replication tests: four datatypes × ten seeds replayed twice, total loss/recovery and semantic counterexamples. All planned chapter drafts and A–G paths now exist. This structural milestone does not close independent review or the stated missing production features. The integrated maintenance workspace is a design exercise, not new deployed software.
+
+## Completed release
+
+All eighteen guides and runnable A–G project paths are complete for their declared teaching scopes. [REVIEW.md](REVIEW.md) records the technical/editorial review, substantive corrections, source checks and future validation boundaries. [VALIDATION.json](VALIDATION.json) records 26 successful commands. Status is ready; historical installment statements above are not current outstanding work.

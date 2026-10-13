@@ -5,8 +5,8 @@ Requires Node.js 18 or later for ES modules and `node:test`; no dependencies or 
 From the repository root:
 
 ```sh
-node examples/synchronization/00-foundations/demo.mjs
-node --test examples/synchronization/00-foundations/foundations.test.mjs
+node playground/synchronization/00-foundations/demo.mjs
+node --test playground/synchronization/00-foundations/foundations.test.mjs
 ```
 
 Directory:
@@ -41,4 +41,6 @@ Failure variation: remove replay records, then resend an increment. It applies a
 
 Performance: record access and dedup lookup are expected constant time in this model; identity storage grows with unique submissions; text insertion copies strings; vector comparison is linear in participant count. No benchmark results are claimed.
 
-Validation record: 2026-10-13, Node.js v26.7.0. The demo produced the documented five lines. Direct execution of `node examples/synchronization/00-foundations/foundations.test.mjs` reported six passing tests and zero failures. `node --test` also exited successfully; its reporter in this environment summarized one file-level subtest, so the direct run was used to confirm the six individual assertions. No network or persistence validation is implied.
+Validation record: 2026-10-13, Node.js v26.7.0. The demo produced the documented five lines. Direct execution of `node playground/synchronization/00-foundations/foundations.test.mjs` reported six passing tests and zero failures. `node --test` also exited successfully; its reporter in this environment summarized one file-level subtest, so the direct run was used to confirm the six individual assertions. No network or persistence validation is implied.
+
+Release review: 2026-10-14, Codex (AI technical/editorial review). Status: ready for this exercise's stated scope. [Review and rerun evidence](../../../guides/synchronization/REVIEW.md) record the actual checks; production-hardening limitations above still apply.

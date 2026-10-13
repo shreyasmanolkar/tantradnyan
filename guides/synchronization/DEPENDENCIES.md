@@ -32,28 +32,30 @@ Implementation dependencies: A establishes atomic acceptance; B adds durable del
 
 ## Installment 5 implementation path
 
-Database atomicity + networking → [engine lifecycle](08-sync-engine/README.md) → [messaging](09-messaging/README.md) → [Project B](../../examples/synchronization/b-durable-chat/README.md). Project C will add durable client state/outbox and reset recovery; Project B proves only the server acceptance and history-delivery branch.
+Database atomicity + networking → [engine lifecycle](08-sync-engine/README.md) → [messaging](09-messaging/README.md) → [Project B](../../playground/synchronization/b-durable-chat/README.md). Project C will add durable client state/outbox and reset recovery; Project B proves only the server acceptance and history-delivery branch.
 
 ## Installment 6 implementation path
 
-[Engine commit boundaries](08-sync-engine/README.md) + [conflict policies](03-conflict-resolution/README.md) → [local-first recovery](10-local-first/README.md) → [Project C](../../examples/synchronization/c-offline-engine/README.md). Project C adds actual local file persistence, snapshot/outcome reconciliation and client crashes. Rich text, browser storage, cryptographic membership and production retention require their own mechanisms.
+[Engine commit boundaries](08-sync-engine/README.md) + [conflict policies](03-conflict-resolution/README.md) → [local-first recovery](10-local-first/README.md) → [Project C](../../playground/synchronization/c-offline-engine/README.md). Project C adds actual local file persistence, snapshot/outcome reconciliation and client crashes. Rich text, browser storage, cryptographic membership and production retention require their own mechanisms.
 
 ## Installment 7 implementation path
 
-OT/CRDT mechanics + engine/local-first boundaries → [application contracts](11-collaboration/README.md) → [Project D](../../examples/synchronization/d-collaborative-text/README.md). Shared source editing is a different domain from execution/terminal control. The next branch is fixed-step multiplayer simulation and its prediction/reconciliation contract.
+OT/CRDT mechanics + engine/local-first boundaries → [application contracts](11-collaboration/README.md) → [Project D](../../playground/synchronization/d-collaborative-text/README.md). Shared source editing is a different domain from execution/terminal control. The next branch is fixed-step multiplayer simulation and its prediction/reconciliation contract.
 
 ## Installment 8 implementation path
 
-Transport/latency + speculative-state boundaries → [multiplayer timelines](12-multiplayer/README.md) → [Project F](../../examples/synchronization/f-multiplayer/README.md). Deterministic lockstep/rollback additionally need complete deterministic state and reproducible transitions; persistent economy/world recovery additionally needs database/durable-outcome mechanisms. The seeded link is an initial adverse-schedule component, not completion of the general Project G harness.
+Transport/latency + speculative-state boundaries → [multiplayer timelines](12-multiplayer/README.md) → [Project F](../../playground/synchronization/f-multiplayer/README.md). Deterministic lockstep/rollback additionally need complete deterministic state and reproducible transitions; persistent economy/world recovery additionally needs database/durable-outcome mechanisms. The seeded link is an initial adverse-schedule component, not completion of the general Project G harness.
 
 ## Installment 9 implementation path
 
-Linearizable transitions + database/engine boundaries → [local concurrency](13-local-concurrency/README.md) → [Java/Node lab](../../examples/synchronization/05-local-concurrency/README.md). Publication and lifetime proofs precede relaxed memory modes or custom nonblocking structures. Local atomic state does not supply the durable/network authority needed by prior synchronization projects.
+Linearizable transitions + database/engine boundaries → [local concurrency](13-local-concurrency/README.md) → [Java/Node lab](../../playground/synchronization/05-local-concurrency/README.md). Publication and lifetime proofs precede relaxed memory modes or custom nonblocking structures. Local atomic state does not supply the durable/network authority needed by prior synchronization projects.
 
 ## Installment 10 implementation path
 
-Engine/database acceptance + local-first recovery → [security boundaries](14-security/README.md) → [production ownership and recovery](15-production/README.md) → [Project G](../../examples/synchronization/g-fault-harness/README.md). A protocol oracle must precede its fault workload. Logical seeded schedules, real application-level HTTP faults, process crashes and full cluster/physical failures establish different evidence; success at one level does not prove the others.
+Engine/database acceptance + local-first recovery → [security boundaries](14-security/README.md) → [production ownership and recovery](15-production/README.md) → [Project G](../../playground/synchronization/g-fault-harness/README.md). A protocol oracle must precede its fault workload. Logical seeded schedules, real application-level HTTP faults, process crashes and full cluster/physical failures establish different evidence; success at one level does not prove the others.
 
 ## Installment 11 consolidation path
 
-Use [Project E](../../examples/synchronization/e-crdts/README.md) after the CRDT algebra chapter: compatible snapshots → adverse logical delivery → explicit anti-entropy → canonical convergence oracle. Then [handbook](16-handbook/README.md) → [comparison matrices](17-comparisons/README.md) → [synthesis](18-synthesis/README.md). The final design exercise requires both domain invariants and recovery/security boundaries; naming a merge algorithm is insufficient. All chapter/project paths exist, with technical review and empirical gaps recorded separately.
+Use [Project E](../../playground/synchronization/e-crdts/README.md) after the CRDT algebra chapter: compatible snapshots → adverse logical delivery → explicit anti-entropy → canonical convergence oracle. Then [handbook](16-handbook/README.md) → [comparison matrices](17-comparisons/README.md) → [synthesis](18-synthesis/README.md). The final design exercise requires both domain invariants and recovery/security boundaries; naming a merge algorithm is insufficient. All chapter/project paths exist, with technical review and empirical gaps recorded separately.
+
+Release status: ready. Reviewed 2026-10-14 by Codex (AI technical/editorial review). Open issues: none blocking the stated reference scope. See [completion review](REVIEW.md).

@@ -51,3 +51,5 @@ Local Java CAS compares the actual AtomicReference identity, not record equals. 
 ## Trust, ownership and fault evidence
 
 Authorization scope is a tuple such as `(tenant, object, actor, epoch, opId)` whose exact fields follow the protocol. Encoding the tuple without collisions does not authorize it. Owner epochs fence obsolete writers; authority/source epochs also identify history continuity, with distinct semantics. Project G uses virtual scheduling time for reproducible traces and OS time only for bounded integration waits. A journal anchor is `(seq, hash)` retained independently of the checked trace; an unsigned hash chain alone cannot authenticate its author or expose a valid truncated prefix.
+
+Release status: ready. Reviewed 2026-10-14 by Codex (AI technical/editorial review). Open issues: none blocking the stated reference scope. See [completion review](REVIEW.md).

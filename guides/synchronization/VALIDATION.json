@@ -1,0 +1,296 @@
+{
+  "date": "2026-10-14",
+  "node": "v26.7.0",
+  "reviewer": "Codex (AI technical review; no independent human review claimed)",
+  "runs": [
+    {
+      "label": "00-foundations tests",
+      "cwd": "playground/synchronization/00-foundations",
+      "command": [
+        "node",
+        "foundations.test.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 0.05,
+      "output": "✔ unconditional read-modify-write loses an intended increment (0.75064ms)\n✔ CAS rejects the stale base and a recomputed increment succeeds (0.632028ms)\n✔ duplicate returns original result even after an intervening operation (0.163682ms)\n✔ identity cannot silently name a different payload (3.958326ms)\n✔ same text operations in different orders need not converge (0.29156ms)\n✔ componentwise comparison detects ancestry and concurrency (0.252822ms)\nℹ tests 6\nℹ suites 0\nℹ pass 6\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 10.888749\n"
+    },
+    {
+      "label": "00-foundations demo",
+      "cwd": "playground/synchronization/00-foundations",
+      "command": [
+        "node",
+        "demo.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 0.024,
+      "output": "lost update: 1 (two intended increments)\nCAS retry: 2\nreplayed identity: 1; new identity: 2\nM then D: cXYat; D then M: cXaYt\nvector relation: concurrent\n"
+    },
+    {
+      "label": "01-math-conflicts tests",
+      "cwd": "playground/synchronization/01-math-conflicts",
+      "command": [
+        "node",
+        "model.test.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 0.05,
+      "output": "✔ loss calculation distinguishes empty transfer and required packets (1.121072ms)\n✔ retry acknowledgment model includes request and ack loss (0.171541ms)\n✔ permanent loss means no unlimited completion guarantee (0.112511ms)\n✔ units produce occupancy and drift bounds (0.138725ms)\n✔ LWW selects the same maximum across every three-candidate order and duplicates (0.889194ms)\n✔ LWW obeys grouping and branch symmetry on bounded candidate fixture (0.366775ms)\n✔ skewed timestamp selects the earlier edit despite deterministic convergence (0.121216ms)\n✔ equal ordering keys cannot have different contents (0.115337ms)\n✔ three-way merge preserves one-sided fields and agrees under branch swap (0.358907ms)\n✔ different concurrent title values remain explicit conflicts (0.21093ms)\n✔ absence is deletion, while null is a distinct value (0.161324ms)\n✔ clean field merge can violate the schedule invariant (0.161164ms)\n✔ flat merge rejects nested data and treats prototype-like keys as inert (0.145421ms)\n✔ causal frontier retains independent candidates then supersedes both (0.362722ms)\n✔ causal projection withstands every delayed, reordered, duplicated write schedule (0.285992ms)\n✔ write identity reuse cannot forge a new payload or causal context (0.208341ms)\n✔ observed removal preserves an unseen concurrent add in either merge order (0.317361ms)\n✔ a delayed removed addition does not resurrect membership (0.093814ms)\n✔ observed-remove evidence obeys join laws including duplicates and delayed tombstones (1.276706ms)\n✔ addition identity cannot be reassigned to another tag (0.170446ms)\nℹ tests 20\nℹ suites 0\nℹ pass 20\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 17.148571\n"
+    },
+    {
+      "label": "01-math-conflicts demo",
+      "cwd": "playground/synchronization/01-math-conflicts",
+      "command": [
+        "node",
+        "demo.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 0.029,
+      "output": "100 packets, 1% loss: 63.397% chance of a loss\n5% request/ack loss: 1.108 mean attempts\n2000/s at 75ms: 150 operations in flight on average\n20ppm after one hour plus 5ms: 77ms uncertainty\nLWW: earlier wins under a skewed clock\nclean field merge: [18,12], valid=false\ncausal title alternatives: Plan, Proposal\nremove vs unseen add: urgent\n"
+    },
+    {
+      "label": "02-ot tests",
+      "cwd": "playground/synchronization/02-ot",
+      "command": [
+        "node",
+        "model.test.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 0.045,
+      "output": "✔ TP1 holds for all 220 pairs over document lengths zero through four (6.309028ms)\n✔ concurrent inserts preserve their intended distinct gaps (0.13294ms)\n✔ same-position insertion has a defined stable identity priority (0.087441ms)\n✔ insert survives deletion of the original character at the same position (0.09036ms)\n✔ same original character deletion becomes a no-op (0.10673ms)\n✔ serial replacement is explicitly two dependent operations (0.077408ms)\n✔ one-round authority matches both optimistic clients in both arrival orders (0.653631ms)\n✔ TP1 does not establish TP2: retained regression witness diverges (0.174396ms)\n✔ cursor mapping declares boundary affinity and deletion contraction (0.151853ms)\n✔ invalid positions, non-ASCII text and identity reuse are rejected (0.571016ms)\nℹ tests 10\nℹ suites 0\nℹ pass 10\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 13.970292\n"
+    },
+    {
+      "label": "02-ot demo",
+      "cwd": "playground/synchronization/02-ot",
+      "command": [
+        "node",
+        "demo.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 0.026,
+      "output": "optimistic views: cXat, caYt\ntransformed results: cXaYt, cXaYt\nsame deletion: ct; remote kind=noop\none-round server and clients: cXt, cXt, cXt\nTP2 counterexample: XYb != YXb\n"
+    },
+    {
+      "label": "03-crdts tests",
+      "cwd": "playground/synchronization/03-crdts",
+      "command": [
+        "node",
+        "model.test.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 0.064,
+      "output": "✔ G-set converges across all three-branch orders, duplicates and join laws (1.701016ms)\n✔ 2P-set cannot re-add a permanently removed element (1.35744ms)\n✔ G-counter joins cumulative components instead of summing duplicate totals (0.849248ms)\n✔ G-counter negative delta rejected and bigints avoid floating-point overflow (0.137397ms)\n✔ two unsynchronized copies of the same counter writer lose a branch increment (0.113685ms)\n✔ PN-counter converges but does not preserve nonnegative inventory (1.35238ms)\n✔ OR-set joins reordered snapshots and suppresses duplicate add IDs (1.977817ms)\n✔ discarding OR tombstones permits stale resurrection (0.151144ms)\n✔ LWW max converges while selecting just one scalar value (0.453347ms)\n✔ MV context keeps concurrent values and suppresses stale snapshots after resolution (3.338474ms)\n✔ MV different payload on same dot rejected rather than arbitrarily selected (0.247578ms)\n✔ MV candidates arriving in every snapshot order cannot resurrect resolved values (0.351051ms)\n✔ fixed-key map merges distinct keys and retains deletion evidence (1.353389ms)\n✔ map cell identity cannot switch live/deleted meaning at an equal key (0.138988ms)\n✔ sequence merges concurrent insertions into stable distinct gaps (2.893218ms)\n✔ concurrent same-anchor runs stay deterministic in this depth-first policy (0.209792ms)\n✔ child-before-parent and deletion-before-insertion buffer evidence then settle (0.32939ms)\n✔ deleting an anchor preserves traversal to live descendants (0.133082ms)\n✔ sequence rejects identity changes and impossible anchor order (0.196191ms)\n✔ sequence atom is a Unicode scalar, not a grapheme or UTF-16 code unit (0.157064ms)\n✔ rich text explicit observed marks do not inherit onto unseen concurrent insertion (0.498786ms)\n✔ rich text retains formatting evidence but hides deleted elements (0.145967ms)\n✔ rich text product joins obey laws on compatible sequence and mark fixtures (1.180982ms)\nℹ tests 23\nℹ suites 0\nℹ pass 23\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 30.061202\n"
+    },
+    {
+      "label": "03-crdts demo",
+      "cwd": "playground/synchronization/03-crdts",
+      "command": [
+        "node",
+        "demo.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 0.034,
+      "output": "G-set: D,M\n2P-set after removal: 0 members; re-add forbidden\nG-counter: 5\nPN-counter independent stock decrements: -1\nMV title alternatives: Plan,Proposal\nMV after resolution and stale replay: Project plan\nmap after deletion and stale replay: 0 keys\nsequence merged: cXaYt\nsequence after deleting anchor c: Xat\nrich text explicit marks: ca*Yt\nOR-set remove/unseen-add: urgent\n"
+    },
+    {
+      "label": "04-networking tests",
+      "cwd": "playground/synchronization/04-networking",
+      "command": [
+        "node",
+        "protocol.test.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 0.468,
+      "output": "✔ TCP decoder preserves messages for every possible two-chunk split (4.039668ms)\n✔ one-byte fragments and coalesced frames retain application boundaries (0.376823ms)\n✔ oversized length rejected before waiting for advertised body (0.436044ms)\n✔ truncated stream is not treated as a complete JSON message (0.181092ms)\n✔ malformed UTF-8 and invalid JSON frames are rejected (0.190574ms)\n✔ datagram codec retains one whole message and enforces the lab size bound (0.186428ms)\n✔ command replay returns original outcome after another operation (0.33924ms)\n✔ memory ledger restart demonstrates the durability gap (0.1243ms)\n✔ bad versions and unbounded command deltas are rejected (0.1875ms)\n✔ snapshot sequence applies only newer values in one declared session (0.250263ms)\n✔ real loopback TCP reconnect reuses application identity while server state survives (14.303185ms)\n✔ real loopback UDP retry survives injected request and ACK loss with one memory effect (302.777222ms)\n✔ finite UDP retry budget can fail even after an effect was applied (101.049949ms)\nℹ tests 13\nℹ suites 0\nℹ pass 13\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 433.108127\n"
+    },
+    {
+      "label": "04-networking demo",
+      "cwd": "playground/synchronization/04-networking",
+      "command": [
+        "node",
+        "demo.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 0.342,
+      "output": "TCP application ACK: 1; replay on new connection: 1; effects: 1\nUDP injected loss: request=true, ACK=true; attempts=3; effects=1\nsnapshot 12 accepted=true; stale 11 accepted=false; view=new\n"
+    },
+    {
+      "label": "Java concurrency",
+      "cwd": "playground/synchronization/05-local-concurrency",
+      "command": [
+        "python3",
+        "run.py",
+        "--jdk",
+        "/home/shreyas/.local/share/mise/installs/java/25.0.1"
+      ],
+      "exit_code": 0,
+      "seconds": 1.127,
+      "output": "openjdk version \"25.0.1\" 2025-10-21\nOpenJDK Runtime Environment (build 25.0.1+8-27)\nOpenJDK 64-Bit Server VM (build 25.0.1+8-27, mixed mode, sharing)\nPASS volatile read-modify-write loses an update under a forced schedule\nPASS fetch-and-add preserves 20000 concurrent increments\nPASS AtomicReference CAS compares identity, not equal record contents\nPASS fresh immutable versions reject stale and value-returned snapshots\nPASS versioned CAS retry publishes one coherent value/version pair\nPASS CAS retry must not execute side effects before success\nPASS volatile publication makes prior ordinary payload visible\nPASS matching release/acquire publication exposes initialized payload\nPASS pointer-only ABA accepts stale next and resurrects a popped node\nPASS stamped ABA rejects the same reference with obsolete history stamp\nPASS immutable-link stack preserves all 4000 unique concurrent values\nPASS condition waiter rechecks predicate after a signal without data\nPASS interruption exits condition wait without leaking its lock\nPASS semaphore bounds active work and returns permits in finally\nPASS read-write lock permits downgrading but does not provide a read upgrade\nPASS consistent lock order preserves transfer invariant\nPASS finite recorded fetch-and-add history admits real-time respecting order\nPASS history checker rejects duplicate increment outcome and real-time reversal\nPASS separate AtomicIntegers do not form an atomic multi-field invariant\nPASS k-mer counting is a domain algorithm with overlapping windows\nJava scenarios passed: 20\nPASS two JVMs each increment their own local counter to 1\nJava validation: 20 in-process scenarios + 1 process-boundary scenario passed\n"
+    },
+    {
+      "label": "Node concurrency",
+      "cwd": "playground/synchronization/05-local-concurrency",
+      "command": [
+        "npm",
+        "run",
+        "test:js"
+      ],
+      "exit_code": 0,
+      "seconds": 0.309,
+      "output": "\n> synchronization-local-concurrency-lab@0.1.0 test:js\n> node workers.mjs\n\nPASS four workers atomically add 20000 shared increments\nPASS atomic flag publication exposes ordinary shared payload\nPASS one event loop still loses a logical update across await\nJavaScript scenarios passed: 3\n"
+    },
+    {
+      "label": "A SQL",
+      "cwd": "playground/synchronization/a-versioned-store",
+      "command": [
+        "node",
+        "postgres.test.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 1.272,
+      "output": "validated server: PostgreSQL 18.4\n▶ PostgreSQL 18 transaction histories on an isolated lab database\n  ✔ rollback hides a provisional mutation and restores old state (9.880757ms)\n  ✔ two stale client assignments reproduce a lost update (8.605312ms)\n  ✔ atomic increments wait on the row and both effects survive (9.047503ms)\n  ✔ version CAS rejects the obsolete base and supports an intentional retry (7.302362ms)\n  ✔ a waiting conditional decrement reevaluates the final-unit predicate (8.601881ms)\n  ✔ Read Committed refreshes while Repeatable Read retains its snapshot (9.891175ms)\n  ✔ snapshot isolation admits write skew on different doctor rows (9.461141ms)\n  ✔ serializable retry rereads the whole decision and preserves one doctor (12.544995ms)\n  ✔ record, replay result and change log commit together; lost-ACK replay is stable (12.461778ms)\n  ✔ concurrent duplicate submission waits then returns the original outcome once (8.510255ms)\n  ✔ aborted acceptance rolls back all three sides of the commit boundary (8.114987ms)\n  ✔ storage constraints reject invalid values and keys without changing committed state (7.27018ms)\n  ✔ opposite lock acquisition causes one real deadlock victim and clean rollback (1007.760647ms)\n  ✔ rejected operations replay the rejection rather than reinterpreting a changed base (17.031621ms)\n✔ PostgreSQL 18 transaction histories on an isolated lab database (1231.662803ms)\nℹ tests 15\nℹ suites 0\nℹ pass 15\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1234.499219\n"
+    },
+    {
+      "label": "A Java",
+      "cwd": "playground/synchronization/a-versioned-store",
+      "command": [
+        "/home/shreyas/.local/share/mise/installs/java/25.0.1/bin/java",
+        "VersionedStore.java"
+      ],
+      "exit_code": 0,
+      "seconds": 0.542,
+      "output": "stale update rejected; record=State[value=1, version=1]\nCAS counter: 20000; AtomicInteger tickets before final CAS: 20000\nchecks: first/stale CAS, version history, concurrent increments, AtomicInteger CAS passed\n"
+    },
+    {
+      "label": "b-durable-chat tests",
+      "cwd": "playground/synchronization/b-durable-chat",
+      "command": [
+        "node",
+        "chat.test.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 4.833,
+      "output": "✔ client page projection advances only a validated contiguous prefix (1.393067ms)\n✔ client rejects invalid page checkpoints and high-water bounds without partial state (0.250053ms)\nvalidated PostgreSQL 18.4\n▶ durable chat across PostgreSQL, Redis and real WebSocket gateway processes\n  ✔ authentication, subprotocol and per-channel authorization are separate checks (255.014355ms)\n  ✔ a second gateway receives broker wake-ups without its periodic catch-up timer (497.329251ms)\n  ✔ concurrent duplicate submissions commit one message and preserve original result (310.397471ms)\n  ✔ an accepted submission ACK alone does not advance a stream checkpoint (265.680389ms)\n  ✔ parameter binding preserves SQL-shaped text and rejects forged or invalid payloads (258.805353ms)\n  ✔ pagination delivers all 23 committed entries in contiguous channel order (306.759562ms)\n  ✔ offline reader resumes after its checkpoint and receives only missed entries (380.243104ms)\n  ✔ missing all publish hints is repaired by periodic durable-log catch-up (367.865848ms)\n  ✔ revocation blocks historical-result replay and further history disclosure (270.015015ms)\n  ✔ future, expired and wrong-generation cursors cannot silently skip history (274.797657ms)\n  ✔ SIGKILL before commit rolls back message, replay result, outbox and sequence allocation (660.446288ms)\n  ✔ SIGKILL after commit before ACK survives restart and returns the same accepted message (508.252085ms)\n  ✔ republishing an outbox notification does not repeat a client projection (332.028768ms)\n✔ durable chat across PostgreSQL, Redis and real WebSocket gateway processes (4748.314399ms)\nℹ tests 16\nℹ suites 0\nℹ pass 16\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 4755.206877\n"
+    },
+    {
+      "label": "b-durable-chat demo",
+      "cwd": "playground/synchronization/b-durable-chat",
+      "command": [
+        "node",
+        "demo.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 0.341,
+      "output": "committed sequence=1; replay same ID=true\nreconnected after 1; received only missing sequence=2\ndatabase messages=2\n"
+    },
+    {
+      "label": "c-offline-engine tests",
+      "cwd": "playground/synchronization/c-offline-engine",
+      "command": [
+        "node",
+        "engine.test.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 1.677,
+      "output": "✔ offline edits survive close/reopen with original identity and derived view (59.888187ms)\n✔ two offline devices merge increments but retain the stale title for human review (32.301164ms)\n✔ queued conditional children do not run after a rejected parent even if version matches (20.726417ms)\n✔ ordered dependent local title edits succeed when the base stays valid (14.445308ms)\n✔ duplicate and concurrent HTTP submissions commit one effect; changed ID payload fails (16.136093ms)\n✔ snapshot after pruning reconciles an unknown success without double optimistic increment (8.254165ms)\n✔ paginated deltas apply the full contiguous prefix, including numeric sequence 10 (38.455591ms)\n✔ malformed, reordered and stale responses cannot advance or partly overwrite the projection (14.67785ms)\n✔ tombstone prevents stale offline edits and increments from resurrecting a deleted record (18.951159ms)\n✔ revocation gates reads, writes and old accepted outcomes; queued work is not erased (14.811274ms)\n✔ expired credentials do not justify replacing logical operation identity (12.895965ms)\n✔ epoch reset preserves current state and quarantines old unresolved work (9.13639ms)\n✔ wire/schema versions, forged actors, future cursors and invalid payloads fail explicitly (6.85296ms)\n✔ client actor binding and future disk-schema marker prevent accidental reuse (7.683641ms)\n✔ throw before client enqueue commit rolls back both intent and derived local view (6.610945ms)\n✔ real client SIGKILL before enqueue commit leaves no proposed state (67.204406ms)\n✔ real client SIGKILL after enqueue commit preserves operation identity and view (70.197025ms)\n✔ real client SIGKILL after server response before local receipt recovers unknown success (84.849304ms)\n✔ real client SIGKILL before-client-install preserves an atomic projection/checkpoint (91.187101ms)\n✔ real client SIGKILL after-client-install preserves an atomic projection/checkpoint (97.804065ms)\n✔ real authority SIGKILL before-server-commit recovers effect/outcome/log consistently (230.425917ms)\n✔ real authority SIGKILL after-server-commit recovers effect/outcome/log consistently (191.310199ms)\n✔ durability settings and integrity check describe actual local stores (8.347153ms)\n✔ lost response retries the identical operation and cannot duplicate a committed increment (472.672619ms)\n✔ authorization rejection is not retried; transient failure is bounded (9.930338ms)\nℹ tests 25\nℹ suites 0\nℹ pass 25\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1613.364939\n"
+    },
+    {
+      "label": "c-offline-engine demo",
+      "cwd": "playground/synchronization/c-offline-engine",
+      "command": [
+        "node",
+        "demo.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 0.109,
+      "output": "offline: Mira=Plan/2; Dev=Proposal/3\nreconnected: title=Proposal; count=5; Mira conflicts=1\nresolved: both=Plan + Proposal/5; Mira pending=0\n"
+    },
+    {
+      "label": "d-collaborative-text tests",
+      "cwd": "playground/synchronization/d-collaborative-text",
+      "command": [
+        "node",
+        "editor.test.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 1.049,
+      "output": "(node:119645) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.\n(Use `node --trace-warnings ...` to show where the warning was created)\n✔ Yjs reordered and duplicated updates converge, including missing causal dependency (8.418627ms)\n✔ state-vector exchange must include deletion evidence even when insertion vectors match (1.168721ms)\n✔ actual WebSocket clients synchronize text and acknowledge only committed updates (35.803624ms)\n✔ offline concurrent insertions retain both branches and converge after reconnect (30.812088ms)\n✔ selective undo removes local contribution while preserving concurrent remote text (48.968977ms)\n✔ relative cursor anchors move with concurrent insertion and presence is not persisted (24.278683ms)\n✔ presence expires without entering document history (207.618675ms)\n✔ Unicode editing uses UTF-16 bounds and rejects splitting surrogate pairs (15.506829ms)\n✔ read-only clients receive updates but cannot write by forging raw frames (29.513697ms)\n✔ revocation blocks both stale writes and further broadcast disclosure (15.5685ms)\n✔ malformed binary and unsupported protocol fail without storing an update (24.781668ms)\n✔ candidate validation rejects unexpected roots without mutating server memory or disk (4.673803ms)\n✔ duplicate blob replay is idempotent and rechecks current permission (15.052758ms)\n✔ out-of-order dependent updates remain recoverable in the stored snapshot (3.273245ms)\n✔ actual server SIGKILL before-commit recovers and reconnect retry converges (222.04332ms)\n✔ actual server SIGKILL after-commit recovers and reconnect retry converges (221.118664ms)\n✔ authority generation change refuses automatic merge of retained private branch (7.504775ms)\n✔ multiple in-flight local edits send each pending blob once per connection (25.470883ms)\nℹ tests 18\nℹ suites 0\nℹ pass 18\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 948.102196\n"
+    },
+    {
+      "label": "d-collaborative-text demo",
+      "cwd": "playground/synchronization/d-collaborative-text",
+      "command": [
+        "node",
+        "demo.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 0.152,
+      "output": "(node:119824) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.\n(Use `node --trace-warnings ...` to show where the warning was created)\noffline: Mira=\"Hello Mira\"; Dev=\"Hello Dev\"\nmerged: both contain Mira and Dev; equal=true\nselective undo: \"Hello Dev\"\n"
+    },
+    {
+      "label": "e-crdts tests",
+      "cwd": "playground/synchronization/e-crdts",
+      "command": [
+        "node",
+        "replication.test.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 0.106,
+      "output": "✔ counter: ten seeded adverse schedules converge after repair (15.617051ms)\n✔ tags: ten seeded adverse schedules converge after repair (12.140898ms)\n✔ title: ten seeded adverse schedules converge after repair (12.936657ms)\n✔ sequence: ten seeded adverse schedules converge after repair (16.898783ms)\n✔ permanent complete loss does not imply liveness; reliable catch-up restores it (1.083845ms)\n✔ two copies reusing one writer converge while losing one intended increment (0.194406ms)\n✔ convergent inventory can violate a domain invariant (0.228051ms)\nℹ tests 7\nℹ suites 0\nℹ pass 7\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 64.610819\n"
+    },
+    {
+      "label": "e-crdts demo",
+      "cwd": "playground/synchronization/e-crdts",
+      "command": [
+        "node",
+        "demo.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 0.051,
+      "output": "counter: [\"9\",\"9\",\"9\"]; convergence verified\ntags: [[\"urgent\"],[\"urgent\"],[\"urgent\"]]; convergence verified\ntitle: [[\"Proposal\",\"Plan\"],[\"Proposal\",\"Plan\"],[\"Proposal\",\"Plan\"]]; convergence verified\nsequence: [\"XaYt\",\"XaYt\",\"XaYt\"]; convergence verified\n"
+    },
+    {
+      "label": "f-multiplayer tests",
+      "cwd": "playground/synchronization/f-multiplayer",
+      "command": [
+        "node",
+        "game.test.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 0.647,
+      "output": "✔ fixed timestep advances only whole steps and caps stall catch-up work (1.232753ms)\n✔ prediction reconciles an authoritative collision then removes finalized inputs (1.108694ms)\n✔ reconciliation replays only unfinalized inputs over authoritative base (0.700991ms)\n✔ lost deadline means neutral finality rather than indefinite replay of late input (0.256977ms)\n✔ redundant pending commands repair a lost packet before the scheduled slot (0.215276ms)\n✔ duplicate and reordered packets cannot run one input slot twice (0.228829ms)\n✔ changed IDs, future slots and a malformed batch do not partially mutate input state (0.293279ms)\n✔ packet frequency never allows more than one fixed movement step per server tick (1.719805ms)\n✔ old session/epoch commands are fenced and explicit rejoin starts fresh slots (0.295337ms)\n✔ stale snapshots cannot rewind prediction, and invalid snapshots preserve local state (0.351826ms)\n✔ interpolation brackets server ticks and holds instead of unbounded extrapolation (0.46935ms)\n✔ entity absence is explicit rather than interpolating from an invented position (0.211547ms)\n✔ seeded loss, duplication, jitter and reorder schedules reproduce and reconcile (2.29399ms)\n✔ a complete simulated partition discards expired inputs then repairs current state (0.181758ms)\n✔ actual UDP clients predict, receive snapshots and observe another player (26.229382ms)\n✔ application-dropped real UDP input is repaired by redundant resend before deadline (20.515128ms)\n✔ application-dropped real UDP snapshots recover from the next full snapshot (11.00158ms)\n✔ fixture authentication, endpoint binding and forged position fields are enforced (21.672724ms)\n✔ replaced UDP session cannot accept an old connected client command (21.183423ms)\n✔ oversized datagrams are rejected within the loopback protocol budget (11.035477ms)\n✔ automatic fixed-step server progresses and expires a disconnected session (162.313589ms)\n✔ actual server SIGKILL creates a new ephemeral match epoch; explicit rejoin resets prediction (74.337447ms)\n✔ repeated hello after lost welcome preserves the assigned session (121.116415ms)\n✔ revocation stops subsequent UDP inputs and snapshot disclosure (32.50322ms)\nℹ tests 24\nℹ suites 0\nℹ pass 24\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 605.784349\n"
+    },
+    {
+      "label": "f-multiplayer demo",
+      "cwd": "playground/synchronization/f-multiplayer",
+      "command": [
+        "node",
+        "demo.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 0.037,
+      "output": "predicted before confirmation=150mm\nauthoritative=120mm; correction=-30mm; pending=0\nremote at tick5=50mm\nseeded link: sent=10; dropped=3; duplicated=2\n"
+    },
+    {
+      "label": "g-fault-harness tests",
+      "cwd": "playground/synchronization/g-fault-harness",
+      "command": [
+        "node",
+        "harness.test.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 1.324,
+      "output": "✔ seeded file-backed scenarios reproduce traces and verify original-operation oracle (181.341329ms)\n✔ generic scheduler supports complete loss and an explicit bounded queue (0.634975ms)\n✔ state-based CRDT adapters converge after adverse delivery and anti-entropy repair (1.04328ms)\n✔ OR-set deletion evidence prevents stale resurrection; deliberate bad GC is detected (1.628216ms)\n✔ tuple namespaces prevent separator collisions but are not authorization (0.287505ms)\n✔ trace chain detects edits and anchored truncation; unanchored valid prefix is allowed (0.294289ms)\n✔ HTTP lost response after commit retries identical operation without repeated effect (60.615508ms)\n✔ HTTP duplicate forward commits once and returns stable result (11.861086ms)\n✔ HTTP partition preserves durable pending work and heals through original IDs (58.992077ms)\n✔ real HTTP delayed response is stale after a newer projection commits (160.313584ms)\n✔ SQLite injected change-log abort rolls back effect, outcome and cursor together (8.826309ms)\n✔ SQLite injected checkpoint abort preserves original projection, queue and receipts (7.099568ms)\n✔ conflicting offline writes retain rejected intent and require a new resolution ID (16.771497ms)\n✔ current revocation blocks read/write/replay and preserves private pending evidence (8.007317ms)\n✔ same ID with changed payload and forged scope fails without accepted mutation (7.18031ms)\n✔ mixed operation schema versions fail explicitly while private work remains available (7.674018ms)\n✔ stale replica after actual pruning resets with retained outcome evidence (8.57137ms)\n✔ simulated same-epoch rollback page behind client checkpoint is rejected (12.502747ms)\n✔ supervised SIGKILL before-server-commit recovers one accepted durable operation (196.409232ms)\n✔ supervised SIGKILL after-server-commit recovers one accepted durable operation (198.325154ms)\n✔ supervised client SIGKILL before-client-install recovers coherent local state (86.077879ms)\n✔ supervised client SIGKILL after-client-install recovers coherent local state (81.599958ms)\n✔ supervised client SIGKILL after-response-before-receipt recovers coherent local state (82.651022ms)\n✔ fault proxy refuses non-loopback targets (0.211173ms)\n✔ supervisor reports startup failure rather than waiting forever for readiness (56.019688ms)\nℹ tests 25\nℹ suites 0\nℹ pass 25\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1261.799739\n"
+    },
+    {
+      "label": "g-fault-harness demo",
+      "cwd": "playground/synchronization/g-fault-harness",
+      "command": [
+        "node",
+        "demo.mjs"
+      ],
+      "exit_code": 0,
+      "seconds": 0.074,
+      "output": "{\"seed\":7,\"operations\":16,\"count\":30,\"head\":16,\"network\":{\"sent\":86,\"dropped\":11,\"duplicates\":21,\"delivered\":96}}\nsame-seed replay=true; anchored trace valid=true\n"
+    }
+  ]
+}

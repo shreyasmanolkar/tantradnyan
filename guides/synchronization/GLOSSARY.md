@@ -169,3 +169,5 @@ Corrections to common conflations: message delivery is not commit; convergence i
 - **RPO:** recovery point objective, the permitted age/gap of lost state under a declared recovery scenario.
 - **RTO:** recovery time objective, the target time to restore the specified service after a declared disruption.
 - **Fault oracle:** executable check of the permitted protocol outcome or history, rather than a throughput measurement.
+
+Release status: ready. Reviewed 2026-10-14 by Codex (AI technical/editorial review). Open issues: none blocking the stated reference scope. See [completion review](REVIEW.md).
