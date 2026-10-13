@@ -154,3 +154,11 @@ Checked 2026-10-14. Read security boundaries before selecting mechanisms; read t
 - [Jepsen linearizability model](https://jepsen.io/consistency/models/linearizable): concise history contract for appropriate objects; no Jepsen cluster run is claimed here.
 
 See [security evidence](14-security/RESEARCH.md), [production evidence](15-production/RESEARCH.md) and [Project G](../../examples/synchronization/g-fault-harness/README.md) for exact local validation and remaining review gaps.
+
+## Consolidation reading route: installment 11
+
+Checked 2026-10-14. The [handbook](16-handbook/README.md) links code and exact project validation scope; the [comparison evidence](17-comparisons/RESEARCH.md) distinguishes reference designs from dated product reports; the [synthesis](18-synthesis/README.md) provides a method for reading new systems.
+
+Revisited primary sources: [PostgreSQL 18 isolation](https://www.postgresql.org/docs/18/transaction-iso.html) for domain transaction decisions, [Yjs updates](https://docs.yjs.dev/api/document-updates) for library/provider boundaries, [Figma's 2019 report](https://www.figma.com/blog/how-figmas-multiplayer-technology-works/) for explicitly historical field-level synchronization, [RFC 8085](https://www.rfc-editor.org/rfc/rfc8085.html) for Internet UDP obligations and [FoundationDB's 2021 paper](https://www.foundationdb.org/files/fdb-paper.pdf) for simulation scope. The original CRDT-paper HAL fetch was denied this turn and is not represented as a newly reviewed proof.
+
+Efficient further study: reproduce one causal/conflict history, read its original proof/model, inspect a library implementation, trace durable recovery, then compare a dated engineering report. Record each source's assumptions, version/date, decision boundary and missing evidence before transferring its claims to a new application.

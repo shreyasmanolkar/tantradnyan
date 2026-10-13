@@ -53,3 +53,7 @@ Linearizable transitions + database/engine boundaries → [local concurrency](13
 ## Installment 10 implementation path
 
 Engine/database acceptance + local-first recovery → [security boundaries](14-security/README.md) → [production ownership and recovery](15-production/README.md) → [Project G](../../examples/synchronization/g-fault-harness/README.md). A protocol oracle must precede its fault workload. Logical seeded schedules, real application-level HTTP faults, process crashes and full cluster/physical failures establish different evidence; success at one level does not prove the others.
+
+## Installment 11 consolidation path
+
+Use [Project E](../../examples/synchronization/e-crdts/README.md) after the CRDT algebra chapter: compatible snapshots → adverse logical delivery → explicit anti-entropy → canonical convergence oracle. Then [handbook](16-handbook/README.md) → [comparison matrices](17-comparisons/README.md) → [synthesis](18-synthesis/README.md). The final design exercise requires both domain invariants and recovery/security boundaries; naming a merge algorithm is insufficient. All chapter/project paths exist, with technical review and empirical gaps recorded separately.

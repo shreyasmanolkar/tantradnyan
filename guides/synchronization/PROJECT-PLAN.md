@@ -73,8 +73,12 @@ Ninth installment (2026-10-14) adds local concurrency and a Java/Node lab. Twent
 
 Reviewer: pending technically informed reader.
 Review date: pending.
-Open issues: planned chapters and projects; technical review; full-text checks recorded in chapter research notes.
+Open issues: independent technical review, fresh-machine reproduction and production-validation/full-text gaps recorded in chapter research notes.
 
 ## Installment 10: trust and operational correctness
 
 Security and production guides now cover current authorization, revocation races, tenant scope, replay identities, validation, encrypted-server limits, audit anchors, gateway capacity, owner fencing, overload, compaction, mixed versions, observability, correctness workloads and disaster-recovery boundaries. Project G passes 25 tests on Node 26.7.0 / SQLite 3.53.4: five seeds replayed twice, actual loopback HTTP loss/duplication/partition/delay, transaction aborts and supervised client/server SIGKILL. A normalized trace demonstrates reproducibility and anchored integrity checks. This does not test real TLS/JWT/E2EE, multi-region fencing, OS packet loss, disk/power failure or actual backup restoration. Guides remain draft pending technical review. Next: the implementation handbook, architecture comparisons and final synthesis, including an explicit reconciliation of Project E with the existing CRDT experiments.
+
+## Installment 11: implementation path, comparisons and synthesis
+
+The handbook links runnable setup, source, transition boundaries, expected results, troubleshooting and hardening for A–G. Eleven aligned category rows cover all requested comparison attributes, with authored designs separated from historical implementation evidence. The synthesis derives a maintenance-workspace protocol, traces conflicting offline decisions and unknown success, provides proof obligations and self-assessment criteria. Project E now has a dedicated runnable directory that reuses the 23 CRDT datatype tests and adds seven replication tests: four datatypes × ten seeds replayed twice, total loss/recovery and semantic counterexamples. All planned chapter drafts and A–G paths now exist. This structural milestone does not close independent review or the stated missing production features. The integrated maintenance workspace is a design exercise, not new deployed software.

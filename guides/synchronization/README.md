@@ -1,6 +1,6 @@
 # Synchronization, distributed state, and multiplayer systems
 
-Status: **draft; installments 1–10**. Evidence checked: 2026-10-14. This index distinguishes written material from planned material. The full masterclass is not yet complete.
+Status: **draft; installments 1–11**. Evidence checked: 2026-10-14. This index distinguishes written material from planned material. All planned chapter drafts and Projects A–G now exist; technical review and the documented production-validation gaps remain open.
 
 ## Reader, objective, and boundary
 
@@ -41,9 +41,9 @@ Start with state transitions and failure ambiguity. Learn causality before confl
 | 8 | [Local concurrency](13-local-concurrency/README.md): Java atomics, publication, locks, ABA, progress and distributed boundaries; k-mer clarification | Written; draft |
 | 8 | [Security](14-security/README.md): trust boundaries, revocation, tenant isolation, replay, validation and audit | Written; draft |
 | 9 | [Production](15-production/README.md): scaling, regional deployment, overload, observability, recovery and correctness testing | Written; draft |
-| 9 | `16-handbook/README.md`: executable projects A–G, setup, tests, walkthroughs and hardening | Planned |
-| 10 | `17-comparisons/README.md`: application architecture matrices with evidence labels | Planned |
-| 10 | `18-synthesis/README.md`: derive a new architecture and read unfamiliar systems independently | Planned |
+| 9 | [Implementation handbook](16-handbook/README.md): executable projects A–G, setup, tests, walkthroughs and hardening | Written; draft |
+| 10 | [Architecture comparisons](17-comparisons/README.md): application architecture matrices with evidence labels | Written; draft |
+| 10 | [Final synthesis](18-synthesis/README.md): derive a new architecture and read unfamiliar systems independently | Written; draft |
 | Reference | [Notation](NOTATION.md), [glossary](GLOSSARY.md), [bibliography](BIBLIOGRAPHY.md), [dependency map](DEPENDENCIES.md) | Written; expands with chapters |
 | Experiment | [Foundation lab](../../examples/synchronization/00-foundations/README.md): lost updates, retries, causal comparisons and noncommuting text edits | Runnable source and tests written; see validation record |
 | Experiment | [Math/conflict lab](../../examples/synchronization/01-math-conflicts/README.md): quantitative models, LWW, three-way merge, causal frontiers and observed-remove tags | 20 tests passed; memory-only |
@@ -54,6 +54,7 @@ Start with state transitions and failure ambiguity. Learn causality before confl
 | Project | [B: durable chat](../../examples/synchronization/b-durable-chat/README.md): WebSockets, transactional acceptance, Redis hints and reconnect history | 16 tests passed; actual gateway crash/restart |
 | Project | [C: offline engine](../../examples/synchronization/c-offline-engine/README.md): SQLite outbox, retained outcomes, snapshot fallback and review | 25 tests passed; actual client/authority crashes |
 | Project | [D: collaborative text](../../examples/synchronization/d-collaborative-text/README.md): Yjs, durable provider, undo and relative cursor presence | 18 tests passed; actual WebSockets/server crashes |
+| Project | [E: replicated structures](../../examples/synchronization/e-crdts/README.md): shared datatypes, seeded full-state delivery, repair and semantic counterexamples | 23 reused + 7 adapter tests passed; memory-only |
 | Project | [F: multiplayer simulation](../../examples/synchronization/f-multiplayer/README.md): scheduled UDP inputs, prediction/replay, interpolation and fault schedules | 24 tests passed; actual UDP/server crash and logical adverse links |
 | Experiment | [Local concurrency lab](../../examples/synchronization/05-local-concurrency/README.md): forced Java schedules, process boundary and Node shared workers | 20 Java scenarios + 1 JVM-boundary check; 3 Node checks passed |
 
@@ -88,7 +89,9 @@ guides/synchronization/
   13-local-concurrency/     shared-memory contracts, progress and evidence
   14-security/             trust, authorization, replay, encryption and audit
   15-production/           scaling, overload, recovery and correctness tests
-  16-handbook/ ... 18-synthesis/  later chapters, created sequentially
+  16-handbook/             run projects, trace boundaries and diagnose failures
+  17-comparisons/          eleven category matrices and dated evidence
+  18-synthesis/            integrated design exercise and assessment
 examples/synchronization/
   00-foundations/           dependency-free executable experiments
   01-math-conflicts/        quantitative and merge experiments; 20 tests
@@ -100,13 +103,17 @@ examples/synchronization/
   b-durable-chat/           Project B: WebSockets, PostgreSQL, catch-up
   c-offline-engine/         Project C: SQLite outbox, snapshots and crash tests
   d-collaborative-text/     Project D: Yjs CLI editor, durable server, undo/presence
-  e-crdts/                 Project E: merge types and convergence tests
+  e-crdts/                 Project E: shared datatype source + seeded delivery/repair
   f-multiplayer/           Project F: authoritative UDP slots, replay and faults
   g-fault-harness/         Project G: seeded adverse schedules and crash tests
 ```
 
-Only written paths exist. Planned directories will be created with substantive content, rather than empty chapter shells. Existing repository templates remain the editorial reference.
+All listed chapter/project directories now contain substantive documents or runnable code. Their draft status and scope limits remain explicit. Existing repository templates remain the editorial reference.
 
 ## Completion standard
 
 Each chapter must answer its declared questions, explain a mechanism with intermediate states, bound claims by assumptions, cover diagnosis and recovery, and cite primary evidence. Each project must run from documented setup and include meaningful tests. Chapters remain `draft` while material gaps exist, move to `review` when substantively complete, and become `ready` after a named technical review. No product architecture will be inferred from its user interface.
+
+## Current reading and review boundary
+
+For the final installment, read the [handbook](16-handbook/README.md), [comparison matrices](17-comparisons/README.md), then [synthesis](18-synthesis/README.md). Project E reuses the datatype implementations from the CRDT lab and adds seeded delivery/repair adapters. All planned chapter drafts and A–G entry points exist. This does not make the labs production-ready or close the independent technical-review, fresh-machine reproduction, hostile-state, WAN/cluster, encryption and storage-failure gaps recorded in the research notes.
