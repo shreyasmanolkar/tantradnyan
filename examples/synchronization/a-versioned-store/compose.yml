@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres:18.4-alpine
+    container_name: sync-masterclass-pg18
+    environment:
+      POSTGRES_USER: sync_lab
+      POSTGRES_DB: sync_lab
+      POSTGRES_HOST_AUTH_METHOD: trust
+    network_mode: none
+    volumes:
+      - lab-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sync_lab -d sync_lab"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+volumes:
+  lab-data:
