@@ -43,3 +43,7 @@ Project D distinguishes Yjs internal item/client clocks, authenticated actor/ses
 ## Multiplayer timeline and finality
 
 Project F uses server tick `k`, fixed timestep `Delta=50 ms`, session start tick `b`, and input slot `q` assigned to tick `b+q`. Its `ack=k-b` finalizes slots, including missing slots executed as neutral; it is not packet receipt or disk durability. Datagram `packetSeq`, input `seq`, match epoch, actor session and render sample time have distinct scopes. Motion uses integer millimetres; interpolation can yield fractional display positions. Pending game input expires under this timeline instead of replaying indefinitely like offline document work.
+
+## Shared-memory access and histories
+
+Local Java CAS compares the actual AtomicReference identity, not record equals. A State value/version pair is immutable and published through one cell. Java happens-before is a language/runtime observation relation, distinct from message-carried causal metadata. In the local lab a recorded history has invocation/response ordinal markers and old-counter return values; its checker covers completed increment calls only. A stamp distinguishes reference history but needs coherent pair capture and a wrap/reuse policy.

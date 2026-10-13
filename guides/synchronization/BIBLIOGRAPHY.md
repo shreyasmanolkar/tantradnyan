@@ -124,3 +124,17 @@ Checked 2026-10-14. Distinguish first-person examples and inspected source from 
 - [RFC 9221](https://www.rfc-editor.org/rfc/rfc9221.html), March 2022: QUIC unreliable datagrams within its transport context.
 
 The Valve networking wiki and Fiedler lockstep page were unavailable during this research. [Multiplayer evidence notes](12-multiplayer/RESEARCH.md) record that limit, logical versus real-socket faults and untested production mechanisms.
+
+## Local concurrency, memory and progress: installment 9
+
+Checked 2026-10-14; Java specification/API scope SE 25, runtime validation OpenJDK 25.0.1.
+
+- [JLS chapter 17](https://docs.oracle.com/javase/specs/jls/se25/html/jls-17.html): memory model, synchronization, final construction and per-access distinctions.
+- [AtomicReference](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/atomic/AtomicReference.html), [AtomicInteger](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/atomic/AtomicInteger.html), [AtomicStampedReference](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/atomic/AtomicStampedReference.html) and [VarHandle](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/invoke/VarHandle.html): exact identity, purity, pair capture and memory modes.
+- [ReentrantLock](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/locks/ReentrantLock.html), [Condition](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/locks/Condition.html), [Semaphore](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/Semaphore.html) and [read/write lock](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/locks/ReentrantReadWriteLock.html): ownership, cancellation, predicates and admission contracts.
+- [Herlihy and Wing, linearizability](https://www.cs.columbia.edu/~wing/publications/HerlihyWing90.pdf), July 1990, and [Herlihy, wait-free synchronization](https://cs.brown.edu/people/mph/Herlihy91/p124-herlihy.pdf), January 1991: original correctness and progress literature.
+- [ECMAScript Atomics](https://tc39.es/ecma262/multipage/structured-data.html#sec-atomics-object) and [Node 26.7.0 workers](https://nodejs.org/download/release/v26.7.0/docs/api/worker_threads.html): JS shared memory and agent boundaries.
+- [jcstress](https://github.com/openjdk/jcstress): specialized concurrency investigation, researched but not executed here.
+- [Marçais/Kingsford Jellyfish paper](https://dna.cs.byu.edu/bio465/papers/fastparallel.pdf), 2011, and [authors' historical page](https://www.cs.cmu.edu/~ckingsf/software/jellyfish/): a concrete CAS-based k-mer workload; not a synchronization protocol or current release recommendation.
+
+Read [validation notes](13-local-concurrency/RESEARCH.md) to distinguish forced interleavings, finite stress, specification guarantees and missing cross-architecture/exhaustive evidence.

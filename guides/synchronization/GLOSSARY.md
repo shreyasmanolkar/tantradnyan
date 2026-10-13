@@ -144,3 +144,16 @@ Corrections to common conflations: message delivery is not commit; convergence i
 - **Rollback networking:** revise speculative simulation by restoring saved state before a late-input mismatch and replaying corrected frames.
 - **Interest management:** choose relevant/authorized replicated entities and update priorities; spatial proximity alone is not permission.
 - **Delta baseline:** precisely identified receiver state against which a difference is encoded; unknown baseline needs recovery.
+
+## Local concurrency and progress
+
+- **Publication:** a valid communication/order edge makes prior initialized state safe for a reader to use.
+- **Fetch-and-add:** one atomic integer transition returning the old value while adding a specified delta.
+- **ABA:** a cell returns to a previously observed value/reference after intervening changes, potentially invalidating retained assumptions.
+- **Stamped reference:** atomically paired reference/history stamp; every relevant writer and the reuse horizon must honor its protocol.
+- **Condition variable:** wait mechanism for a predicate guarded by an associated lock; wake-up does not prove the predicate.
+- **Semaphore:** permit count bounding admission; it does not automatically protect admitted tasks' shared state.
+- **Obstruction-free:** completion when a participant can run in isolation long enough under the algorithm's model.
+- **Lock-free:** continuing system execution makes operation progress by some participant; individual starvation remains possible.
+- **Wait-free:** finite bounded own-step completion under the model, distinct from a wall-clock/runtime guarantee.
+- **k-mer:** length-k contiguous substring; a sequence-processing domain object, sometimes counted with concurrent CAS-based structures.
