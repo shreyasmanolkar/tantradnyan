@@ -53,7 +53,9 @@ Node examples use JavaScript modules unless TypeScript adds enough value to just
 
 ## Review ledger
 
-First installment covers structure, foundation, shared vocabulary, initial bibliography and a foundation lab. It does not satisfy the complete masterclass or projects A–G. Full algorithms, product research, quantitative reference and production implementations remain outstanding.
+First installment covers structure, foundation, shared vocabulary, initial bibliography and a foundation lab. It does not satisfy the complete masterclass or projects A–G. Full algorithms, product research and production implementations remain outstanding.
+
+Second installment adds the mathematical foundations reference, conflict-resolution guide and a dependency-free lab with 20 passing tests. It covers numerical models, explicit merge policies, causal alternatives, deletion and invariant counterexamples. Full OT/CRDT chapters and projects A–G remain outstanding; the educational lab does not replace durable/networked integration work.
 
 Reviewer: pending technically informed reader.
 Review date: pending.

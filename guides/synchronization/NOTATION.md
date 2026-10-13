@@ -15,3 +15,7 @@
 Default failure model: crash/restart nodes, loss/delay/duplication/reordering of application messages, partitions and unsynchronized clocks. Eventual delivery is an additional liveness assumption, never an automatic property. Malicious actors are discussed separately; a crash-tolerant proof does not cover Byzantine behavior.
 
 Examples using positions initially count ASCII characters. Later text guides must state UTF-16 code units, Unicode scalar values or grapheme clusters explicitly. A cursor offset has no meaning without a document version and indexing convention.
+
+Chapter-local mathematical symbols are defined at each equation: mean occupancy `L` differs from Lamport timestamp `L(a)`; queue utilization `ρ` differs from a clock's fractional drift bound. Durations use seconds unless a section explicitly states milliseconds. `r` can denote RTT in a network equation or participant count in a complexity analysis; each use declares its meaning.
+
+Conflict-guide branches: `B` is the common base, `L` the local branch, and `R` the remote branch. Missing own fields represent deletion only in a full-branch comparison; omission in a patch does not have that meaning. Lab values are finite JSON scalars; structured text/maps need specialized algorithms.

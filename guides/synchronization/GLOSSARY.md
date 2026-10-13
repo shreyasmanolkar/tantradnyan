@@ -34,3 +34,25 @@ This reference grows with the chapters. Definitions refer to contracts, not prod
 | Presence | Ephemeral estimate of participation, generally based on heartbeats or leases. |
 
 Corrections to common conflations: message delivery is not commit; convergence is not intent preservation; isolation is not replication consistency; a local CAS is not distributed coordination; a socket is not a durable synchronization protocol.
+
+## Mathematical and conflict terms
+
+| Term | Meaning |
+|---|---|
+| Bandwidth-delay product | Capacity times feedback delay; estimates data needed in flight to fill a path. |
+| Residence time | Time inside a declared queue/service boundary, including the components named by that boundary. |
+| Backpressure | Slowing or bounding admission when downstream capacity cannot drain work. |
+| Tail latency | High-percentile response delay; averages alone do not describe it. |
+| Commutativity | Changing the permitted order of operations or merge inputs preserves the specified result. |
+| Join-semilattice | A partially ordered state space where each pair has a least upper bound. |
+| Join | Least state above both inputs in the declared information order. |
+| Monotonic update | Transition that only advances in the declared information order; visible data may still be deleted. |
+| LWW | Last-write-wins: select one candidate by a defined total key, which need not reflect true generation time. |
+| CAS | Compare-and-swap/set: atomically check an expected value/version and perform the transition only if it matches. |
+| Three-way merge | Compare two branches to their common base and combine one-sided changes or retain conflicts. |
+| Write skew | Transactions change different records after mutually incompatible reads, violating a shared rule. |
+| Causal frontier | Candidate versions not causally dominated by another known version. |
+| Observed-remove | Removal suppresses addition identities it observed; concurrent unseen additions can survive. |
+| Domain invariant | Application rule required of accepted states or histories; convergence alone does not enforce it. |
+| Conflict resolution | A defined decision to combine, transform, select, retain or reject competing operations/state. |
+| Intention preservation | A context-dependent requirement that merged effects reflect specified user operation meaning; deterministic agreement alone does not establish it. |

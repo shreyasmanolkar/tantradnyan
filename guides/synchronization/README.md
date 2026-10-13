@@ -1,6 +1,6 @@
 # Synchronization, distributed state, and multiplayer systems
 
-Status: **draft; first installment**. Evidence checked: 2026-10-13. This index distinguishes written material from planned material. The full masterclass is not yet complete.
+Status: **draft; installments 1–2**. Evidence checked: 2026-10-13. This index distinguishes written material from planned material. The full masterclass is not yet complete.
 
 ## Reader, objective, and boundary
 
@@ -27,8 +27,8 @@ Start with state transitions and failure ambiguity. Learn causality before confl
 |---|---|---|
 | 0 | [Project plan](PROJECT-PLAN.md): document boundaries, requirements, evidence and review policy | Written |
 | 1 | [Distributed state](01-distributed-state/README.md): unified model, failures, retries, clocks, consistency, coordination, design choices | Written; draft |
-| 2 | `02-mathematics/README.md`: quantitative reference; proofs, queueing, reliability, bounds and complexity | Planned |
-| 3 | `03-conflict-resolution/README.md`: compare merge policies using identical histories and domain invariants | Planned |
+| 2 | [Mathematical foundations](02-mathematics/README.md): quantitative reference; proofs, queueing, reliability, bounds and complexity | Written; draft |
+| 3 | [Conflict resolution](03-conflict-resolution/README.md): compare merge policies using identical histories and domain invariants | Written; draft |
 | 4 | `04-ot/README.md`: transformations, correctness conditions, client/server state and structured text | Planned |
 | 4 | `05-crdts/README.md`: semilattices, causal operations, concrete data types, deletion and compaction | Planned |
 | 5 | `06-database-concurrency/README.md`: transactions, MVCC, CAS, WAL, replication, consensus and distributed commit | Planned |
@@ -46,6 +46,7 @@ Start with state transitions and failure ambiguity. Learn causality before confl
 | 10 | `18-synthesis/README.md`: derive a new architecture and read unfamiliar systems independently | Planned |
 | Reference | [Notation](NOTATION.md), [glossary](GLOSSARY.md), [bibliography](BIBLIOGRAPHY.md), [dependency map](DEPENDENCIES.md) | Written; expands with chapters |
 | Experiment | [Foundation lab](../../examples/synchronization/00-foundations/README.md): lost updates, retries, causal comparisons and noncommuting text edits | Runnable source and tests written; see validation record |
+| Experiment | [Math/conflict lab](../../examples/synchronization/01-math-conflicts/README.md): quantitative models, LWW, three-way merge, causal frontiers and observed-remove tags | 20 tests passed; memory-only |
 
 Read stages 1–3 before choosing OT or CRDTs. Read both algorithm chapters to compare them. Database and networking chapters can then be studied independently. The practical path interleaves A with databases, B with messaging, C with the engine, D with editing, E with CRDTs, F with games, and G throughout.
 
@@ -62,9 +63,12 @@ guides/synchronization/
   01-distributed-state/
     README.md               foundational guide
     RESEARCH.md             evidence boundaries and review gaps
-  02-mathematics/ ... 18-synthesis/  detailed chapters, created sequentially
+  02-mathematics/            quantitative reference and evidence notes
+  03-conflict-resolution/   merge policies, worked histories and evidence notes
+  04-ot/ ... 18-synthesis/   later chapters, created sequentially
 examples/synchronization/
   00-foundations/           dependency-free executable experiments
+  01-math-conflicts/        quantitative and merge experiments; 20 tests
   a-versioned-store/        Project A: conditional records, Java and PostgreSQL
   b-durable-chat/           Project B: WebSockets, PostgreSQL, catch-up
   c-offline-engine/         Project C: durable local outbox and replay
