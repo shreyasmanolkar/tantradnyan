@@ -188,7 +188,7 @@ Proofs are model-specific. Finite tests seek counterexamples and validate implem
 8. Separate proof from finite tests and historical benchmarks; ask whether the implementation satisfies the proof's assumptions.
 9. Reproduce the smallest executable mechanism, then mutate an assumption and require an explanatory failure.
 
-For further study, use the [annotated bibliography](../BIBLIOGRAPHY.md): clocks/consistency first, OT/CRDT papers with the worked histories second, database/runtime/network specifications third, product engineering reports after their mechanism prerequisites. Use the [dependency map](../DEPENDENCIES.md) to fill a missing prerequisite instead of treating unexplained jargon as a result.
+For further study, use the [annotated sources and further reading](../SOURCES-AND-FURTHER-READING.md): clocks/consistency first, OT/CRDT papers with the worked histories second, database/runtime/network specifications third, product engineering reports after their mechanism prerequisites. Use the [dependency map](../DEPENDENCIES.md) to fill a missing prerequisite instead of treating unexplained jargon as a result.
 
 ## 9. Self-assessment with answer criteria
 

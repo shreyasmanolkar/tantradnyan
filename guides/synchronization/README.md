@@ -44,7 +44,7 @@ Start with state transitions and failure ambiguity. Learn causality before confl
 | 9 | [Implementation handbook](16-handbook/README.md): executable projects A–G, setup, tests, walkthroughs and hardening | Written; draft |
 | 10 | [Architecture comparisons](17-comparisons/README.md): application architecture matrices with evidence labels | Written; draft |
 | 10 | [Final synthesis](18-synthesis/README.md): derive a new architecture and read unfamiliar systems independently | Written; draft |
-| Reference | [Notation](NOTATION.md), [glossary](GLOSSARY.md), [bibliography](BIBLIOGRAPHY.md), [dependency map](DEPENDENCIES.md) | Written; expands with chapters |
+| Reference | [Notation](NOTATION.md), [glossary](GLOSSARY.md), [sources and further reading](SOURCES-AND-FURTHER-READING.md), [dependency map](DEPENDENCIES.md) | Written; expands with chapters |
 | Experiment | [Foundation lab](../../examples/synchronization/00-foundations/README.md): lost updates, retries, causal comparisons and noncommuting text edits | Runnable source and tests written; see validation record |
 | Experiment | [Math/conflict lab](../../examples/synchronization/01-math-conflicts/README.md): quantitative models, LWW, three-way merge, causal frontiers and observed-remove tags | 20 tests passed; memory-only |
 | Experiment | [OT lab](../../examples/synchronization/02-ot/README.md): pairwise transforms, bounded round, cursors and TP2 counterexample | 10 tests passed; 220 pair cases |
@@ -71,7 +71,7 @@ guides/synchronization/
   NOTATION.md               shared symbols and evolving example domain
   DEPENDENCIES.md           prerequisite graph and implementation dependencies
   GLOSSARY.md               concise definitions and conceptual distinctions
-  BIBLIOGRAPHY.md           annotated primary-source reading path
+  SOURCES-AND-FURTHER-READING.md  annotated primary-source reading path
   01-distributed-state/
     README.md               foundational guide
     RESEARCH.md             evidence boundaries and review gaps

@@ -18,7 +18,7 @@ The tables are **reference designs**, not a survey claiming that named products 
 
 Evidence labels:
 
-- **Theory:** an algorithm's established property under its stated model; see the corresponding mechanism chapter and bibliography.
+- **Theory:** an algorithm's established property under its stated model; see the corresponding mechanism chapter and source list.
 - **Source-backed implementation:** a dated, scoped report or inspected implementation, never an inferred whole current product.
 - **Reference design:** an authored architecture option whose fit follows from the stated constraints.
 - **Unknown:** evidence is insufficient to identify a product's current private mechanism.

@@ -1,6 +1,6 @@
-# Primary-source bibliography and reading roadmap
+# Sources and Further Reading
 
-Evidence checked 2026-10-13. This covers installments 1–4, not yet the full course bibliography. Dates below are publication dates, not search-engine crawl dates. No claim of formal ASD-STE100 compliance is made; its controlled dictionary was not consulted.
+Evidence checked 2026-10-13. This covers installments 1–4, not yet the full course source list. Dates below are publication dates, not search-engine crawl dates. No claim of formal ASD-STE100 compliance is made; its controlled dictionary was not consulted.
 
 ## Ordering and concurrent observations
 

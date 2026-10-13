@@ -351,7 +351,7 @@ Record base and accepted versions, operation IDs, candidate vectors, policy/code
 
 ## Sources, limitations and review
 
-Follow the [annotated bibliography](../BIBLIOGRAPHY.md) from causal ordering to datatype algebra and transaction theory. This installment implements LWW selection, flat three-way merging, an audit-backed causal frontier and a tombstone observed-remove set. Full OT/CRDT architectures, database-backed integration and production reclamation are subsequent work. No named product's internals are inferred.
+Follow the [annotated sources and further reading](../SOURCES-AND-FURTHER-READING.md) from causal ordering to datatype algebra and transaction theory. This installment implements LWW selection, flat three-way merging, an audit-backed causal frontier and a tombstone observed-remove set. Full OT/CRDT architectures, database-backed integration and production reclamation are subsequent work. No named product's internals are inferred.
 
 Reviewer: pending technically informed reader.
 Review date: pending.
