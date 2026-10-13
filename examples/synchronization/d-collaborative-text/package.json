@@ -1,0 +1,6 @@
+{
+ "name":"synchronization-collaborative-text-lab", "version":"0.1.0", "private":true,
+ "type":"module", "engines":{"node":">=26.7.0"},
+ "scripts":{"serve":"node cli.mjs serve", "client":"node cli.mjs client", "test":"node --test editor.test.mjs", "demo":"node demo.mjs"},
+ "dependencies":{"yjs":"13.6.33","ws":"8.22.0"}
+}
