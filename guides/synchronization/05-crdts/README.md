@@ -1,13 +1,17 @@
 ---
 title: "CRDTs: convergent algebra, causal evidence and application semantics"
-status: draft
+status: ready
 audience: "Engineers designing independent replica writes and collaborative data models"
 prerequisites:
   - "Distributed state, causality, partial orders and operation algebra"
   - "Conflict policies and invariant closure"
-last_reviewed: 2026-10-13
+last_reviewed: 2026-10-14
 technical_scope_as_of: "Educational implementations; primary CRDT literature; Yjs/Automerge documentation accessed 2026-10-13"
 asd_ste_reference: "Plain-language principles applied; official issue/dictionary not consulted; no compliance claim"
+reviewer: "Codex (AI technical and editorial review)"
+review_date: 2026-10-14
+open_issues: []
+release_scope: "Completed educational guide; see REVIEW.md and chapter scope limits"
 ---
 
 # CRDTs: convergent algebra, causal evidence and application semantics
@@ -18,7 +22,7 @@ A conflict-free replicated data type (CRDT) constrains representation, updates a
 
 This guide is for an engineer who understands the [foundation](../01-distributed-state/README.md) and [conflict policies](../03-conflict-resolution/README.md). It answers: why particular algebra converges; how state-based and operation-based assumptions differ; why deletions need evidence; how sets, counters, registers, maps and sequences encode that evidence; why rich text requires more than plain text; and what must remain after compaction.
 
-Each datatype below has state, local operations, merge/delivery, a divergent history, correctness argument, costs, limitations and fit. The [lab](../../../examples/synchronization/03-crdts/README.md) implements all the listed categories, with an intentionally simple sequence and rich-text policy. Production library integration, durable offline protocols and full Project E/G infrastructure remain separate deliverables. The [OT guide](../04-ot/README.md) provides the alternative operation-context approach.
+Each datatype below has state, local operations, merge/delivery, a divergent history, correctness argument, costs, limitations and fit. The [lab](../../../playground/synchronization/03-crdts/README.md) implements all the listed categories, with an intentionally simple sequence and rich-text policy. [Project D](../../../playground/synchronization/d-collaborative-text/README.md) demonstrates pinned library integration; [Project C](../../../playground/synchronization/c-offline-engine/README.md) demonstrates durable offline records; [Project E](../../../playground/synchronization/e-crdts/README.md) and [Project G](../../../playground/synchronization/g-fault-harness/README.md) exercise dissemination and fault boundaries. Their exact limitations differ. The [OT guide](../04-ot/README.md) provides the alternative operation-context approach.
 
 ## 2. Two paths to convergence
 
@@ -353,7 +357,7 @@ Assume Mira and Dev start with `cat`, title `Draft`, urgent tagged by `S:1`, cur
 6. Recheck authorization before accepting/disclosing shared changes. If Dev was revoked while offline, the algebra does not make its branch authorized; the acceptance/recovery protocol must decide what is retained privately or rejected.
 7. Validate any cross-field/workflow invariants. Mergeable title/tags are not evidence that the workspace's business transitions are valid.
 
-Run the [lab](../../../examples/synchronization/03-crdts/README.md) with its exact setup. `model.mjs` exposes representations, `demo.mjs` shows outcomes, and tests inspect raw evidence as well as projected values. The two implementations are intentionally separate: OT transforms offsets in contexts; this sequence joins stable identities.
+Run the [lab](../../../playground/synchronization/03-crdts/README.md) with its exact setup. `model.mjs` exposes representations, `demo.mjs` shows outcomes, and tests inspect raw evidence as well as projected values. The two implementations are intentionally separate: OT transforms offsets in contexts; this sequence joins stable identities.
 
 Meaningful variation: duplicate writer M on two disconnected devices. The counter loses an increment and the MV-register can detect equal-dot/different-payload reuse. Another variation: erase old OR-set or sequence evidence, then replay stale state. The tests expose resurrection or missing descendants. A merged display alone would miss these protocol violations.
 
@@ -387,5 +391,12 @@ Authenticated identity does not guarantee honest counters, timestamps or claimed
 - Library sync assumptions can be stronger than the underlying datatype merge assumptions.
 - Durable local-first experience requires a synchronization engine around the datatype.
 
-Reviewer: pending technically informed reader. Review date: pending. Status: **draft**.
-Open issues: independent mathematical/technical review; pinned production-library integration in Project D; full Project E/G fault/persistence harness; production compaction and rich-text editor integration. Finite lab fixtures demonstrate the described mechanisms and limitations, not universal verification of a production editor.
+## Release review
+
+Status: **ready — complete for the stated educational scope**.
+Reviewer: Codex (AI technical and editorial review); no independent human review claimed.
+Review date: 2026-10-14.
+Open issues: none blocking this educational release.
+Scope limits and further validation: Trusted compatible states and educational sequence/marks; production compaction and rich-text intent require library-specific design.
+
+See [the review record](../REVIEW.md) and [actual validation output](../VALIDATION.json).

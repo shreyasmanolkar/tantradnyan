@@ -1,6 +1,6 @@
 # Multiplayer research and validation record
 
-Status: draft. Research began 2026-10-13 and continued through 2026-10-14 local date. Final guide/validation date: 2026-10-14. Reviewer: pending.
+Status: ready (educational evidence record). Research began 2026-10-13 and continued through 2026-10-14 local date. Final guide/validation date: 2026-10-14. Reviewer: Codex (AI technical/editorial review), 2026-10-14.
 
 ## Source quality and limits
 
@@ -49,3 +49,9 @@ No real Internet congestion control, cryptographic transport, hostile packet-spo
 Technical review should inspect timing/finality mapping, stale/duplicate handling, complete-packet validation, replay assumptions, snapshot/epoch validation, disconnect admission and overload policy. Production evidence requires WAN/load/long-session testing, simulation determinism checks where applicable, anti-cheat/privacy evaluation and explicit persistent-state recovery. No formal ASD-STE100 compliance claim.
 
 Final checks (2026-10-14): documented npm test and npm run demo reran successfully: 24 tests passed, zero failures, and all four demo lines matched. A separate spawned CLI exercised right/neutral input, show, explicit reconnect and quit; output showed immediate predicted displacement and a reset pending queue, and the loopback authority received input. Its server/socket were closed. Local paths and balanced fences passed across 40 Markdown documents excluding node_modules; new-file whitespace and git diff --check passed. No persistent game files, external services or containers were created.
+
+## Release review — 2026-10-14
+
+Current status: ready for the stated educational scope. Reviewer: Codex (AI technical and editorial review); no independent human review claimed. Historical research/execution notes above retain their original scope and do not imply every cited full text was newly fetched. The [review record](../REVIEW.md) supersedes earlier pending-review/planned-work statements; [VALIDATION.json](../VALIDATION.json) records this release's actual reruns.
+
+Open issues: none blocking this educational release. Scope limits and further validation: Minimal one-dimensional match; no full physics/rollback, Internet security/congestion/NAT or persistent MMO implementation.

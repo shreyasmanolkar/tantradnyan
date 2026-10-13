@@ -1,13 +1,17 @@
 ---
 title: "Networking for synchronization: transport, framing, reliability and recovery"
-status: draft
+status: ready
 audience: "Engineers selecting and implementing delivery paths for shared state"
 prerequisites:
   - "Distributed-state failures, identities, causality and consistency"
   - "Latency, queues and retry models; basic client/server programming"
-last_reviewed: 2026-10-13
+last_reviewed: 2026-10-14
 technical_scope_as_of: "Named IETF specifications and WHATWG snapshots; Node.js v26.7.0 loopback validation"
 asd_ste_reference: "Plain-language principles; official issue/dictionary not consulted; no compliance claim"
+reviewer: "Codex (AI technical and editorial review)"
+review_date: 2026-10-14
+open_issues: []
+release_scope: "Completed educational guide; see REVIEW.md and chapter scope limits"
 ---
 
 # Networking for synchronization: transport, framing, reliability and recovery
@@ -18,7 +22,7 @@ A protocol must move information across an uncertain path. A synchronization eng
 
 This guide equips an engineer to choose TCP, UDP or supported web transports; build message framing; distinguish several kinds of acknowledgment; handle backpressure and reconnection; and understand secure establishment, NAT traversal and application ordering. Questions: what does each layer guarantee; what is a packet versus a message; what may be skipped; when is retransmission safe; what survives reconnect; and which protocol duties are still ours?
 
-Read [distributed-state foundations](../01-distributed-state/README.md), the [quantitative models](../02-mathematics/README.md) and [database commit boundaries](../06-database-concurrency/README.md). The [network lab](../../../examples/synchronization/04-networking/README.md) runs actual TCP/UDP loopback sockets plus deterministic parser/fault cases. It does not implement Internet-safe UDP, NAT, TLS or WebSocket servers. Messaging and game guides later use these foundations for durable chat and simulation.
+Read [distributed-state foundations](../01-distributed-state/README.md), the [quantitative models](../02-mathematics/README.md) and [database commit boundaries](../06-database-concurrency/README.md). The [network lab](../../../playground/synchronization/04-networking/README.md) runs actual TCP/UDP loopback sockets plus deterministic parser/fault cases. It does not implement Internet-safe UDP, NAT, TLS or WebSocket servers. Messaging and game guides later use these foundations for durable chat and simulation.
 
 ## 2. TCP/IP is a suite, not one transport
 
@@ -123,7 +127,7 @@ The lab deliberately creates this schedule:
 | 2 | Apply command, discard ACK | Still no ACK; effect actually happened |
 | 3 | Deduplicate command, resend original outcome | One accepted memory effect confirmed |
 
-The effect and replay record are synchronous in a memory ledger. Restarting that ledger loses its decision history. [Project A](../../../examples/synchronization/a-versioned-store/README.md) shows the durable database boundary needed for a persisted operation.
+The effect and replay record are synchronous in a memory ledger. Restarting that ledger loses its decision history. [Project A](../../../playground/synchronization/a-versioned-store/README.md) shows the durable database boundary needed for a persisted operation.
 
 A production reliable datagram protocol needs an outstanding window, identity retention, receipt/ACK ranges, pacing, loss detection, adaptive timing, flow control, congestion response, security and reconnect state. Dependent messages need ordering/causal handling. Selective acknowledgments can avoid resending already received information, but lost ACKs still leave uncertainty until later evidence arrives.
 
@@ -263,7 +267,7 @@ For a durable increment, follow three knowledge boundaries:
 2. Receiver parses and returns the lab's application ACK: memory effect recorded, but no disk durability.
 3. Project A commits mutation/result/log before an application response: durable under its tested configuration assumptions, although a missing response still needs replay.
 
-Run the [network lab](../../../examples/synchronization/04-networking/README.md). `protocol.mjs` contains the length-prefix decoder, bounded command envelope, volatile replay ledger and latest-snapshot filter. `sockets.mjs` establishes ephemeral loopback endpoints and injects the two UDP losses. Tests distinguish deterministic parser schedules from actual network callbacks.
+Run the [network lab](../../../playground/synchronization/04-networking/README.md). `protocol.mjs` contains the length-prefix decoder, bounded command envelope, volatile replay ledger and latest-snapshot filter. `sockets.mjs` establishes ephemeral loopback endpoints and injects the two UDP losses. Tests distinguish deterministic parser schedules from actual network callbacks.
 
 Expected outcomes: a repeated logical increment across two TCP connections returns result 1 twice with one surviving-server memory effect; a UDP request drop plus ACK drop causes at least three attempts with one memory effect; snapshot 12 is kept and older 11 ignored. The measured demonstration completed after three UDP attempts on this host. No timing/throughput benchmark follows from that observation.
 
@@ -302,5 +306,12 @@ A large UDP response to an unauthenticated spoofed source can amplify traffic. V
 - Latest-value delivery fits replaceable state; required commands need their own history.
 - TLS/NAT establishment does not establish authorization or sync correctness.
 
-Reviewer: pending technically informed reader. Review date: pending. Status: **draft**.
-Open issues: independent protocol review; durable WebSocket/broker application in Project B; WAN congestion/MTU/TLS/NAT experiments; production reconnection/overload tests. The loopback lab proves its finite fixtures, not an Internet transport or full synchronization engine.
+## Release review
+
+Status: **ready — complete for the stated educational scope**.
+Reviewer: Codex (AI technical and editorial review); no independent human review claimed.
+Review date: 2026-10-14.
+Open issues: none blocking this educational release.
+Scope limits and further validation: Real loopback TCP/UDP examples; no Internet congestion, TLS/QUIC/NAT or MTU deployment validation.
+
+See [the review record](../REVIEW.md) and [actual validation output](../VALIDATION.json).

@@ -1,6 +1,6 @@
 # Local-first evidence, implementation and review record
 
-Status: draft. Research/validation date: 2026-10-13. Reviewer: pending.
+Status: ready (educational evidence record). Research/validation date: 2026-10-13. Reviewer: Codex (AI technical/editorial review), 2026-10-14.
 
 ## Scope and claim classification
 
@@ -42,6 +42,12 @@ Tests/demo create randomized temporary directories and remove their own files af
 
 No browser, host power-loss, media corruption, long-suspension, disk-full, real token refresh, implemented schema migration, encrypted payload, large/chunked snapshot, multi-tab leader election, multi-authority or production load test is claimed. Fixtures allow trusted local database access; tokens are public and transport is loopback HTTP. Authoritative outcomes and local receipts are retained without GC.
 
-Review should focus on unknown-success reconciliation, cursor/epoch invariants, dependency meaning, authorization boundaries, immutable outcome fingerprints and local backup/restore behavior. The guide remains draft pending that review. No formal ASD-STE100 compliance claim.
+Review should focus on unknown-success reconciliation, cursor/epoch invariants, dependency meaning, authorization boundaries, immutable outcome fingerprints and local backup/restore behavior. The release review now records those checks in ../REVIEW.md. No formal ASD-STE100 compliance claim.
 
 Final documentation/CLI checks: a separate disposable workflow executed CLI bootstrap, enqueue, sync, show and fresh-ID title resolution, then confirmed the resolved title on Dev's device. Its server and temporary files were closed/removed. Local targets and balanced code fences passed across 34 Markdown documents excluding node_modules; git diff --check passed. The index's Project B/C rows were joined into the comparison table during final review.
+
+## Release review — 2026-10-14
+
+Current status: ready for the stated educational scope. Reviewer: Codex (AI technical and editorial review); no independent human review claimed. Historical research/execution notes above retain their original scope and do not imply every cited full text was newly fetched. The [review record](../REVIEW.md) supersedes earlier pending-review/planned-work statements; [VALIDATION.json](../VALIDATION.json) records this release's actual reruns.
+
+Open issues: none blocking this educational release. Scope limits and further validation: Durable SQLite/HTTP offline engine; browser storage, implemented migrations, encrypted payloads and safe outcome GC remain outside the lab.

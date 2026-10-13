@@ -1,6 +1,6 @@
 # Local concurrency lab: Java atomics, publication, ABA and locks
 
-Status: **draft educational lab**. Reader: an engineer comfortable with threads/records and [linearizable transitions](../../../guides/synchronization/01-distributed-state/README.md). This lab exposes controlled shared-memory failures, implements atomic/order boundaries, and distinguishes local safety from durable distributed state.
+Status: **ready educational lab**. Reader: an engineer comfortable with threads/records and [linearizable transitions](../../../guides/synchronization/01-distributed-state/README.md). This lab exposes controlled shared-memory failures, implements atomic/order boundaries, and distinguishes local safety from durable distributed state.
 
 Questions: why can volatile increments lose work; what does CAS compare; what publishes ordinary payload; why does A→B→A hide stale assumptions; why must a waiter recheck its predicate; and why can separate JVMs each succeed on unrelated local cells?
 
@@ -9,7 +9,7 @@ Questions: why can volatile increments lose work; what does CAS compare; what pu
 Requirements: Python 3, a JDK with java/javac, optionally Node for comparison. Sources compile with `--release 17`; validation used **OpenJDK 25.0.1+8-27**, **Python 3.14.7** and **Node 26.7.0**. Older compatible runtimes were not tested. No dependencies, Maven/Gradle, databases or containers are needed.
 
 ```sh
-cd examples/synchronization/05-local-concurrency
+cd playground/synchronization/05-local-concurrency
 python3 run.py
 node workers.mjs
 ```
@@ -133,3 +133,5 @@ A timeout suggests ownership/cancellation/scheduling failure; inspect thread dum
 Validation date: 2026-10-14. Java: 20 in-process passes plus one process-boundary check. Node: three passes. Temporary build resources are removed by the runner. See [the guide](../../../guides/synchronization/13-local-concurrency/README.md) and [evidence notes](../../../guides/synchronization/13-local-concurrency/RESEARCH.md) for correctness arguments and review gaps.
 
 Final documented-command rerun: 20 Java scenarios, one JVM-boundary check and three Node checks passed. Local-path/fence validation covered 43 Markdown documents; new-file whitespace and git diff --check passed. Temporary class directories were removed; no global Java settings or external services were changed.
+
+Release review: 2026-10-14, Codex (AI technical/editorial review). Status: ready for this exercise's stated scope. [Review and rerun evidence](../../../guides/synchronization/REVIEW.md) record the actual checks; production-hardening limitations above still apply.

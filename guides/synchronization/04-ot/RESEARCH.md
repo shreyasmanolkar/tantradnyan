@@ -11,4 +11,10 @@ Transforms, the pair test alphabet, the bounded two-client round and TP2 regress
 
 Validation: Node.js v26.7.0, 2026-10-13. Demo matched all five documented lines. Direct test-module execution reported 10 passing tests and zero failures, including 220 valid operation pairs and the expected failing TP2 property. A green counterexample regression means the unsupported general property remains false.
 
-No real transport, disk crash recovery, continuous editor or IME testing. Technical reviewer: pending. Formal ASD-STE100 compliance not claimed.
+No real transport, disk crash recovery, continuous editor or IME testing. Release review: see ../REVIEW.md. Formal ASD-STE100 compliance not claimed.
+
+## Release review — 2026-10-14
+
+Current status: ready for the stated educational scope. Reviewer: Codex (AI technical and editorial review); no independent human review claimed. Historical research/execution notes above retain their original scope and do not imply every cited full text was newly fetched. The [review record](../REVIEW.md) supersedes earlier pending-review/planned-work statements; [VALIDATION.json](../VALIDATION.json) records this release's actual reruns.
+
+Open issues: none blocking this educational release. Scope limits and further validation: Two-client bounded OT round with documented TP2 counterexample; no general continuous OT editor or universal correctness claim.

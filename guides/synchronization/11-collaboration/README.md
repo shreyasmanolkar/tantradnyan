@@ -1,12 +1,16 @@
 ---
 title: "Collaborative applications: text, object graphs, workflows and shared execution"
-status: draft
+status: ready
 audience: "Engineers choosing state models and protocols for collaborative products"
 prerequisites:
   - "OT/CRDT assumptions, transactions, synchronization engines and local-first recovery"
-last_reviewed: 2026-10-13
+last_reviewed: 2026-10-14
 technical_scope_as_of: "Historical product reports explicitly dated; Project D on Yjs 13.6.33, ws 8.22.0, Node 26.7.0"
 asd_ste_reference: "Plain-language principles applied; official issue/dictionary not consulted; no compliance claim"
+reviewer: "Codex (AI technical and editorial review)"
+review_date: 2026-10-14
+open_issues: []
+release_scope: "Completed educational guide; see REVIEW.md and chapter scope limits"
 ---
 
 # Collaborative applications: text, object graphs, workflows and shared execution
@@ -19,7 +23,7 @@ This guide answers: what is the replicated state; which user actions become whic
 
 The scope is text documents, design graphs, task/page systems, messaging and collaborative development. Game simulation is the next branch. Full merge proofs are cross-referenced rather than restated. Product names identify requirements unless a dated primary report is explicitly cited. A user interface does not reveal a proprietary protocol.
 
-[Project D](../../../examples/synchronization/d-collaborative-text/README.md) is a runnable command-line collaborative plain-text editor using a pinned Yjs library and a custom durable WebSocket provider. It adds selective undo and expiring relative-position presence. It is neither a graphical editor nor a rich-text implementation; its client state is memory-only.
+[Project D](../../../playground/synchronization/d-collaborative-text/README.md) is a runnable command-line collaborative plain-text editor using a pinned Yjs library and a custom durable WebSocket provider. It adds selective undo and expiring relative-position presence. It is neither a graphical editor nor a rich-text implementation; its client state is memory-only.
 
 ## 2. One product usually contains several consistency domains
 
@@ -265,7 +269,7 @@ A subtle test applies a dependent update before its predecessor, persists the ca
 
 Another test creates deletion divergence with equal insertion vectors. Difference exchange still carries delete evidence; skipping exchange solely because those vectors match would leave different text. A test is implementation evidence for this version, not a new proof about every CRDT.
 
-Run [the documented setup and commands](../../../examples/synchronization/d-collaborative-text/README.md). Eighteen tests passed with actual WebSockets, SQLite files and server SIGKILL before/after commit. The demo produces two retained contributions, equal merged text and `Hello Dev` after Mira's selective undo. Client-crash persistence, graphical bindings, WAN/load behavior and malicious-encoding completeness are outside these results. [Validation record](RESEARCH.md)
+Run [the documented setup and commands](../../../playground/synchronization/d-collaborative-text/README.md). Eighteen tests passed with actual WebSockets, SQLite files and server SIGKILL before/after commit. The demo produces two retained contributions, equal merged text and `Hello Dev` after Mira's selective undo. Client-crash persistence, graphical bindings, WAN/load behavior and malicious-encoding completeness are outside these results. [Validation record](RESEARCH.md)
 
 ## 10. Failure symptoms, operating requirements and security
 
@@ -303,6 +307,14 @@ Design rules:
 
 Remaining work includes a production editor binding, rich-text schema integration, durable client CRDT storage, multi-owner fencing, secure identity, chunked bootstrap, safe compaction and broad fault/load testing. Project D assumes a single owner and trusted fixture context with bounded inputs; projection validation is not exhaustive hostile-binary validation. It remains an educational implementation.
 
-Further reading: Yjs [updates](https://docs.yjs.dev/api/document-updates), [relative positions](https://docs.yjs.dev/api/relative-positions) and [UndoManager](https://docs.yjs.dev/api/undo-manager) turn datatype behavior into editor plumbing. Read the dated Figma/Notion reports for distinct object models; consult the existing OT/CRDT chapters for algorithm obligations. The next installment derives game simulation protocols, where plausible continuity and fairness introduce another observation contract.
+Further reading: Yjs [updates](https://docs.yjs.dev/api/document-updates), [relative positions](https://docs.yjs.dev/api/relative-positions) and [UndoManager](https://docs.yjs.dev/api/undo-manager) turn datatype behavior into editor plumbing. Read the dated Figma/Notion reports for distinct object models; consult the existing OT/CRDT chapters for algorithm obligations. The [multiplayer chapter](../12-multiplayer/README.md) derives game simulation protocols, where plausible continuity and fairness introduce another observation contract.
 
-Reviewer: pending technically informed reader. Review date: pending. Open issues: technical review and unimplemented production mechanisms above. Status: **draft**.
+## Release review
+
+Status: **ready — complete for the stated educational scope**.
+Reviewer: Codex (AI technical and editorial review); no independent human review claimed.
+Review date: 2026-10-14.
+Open issues: none blocking this educational release.
+Scope limits and further validation: Plain-text CLI/provider and dated product evidence; no durable CRDT client, graphical rich-text binding or current private vendor architecture claim.
+
+See [the review record](../REVIEW.md) and [actual validation output](../VALIDATION.json).

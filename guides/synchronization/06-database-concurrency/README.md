@@ -1,13 +1,17 @@
 ---
 title: "Database concurrency: atomic decisions, snapshots, logs and replication"
-status: draft
+status: ready
 audience: "Engineers building the durable authority behind a synchronization protocol"
 prerequisites:
   - "Distributed state, consistency, conflict policies, versions and retries"
   - "Basic SQL; Docker and Node for Project A; Java for the local CAS comparison"
-last_reviewed: 2026-10-13
+last_reviewed: 2026-10-14
 technical_scope_as_of: "PostgreSQL 18 documentation and real PostgreSQL 18.4 tests; Java SE 25 references"
 asd_ste_reference: "Plain-language principles; official issue/dictionary not consulted; no compliance claim"
+reviewer: "Codex (AI technical and editorial review)"
+review_date: 2026-10-14
+open_issues: []
+release_scope: "Completed educational guide; see REVIEW.md and chapter scope limits"
 ---
 
 # Database concurrency: atomic decisions, snapshots, logs and replication
@@ -18,7 +22,7 @@ A synchronization server must turn a submitted intent into an accepted, recovera
 
 This guide teaches an engineer who knows SQL how independent requests interact inside the authority: snapshots, locks, conditional transitions, constraints, transaction retries, durable logs, replication and distributed commit. Central questions: when is a read obsolete; which decision must be atomic; what does commit survive; what history can replicas expose; and how does the acceptance boundary support retry-safe synchronization?
 
-Read the [conflict guide](../03-conflict-resolution/README.md) first. [Project A](../../../examples/synchronization/a-versioned-store/README.md) supplies complete setup, schema, Node test orchestration and Java source. Its PostgreSQL tests use actual concurrent database sessions. Replication, power loss and two-phase commit are explained but not tested by this installment. The [networking guide](../07-networking/README.md) explains why sending the response is another boundary.
+Read the [conflict guide](../03-conflict-resolution/README.md) first. [Project A](../../../playground/synchronization/a-versioned-store/README.md) supplies complete setup, schema, Node test orchestration and Java source. Its PostgreSQL tests use actual concurrent database sessions. Replication, power loss and two-phase commit are explained but not tested by this installment. The [networking guide](../07-networking/README.md) explains why sending the response is another boundary.
 
 ## 2. A transaction is a proposed state transition
 
@@ -268,7 +272,7 @@ A retry loop is not a promise that every thread completes promptly. Progress gua
 
 ## 14. Run Project A and interpret the results
 
-Follow the [project README](../../../examples/synchronization/a-versioned-store/README.md) for the isolated Docker setup and source-file Java launcher. The fixture database has no published ports and no connection to an application database. Tests create a unique schema and remove only that schema on completion.
+Follow the [project README](../../../playground/synchronization/a-versioned-store/README.md) for the isolated Docker setup and source-file Java launcher. The fixture database has no published ports and no connection to an application database. Tests create a unique schema and remove only that schema on completion.
 
 The runnable test path traces a versioned operation through validation, mutation, replay result and log insertion. It observes actual lock waits, contrasting them with stale writes and snapshot-only decisions. Expected outcomes: lost update 1, atomic increments 2, last-unit reservation 0, unsafe doctor count 0, serializable count 1, stable original replay and one change per accepted ID. Java finishes with value/version 20,000 after four threads' increments.
 
@@ -304,5 +308,12 @@ Do not log credentials or document contents simply to diagnose versions. Scope i
 - 2PC coordinates participants; consensus governs a replicated group's history.
 - Database correctness does not replace application merge or authorization semantics.
 
-Reviewer: pending technically informed reader. Review date: pending. Status: **draft**.
-Open issues: independent technical review; database restart/power-loss/failover tests; production auth/connection-pool implementation; CDC and 2PC deployment experiments. The validated lab is a concrete transaction project, not a production database service.
+## Release review
+
+Status: **ready — complete for the stated educational scope**.
+Reviewer: Codex (AI technical and editorial review); no independent human review claimed.
+Review date: 2026-10-14.
+Open issues: none blocking this educational release.
+Scope limits and further validation: Real PostgreSQL transaction examples; no database power-loss, replication failover, CDC or 2PC deployment certification.
+
+See [the review record](../REVIEW.md) and [actual validation output](../VALIDATION.json).

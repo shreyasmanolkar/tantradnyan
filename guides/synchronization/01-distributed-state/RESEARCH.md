@@ -20,3 +20,11 @@ Worked seat, document, replay and cursor histories are illustrative construction
 Validation: 2026-10-13, Node.js v26.7.0; demo output matched documentation. Direct execution of the test module reported six passing tests, zero failures. The `--test` invocation also passed but reported at file level in this environment. The lab uses memory and does not establish network, disk or multi-process crash guarantees. Planned A–G integration tests must cover those boundaries.
 
 Editorial review: reader and boundary defined; each foundation question has a causal example; examples state assumptions; citations placed near established properties; limitations and operational/security boundaries explicit. Remaining gaps are listed in the chapter. Formal ASD-STE100 compliance is not asserted.
+
+## Release review — 2026-10-14
+
+Current status: ready for the stated educational scope. Reviewer: Codex (AI technical and editorial review); no independent human review claimed. Historical research/execution notes above retain their original scope and do not imply every cited full text was newly fetched. The [review record](../REVIEW.md) supersedes earlier pending-review/planned-work statements; [VALIDATION.json](../VALIDATION.json) records this release's actual reruns.
+
+Open issues: none blocking this educational release. Scope limits and further validation: Abstract failure model and educational lab; deployment-specific safety requires the later implementation and production chapters.
+
+Source-gap resolution: the author-hosted [Gilbert/Lynch CAP paper](https://groups.csail.mit.edu/tds/papers/Gilbert/Brewer6.pdf) was opened and its partition argument checked. The author-hosted [CRDT RR-7506 report](https://www.lip6.fr/Marc.Shapiro/papers/2011/Comprehensive-CRDTs-RR7506-2011-01.pdf) was opened and its system model and §2.3 convergence conditions checked. This resolves the overview's evidence gap through the comprehensive report; it does not claim the earlier SSS URL was fetched.

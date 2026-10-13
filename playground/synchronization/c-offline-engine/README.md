@@ -1,6 +1,6 @@
 # Project C: durable offline mutation queue and synchronization
 
-Status: **draft educational implementation**. Reader: an engineer who understands [the engine lifecycle](../../../guides/synchronization/08-sync-engine/README.md), transactions and conditional versions. The project demonstrates local persistence, retry identity, accepted-history catch-up, snapshot reset and conflict retention. It deliberately uses one task and one loopback authority; it is not a production local-first platform.
+Status: **ready educational implementation**. Reader: an engineer who understands [the engine lifecycle](../../../guides/synchronization/08-sync-engine/README.md), transactions and conditional versions. The project demonstrates local persistence, retry identity, accepted-history catch-up, snapshot reset and conflict retention. It deliberately uses one task and one loopback authority; it is not a production local-first platform.
 
 ## 1. Questions and architecture
 
@@ -23,7 +23,7 @@ Use **Node 26.7.0**, the validated runtime. `node:sqlite` was a release candidat
 From the repository root:
 
 ```sh
-cd examples/synchronization/c-offline-engine
+cd playground/synchronization/c-offline-engine
 npm test
 npm run demo
 ```
@@ -170,3 +170,5 @@ Before real deployment: bind actor/tenant/authority identity to each local store
 See [the local-first guide](../../../guides/synchronization/10-local-first/README.md) for the full offline/reconnect argument and [research notes](../../../guides/synchronization/10-local-first/RESEARCH.md) for evidence and review gaps.
 
 Validation record: 2026-10-13; 25 tests passed, zero failures; demo matched all three documented lines; separate CLI bootstrap/enqueue/sync/show/resolve workflow passed. Tests, demo and workflow closed their services and removed their disposable files. Markdown local-path/fence checks and git diff --check passed. No unrelated services were changed.
+
+Release review: 2026-10-14, Codex (AI technical/editorial review). Status: ready for this exercise's stated scope. [Review and rerun evidence](../../../guides/synchronization/REVIEW.md) record the actual checks; production-hardening limitations above still apply.

@@ -1,13 +1,17 @@
 ---
 title: "Synchronization engines: durable intent, accepted history and replica recovery"
-status: draft
+status: ready
 audience: "Engineers designing an end-to-end shared-state protocol"
 prerequisites:
   - "Distributed state, conflict policies, OT/CRDT boundaries"
   - "Database atomicity, transport delivery and reconnect semantics"
-last_reviewed: 2026-10-13
+last_reviewed: 2026-10-14
 technical_scope_as_of: "Explicit reference protocol; Project B on PostgreSQL 18.4 and Redis 7.4.3; IndexedDB/SQLite primary documentation"
 asd_ste_reference: "Plain-language principles; official issue/dictionary not consulted; no compliance claim"
+reviewer: "Codex (AI technical and editorial review)"
+review_date: 2026-10-14
+open_issues: []
+release_scope: "Completed educational guide; see REVIEW.md and chapter scope limits"
 ---
 
 # Synchronization engines: durable intent, accepted history and replica recovery
@@ -18,7 +22,7 @@ A synchronization engine connects independent local decisions with an accepted s
 
 This guide is for an engineer who has read [database concurrency](../06-database-concurrency/README.md), [networking](../07-networking/README.md) and the [conflict guide](../03-conflict-resolution/README.md). It answers: what is persisted at each boundary; which component owns each responsibility; what evidence proves acceptance or catch-up; what can be compacted; how do versions, permissions and offline histories interact; and how does the design change with scale, regions or encryption?
 
-The reference protocol below is an authored design, not a claim about a proprietary product. [Project B](../../../examples/synchronization/b-durable-chat/README.md) implements its server acceptance/log/fan-out/catch-up branch for immutable chat. Durable client outboxes and offline record reconciliation are Project C work. Full application/game semantics appear in later guides; mechanisms are cross-referenced rather than redefined here.
+The reference protocol below is an authored design, not a claim about a proprietary product. [Project B](../../../playground/synchronization/b-durable-chat/README.md) implements its server acceptance/log/fan-out/catch-up branch for immutable chat. Durable client outboxes and offline record reconciliation are Project C work. Full application/game semantics appear in later guides; mechanisms are cross-referenced rather than redefined here.
 
 Central design artifacts are the operation envelope, local durable transaction, authoritative acceptance transaction, retained stream/checkpoint contract and recovery state machine. Choose them before transport and deployment topology.
 
@@ -102,7 +106,7 @@ A pending state machine can distinguish queued, in-flight, accepted, rejected an
 
 For browser storage, wait for the transaction's completion rather than treating one request success as durable completion, and respect active/inactive transaction lifetime rules. Arbitrary asynchronous work can outlive a transaction. Native SQLite atomic-commit behavior similarly depends on configured storage and journal/durability assumptions. [IndexedDB transactions](https://www.w3.org/TR/IndexedDB/#transactions), [SQLite atomic commit](https://www.sqlite.org/atomiccommit.html)
 
-Project B's Node client is memory-only. Its server durability tests do not establish this local boundary. Project C will implement it with a concrete local store and crash tests.
+Project B's Node client is memory-only. Its server durability tests do not establish this local boundary. [Project C](../../../playground/synchronization/c-offline-engine/README.md) implements a concrete durable local store and crash tests.
 
 ## 5. Capture and encode operations without changing their meaning
 
@@ -284,7 +288,7 @@ Project B supplies concrete server, paging and broker cases; client persistence,
 
 ## 14. Worked reference through Project B
 
-Run the [project](../../../examples/synchronization/b-durable-chat/README.md) and inspect these functions in order:
+Run the [project](../../../playground/synchronization/b-durable-chat/README.md) and inspect these functions in order:
 
 1. `Repository.submit`: current membership, immutable scoped request, locked channel sequence and atomic message/result/outbox commit.
 2. `publishPending`: committed notification work, publish-before-mark and duplicate-safe wake-up semantics.
@@ -306,5 +310,12 @@ Expected outcomes and complete commands are in the project README. Meaningful va
 - Version persisted queues and interpretation rules, not just transport endpoints.
 - State changes for scaling, regions and encryption must change their correctness argument explicitly.
 
-Reviewer: pending technically informed reader. Review date: pending. Status: **draft**.
-Open issues: independent review; Project C durable local store/reset implementation; mixed-schema and encrypted protocol tests; production region/retention/overload experiments. The guide defines complete responsibilities; the Project B code deliberately covers its stated subset.
+## Release review
+
+Status: **ready — complete for the stated educational scope**.
+Reviewer: Codex (AI technical and editorial review); no independent human review claimed.
+Review date: 2026-10-14.
+Open issues: none blocking this educational release.
+Scope limits and further validation: Lifecycle and atomic-boundary guide; distributed ownership, encryption, migrations and retention depend on the chosen deployment.
+
+See [the review record](../REVIEW.md) and [actual validation output](../VALIDATION.json).

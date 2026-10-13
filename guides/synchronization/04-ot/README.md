@@ -1,13 +1,17 @@
 ---
 title: "Operational transformation: context, transformations and protocol correctness"
-status: draft
+status: ready
 audience: "Engineers implementing or evaluating collaborative editors"
 prerequisites:
   - "Distributed state, causal order, optimistic updates and conflict policies"
   - "Operation algebra and consistency contracts"
-last_reviewed: 2026-10-13
+last_reviewed: 2026-10-14
 technical_scope_as_of: "Bounded ASCII insert/delete lab; published OT literature; Unicode UAX #29 revision 49 consulted"
 asd_ste_reference: "Plain-language principles; official issue/dictionary not consulted; no compliance claim"
+reviewer: "Codex (AI technical and editorial review)"
+review_date: 2026-10-14
+open_issues: []
+release_scope: "Completed educational guide; see REVIEW.md and chapter scope limits"
 ---
 
 # Operational transformation: context, transformations and protocol correctness
@@ -103,7 +107,7 @@ Deleting original `a` twice from `cat` must produce `ct`, not `c` or an invalid 
 
 Transforming a no-op, or transforming against a no-op, leaves the other's effect unchanged. Duplicate delivery of the *same* identity is handled by protocol deduplication, not by treating it as another concurrent user operation. The lab rejects transformation of an identity against itself.
 
-These rules are authored as a bounded educational algorithm, not extracted as a complete production protocol. Source-level implementations are in the [lab](../../../examples/synchronization/02-ot/README.md).
+These rules are authored as a bounded educational algorithm, not extracted as a complete production protocol. Source-level implementations are in the [lab](../../../playground/synchronization/02-ot/README.md).
 
 ## 4. What correctness actually requires
 
@@ -271,8 +275,8 @@ Neither label determines latency, memory use, full offline usability or security
 From repository root:
 
 ```sh
-node examples/synchronization/02-ot/demo.mjs
-node examples/synchronization/02-ot/model.test.mjs
+node playground/synchronization/02-ot/demo.mjs
+node playground/synchronization/02-ot/model.test.mjs
 ```
 
 Walkthrough:
@@ -313,5 +317,12 @@ Protect against huge pending queues, malformed offsets, oversized transforms and
 - Replacement, ranges, undo, Unicode and structured documents expand the operation contract.
 - Durable history and authorization are independent of transform algebra.
 
-Status: **draft**. Reviewer: pending technically informed reader. Review date: pending.
-Open issues: independent technical review; production continuous-control implementation and its proof; Unicode/editor integration; durable/network failure tests in later projects. The lab is intentionally limited and its TP2 failure is documented, not repaired into an unproven general algorithm.
+## Release review
+
+Status: **ready — complete for the stated educational scope**.
+Reviewer: Codex (AI technical and editorial review); no independent human review claimed.
+Review date: 2026-10-14.
+Open issues: none blocking this educational release.
+Scope limits and further validation: Two-client bounded OT round with documented TP2 counterexample; no general continuous OT editor or universal correctness claim.
+
+See [the review record](../REVIEW.md) and [actual validation output](../VALIDATION.json).

@@ -3,11 +3,11 @@
 Requires Node.js 18 or later, no dependencies. Counter components use `BigInt`. Run from the repository root:
 
 ```sh
-node examples/synchronization/03-crdts/demo.mjs
-node --test examples/synchronization/03-crdts/model.test.mjs
+node playground/synchronization/03-crdts/demo.mjs
+node --test playground/synchronization/03-crdts/model.test.mjs
 ```
 
-For individual test output, run `node examples/synchronization/03-crdts/model.test.mjs` directly.
+For individual test output, run `node playground/synchronization/03-crdts/model.test.mjs` directly.
 
 ```text
 03-crdts/
@@ -60,3 +60,5 @@ Costs: G/PN counters and causal contexts grow with writer count; OR evidence gro
 Production hardening requires pinned implementations, validated types and identities, durable local state/outboxes, bounded input/metadata, server-side authorization, anti-entropy/catch-up, schema evolution, history-generation/reset policy, safe reclamation and integration tests across actual crashes. Mathematical convergence does not enforce inventory, access or rich-text intent.
 
 Validation: 2026-10-13, Node.js v26.7.0: demo matched 11 documented lines; direct test execution reported 23 passing tests, zero failures. Finite fixtures and memory-only histories; no disk/network guarantees.
+
+Release review: 2026-10-14, Codex (AI technical/editorial review). Status: ready for this exercise's stated scope. [Review and rerun evidence](../../../guides/synchronization/REVIEW.md) record the actual checks; production-hardening limitations above still apply.

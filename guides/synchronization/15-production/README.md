@@ -1,12 +1,16 @@
 ---
 title: "Production synchronization: scaling, overload, recovery and correctness testing"
-status: draft
+status: ready
 audience: "Engineers turning a defined synchronization protocol into an operable service"
 prerequisites:
   - "Engine commit/cursor contracts, security, databases, transport and application conflict policies"
 last_reviewed: 2026-10-14
 technical_scope_as_of: "Authored architecture/runbooks; cited primary SRE/database/research sources; local Project G validation"
 asd_ste_reference: "Plain-language principles applied; official issue/dictionary not consulted; no compliance claim"
+reviewer: "Codex (AI technical and editorial review)"
+review_date: 2026-10-14
+open_issues: []
+release_scope: "Completed educational guide; see REVIEW.md and chapter scope limits"
 ---
 
 # Production synchronization: scaling, overload, recovery and correctness testing
@@ -17,7 +21,7 @@ You can design the [mutation/recovery protocol](../08-sync-engine/README.md), ch
 
 This guide asks: what is the ownership/partition unit; how do millions of connections and hot objects consume capacity; how is overload bounded; what survives gateway/broker/database/region failure; how are snapshots and mixed versions managed; which telemetry reveals lost work; and how do tests reject wrong histories rather than merely generate requests?
 
-Scope: an illustrative durable collaborative service, with game-specific differences cross-referenced. Deployment commands for a particular cloud, audited disaster recovery and measured production capacity are outside this installment. [Project G](../../../examples/synchronization/g-fault-harness/README.md) is a runnable local failure harness; it does not certify an Internet/multi-region cluster.
+Scope: an illustrative durable collaborative service, with game-specific differences cross-referenced. Deployment commands for a particular cloud, audited disaster recovery and measured production capacity are outside this installment. [Project G](../../../playground/synchronization/g-fault-harness/README.md) is a runnable local failure harness; it does not certify an Internet/multi-region cluster.
 
 ## 2. Start with contracts that survive replacement
 
@@ -236,7 +240,7 @@ Use complementary evidence levels:
 
 Deterministic simulation can expose deep repeatable fault sequences, but only for the parts represented in that environment. FoundationDB's 2021 primary paper describes its integrated simulation approach; Project G is a far smaller reference harness, not an equivalent validation program. [FoundationDB paper, SIGMOD 2021](https://www.foundationdb.org/files/fdb-paper.pdf)
 
-[Project G](../../../examples/synchronization/g-fault-harness/README.md) has reusable seeded scheduling, a bounded loopback HTTP proxy and an owned-process supervisor. It checks five seeds twice, real duplicate/lost/delayed HTTP behavior, SQLite transaction ABORT and actual SIGKILL boundaries. A trace hash chain verifies retained event integrity relative to a supplied anchor; it does not prove the authority told the truth.
+[Project G](../../../playground/synchronization/g-fault-harness/README.md) has reusable seeded scheduling, a bounded loopback HTTP proxy and an owned-process supervisor. It checks five seeds twice, real duplicate/lost/delayed HTTP behavior, SQLite transaction ABORT and actual SIGKILL boundaries. A trace hash chain verifies retained event integrity relative to a supplied anchor; it does not prove the authority told the truth.
 
 Keep the failing seed/workload version/first violated invariant. Minimize the schedule without deleting required causality, original identity or fault boundary. An arbitrary race that disappears after extra logging is still a bug; instrumentation adds ordering and can change it. Use explicit phase signals instead of guessing timing with sleeps.
 
@@ -292,4 +296,14 @@ Production rules: ownership is enforced at storage/authority; accepted effects h
 
 Project G's final expanded suite passed 25 tests on Node 26.7.0 / SQLite 3.53.4, with same-seed replay and a documented demo. It tests local process/network/transaction boundaries, not production scale or a secure regional deployment. No fault command targets external systems or modifies global network configuration.
 
-Status remains **draft** pending technical review. Open gaps include multi-region/replicated recovery, broker failure integration, actual migrations, secure admission, production load and disaster rehearsals. [Evidence notes](RESEARCH.md) label all measurements and untested mechanisms. The next installment consolidates the implementation handbook, architecture comparison matrices and final synthesis while preserving these limits.
+Deployment validation still needs multi-region/replicated recovery, broker failure integration, actual migrations, secure admission, production load and disaster rehearsals. [Evidence notes](RESEARCH.md) label all measurements and untested mechanisms. Continue with the [handbook](../16-handbook/README.md), [comparison matrices](../17-comparisons/README.md) and [synthesis](../18-synthesis/README.md).
+
+## Release review
+
+Status: **ready — complete for the stated educational scope**.
+Reviewer: Codex (AI technical and editorial review); no independent human review claimed.
+Review date: 2026-10-14.
+Open issues: none blocking this educational release.
+Scope limits and further validation: Production design and local fault harness; actual regional failover, migrations, secure admission, capacity and disaster restore require deployment rehearsals.
+
+See [the review record](../REVIEW.md) and [actual validation output](../VALIDATION.json).

@@ -1,6 +1,6 @@
 # Project G: reproducible synchronization failure testing
 
-Status: **draft educational harness**. Reader: an engineer who understands Projects C/E-style state, original operation identity, commit boundaries and cursor recovery. The harness tests real implementation boundaries and deterministic schedules. It is not a production chaos platform, an Internet fault injector, or a proof of all distributed histories.
+Status: **ready educational harness**. Reader: an engineer who understands Projects C/E-style state, original operation identity, commit boundaries and cursor recovery. The harness tests real implementation boundaries and deterministic schedules. It is not a production chaos platform, an Internet fault injector, or a proof of all distributed histories.
 
 ## 1. Questions and architecture
 
@@ -25,7 +25,7 @@ The scheduler/proxy/supervisor are reusable small components; the main scenario 
 Use **Node 26.7.0**, validated with bundled SQLite 3.53.4. Project C is imported by relative path. No dependencies, containers or database services are required.
 
 ```sh
-cd examples/synchronization/g-fault-harness
+cd playground/synchronization/g-fault-harness
 npm test
 npm run demo
 node demo.mjs 42
@@ -118,4 +118,6 @@ Large model sweeps need bounded queues, event counts, fixture data and trace ret
 
 Public fixture tokens and local SQL access remain educational assumptions. Fault controls must not be exposed to deployed clients. Tests remove only their temporary directories and stop their own child processes. No global network rules, external stores or unrelated processes are modified.
 
-Read [security](../../../guides/synchronization/14-security/README.md) and [production engineering](../../../guides/synchronization/15-production/README.md) for the wider threat/recovery requirements. Their research records identify evidence gaps. Material remains draft pending technical review.
+Read [security](../../../guides/synchronization/14-security/README.md) and [production engineering](../../../guides/synchronization/15-production/README.md) for the wider threat/recovery requirements. Their research records identify evidence gaps. Material is ready for the stated educational scope; see the release review.
+
+Release review: 2026-10-14, Codex (AI technical/editorial review). Status: ready for this exercise's stated scope. [Review and rerun evidence](../../../guides/synchronization/REVIEW.md) record the actual checks; production-hardening limitations above still apply.

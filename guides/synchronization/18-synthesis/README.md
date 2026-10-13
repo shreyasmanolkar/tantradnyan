@@ -1,11 +1,15 @@
 ---
 title: "Synthesis: derive a synchronization design from constraints"
-status: draft
+status: ready
 audience: "Engineers ready to design a new protocol and critique unfamiliar implementations"
 prerequisites: ["Foundations, algorithm chapters, engine lifecycle, application comparisons and failure testing"]
 last_reviewed: 2026-10-14
 technical_scope_as_of: "Authored design exercise, existing local labs and cited primary mechanisms"
 asd_ste_reference: "Plain-language principles only; no formal compliance claim"
+reviewer: "Codex (AI technical and editorial review)"
+review_date: 2026-10-14
+open_issues: []
+release_scope: "Completed educational guide; see REVIEW.md and chapter scope limits"
 ---
 
 # Synthesis: derive a synchronization design from constraints
@@ -209,8 +213,16 @@ Use source and tests to verify your answers. A response that merely names “CRD
 
 ## 10. Completion and review boundaries
 
-The repository now contains all eighteen planned chapter drafts, shared references and runnable Projects A–G. This is structural coverage, not a declaration that every requested production mechanism is implemented or every chapter independently verified. Examples are deliberately limited; their READMEs/evidence notes list omissions. Technical review, fresh-machine reproduction, deeper hostile-state testing, WAN/cluster failover, power-loss validation and production identity/encryption remain meaningful work.
+The repository contains eighteen completed educational guides, shared references and runnable Projects A–G. The dated [AI technical/editorial review](../REVIEW.md) and [executed validation record](../VALIDATION.json) define their release boundary. Examples remain deliberately limited; their READMEs/evidence notes list omissions. Independent human review, fresh-machine reproduction, deeper hostile-state testing, WAN/cluster failover, power-loss validation and production identity/encryption are additional validation paths.
 
 The unified rule is to define accepted state, permitted observations and recoverable evidence first. Independent computers coordinate only through mechanisms whose ordering, atomicity, identity, delivery and trust assumptions are explicit. When a requirement changes, derive which assumption or boundary must change; do not expect a transport or algorithm name to make the change for you.
 
-Reviewer: pending technically informed reader. Review date: pending. Open issues: integrated workspace implementation is absent, independent technical review and production validation remain open. No formal ASD-STE100 compliance claim.
+## Release review
+
+Status: **ready — complete for the stated educational scope**.
+Reviewer: Codex (AI technical and editorial review); no independent human review claimed.
+Review date: 2026-10-14.
+Open issues: none blocking this educational release.
+Scope limits and further validation: Integrated workspace is an explicit design exercise; no implemented integrated product or deployment-specific correctness/security/durability certification.
+
+See [the review record](../REVIEW.md) and [actual validation output](../VALIDATION.json).

@@ -1,6 +1,6 @@
 # Project D: collaborative text with Yjs and a durable provider
 
-Status: **draft educational implementation**. Audience: engineers who understand [OT](../../../guides/synchronization/04-ot/README.md), [CRDTs](../../../guides/synchronization/05-crdts/README.md) and [engine commit boundaries](../../../guides/synchronization/08-sync-engine/README.md). This project makes a small command-line text editor collaborate over actual WebSockets. It shows library convergence, reconnect, selective undo, relative cursor anchors and durable server acknowledgment. It does not implement a graphical/rich-text editor or durable client storage.
+Status: **ready educational implementation**. Audience: engineers who understand [OT](../../../guides/synchronization/04-ot/README.md), [CRDTs](../../../guides/synchronization/05-crdts/README.md) and [engine commit boundaries](../../../guides/synchronization/08-sync-engine/README.md). This project makes a small command-line text editor collaborate over actual WebSockets. It shows library convergence, reconnect, selective undo, relative cursor anchors and durable server acknowledgment. It does not implement a graphical/rich-text editor or durable client storage.
 
 ## 1. What the implementation proves and assumes
 
@@ -13,7 +13,7 @@ CRDT item identities are independent of authenticated user identities. Yjs handl
 Validated on **Node 26.7.0**, bundled SQLite **3.53.4**, Yjs **13.6.33**, ws **8.22.0**. Exact dependency pins and transitive versions are recorded in package-lock.json. No containers or external database are needed.
 
 ```sh
-cd examples/synchronization/d-collaborative-text
+cd playground/synchronization/d-collaborative-text
 npm ci --ignore-scripts
 npm test
 npm run demo
@@ -167,6 +167,8 @@ Tokens are public fixtures, transport is loopback WS, and no application encrypt
 
 A real implementation needs TLS/session validation, tenant/document routing, proper leases/fencing, per-document authorization, bounded parsing and deferred-structure policies, durable clients, structured error recovery and private-branch export. Do not store permissions as collaboratively writable CRDT content and then trust those same writers to grant themselves rights. Rich text needs schema validation, sanitization, rendering and editor bindings beyond this plain-text model.
 
-Read [collaboration architectures](../../../guides/synchronization/11-collaboration/README.md) for the application distinctions and [Yjs update APIs](https://docs.yjs.dev/api/document-updates) for the library/provider boundary. Status remains draft pending technical review.
+Read [collaboration architectures](../../../guides/synchronization/11-collaboration/README.md) for the application distinctions and [Yjs update APIs](https://docs.yjs.dev/api/document-updates) for the library/provider boundary. Status: ready for the stated educational scope; see the release review.
 
 Final validation: npm test and npm run demo passed; a separate CLI offline/reconnect/undo/redo/show workflow passed. Local Markdown path/fence checks and new-file whitespace checks passed across the documented scope; git diff --check passed. Disposable test/demo/CLI services and files were closed/removed. Dependencies remain installed in ignored node_modules.
+
+Release review: 2026-10-14, Codex (AI technical/editorial review). Status: ready for this exercise's stated scope. [Review and rerun evidence](../../../guides/synchronization/REVIEW.md) record the actual checks; production-hardening limitations above still apply.

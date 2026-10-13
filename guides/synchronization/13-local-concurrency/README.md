@@ -1,12 +1,16 @@
 ---
 title: "Local concurrency: atomic transitions, memory ordering and progress"
-status: draft
+status: ready
 audience: "Engineers connecting shared-memory correctness to distributed synchronization"
 prerequisites:
   - "State transitions, linearizability, conditional updates and ordinary Java programming"
 last_reviewed: 2026-10-14
 technical_scope_as_of: "Java SE 25 specification/API; lab OpenJDK 25.0.1, Node 26.7.0; sources checked 2026-10-14"
 asd_ste_reference: "Plain-language principles applied; official issue/dictionary not consulted; no compliance claim"
+reviewer: "Codex (AI technical and editorial review)"
+review_date: 2026-10-14
+open_issues: []
+release_scope: "Completed educational guide; see REVIEW.md and chapter scope limits"
 ---
 
 # Local concurrency: atomic transitions, memory ordering and progress
@@ -19,7 +23,7 @@ This guide answers: which actions are atomic; what establishes visibility/order;
 
 Scope: Java atomics/VarHandles, mutexes, semaphores, conditions, read/write locks, ABA, memory reclamation boundaries and concrete tests. Distributed consensus/replication and database isolation remain separate chapters. Native lock-free implementation and biological sequence-analysis performance are outside the implementation scope, but their terminology is clarified.
 
-[The concurrency lab](../../../examples/synchronization/05-local-concurrency/README.md) contains runnable Java scenarios plus a small Node comparison. Study sections 2–5 before relaxed access/ABA, then 6–10 for algorithms/primitives, and 11–15 for boundaries and validation. Java API claims are bound to SE 25; validation used installed OpenJDK 25.0.1 without changing global machine settings.
+[The concurrency lab](../../../playground/synchronization/05-local-concurrency/README.md) contains runnable Java scenarios plus a small Node comparison. Study sections 2–5 before relaxed access/ABA, then 6–10 for algorithms/primitives, and 11–15 for boundaries and validation. Java API claims are bound to SE 25; validation used installed OpenJDK 25.0.1 without changing global machine settings.
 
 ## 2. Shared memory changes the mechanism, not the need for a contract
 
@@ -306,7 +310,7 @@ The lab includes a simple sequential substring/map counter solely to make the te
 
 ## 14. Runnable worked path, tests and use cases
 
-Follow [lab setup](../../../examples/synchronization/05-local-concurrency/README.md): run the Python/JDK runner and Node comparison. Expected Java results are 20 in-process scenarios plus one separate-JVM boundary check; Node has three scenarios. Tests use actual threads/workers but deliberately control selected schedules.
+Follow [lab setup](../../../playground/synchronization/05-local-concurrency/README.md): run the Python/JDK runner and Node comparison. Expected Java results are 20 in-process scenarios plus one separate-JVM boundary check; Node has three scenarios. Tests use actual threads/workers but deliberately control selected schedules.
 
 Start with the volatile lost-update experiment, replace it conceptually with fetch-and-add, then examine immutable-pair CAS. Next follow pointer-only/stamped ABA and the one-slot condition. Finally run the process-boundary example to see why local success does not establish shared-machine agreement. [Validation record](RESEARCH.md)
 
@@ -351,4 +355,12 @@ Core invariants and rules:
 
 Remaining work: technical review, exhaustive/model-based weak-memory checks, jcstress/JMH measurements, additional architectures and native reclamation analysis. The guide/lab do not prove hard real-time, starvation-freedom, arbitrary external-effect atomicity or distributed durability. See [RESEARCH.md](RESEARCH.md) for source/version/validation boundaries.
 
-Reviewer: pending technically informed reader. Review date: pending. Open issues: technical review and unexecuted advanced validation above. Status: **draft**.
+## Release review
+
+Status: **ready — complete for the stated educational scope**.
+Reviewer: Codex (AI technical and editorial review); no independent human review claimed.
+Review date: 2026-10-14.
+Open issues: none blocking this educational release.
+Scope limits and further validation: Controlled Java/Node schedules; no exhaustive weak-memory/progress proof, jcstress/JMH or native reclamation validation.
+
+See [the review record](../REVIEW.md) and [actual validation output](../VALIDATION.json).

@@ -1,12 +1,16 @@
 ---
 title: "Distributed state and synchronization from first principles"
-status: draft
+status: ready
 audience: "Computer engineers familiar with basic programming, networking and SQL"
 prerequisites:
   - "Functions, records, lists and basic request/response communication"
-last_reviewed: 2026-10-13
+last_reviewed: 2026-10-14
 technical_scope_as_of: "Abstract crash/restart and partition model; PostgreSQL references bounded to version 18"
 asd_ste_reference: "General plain-language principles; official issue and dictionary not consulted; no formal compliance claim"
+reviewer: "Codex (AI technical and editorial review)"
+review_date: 2026-10-14
+open_issues: []
+release_scope: "Completed educational guide; see REVIEW.md and chapter scope limits"
 ---
 
 # Distributed state and synchronization from first principles
@@ -17,7 +21,7 @@ After this guide, you should be able to describe a synchronization design as a s
 
 The central questions are: what does shared state mean without shared memory; what information survives disconnection; how do causality and consistency restrict observations; when must operations coordinate; and how does a client know what to replay? Full OT transforms, CRDT types, database protocols and transport mechanics belong to the later chapters listed in the [master index](../README.md). This guide supplies the prerequisites rather than a substitute for those chapters.
 
-Use the [notation reference](../NOTATION.md) throughout. Work through the document history below before reading the consistency table; then run the [foundation lab](../../../examples/synchronization/00-foundations/README.md).
+Use the [notation reference](../NOTATION.md) throughout. Work through the document history below before reading the consistency table; then run the [foundation lab](../../../playground/synchronization/00-foundations/README.md).
 
 ## 2. Shared state is a contract over observations
 
@@ -134,7 +138,7 @@ A Lamport clock increments locally and, on receive, advances to one beyond the m
 
 A full vector clock keeps one counter per participant, increments its own counter at each local event, and merges received counters componentwise before advancing the receiver's counter. With complete tracked participants and correct propagation, componentwise dominance reveals causal ancestry. Neither vector dominating the other reveals concurrency.
 
-Example, components ordered `[M,D]`: Mira's edit has `[1,0]`; Dev's independent edit has `[0,1]`. They are incomparable. After Dev receives Mira's edit and records another event, Dev can have `[1,2]`, which dominates both. Vector storage grows with tracked participants; membership churn and compact causal representations require additional design. The later mathematics and conflict chapters will source and derive those variants.
+Example, components ordered `[M,D]`: Mira's edit has `[1,0]`; Dev's independent edit has `[0,1]`. They are incomparable. After Dev receives Mira's edit and records another event, Dev can have `[1,2]`, which dominates both. Vector storage grows with tracked participants; membership churn and compact causal representations require additional design. The [mathematics](../02-mathematics/README.md) and [conflict](../03-conflict-resolution/README.md) chapters derive those comparisons and their costs.
 
 Sequence numbers order one log scope. They need not order two channels. Epochs distinguish different log or leader generations. A fencing token rejects obsolete authority. None of these automatically tracks the complete causal history of independently generated offline operations.
 
@@ -163,7 +167,7 @@ Database isolation concerns interactions among transactions. Replication consist
 
 Write skew example: two doctors are on call. Each transaction reads both rows and removes a different doctor after seeing the other on call. Their writes do not overlap, but together violate “at least one doctor on call.” Snapshot isolation can admit this; a serializable implementation must reject or prevent the incompatible committed history. PostgreSQL 18 documents its isolation behavior and requires retry of the complete transaction after relevant serialization failures. [PostgreSQL 18](https://www.postgresql.org/docs/18/transaction-iso.html)
 
-Strong eventual consistency adds a useful property: replicas that have incorporated the same updates have equivalent states, plus the model's eventual-delivery and termination requirements. CRDTs establish this through constraints on merge or operation algebra. This does not establish application invariants or intent. Detailed proof and type-specific assumptions are reserved for the CRDT chapter. [Shapiro et al., 2011](https://perso.lip6.fr/Marc.Shapiro/papers/2011/CRDTs_SSS-2011.pdf)
+Strong eventual consistency adds a useful property: replicas that have incorporated the same updates have equivalent states, plus the model's eventual-delivery and termination requirements. CRDTs establish this through constraints on merge or operation algebra. This does not establish application invariants or intent. Detailed proof and type-specific assumptions are reserved for the CRDT chapter. [Shapiro et al., 2011](https://www.lip6.fr/Marc.Shapiro/papers/2011/Comprehensive-CRDTs-RR7506-2011-01.pdf)
 
 ## 7. What coordination costs and why partitions matter
 
@@ -173,7 +177,7 @@ Assume a replicated read/write register, arbitrary message delay/loss between pa
 
 A partition separates `A` and `B`. A write `x=1` completes at `A`. A later read starts at `B`. No message carrying the write can reach `B`. Its local evidence is identical to a history where the write never happened. If it returns a stale value, it violates linearizability in the first history. If it waits indefinitely, it violates availability. A generic error does not satisfy this availability contract.
 
-This argument concerns behavior during a partition. It does not mean a healthy system permanently selects two properties, and partition tolerance is not a feature that makes failed links work. Recovery still needs rules for divergent accepted histories. [Gilbert and Lynch, 2002](https://www.cs.princeton.edu/courses/archive/spr22/cos418/papers/cap.pdf)
+This argument concerns behavior during a partition. It does not mean a healthy system permanently selects two properties, and partition tolerance is not a feature that makes failed links work. Recovery still needs rules for divergent accepted histories. [Gilbert and Lynch, 2002](https://groups.csail.mit.edu/tds/papers/Gilbert/Brewer6.pdf)
 
 PACELC adds the normal-operation question: coordinating replicas can trade latency against consistency even without a partition. It is a design framework; exact lower bounds depend on the protocol and network model. [Abadi, 2012](https://www.cs.umd.edu/~abadi/papers/abadi-pacelc.pdf)
 
@@ -255,14 +259,14 @@ A snapshot must represent a known log boundary `k`; catch-up begins strictly aft
 
 ## 10. Worked executable experiment
 
-Assumptions: one Node process, deterministic in-memory records, ASCII text and explicit schedules. It models logic, not disk durability, networking or security. Setup and complete source are in the [lab](../../../examples/synchronization/00-foundations/README.md).
+Assumptions: one Node process, deterministic in-memory records, ASCII text and explicit schedules. It models logic, not disk durability, networking or security. Setup and complete source are in the [lab](../../../playground/synchronization/00-foundations/README.md).
 
-1. Run `node examples/synchronization/00-foundations/demo.mjs` from the repository root.
+1. Run `node playground/synchronization/00-foundations/demo.mjs` from the repository root.
 2. Observe the unsafe read-modify-write counter: two readers derive `1` from `0`, leaving `1` after two writes.
 3. Observe conditional writes: exactly one first attempt succeeds. The loser rereads and retries, reaching `2`.
 4. Observe timeout replay: the same increment identity returns its old result and the counter stays `1`; another identity increments to `2`.
 5. Observe the two text orders: `cXYat` and `cXaYt` differ despite identical operation sets.
-6. Run `node --test examples/synchronization/00-foundations/foundations.test.mjs`. Tests check outcomes and a conflicting reuse of an identity.
+6. Run `node --test playground/synchronization/00-foundations/foundations.test.mjs`. Tests check outcomes and a conflicting reuse of an identity.
 
 Meaningful variation: retry a *set-to-value* user edit after rereading. Unlike an increment, recomputing a value is not necessarily preserving the original user intent. A CAS rejection detects obsolete assumptions; it does not choose the correct repair.
 
@@ -303,8 +307,14 @@ For deployment, first specify the authoritative decision boundary, storage failu
 
 ## Review and open issues
 
-Status remains **draft**. The examples are educational and the lab's execution result is recorded separately. Detailed vector-clock sources/proofs, session guarantees, full CRDT conditions and transport/durability implementations remain for the subsequent chapters. CAP and CRDT full-text fetches failed during this research pass; their source checks need completion. No proprietary product implementation is claimed.
+The foundational explanations are complete for their stated abstract model. Continue with [mathematics](../02-mathematics/README.md), [CRDTs](../05-crdts/README.md), [networking](../07-networking/README.md) and [the implementation handbook](../16-handbook/README.md) for the detailed mechanisms and executable boundaries. Primary CAP and CRDT report copies were checked during release review; see [the review record](../REVIEW.md). No proprietary product implementation is claimed.
 
-Reviewer: pending technically informed reader.
-Review date: pending.
-Open issues: technical review; full-text source checks above; later chapter cross-references become links when those chapters exist.
+## Release review
+
+Status: **ready — complete for the stated educational scope**.
+Reviewer: Codex (AI technical and editorial review); no independent human review claimed.
+Review date: 2026-10-14.
+Open issues: none blocking this educational release.
+Scope limits and further validation: Abstract failure model and educational lab; deployment-specific safety requires the later implementation and production chapters.
+
+See [the review record](../REVIEW.md) and [actual validation output](../VALIDATION.json).

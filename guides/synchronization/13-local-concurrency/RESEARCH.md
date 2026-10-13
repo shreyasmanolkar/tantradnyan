@@ -1,6 +1,6 @@
 # Local concurrency evidence and validation
 
-Status: draft. Research/validation date: 2026-10-14. Reviewer: pending.
+Status: ready (educational evidence record). Research/validation date: 2026-10-14. Reviewer: Codex (AI technical/editorial review), 2026-10-14.
 
 ## Primary sources and limits
 
@@ -34,6 +34,12 @@ Latches/barriers add ordering and deliberately select schedules. ABA/lost-update
 
 No jcstress/JMH, exhaustive schedules, alternate architectures/JDKs, hard real-time guarantee, starvation proof, native memory reclamation, distributed transaction or persistent recovery test is claimed. The mutable-node ABA demo is intentionally unsafe; the immutable stack has different lifetime assumptions. No real external side effect or uninterruptible intentional deadlock is executed.
 
-Review priorities: memory/publication proof, retry purity, history/stamp lifetime, progress assumptions, lock/wait/cancellation discipline and local-versus-distributed scope. Guides remain draft; no formal ASD-STE100 compliance claim.
+Review priorities: memory/publication proof, retry purity, history/stamp lifetime, progress assumptions, lock/wait/cancellation discipline and local-versus-distributed scope. Current release status is recorded in ../REVIEW.md; no formal ASD-STE100 compliance claim.
 
 Final checks: the exact documented Python/JDK runner and npm run test:js were rerun successfully: 20 Java scenario passes, one separate-JVM boundary pass and three Node passes. Python --version confirmed 3.14.7. The stack stress case uses four concurrent pushers followed by four concurrent poppers; it does not test arbitrary overlapping push/pop histories. The runner removed temporary classes after execution, and all worker/executor resources completed. Local Markdown targets/fences passed across 43 documents excluding node_modules; new-file whitespace and git diff --check passed.
+
+## Release review — 2026-10-14
+
+Current status: ready for the stated educational scope. Reviewer: Codex (AI technical and editorial review); no independent human review claimed. Historical research/execution notes above retain their original scope and do not imply every cited full text was newly fetched. The [review record](../REVIEW.md) supersedes earlier pending-review/planned-work statements; [VALIDATION.json](../VALIDATION.json) records this release's actual reruns.
+
+Open issues: none blocking this educational release. Scope limits and further validation: Controlled Java/Node schedules; no exhaustive weak-memory/progress proof, jcstress/JMH or native reclamation validation.

@@ -1,11 +1,15 @@
 ---
 title: "Implementation handbook: from atomic decisions to fault recovery"
-status: draft
+status: ready
 audience: "Engineers implementing and verifying the mechanisms developed in chapters 1–15"
 prerequisites: ["JavaScript modules, SQL, shell commands, chapter-specific protocol models"]
 last_reviewed: 2026-10-14
 technical_scope_as_of: "Repository implementations and recorded local validation; not production certification"
 asd_ste_reference: "Plain-language principles only; no formal compliance claim"
+reviewer: "Codex (AI technical and editorial review)"
+review_date: 2026-10-14
+open_issues: []
+release_scope: "Completed educational guide; see REVIEW.md and chapter scope limits"
 ---
 
 # Implementation handbook
@@ -41,13 +45,13 @@ Automated disk-backed tests create and remove their own randomized temporary sto
 
 | Project | Runnable entry and prerequisites | New mechanism | Verification boundary |
 |---|---|---|---|
-| [A](../../../examples/synchronization/a-versioned-store/README.md) | SQL test script + Java source launcher; Node/Docker/JDK | Atomic expected-version decision, stable replay result, serializable retry | Real PostgreSQL sessions; local Java threads |
-| [B](../../../examples/synchronization/b-durable-chat/README.md) | `npm test`, `npm run demo`; Node/Docker/pinned packages | Durable message/result/outbox; WebSocket delivery; Redis hints | Real gateway processes, PostgreSQL, Redis and sockets |
-| [C](../../../examples/synchronization/c-offline-engine/README.md) | `npm test`, `npm run demo`; Node 26.7.0 | Durable client queue, outcomes, cursor, snapshot reset and private conflict | Real SQLite/HTTP/client and authority crashes |
-| [D](../../../examples/synchronization/d-collaborative-text/README.md) | `npm test`, `npm run demo`; Node/pinned Yjs/ws | Mergeable text evidence, custom durable provider, selective undo, relative anchors | Real WebSockets/server storage; memory-only client |
-| [E](../../../examples/synchronization/e-crdts/README.md) | `npm test`, `npm run demo`; no dependencies | Replicated algebra plus adverse delivery and explicit repair | In-memory logical schedules; shared datatype source |
-| [F](../../../examples/synchronization/f-multiplayer/README.md) | `npm test`, `npm run demo`; no dependencies | Fixed input slots, authority, prediction/replay and interpolation | Real UDP/process restart plus logical loss schedules |
-| [G](../../../examples/synchronization/g-fault-harness/README.md) | `npm test`, `npm run demo`; Node 26.7.0 | Seeded trace, HTTP proxy faults, transaction aborts and supervised crashes | Logical schedules + actual application/SQLite/process boundaries |
+| [A](../../../playground/synchronization/a-versioned-store/README.md) | SQL test script + Java source launcher; Node/Docker/JDK | Atomic expected-version decision, stable replay result, serializable retry | Real PostgreSQL sessions; local Java threads |
+| [B](../../../playground/synchronization/b-durable-chat/README.md) | `npm test`, `npm run demo`; Node/Docker/pinned packages | Durable message/result/outbox; WebSocket delivery; Redis hints | Real gateway processes, PostgreSQL, Redis and sockets |
+| [C](../../../playground/synchronization/c-offline-engine/README.md) | `npm test`, `npm run demo`; Node 26.7.0 | Durable client queue, outcomes, cursor, snapshot reset and private conflict | Real SQLite/HTTP/client and authority crashes |
+| [D](../../../playground/synchronization/d-collaborative-text/README.md) | `npm test`, `npm run demo`; Node/pinned Yjs/ws | Mergeable text evidence, custom durable provider, selective undo, relative anchors | Real WebSockets/server storage; memory-only client |
+| [E](../../../playground/synchronization/e-crdts/README.md) | `npm test`, `npm run demo`; no dependencies | Replicated algebra plus adverse delivery and explicit repair | In-memory logical schedules; shared datatype source |
+| [F](../../../playground/synchronization/f-multiplayer/README.md) | `npm test`, `npm run demo`; no dependencies | Fixed input slots, authority, prediction/replay and interpolation | Real UDP/process restart plus logical loss schedules |
+| [G](../../../playground/synchronization/g-fault-harness/README.md) | `npm test`, `npm run demo`; Node 26.7.0 | Seeded trace, HTTP proxy faults, transaction aborts and supervised crashes | Logical schedules + actual application/SQLite/process boundaries |
 
 For the mathematical path, run E before D. For the durable application path, run A → B → C, then D. F branches from networking and speculation; it does not require text merging. G adds faults to protocols with an already defined oracle. The [supporting labs](../README.md) isolate math, pairwise OT, networking and local concurrency before the larger projects.
 
@@ -84,7 +88,7 @@ There is no cross-project distributed transaction. In B, a broker hint is sent a
 
 ## 5. Project A: establish a decision boundary
 
-Read `schema.sql`, then `psql-session.mjs`, then the controlled concurrent histories. Run the exact container/source-launch commands in [A's setup](../../../examples/synchronization/a-versioned-store/README.md).
+Read `schema.sql`, then `psql-session.mjs`, then the controlled concurrent histories. Run the exact container/source-launch commands in [A's setup](../../../playground/synchronization/a-versioned-store/README.md).
 
 The vulnerable history reads zero twice and assigns one twice. Row locking serializes physical writes but cannot reconstruct the lost increment. The corrected atomic increment updates the current stored value. The expected-version variant rejects a stale base instead of guessing the user's revised intent. `submit_increment` additionally retains the decision under a stable identity; replay returns its original outcome even after newer writes.
 
@@ -124,7 +128,7 @@ Undo tracks local origin; it does not restore an old whole document and erase De
 
 ## 9. Project E: isolate algebra, liveness and domain correctness
 
-E supplies the explicit Project E directory while reusing the earlier datatype implementations. It adds four seeded full-state dissemination adapters. Run its test/demo commands in the [project README](../../../examples/synchronization/e-crdts/README.md).
+E supplies the explicit Project E directory while reusing the earlier datatype implementations. It adds four seeded full-state dissemination adapters. Run its test/demo commands in the [project README](../../../playground/synchronization/e-crdts/README.md).
 
 A snapshot join takes cumulative evidence, not a command to repeat a side effect. Duplicated counter state takes maxima per writer. Removed OR tags retain suppression evidence. Concurrent title alternatives remain visible until a new causally informed assignment supersedes them. Sequence deletion hides an anchor without discarding its descendants.
 
@@ -199,4 +203,12 @@ The [validation ledger](RESEARCH.md) separates this installment's executions fro
 
 Invariants: preserve original identities after unknown outcomes; commit mutually dependent artifacts together; acknowledge the exact fact certified; compare causal metadata when it matters; restore delivery for liveness; enforce domain rules and permissions independently of convergence.
 
-Reviewer: pending technically informed reader. Review date: pending. Open issues: independent fresh-machine reproduction, full Internet/cluster/storage failure coverage and production security review. Project READMEs and source define the executable contract; this handbook does not declare all user-requested production mechanisms implemented.
+## Release review
+
+Status: **ready — complete for the stated educational scope**.
+Reviewer: Codex (AI technical and editorial review); no independent human review claimed.
+Review date: 2026-10-14.
+Open issues: none blocking this educational release.
+Scope limits and further validation: All runnable projects checked in this environment; independent fresh-machine reproduction and production certification are not claimed.
+
+See [the review record](../REVIEW.md) and [actual validation output](../VALIDATION.json).

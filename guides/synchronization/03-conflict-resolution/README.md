@@ -1,12 +1,16 @@
 ---
 title: "Conflict resolution: detection, merge semantics and invariant preservation"
-status: draft
+status: ready
 audience: "Engineers choosing policies for independently generated user operations"
 prerequisites:
   - "Distributed-state foundation and operation algebra"
-last_reviewed: 2026-10-13
+last_reviewed: 2026-10-14
 technical_scope_as_of: "Explicit educational policies; HTTP RFC 9110; PostgreSQL 18 for database-specific statements"
 asd_ste_reference: "Plain-language principles applied; official issue/dictionary not consulted; no compliance claim"
+reviewer: "Codex (AI technical and editorial review)"
+review_date: 2026-10-14
+open_issues: []
+release_scope: "Completed educational guide; see REVIEW.md and chapter scope limits"
 ---
 
 # Conflict resolution: detection, merge semantics and invariant preservation
@@ -17,7 +21,7 @@ Mira and Dev can each make a valid edit against the state they see. Their edits 
 
 The reader has studied the [foundation](../01-distributed-state/README.md) and the [mathematical reference](../02-mathematics/README.md). This guide answers: what constitutes a conflict; what evidence detects it; what each resolution algorithm actually does; which guarantees follow; what work can be lost; and which invariants require coordination. It treats text, record fields, collections, relationships and permissions as different semantic problems.
 
-OT and CRDTs receive dedicated algorithm chapters next. Here their mechanisms are explained enough to compare policies and work through concrete histories, without claiming a complete structured editor. Database and security chapters later develop actual transaction/revocation protocols. The [lab](../../../examples/synchronization/01-math-conflicts/README.md) implements the policies explicitly bounded below.
+OT and CRDTs receive dedicated algorithm chapters next. Here their mechanisms are explained enough to compare policies and work through concrete histories, without claiming a complete structured editor. Database and security chapters later develop actual transaction/revocation protocols. The [lab](../../../playground/synchronization/01-math-conflicts/README.md) implements the policies explicitly bounded below.
 
 ## 2. Classify what failed before selecting a remedy
 
@@ -211,7 +215,7 @@ Here `s` is the common base, `a,b` concurrent operations in that base, and `T(x,
 
 **Costs and limits.** A remote operation can require transformation through `k` unacknowledged local operations, so a straightforward queue uses `O(k)` transform calls plus retained operation data. Text storage and structured transformations add their own cost. A replacement is not automatically an indivisible delete-plus-insert in every algorithm. Unicode positions and rich-text trees must be explicitly modeled.
 
-**Fit.** Collaborative text where a well-specified control algorithm and transform implementation match the topology. Central serialization can simplify which transformation paths occur; it does not remove rebasing. OT is not a general remedy for inventory, permissions or arbitrary nested objects. No incomplete insert-only transform is presented here as a full editor; the OT chapter will implement and test its bounded algorithm.
+**Fit.** Collaborative text where a well-specified control algorithm and transform implementation match the topology. Central serialization can simplify which transformation paths occur; it does not remove rebasing. OT is not a general remedy for inventory, permissions or arbitrary nested objects. No incomplete insert-only transform is presented here as a full editor; the [OT chapter](../04-ot/README.md) implements and tests its bounded algorithm.
 
 ## 11. Transactional conflict detection protects a declared decision
 
@@ -351,8 +355,14 @@ Record base and accepted versions, operation IDs, candidate vectors, policy/code
 
 ## Sources, limitations and review
 
-Follow the [annotated sources and further reading](../SOURCES-AND-FURTHER-READING.md) from causal ordering to datatype algebra and transaction theory. This installment implements LWW selection, flat three-way merging, an audit-backed causal frontier and a tombstone observed-remove set. Full OT/CRDT architectures, database-backed integration and production reclamation are subsequent work. No named product's internals are inferred.
+Follow the [annotated sources and further reading](../SOURCES-AND-FURTHER-READING.md) from causal ordering to datatype algebra and transaction theory. This installment implements LWW selection, flat three-way merging, an audit-backed causal frontier and a tombstone observed-remove set. The [OT](../04-ot/README.md), [CRDT](../05-crdts/README.md) and [database](../06-database-concurrency/README.md) chapters supply the detailed architectures and integration examples. Safe production reclamation remains an implementation-specific obligation. No named product's internals are inferred.
 
-Reviewer: pending technically informed reader.
-Review date: pending.
-Open issues: independent technical review; dedicated OT/CRDT/database chapters; durable process/network failure tests; production causal-context compaction and permission protocol. The code's finite educational tests do not prove universal correctness or security.
+## Release review
+
+Status: **ready — complete for the stated educational scope**.
+Reviewer: Codex (AI technical and editorial review); no independent human review claimed.
+Review date: 2026-10-14.
+Open issues: none blocking this educational release.
+Scope limits and further validation: Domain policies and finite fixtures; production causal compaction and policy enforcement require implementation-specific verification.
+
+See [the review record](../REVIEW.md) and [actual validation output](../VALIDATION.json).

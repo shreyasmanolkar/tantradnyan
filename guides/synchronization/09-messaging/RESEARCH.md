@@ -1,6 +1,6 @@
 # Messaging evidence and validation
 
-Status: draft. Evidence checked 2026-10-13. Reviewer: pending.
+Status: ready (educational evidence record). Evidence checked 2026-10-13. Reviewer: Codex (AI technical/editorial review), 2026-10-14.
 
 ## Evidence boundaries
 
@@ -30,3 +30,9 @@ A technically informed reader should review authorization/revocation ordering, s
 Image identities used: PostgreSQL `sha256:9a8afca54e7861fd90fab5fdf4c42477a6b1cb7d293595148e674e0a3181de15`; Redis `sha256:f773b35a95e170d92dd4214a3ec4859b1b7960bf56896ae687646d695f311187`. Final tests were rerun after authorization-header and qualified outbox-order changes: 16 passes, zero failures.
 
 Cleanup completed after final tests/demo: only `sync-masterclass-chat` containers, network and volume were removed. Local path targets and balanced fences were checked across 31 Markdown documents (excluding node_modules); no errors. `git diff --check` passed.
+
+## Release review — 2026-10-14
+
+Current status: ready for the stated educational scope. Reviewer: Codex (AI technical and editorial review); no independent human review claimed. Historical research/execution notes above retain their original scope and do not imply every cited full text was newly fetched. The [review record](../REVIEW.md) supersedes earlier pending-review/planned-work statements; [VALIDATION.json](../VALIDATION.json) records this release's actual reruns.
+
+Open issues: none blocking this educational release. Scope limits and further validation: Real loopback chat/database/broker; production capacity, broker failover, durable browser clients and regional behavior need further validation.

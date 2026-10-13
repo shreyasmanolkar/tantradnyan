@@ -10,4 +10,10 @@ Executable evidence: Project B, Node v26.7.0, PostgreSQL 18.4, Redis 7.4.3; pack
 
 The first pagination test exposed text-alias ordering; qualifying the numeric input column fixed it. The client prefix guard rejected the invalid page. This is recorded implementation evidence, not an invented incident or claim about a vendor.
 
-No durable client outbox, snapshot reset, pruning, encryption, migration or WAN fault test is claimed. Reviewer pending; no formal ASD-STE100 compliance claim. Container lifecycle and image identities are recorded in the messaging research notes.
+No durable client outbox, snapshot reset, pruning, encryption, migration or WAN fault test is claimed. Release review: see ../REVIEW.md; no formal ASD-STE100 compliance claim. Container lifecycle and image identities are recorded in the messaging research notes.
+
+## Release review — 2026-10-14
+
+Current status: ready for the stated educational scope. Reviewer: Codex (AI technical and editorial review); no independent human review claimed. Historical research/execution notes above retain their original scope and do not imply every cited full text was newly fetched. The [review record](../REVIEW.md) supersedes earlier pending-review/planned-work statements; [VALIDATION.json](../VALIDATION.json) records this release's actual reruns.
+
+Open issues: none blocking this educational release. Scope limits and further validation: Lifecycle and atomic-boundary guide; distributed ownership, encryption, migrations and retention depend on the chosen deployment.

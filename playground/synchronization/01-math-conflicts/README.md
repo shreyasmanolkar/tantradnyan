@@ -5,14 +5,14 @@ Status: educational implementation; no dependencies. Requires Node.js 18 or late
 From repository root:
 
 ```sh
-node examples/synchronization/01-math-conflicts/demo.mjs
-node --test examples/synchronization/01-math-conflicts/model.test.mjs
+node playground/synchronization/01-math-conflicts/demo.mjs
+node --test playground/synchronization/01-math-conflicts/model.test.mjs
 ```
 
 To see individual test names if a runner summarizes at file level:
 
 ```sh
-node examples/synchronization/01-math-conflicts/model.test.mjs
+node playground/synchronization/01-math-conflicts/model.test.mjs
 ```
 
 ## Architecture and design
@@ -70,3 +70,5 @@ The probability calculations are constant-time arithmetic. LWW stores one candid
 Production work requires durable operation identities/results, crash-safe transactions/outboxes, schema and protocol versions, validated envelopes, bounded payload/history sizes, tenant authorization, safe compaction/reset, migration and actual process/network failure tests. Algebraic convergence does not establish these boundaries. No performance measurements or production-readiness claims are made.
 
 Validation record: 2026-10-13, Node.js v26.7.0: demo output matched all eight documented lines; direct execution of `model.test.mjs` reported 20 passing tests, zero failures. Checks cover finite fixtures and deterministic schedules, not disk/network guarantees.
+
+Release review: 2026-10-14, Codex (AI technical/editorial review). Status: ready for this exercise's stated scope. [Review and rerun evidence](../../../guides/synchronization/REVIEW.md) record the actual checks; production-hardening limitations above still apply.

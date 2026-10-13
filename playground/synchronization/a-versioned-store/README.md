@@ -17,9 +17,9 @@ a-versioned-store/
 Run from repository root:
 
 ```sh
-docker compose --env-file /dev/null -p sync-masterclass-lab -f examples/synchronization/a-versioned-store/compose.yml up -d --wait
-node examples/synchronization/a-versioned-store/postgres.test.mjs
-java examples/synchronization/a-versioned-store/VersionedStore.java
+docker compose --env-file /dev/null -p sync-masterclass-lab -f playground/synchronization/a-versioned-store/compose.yml up -d --wait
+node playground/synchronization/a-versioned-store/postgres.test.mjs
+java playground/synchronization/a-versioned-store/VersionedStore.java
 ```
 
 The JDK source-file launcher avoids a separate compile step. If Java is installed but not selected by a version manager, invoke that JDK's `bin/java` directly; no global setting change is required.
@@ -29,7 +29,7 @@ Each database run creates a unique schema in the dedicated `sync_lab` database, 
 After working through the project, remove only its container/volume:
 
 ```sh
-docker compose --env-file /dev/null -p sync-masterclass-lab -f examples/synchronization/a-versioned-store/compose.yml down --volumes
+docker compose --env-file /dev/null -p sync-masterclass-lab -f playground/synchronization/a-versioned-store/compose.yml down --volumes
 ```
 
 This removes the isolated lab data. Retain that volume if you intentionally want to inspect it. An interrupted test can leave a uniquely named schema for diagnosis.
@@ -83,3 +83,5 @@ The tests establish transaction/isolation behavior on a real database and lost-A
 Production hardening: enforce domain constraints for every writer, scope IDs by tenant/object, authorize before result disclosure, persist outbox/checkpoint boundaries, pin image digest, pool connections, expose precise conflict/rejection responses, bound retries, track lock/retry rates, and test real process/storage/failover failures. See the [database guide](../../../guides/synchronization/06-database-concurrency/README.md).
 
 Validation: 2026-10-13, PostgreSQL 18.4 and Node.js v26.7.0: 14 SQL subtests passed (15 reported tests including the parent), zero failures. Java 25.0.1 passed all embedded assertions with four threads and 20,000 increments. Image digest: `sha256:9a8afca54e7861fd90fab5fdf4c42477a6b1cb7d293595148e674e0a3181de15`; observed fsync, synchronous_commit and full_page_writes were all on. No power-loss/failover testing. The temporary container and scoped volume were removed after validation.
+
+Release review: 2026-10-14, Codex (AI technical/editorial review). Status: ready for this exercise's stated scope. [Review and rerun evidence](../../../guides/synchronization/REVIEW.md) record the actual checks; production-hardening limitations above still apply.

@@ -10,4 +10,10 @@ Actual validation: 2026-10-13, Node.js v26.7.0; isolated container PostgreSQL 18
 
 The database tests exercise actual independent psql sessions and inspect lock wait state; they simulate a lost application acknowledgment by discarding a returned result. They do not inject database/power/storage failures or deploy replication/2PC. Trusted test SQL is not a production parameterized driver. A unique test schema is removed after each run; the temporary container and scoped data volume were removed after final validation. Constraint checks and a real deadlock were included in the final run.
 
-Technical reviewer pending. No formal ASD-STE100 compliance claim.
+Release review: see ../REVIEW.md. No formal ASD-STE100 compliance claim.
+
+## Release review — 2026-10-14
+
+Current status: ready for the stated educational scope. Reviewer: Codex (AI technical and editorial review); no independent human review claimed. Historical research/execution notes above retain their original scope and do not imply every cited full text was newly fetched. The [review record](../REVIEW.md) supersedes earlier pending-review/planned-work statements; [VALIDATION.json](../VALIDATION.json) records this release's actual reruns.
+
+Open issues: none blocking this educational release. Scope limits and further validation: Real PostgreSQL transaction examples; no database power-loss, replication failover, CDC or 2PC deployment certification.

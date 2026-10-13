@@ -1,6 +1,6 @@
 # Project F: authoritative multiplayer simulation
 
-Status: **draft educational implementation**. Reader: an engineer familiar with [networking](../../../guides/synchronization/07-networking/README.md), ordering and speculative state. This lab demonstrates a fixed-step authority, scheduled inputs, client prediction/reconciliation, remote interpolation and bounded adverse schedules. It is a one-dimensional command-line simulation, not a production game engine.
+Status: **ready educational implementation**. Reader: an engineer familiar with [networking](../../../guides/synchronization/07-networking/README.md), ordering and speculative state. This lab demonstrates a fixed-step authority, scheduled inputs, client prediction/reconciliation, remote interpolation and bounded adverse schedules. It is a one-dimensional command-line simulation, not a production game engine.
 
 ## 1. Design questions and boundary
 
@@ -15,7 +15,7 @@ There are no player-player collisions, held-key input sampling, graphical render
 No dependencies or containers are required. Use Node 22 or later; validation used **Node 26.7.0**. Earlier compatible versions were not tested.
 
 ```sh
-cd examples/synchronization/f-multiplayer
+cd playground/synchronization/f-multiplayer
 npm test
 npm run demo
 ```
@@ -166,6 +166,8 @@ Before real deployment: use a suitable secure congestion-controlled transport; i
 
 Lag compensation, deterministic lockstep, rollback networking, quantization/delta compression, world partitioning and persistent MMO state are explained in [the multiplayer guide](../../../guides/synchronization/12-multiplayer/README.md) but are not implemented here. Tests clean up only their owned UDP sockets/processes; no database files or external services are involved.
 
-See [research and validation notes](../../../guides/synchronization/12-multiplayer/RESEARCH.md). Material remains draft pending technical review.
+See [research and validation notes](../../../guides/synchronization/12-multiplayer/RESEARCH.md). Material is ready for the stated educational scope; see the release review.
 
 Final validation: 2026-10-14; 24 tests passed, zero failures; demo matched all four documented lines; separate CLI input/show/reconnect/quit workflow passed. Owned sockets and child processes were closed/stopped. Markdown local-path/fence checks, new-file whitespace and git diff --check passed.
+
+Release review: 2026-10-14, Codex (AI technical/editorial review). Status: ready for this exercise's stated scope. [Review and rerun evidence](../../../guides/synchronization/REVIEW.md) record the actual checks; production-hardening limitations above still apply.

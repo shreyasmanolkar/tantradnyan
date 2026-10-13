@@ -1,11 +1,13 @@
 ---
 title: "Messaging: durable history, live delivery and ephemeral state"
-status: draft
+status: ready
 audience: "Engineers building channel-based real-time applications"
-last_reviewed: 2026-10-13
+last_reviewed: 2026-10-14
 technical_scope_as_of: "Project B; PostgreSQL 18.4, Redis 7.4.3, Kafka 4.1 design documentation; RabbitMQ 4.3 documentation"
-reviewer: pending
-open_issues: "Technical review; production load, broker failover, client persistence and regional deployment not validated"
+reviewer: "Codex (AI technical and editorial review)"
+review_date: 2026-10-14
+open_issues: []
+release_scope: "Completed educational guide; see REVIEW.md and chapter scope limits"
 ---
 
 # Messaging: durable history, live delivery and ephemeral state
@@ -16,7 +18,7 @@ You understand [transactions](../06-database-concurrency/README.md), [transports
 
 This chapter answers: what becomes authoritative; what is ordered; which acknowledgment proves which boundary; how do consumers survive retries; how does live delivery meet historical catch-up; what can be discarded; and how do fan-out, presence, receipts and overload alter the design?
 
-The reference architecture is an authored design. It describes Slack- and Discord-style requirements without claiming either product uses this implementation. [Project B](../../../examples/synchronization/b-durable-chat/README.md) supplies runnable WebSocket, PostgreSQL and Redis code. Full offline client persistence belongs to Project C; games need a simulation protocol beyond the delivery distinctions explained here.
+The reference architecture is an authored design. It describes Slack- and Discord-style requirements without claiming either product uses this implementation. [Project B](../../../playground/synchronization/b-durable-chat/README.md) supplies runnable WebSocket, PostgreSQL and Redis code. Full offline client persistence belongs to Project C; games need a simulation protocol beyond the delivery distinctions explained here.
 
 ## 2. Begin with the state, not the socket
 
@@ -184,7 +186,7 @@ Redaction, legal retention and encrypted payload evolution complicate immutable 
 
 ## 11. Runnable walkthrough and failure diagnosis
 
-Follow [Project B setup](../../../examples/synchronization/b-durable-chat/README.md): start the isolated database/broker, install pinned dependencies, initialize `chat_demo`, start the gateway and open Mira and Dev clients. Use `npm run demo` for reproducible submission/replay/offline catch-up; `npm test` runs real gateway subprocess failures.
+Follow [Project B setup](../../../playground/synchronization/b-durable-chat/README.md): start the isolated database/broker, install pinned dependencies, initialize `chat_demo`, start the gateway and open Mira and Dev clients. Use `npm run demo` for reproducible submission/replay/offline catch-up; `npm test` runs real gateway subprocess failures.
 
 Critical functions are `repository.submit` (transactional acceptance), `repository.page` (authorized ordered catch-up), gateway `pump` (serialized per-socket pagination), `publishPending` (repeatable hint publication), and client `projectPage` (validate before checkpoint advance). The README explains source paths and protocol fields.
 
@@ -220,4 +222,14 @@ Chapter invariants:
 6. Revocation gates subsequent disclosure as well as writes and replayed outcomes.
 7. Ephemeral state expires; durable user work recovers through a log or equivalent history.
 
-Status remains **draft** pending technical review. Production capacity and recovery guarantees require measurements and fault testing beyond this loopback lab.
+Production capacity and recovery guarantees require measurements and fault testing beyond this loopback lab.
+
+## Release review
+
+Status: **ready — complete for the stated educational scope**.
+Reviewer: Codex (AI technical and editorial review); no independent human review claimed.
+Review date: 2026-10-14.
+Open issues: none blocking this educational release.
+Scope limits and further validation: Real loopback chat/database/broker; production capacity, broker failover, durable browser clients and regional behavior need further validation.
+
+See [the review record](../REVIEW.md) and [actual validation output](../VALIDATION.json).

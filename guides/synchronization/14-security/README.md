@@ -1,12 +1,16 @@
 ---
 title: "Synchronization security: authority, disclosure, replay and encrypted state"
-status: draft
+status: ready
 audience: "Engineers designing trust boundaries for shared-state protocols"
 prerequisites:
   - "Operation identity, commit boundaries, authorization and offline recovery"
 last_reviewed: 2026-10-14
 technical_scope_as_of: "Authored threat model; cited RFCs/PostgreSQL 18; Project G local fixtures"
 asd_ste_reference: "Plain-language principles applied; official issue/dictionary not consulted; no compliance claim"
+reviewer: "Codex (AI technical and editorial review)"
+review_date: 2026-10-14
+open_issues: []
+release_scope: "Completed educational guide; see REVIEW.md and chapter scope limits"
 ---
 
 # Synchronization security: authority, disclosure, replay and encrypted state
@@ -17,7 +21,7 @@ You understand [engine responsibilities](../08-sync-engine/README.md), [offline 
 
 This guide answers: how are authentication and authorization applied at every lifecycle boundary; how do revocation and tenant scope interact with retries/caches; which replay is legitimate; what does server validation establish; how are resource use and transport protected; what changes with end-to-end encryption; and what makes an audit history detectably altered?
 
-The scope is protocol/application security, not a complete identity-provider, cryptography, legal-compliance or penetration-testing manual. Sources name protocol properties; the architecture is an authored design. [Project G](../../../examples/synchronization/g-fault-harness/README.md) provides local fault and boundary tests, not a production security implementation. Public fixture tokens and loopback transport in earlier labs must remain visible limitations.
+The scope is protocol/application security, not a complete identity-provider, cryptography, legal-compliance or penetration-testing manual. Sources name protocol properties; the architecture is an authored design. [Project G](../../../playground/synchronization/g-fault-harness/README.md) provides local fault and boundary tests, not a production security implementation. Public fixture tokens and loopback transport in earlier labs must remain visible limitations.
 
 ## 2. Begin with assets, adversaries and trust boundaries
 
@@ -118,7 +122,7 @@ begin atomic acceptance boundary
       commit effect + original outcome + accepted log/outbox evidence
 ```
 
-Do not attach new credentials to the operation fingerprint if refreshing them should preserve original identity. Do bind operation kind/payload, object scope, generation and semantic schema. A changed intent gets a new ID. Different encoded CRDT blobs can contain overlapping evidence; exact blob hash identity is not automatically a user-gesture identity. [Project D provider boundaries](../../../examples/synchronization/d-collaborative-text/README.md)
+Do not attach new credentials to the operation fingerprint if refreshing them should preserve original identity. Do bind operation kind/payload, object scope, generation and semantic schema. A changed intent gets a new ID. Different encoded CRDT blobs can contain overlapping evidence; exact blob hash identity is not automatically a user-gesture identity. [Project D provider boundaries](../../../playground/synchronization/d-collaborative-text/README.md)
 
 A UUID makes accidental collision unlikely under its generation assumptions; it is not a permission or signature. Deduplication prevents repeated counted effects within its retained namespace, not credential theft. Rate-limit duplicate traffic because harmless repeated effects can still consume CPU/reads.
 
@@ -200,7 +204,7 @@ Assume Mira and Dev have document/task access. Dev saves local operation D:17. A
 
 Variation: D:17 never committed. Permission denial still preserves the local proposal but prevents shared acceptance. Variation: Dev changes payload under D:17 after restoration. The fingerprint check rejects changed-ID meaning instead of guessing whether the new intent should replace history.
 
-Project G exercises those boundaries with Project C and real HTTP/storage/process faults. Its tuple/forged-field tests are limited single-workspace checks; a complete multitenant/service deployment needs dedicated isolation, role, key and cache tests. [Harness setup](../../../examples/synchronization/g-fault-harness/README.md)
+Project G exercises those boundaries with Project C and real HTTP/storage/process faults. Its tuple/forged-field tests are limited single-workspace checks; a complete multitenant/service deployment needs dedicated isolation, role, key and cache tests. [Harness setup](../../../playground/synchronization/g-fault-harness/README.md)
 
 ## 13. Security tests, diagnosis and invariants
 
@@ -218,4 +222,12 @@ Test wrong/missing credentials, wrong audiences/scopes, every object action, act
 
 Invariants: trusted identity binds effects; current action/disclosure policy is enforced at a named boundary; operation meaning cannot change under retained identity; every route/cache/log retains appropriate scope; resource work remains bounded; encryption/audit claims name their key/anchor trust assumptions; clients never enforce critical authority alone.
 
-Status: **draft**. Reviewer and review date: pending. Open issues: real identity/TLS/E2EE, end-to-end tenancy/cache/role tests, abuse/load/fuzz review and deployment-specific controls. [Evidence record](RESEARCH.md)
+## Release review
+
+Status: **ready — complete for the stated educational scope**.
+Reviewer: Codex (AI technical and editorial review); no independent human review claimed.
+Review date: 2026-10-14.
+Open issues: none blocking this educational release.
+Scope limits and further validation: Trust-boundary guide and fixture tests; real identity/TLS/E2EE, multitenant deployment, abuse and fuzz/security audits need separate implementation review.
+
+See [the review record](../REVIEW.md) and [actual validation output](../VALIDATION.json).

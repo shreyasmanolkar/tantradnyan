@@ -1,12 +1,16 @@
 ---
 title: "Multiplayer systems: authority, simulation time and plausible continuity"
-status: draft
+status: ready
 audience: "Engineers deriving real-time game protocols from simulation and network constraints"
 prerequisites:
   - "Distributed state, transport semantics, latency budgets and speculative replicas"
 last_reviewed: 2026-10-14
 technical_scope_as_of: "Authored simulation protocol; Project F on Node 26.7.0; dated networking specifications and source inspected 2026-10-14"
 asd_ste_reference: "Plain-language principles applied; official issue/dictionary not consulted; no compliance claim"
+reviewer: "Codex (AI technical and editorial review)"
+review_date: 2026-10-14
+open_issues: []
+release_scope: "Completed educational guide; see REVIEW.md and chapter scope limits"
 ---
 
 # Multiplayer systems: authority, simulation time and plausible continuity
@@ -17,7 +21,7 @@ You know [distributed state](../01-distributed-state/README.md), [networking](..
 
 This guide answers: why games use different observation contracts from editors; how fixed ticks, input timing and rendering interact; how prediction/reconciliation differs from interpolation; what lag compensation, lockstep and rollback require; how entity replication scales; and which architectures fit eight game categories.
 
-[Project F](../../../examples/synchronization/f-multiplayer/README.md) implements a one-dimensional authoritative simulation with scheduled inputs, UDP snapshots, client replay and remote interpolation. Its seeded logical fault scheduler and actual UDP/process tests exercise explicit boundaries. Weapons, full rollback, graphics, Internet congestion/security, NAT and persistent worlds are explained but not implemented. No undocumented proprietary game architecture is inferred.
+[Project F](../../../playground/synchronization/f-multiplayer/README.md) implements a one-dimensional authoritative simulation with scheduled inputs, UDP snapshots, client replay and remote interpolation. Its seeded logical fault scheduler and actual UDP/process tests exercise explicit boundaries. Weapons, full rollback, graphics, Internet congestion/security, NAT and persistent worlds are explained but not implemented. No undocumented proprietary game architecture is inferred.
 
 Learning route: sections 2–5 establish authority/time; 6–10 explain latency hiding and timeline correctness; 11–13 cover scale, bandwidth and architectures; 14–17 connect code, faults, security and design invariants.
 
@@ -284,10 +288,10 @@ Scheduled input buffering can add another policy-controlled delay and must be ac
 
 ## 15. Runnable project and correctness checks
 
-[Project F's README](../../../examples/synchronization/f-multiplayer/README.md) includes commands, directory structure, protocol and critical functions. Run:
+[Project F's README](../../../playground/synchronization/f-multiplayer/README.md) includes commands, directory structure, protocol and critical functions. Run:
 
 ```sh
-cd examples/synchronization/f-multiplayer
+cd playground/synchronization/f-multiplayer
 npm test
 npm run demo
 ```
@@ -336,4 +340,12 @@ Project F omits graphics, continuous input sampling, complete physics, lag compe
 
 Read GGPO and its callback interface for rollback state obligations; the inspected Source SDK file for concrete lag-compensation checks; Fiedler's timestep/interpolation/compression articles for engineering mechanisms; and IETF transport/NAT specifications for deployment boundaries. Source quality, unavailable pages and review needs are recorded in [RESEARCH.md](RESEARCH.md).
 
-Reviewer: pending technically informed reader. Review date: pending. Open issues: technical review and production mechanisms/tests outside the lab scope. Status: **draft**.
+## Release review
+
+Status: **ready — complete for the stated educational scope**.
+Reviewer: Codex (AI technical and editorial review); no independent human review claimed.
+Review date: 2026-10-14.
+Open issues: none blocking this educational release.
+Scope limits and further validation: Minimal one-dimensional match; no full physics/rollback, Internet security/congestion/NAT or persistent MMO implementation.
+
+See [the review record](../REVIEW.md) and [actual validation output](../VALIDATION.json).

@@ -1,6 +1,6 @@
 # Production engineering evidence and validation
 
-Status: draft. Research/validation date: 2026-10-14. Reviewer: pending.
+Status: ready (educational evidence record). Research/validation date: 2026-10-14. Reviewer: Codex (AI technical/editorial review), 2026-10-14.
 
 ## Primary sources read
 
@@ -31,3 +31,9 @@ Scope/permission cases include current revocation, changed payload, forged extra
 No full production load, regional partition, cluster owner transfer, replica promotion, broker outage, backup restore, encryption/key recovery, mixed-version deployment, OS packet emulator or exhaustive state-space exploration was executed. Tests use disposable owned loopback processes/stores; no unrelated service/process/network setting is changed. All temporary data is removed after completion.
 
 Review should inspect ownership/fencing, commit/ACK ambiguity, snapshot/dedup retention, overload/admission semantics, model fidelity and oracle independence. Validate production-specific runbooks with rehearsals before ready. No formal ASD-STE100/compliance claim.
+
+## Release review — 2026-10-14
+
+Current status: ready for the stated educational scope. Reviewer: Codex (AI technical and editorial review); no independent human review claimed. Historical research/execution notes above retain their original scope and do not imply every cited full text was newly fetched. The [review record](../REVIEW.md) supersedes earlier pending-review/planned-work statements; [VALIDATION.json](../VALIDATION.json) records this release's actual reruns.
+
+Open issues: none blocking this educational release. Scope limits and further validation: Production design and local fault harness; actual regional failover, migrations, secure admission, capacity and disaster restore require deployment rehearsals.

@@ -3,11 +3,11 @@
 Requires Node.js 18 or later; no dependencies. Run from repository root:
 
 ```sh
-node examples/synchronization/04-networking/demo.mjs
-node --test examples/synchronization/04-networking/protocol.test.mjs
+node playground/synchronization/04-networking/demo.mjs
+node --test playground/synchronization/04-networking/protocol.test.mjs
 ```
 
-Directly run `node examples/synchronization/04-networking/protocol.test.mjs` for individual test output. The socket cases bind only `127.0.0.1` on ephemeral ports and close them after each case. Environments that restrict loopback binding must allow these tests explicitly.
+Directly run `node playground/synchronization/04-networking/protocol.test.mjs` for individual test output. The socket cases bind only `127.0.0.1` on ephemeral ports and close them after each case. Environments that restrict loopback binding must allow these tests explicitly.
 
 ```text
 04-networking/
@@ -51,3 +51,5 @@ Tests demonstrate finite parser schedules and loopback communication. They do no
 Production hardening: use established secure transports, validate authenticated sessions and epochs, persist acceptance/replay records where needed, bound queues, pace retry/fan-out, provide catch-up/reset cursors, and test real reconnect/process/storage failure boundaries. Project B adds durable WebSocket chat later; Project F adds an authoritative game simulation.
 
 Validation: 2026-10-13, Node.js v26.7.0: demo matched all three lines with three UDP attempts; 13 tests passed, zero failures. Actual TCP/UDP loopback sockets were used and closed afterward; faults were injected in application handlers. The final timeout assertion inspected the server ledger to confirm one effect despite missing acknowledgment; that server-side fact would be unavailable to an actual disconnected client.
+
+Release review: 2026-10-14, Codex (AI technical/editorial review). Status: ready for this exercise's stated scope. [Review and rerun evidence](../../../guides/synchronization/REVIEW.md) record the actual checks; production-hardening limitations above still apply.

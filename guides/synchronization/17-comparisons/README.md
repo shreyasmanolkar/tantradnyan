@@ -1,11 +1,15 @@
 ---
 title: "Architecture comparisons: choose guarantees by state and invariant"
-status: draft
+status: ready
 audience: "Engineers comparing application architectures after studying the mechanisms"
 prerequisites: ["Consistency, conflict resolution, engine lifecycle, application chapters and security"]
 last_reviewed: 2026-10-14
 technical_scope_as_of: "Authored reference designs; historical product evidence explicitly dated"
 asd_ste_reference: "Plain-language principles only; no formal compliance claim"
+reviewer: "Codex (AI technical and editorial review)"
+review_date: 2026-10-14
+open_issues: []
+release_scope: "Completed educational guide; see REVIEW.md and chapter scope limits"
 ---
 
 # Architecture comparisons
@@ -121,4 +125,12 @@ If a table cell appears contradictory, split the state further. An MMO can accep
 
 Design rules: compare mechanisms against identical histories; name the state and authority; separate required guarantees from observed implementation; qualify offline support by operation; measure actual workloads; test domain/security invariants as well as convergence.
 
-Reviewer: pending technically informed reader. Review date: pending. Open issues: independent technical review and broader current product evidence. These are bounded reference designs, not measured architectures or deployment recommendations for a particular vendor.
+## Release review
+
+Status: **ready — complete for the stated educational scope**.
+Reviewer: Codex (AI technical and editorial review); no independent human review claimed.
+Review date: 2026-10-14.
+Open issues: none blocking this educational release.
+Scope limits and further validation: Authored reference designs with historical implementation evidence; no measured capacity or inferred current proprietary mechanism.
+
+See [the review record](../REVIEW.md) and [actual validation output](../VALIDATION.json).

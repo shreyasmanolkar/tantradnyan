@@ -1,13 +1,17 @@
 ---
 title: "Local-first software: durable work, offline divergence and reconnect recovery"
-status: draft
+status: ready
 audience: "Engineers designing applications that must preserve work through disconnection"
 prerequisites:
   - "Conflict policies, transactions and durable synchronization boundaries"
   - "Protocol identity, epochs, cursors and transport failure ambiguity"
-last_reviewed: 2026-10-13
+last_reviewed: 2026-10-14
 technical_scope_as_of: "Authored protocol; Project C on Node 26.7.0 / SQLite 3.53.4; standards accessed 2026-10-13"
 asd_ste_reference: "Plain-language principles applied; official issue/dictionary not consulted; no compliance claim"
+reviewer: "Codex (AI technical and editorial review)"
+review_date: 2026-10-14
+open_issues: []
+release_scope: "Completed educational guide; see REVIEW.md and chapter scope limits"
 ---
 
 # Local-first software: durable work, offline divergence and reconnect recovery
@@ -26,7 +30,7 @@ This guide answers seven questions:
 6. How do storage quotas, backups, multi-device operation and encryption change the contract?
 7. Which domain rules require online coordination or explicitly limited offline rights?
 
-The chapter covers durable local storage and a reference offline protocol. [Project C](../../../examples/synchronization/c-offline-engine/README.md) implements file-backed clients and an HTTP authority with CAS titles, independent increments, deletion, retained outcomes and snapshot fallback. It is a server-coordinated educational system. It does not implement a general CRDT platform, browser storage, peer discovery, encryption or production identity. Algorithm details are in the OT/CRDT chapters; production deployment and product-specific architecture remain adjacent work.
+The chapter covers durable local storage and a reference offline protocol. [Project C](../../../playground/synchronization/c-offline-engine/README.md) implements file-backed clients and an HTTP authority with CAS titles, independent increments, deletion, retained outcomes and snapshot fallback. It is a server-coordinated educational system. It does not implement a general CRDT platform, browser storage, peer discovery, encryption or production identity. Algorithm details are in the OT/CRDT chapters; production deployment and product-specific architecture remain adjacent work.
 
 Read sections 2–5 for the smallest model; 6–9 for the complete reconnect example and retention; 10–13 for evolving/deploying a real client; and 14–16 for execution, diagnosis and review.
 
@@ -145,7 +149,7 @@ Assume one task `task-7`, initial title Draft, count 0, record version 0, author
 
 The title conflict is intentional evidence, not a convergence failure. The devices converge on accepted state while one retains a separate unresolved branch. Adding two increments preserves arithmetic intent; whole-record CAS for the title rejects stale assumptions. A per-field version could reduce unrelated conflicts, but must still enforce relationships between fields where those matter.
 
-Verification: [Project C demo](../../../examples/synchronization/c-offline-engine/README.md) prints the offline views, the accepted count 5 with one title conflict, and the resolved title on both replicas. The test suite covers the same schedule with actual log pruning. Variation: delete the task before Mira reconnects. The snapshot retains its tombstone and both stale operations are rejected; neither resurrects it.
+Verification: [Project C demo](../../../playground/synchronization/c-offline-engine/README.md) prints the offline views, the accepted count 5 with one title conflict, and the resolved title on both replicas. The test suite covers the same schedule with actual log pruning. Variation: delete the task before Mira reconnects. The snapshot retains its tombstone and both stale operations are rejected; neither resurrects it.
 
 ### Dependent operations need evidence beyond coincidental versions
 
@@ -278,10 +282,10 @@ Encrypted long-offline clients may need missing key epochs before decoding retai
 
 ## 14. Implementation path and real use cases
 
-[Project C's README](../../../examples/synchronization/c-offline-engine/README.md) includes setup, directory map, CLI, code walkthrough and tests. Run:
+[Project C's README](../../../playground/synchronization/c-offline-engine/README.md) includes setup, directory map, CLI, code walkthrough and tests. Run:
 
 ```sh
-cd examples/synchronization/c-offline-engine
+cd playground/synchronization/c-offline-engine
 npm test
 npm run demo
 ```
@@ -333,4 +337,12 @@ Project C omits offline creation, browser storage, real token refresh, actual sc
 
 Further reading: start with the [2019 local-first research essay](https://www.inkandswitch.com/essay/local-first/) for the user contract; [SQLite transactions](https://www.sqlite.org/lang_transaction.html) and [WAL](https://www.sqlite.org/wal.html) for native local atomicity; [IndexedDB](https://www.w3.org/TR/IndexedDB/) and [Storage](https://storage.spec.whatwg.org/) for browser lifecycle; the existing [CRDT guide](../05-crdts/README.md) for decentralized merge evidence; and [MLS](https://www.rfc-editor.org/rfc/rfc9420.html) for the separate group-key problem. Sources and review gaps are recorded in [RESEARCH.md](RESEARCH.md).
 
-Reviewer: pending technically informed reader. Review date: pending. Open issues: technical review and production mechanisms listed above. Status: **draft**.
+## Release review
+
+Status: **ready — complete for the stated educational scope**.
+Reviewer: Codex (AI technical and editorial review); no independent human review claimed.
+Review date: 2026-10-14.
+Open issues: none blocking this educational release.
+Scope limits and further validation: Durable SQLite/HTTP offline engine; browser storage, implemented migrations, encrypted payloads and safe outcome GC remain outside the lab.
+
+See [the review record](../REVIEW.md) and [actual validation output](../VALIDATION.json).

@@ -18,4 +18,10 @@ Reliability products, backlog arithmetic, storage/fan-out calculations and small
 
 Access notes: RFC Editor rate-limited the RFC 7323 text; full text was accessible through the IETF Datatracker. Little 1961 hosted PDF failed, so its publisher abstract was paired with the author's accessible 2011 retrospective. CRDT RR-7506 full text is accessible through www.lip6.fr, resolving the earlier overview's access gap for the comprehensive report (not proving the earlier SSS PDF was fetched).
 
-Validation: 2026-10-13, Node.js v26.7.0: demo output matched all eight documented lines; direct execution of `model.test.mjs` reported 20 passing tests, zero failures. Checks cover finite fixtures and deterministic schedules, not disk/network guarantees. Technical review: pending. No formal ASD-STE100 compliance claim; official dictionary not consulted.
+Validation: 2026-10-13, Node.js v26.7.0: demo output matched all eight documented lines; direct execution of `model.test.mjs` reported 20 passing tests, zero failures. Checks cover finite fixtures and deterministic schedules, not disk/network guarantees. Release review: see ../REVIEW.md. No formal ASD-STE100 compliance claim; official dictionary not consulted.
+
+## Release review — 2026-10-14
+
+Current status: ready for the stated educational scope. Reviewer: Codex (AI technical and editorial review); no independent human review claimed. Historical research/execution notes above retain their original scope and do not imply every cited full text was newly fetched. The [review record](../REVIEW.md) supersedes earlier pending-review/planned-work statements; [VALIDATION.json](../VALIDATION.json) records this release's actual reruns.
+
+Open issues: none blocking this educational release. Scope limits and further validation: Constructed numerical inputs and finite algebra checks; no measured capacity or universal tail-latency prediction.

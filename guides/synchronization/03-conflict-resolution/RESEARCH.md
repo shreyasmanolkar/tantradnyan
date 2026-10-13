@@ -17,4 +17,10 @@ The max-selection algebra, scalar three-way table, schedule counterexample, dele
 
 Review focus: check that missing/null are distinct; conflicts are not committed as complete partial merges; old candidates cannot reappear after dominance; concurrent unseen add survives observed removal; removal-before-add replay is safe; permission checks are not inferred from data convergence; timestamp tie-breaking cannot depend on locale.
 
-Validation: 2026-10-13, Node.js v26.7.0: demo output matched all eight documented lines; direct execution of `model.test.mjs` reported 20 passing tests, zero failures. Checks cover finite fixtures and deterministic schedules, not disk/network guarantees. SQL and full OT implementations are not executed in this installment. Reviewer pending; no formal ASD-STE100 compliance claim.
+Validation: 2026-10-13, Node.js v26.7.0: demo output matched all eight documented lines; direct execution of `model.test.mjs` reported 20 passing tests, zero failures. Checks cover finite fixtures and deterministic schedules, not disk/network guarantees. SQL and full OT implementations are not executed in this installment. Release review: see ../REVIEW.md; no formal ASD-STE100 compliance claim.
+
+## Release review — 2026-10-14
+
+Current status: ready for the stated educational scope. Reviewer: Codex (AI technical and editorial review); no independent human review claimed. Historical research/execution notes above retain their original scope and do not imply every cited full text was newly fetched. The [review record](../REVIEW.md) supersedes earlier pending-review/planned-work statements; [VALIDATION.json](../VALIDATION.json) records this release's actual reruns.
+
+Open issues: none blocking this educational release. Scope limits and further validation: Domain policies and finite fixtures; production causal compaction and policy enforcement require implementation-specific verification.

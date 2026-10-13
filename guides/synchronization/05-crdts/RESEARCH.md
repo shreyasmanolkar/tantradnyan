@@ -19,4 +19,10 @@ The compact MV register retains causal context while pruning payloads. Its repre
 
 Validation: Node.js v26.7.0, 2026-10-13. Demo matched all 11 documented lines. Direct test-module execution reported 23 passing tests, zero failures. Tests include finite join-law triples, snapshot permutations, stale MV replay, identity misuse, tombstone resurrection, delayed anchors, Unicode scalars and formatting limits.
 
-No sockets, crash durability, malicious-wire parsing or production library integration tested. All raw maps/sets are treated as immutable by callers. Review: pending technically informed reader; no formal ASD-STE100 compliance claim.
+No sockets, crash durability, malicious-wire parsing or production library integration tested. All raw maps/sets are treated as immutable by callers. Release review: see ../REVIEW.md; no formal ASD-STE100 compliance claim.
+
+## Release review — 2026-10-14
+
+Current status: ready for the stated educational scope. Reviewer: Codex (AI technical and editorial review); no independent human review claimed. Historical research/execution notes above retain their original scope and do not imply every cited full text was newly fetched. The [review record](../REVIEW.md) supersedes earlier pending-review/planned-work statements; [VALIDATION.json](../VALIDATION.json) records this release's actual reruns.
+
+Open issues: none blocking this educational release. Scope limits and further validation: Trusted compatible states and educational sequence/marks; production compaction and rich-text intent require library-specific design.

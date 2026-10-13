@@ -22,8 +22,8 @@ b-durable-chat/
 From the repository root:
 
 ```sh
-docker compose --env-file /dev/null -p sync-masterclass-chat -f examples/synchronization/b-durable-chat/compose.yml up -d --wait
-cd examples/synchronization/b-durable-chat
+docker compose --env-file /dev/null -p sync-masterclass-chat -f playground/synchronization/b-durable-chat/compose.yml up -d --wait
+cd playground/synchronization/b-durable-chat
 npm ci --ignore-scripts
 npm run init
 npm run serve
@@ -64,7 +64,7 @@ The demo/tests use unique `chat_lab_<random>` schemas; they delete only their ow
 After stopping manual servers/clients, remove only this lab's resources from the repository root:
 
 ```sh
-docker compose --env-file /dev/null -p sync-masterclass-chat -f examples/synchronization/b-durable-chat/compose.yml down --volumes
+docker compose --env-file /dev/null -p sync-masterclass-chat -f playground/synchronization/b-durable-chat/compose.yml down --volumes
 ```
 
 That deletes this lab's persistent chat history. Retain the scoped volume instead if you want to study it later.
@@ -142,3 +142,5 @@ No message edit/delete/reaction/read-receipt/presence semantics are implemented.
 See [synchronization-engine architecture](../../../guides/synchronization/08-sync-engine/README.md) and [messaging](../../../guides/synchronization/09-messaging/README.md).
 
 Validation: 2026-10-13; Node v26.7.0, PostgreSQL 18.4, Redis 7.4.3, pinned packages above. Final run: 16 tests passed, zero failures; demo matched three documented lines. PostgreSQL fsync/synchronous_commit/full_page_writes were all on. Image identities are recorded in the guide research notes. After the final test/demo run, the isolated chat containers, network and disposable database volume were removed. Local Markdown path/fence checks and git diff --check passed.
+
+Release review: 2026-10-14, Codex (AI technical/editorial review). Status: ready for this exercise's stated scope. [Review and rerun evidence](../../../guides/synchronization/REVIEW.md) record the actual checks; production-hardening limitations above still apply.

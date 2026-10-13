@@ -3,11 +3,11 @@
 Requires Node.js 18 or later; no dependencies. Run from the repository root:
 
 ```sh
-node examples/synchronization/02-ot/demo.mjs
-node --test examples/synchronization/02-ot/model.test.mjs
+node playground/synchronization/02-ot/demo.mjs
+node --test playground/synchronization/02-ot/model.test.mjs
 ```
 
-Directly run `node examples/synchronization/02-ot/model.test.mjs` to see individual tests if the runner summarizes at file level.
+Directly run `node playground/synchronization/02-ot/model.test.mjs` to see individual tests if the runner summarizes at file level.
 
 ```text
 02-ot/
@@ -42,3 +42,5 @@ All tests are finite fixtures: 220 valid operation pairs on lengths 0–4, named
 Performance: transforms are constant work for this signature; string application copies `O(n)` characters. Real pending queues, rich-text transforms, storage and transport add costs. Hardening requires a complete control algorithm with a matching proof, durable IDs/logs, reliable catch-up, rejected-edit repair, authorization, schema/indexing versions, IME handling, grapheme integration and failure tests. The lab's explicit scope restriction is part of its correctness claim.
 
 Validation: 2026-10-13, Node.js v26.7.0: demo matched five documented lines; direct test execution reported 10 passing tests, zero failures, including 220 pair cases and the expected TP2 counterexample. Memory-only.
+
+Release review: 2026-10-14, Codex (AI technical/editorial review). Status: ready for this exercise's stated scope. [Review and rerun evidence](../../../guides/synchronization/REVIEW.md) record the actual checks; production-hardening limitations above still apply.

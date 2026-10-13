@@ -1,6 +1,6 @@
 # Project E: replicated structures under adverse delivery
 
-Status: draft. Reader: an engineer who understands the [CRDT chapter](../../../guides/synchronization/05-crdts/README.md) and wants to distinguish a merge proof from dissemination and domain correctness. Scope: compatible, in-memory state-based replicas. No sockets, disk persistence, identity service or production garbage collection.
+Status: ready (completed educational exercise). Reader: an engineer who understands the [CRDT chapter](../../../guides/synchronization/05-crdts/README.md) and wants to distinguish a merge proof from dissemination and domain correctness. Scope: compatible, in-memory state-based replicas. No sockets, disk persistence, identity service or production garbage collection.
 
 Central questions: which evidence must a state carry; can duplication/reordering change the result; what repairs message loss; and which application invariants remain unproved by convergence?
 
@@ -9,7 +9,7 @@ Central questions: which evidence must a state carry; can duplication/reordering
 From the repository root, with Node 26.7.0 (validated) and no dependencies:
 
 ```sh
-cd examples/synchronization/e-crdts
+cd playground/synchronization/e-crdts
 npm test
 npm run demo
 ```
@@ -69,4 +69,6 @@ If visible results differ after repair, inspect canonical evidence before changi
 
 The adapter has three replicas, three rounds and full cloned state payloads. Costs grow with state/history size; BigInt, Map and Set need a lossless wire codec before real networking. The scheduler records per-message trace entries and is bounded; these tests are not capacity measurements. Production requires durable writer identity/state, current authorization, bounded decoding, anti-entropy, snapshot-generation policy and a justified metadata-retention/GC protocol. Use [Project C](../c-offline-engine/README.md) for durable acceptance boundaries, [Project D](../d-collaborative-text/README.md) for library-backed collaborative text, and [Project G](../g-fault-harness/README.md) for actual HTTP/process fault boundaries.
 
-Validation: 2026-10-14, Node 26.7.0; `npm test` passed 23 reused datatype tests and seven adapter tests, zero failures. `npm run demo` matched all four lines above. Full validation boundaries are recorded in the [handbook evidence notes](../../../guides/synchronization/16-handbook/RESEARCH.md). Reviewer: pending. Open issues: hostile wire states, persistence, membership lifecycle and safe compaction are outside this implementation.
+Validation: 2026-10-14, Node 26.7.0; `npm test` passed 23 reused datatype tests and seven adapter tests, zero failures. `npm run demo` matched all four lines above. Full validation boundaries are recorded in the [handbook evidence notes](../../../guides/synchronization/16-handbook/RESEARCH.md). Reviewer: Codex (AI technical/editorial review), 2026-10-14. Scope limits: hostile wire states, persistence, membership lifecycle and safe compaction are outside this implementation.
+
+Release review: 2026-10-14, Codex (AI technical/editorial review). Status: ready for this exercise's stated scope. [Review and rerun evidence](../../../guides/synchronization/REVIEW.md) record the actual checks; production-hardening limitations above still apply.

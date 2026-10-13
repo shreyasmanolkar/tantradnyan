@@ -1,13 +1,17 @@
 ---
 title: "Mathematical foundations for synchronization decisions"
-status: draft
+status: ready
 audience: "Computer engineers who have read the distributed-state foundation"
 prerequisites:
   - "State transitions, retries, causal order and consistency contracts"
   - "Basic algebra, probability and asymptotic complexity"
-last_reviewed: 2026-10-13
+last_reviewed: 2026-10-14
 technical_scope_as_of: "Explicit analytical models; constructed numerical examples, not measured deployments"
 asd_ste_reference: "Plain-language principles applied; official issue/dictionary not consulted; no compliance claim"
+reviewer: "Codex (AI technical and editorial review)"
+review_date: 2026-10-14
+open_issues: []
+release_scope: "Completed educational guide; see REVIEW.md and chapter scope limits"
 ---
 
 # Mathematical foundations for synchronization decisions
@@ -327,7 +331,7 @@ Assume one hot document, 200 operations/s, mean retained operation 300 bytes, 10
 
 Variation: if updates carry a 1,000-writer dense vector, its 8 KB counter payload overwhelms the assumed 300-byte event. Choose narrower causal scopes or another supported representation, then revise both the proof and the traffic estimate. Compression without representation analysis does not remove this architectural mismatch.
 
-Run the [quantitative and conflict lab](../../../examples/synchronization/01-math-conflicts/README.md) to reproduce selected calculations and check concrete algebraic properties. It uses no network or database and cannot validate the assumed service capacity.
+Run the [quantitative and conflict lab](../../../playground/synchronization/01-math-conflicts/README.md) to reproduce selected calculations and check concrete algebraic properties. It uses no network or database and cannot validate the assumed service capacity.
 
 ## 14. Diagnose the model before changing the system
 
@@ -353,6 +357,12 @@ Network loss and queue overload are often dependent, so fit measurements before 
 - Metadata, retry history and offline horizons consume measurable resources.
 - A measured departure from a model is evidence to revise its assumptions.
 
-Reviewer: pending technically informed reader.
-Review date: pending.
-Open issues: independent mathematical/technical review; empirical validation on a networked implementation; transport-specific startup and tail-latency models remain for networking/production chapters. This reference supplies the mathematical tools for those chapters rather than measured deployment guidance.
+## Release review
+
+Status: **ready — complete for the stated educational scope**.
+Reviewer: Codex (AI technical and editorial review); no independent human review claimed.
+Review date: 2026-10-14.
+Open issues: none blocking this educational release.
+Scope limits and further validation: Constructed numerical inputs and finite algebra checks; no measured capacity or universal tail-latency prediction.
+
+See [the review record](../REVIEW.md) and [actual validation output](../VALIDATION.json).
