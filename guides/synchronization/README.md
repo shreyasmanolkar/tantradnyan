@@ -1,6 +1,6 @@
 # Synchronization, distributed state, and multiplayer systems
 
-Status: **draft; installments 1–3**. Evidence checked: 2026-10-13. This index distinguishes written material from planned material. The full masterclass is not yet complete.
+Status: **draft; installments 1–4**. Evidence checked: 2026-10-13. This index distinguishes written material from planned material. The full masterclass is not yet complete.
 
 ## Reader, objective, and boundary
 
@@ -31,8 +31,8 @@ Start with state transitions and failure ambiguity. Learn causality before confl
 | 3 | [Conflict resolution](03-conflict-resolution/README.md): compare merge policies using identical histories and domain invariants | Written; draft |
 | 4 | [Operational transformation](04-ot/README.md): transforms, TP1/TP2, client/server control, Unicode and structured text | Written; draft |
 | 4 | [CRDTs](05-crdts/README.md): semilattices, datatype implementations, causal context, sequences, rich text and reclamation | Written; draft |
-| 5 | `06-database-concurrency/README.md`: transactions, MVCC, CAS, WAL, replication, consensus and distributed commit | Planned |
-| 5 | `07-networking/README.md`: transport, delivery, congestion, latency budgets, packet protocols and NAT | Planned |
+| 5 | [Database concurrency](06-database-concurrency/README.md): transactions, MVCC, CAS, WAL, replication, consensus and distributed commit | Written; draft |
+| 5 | [Networking](07-networking/README.md): TCP/UDP, web transports, QUIC, framing, congestion, secure establishment and NAT | Written; draft |
 | 6 | `08-sync-engine/README.md`: mutation lifecycle, durable queues, cursors, recovery, protocol evolution and ownership | Planned |
 | 7 | `09-messaging/README.md`: durable chat, ephemeral events, brokers, ordering, fan-out and recovery | Planned |
 | 7 | `10-local-first/README.md`: offline state, days-long divergence, migrations, permissions and encrypted synchronization | Planned |
@@ -49,6 +49,8 @@ Start with state transitions and failure ambiguity. Learn causality before confl
 | Experiment | [Math/conflict lab](../../examples/synchronization/01-math-conflicts/README.md): quantitative models, LWW, three-way merge, causal frontiers and observed-remove tags | 20 tests passed; memory-only |
 | Experiment | [OT lab](../../examples/synchronization/02-ot/README.md): pairwise transforms, bounded round, cursors and TP2 counterexample | 10 tests passed; 220 pair cases |
 | Experiment | [CRDT lab](../../examples/synchronization/03-crdts/README.md): sets, counters, registers, maps, sequences and explicit rich-text marks | 23 tests passed; memory-only |
+| Project | [A: versioned store](../../examples/synchronization/a-versioned-store/README.md): PostgreSQL transactions/replay plus Java CAS | 14 SQL scenarios passed; Java assertions passed |
+| Experiment | [Networking lab](../../examples/synchronization/04-networking/README.md): TCP framing/reconnect, UDP loss/retry and stale snapshots | 13 tests passed; real loopback sockets |
 
 Read stages 1–3 before choosing OT or CRDTs. Read both algorithm chapters to compare them. Database and networking chapters can then be studied independently. The practical path interleaves A with databases, B with messaging, C with the engine, D with editing, E with CRDTs, F with games, and G throughout.
 
@@ -69,12 +71,15 @@ guides/synchronization/
   03-conflict-resolution/   merge policies, worked histories and evidence notes
   04-ot/                   transformation and control guide; evidence notes
   05-crdts/                convergent datatype guide; evidence notes
-  06-database-concurrency/ ... 18-synthesis/  later chapters, created sequentially
+  06-database-concurrency/  durable decisions, replication and evidence notes
+  07-networking/            protocol guide and socket validation notes
+  08-sync-engine/ ... 18-synthesis/  later chapters, created sequentially
 examples/synchronization/
   00-foundations/           dependency-free executable experiments
   01-math-conflicts/        quantitative and merge experiments; 20 tests
   02-ot/                   bounded pairwise transforms; 10 tests
   03-crdts/                replicated types and semantic limits; 23 tests
+  04-networking/           real TCP/UDP loopback and parser tests
   a-versioned-store/        Project A: conditional records, Java and PostgreSQL
   b-durable-chat/           Project B: WebSockets, PostgreSQL, catch-up
   c-offline-engine/         Project C: durable local outbox and replay

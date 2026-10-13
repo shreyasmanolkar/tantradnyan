@@ -75,3 +75,27 @@ Corrections to common conflations: message delivery is not commit; convergence i
 | Sequence anchor | Stable element identity used to place another insertion or resolve a position. |
 | Grapheme cluster | Unicode segmentation unit approximating a user-perceived character; may contain multiple scalars/code units. |
 | Writer incarnation | Exclusive generation of a writer identity whose operation/counter namespace cannot be rolled back or reused. |
+
+## Database and transport terms
+
+| Term | Meaning |
+|---|---|
+| MVCC | Retain versions and choose visible state through a snapshot rather than forcing every ordinary read to block a writer. |
+| SSI | Serializable Snapshot Isolation: snapshot execution plus dependency handling that prevents incompatible committed transaction histories. |
+| WAL | Write-ahead recovery/replication log; required log data precedes durable writes of corresponding data pages. |
+| CDC | Change-data capture: expose changes for consumers under a defined commit/checkpoint protocol. |
+| LSN | Log sequence number/location in WAL; not automatically a complete business transaction cursor. |
+| Prepared transaction | Participant state durably ready to follow an external commit/abort decision; can retain locks until resolution. |
+| Two-phase commit | Prepare participants, then disseminate a durable global commit/abort decision. Coordinator uncertainty can block progress. |
+| Deadlock | Cycle of incompatible resource waits; one participant must release/abort to make progress. |
+| TCP stream | Ordered bytes within one connection; application message boundaries and durable effects are separate. |
+| UDP datagram | One transport message without built-in reliable ordering/retransmission/congestion control. |
+| Framing | Encode and recognize complete application messages despite arbitrary byte-stream chunk boundaries. |
+| Flow control | Bound sender traffic by receiver transport capacity. |
+| Congestion control | Adapt traffic to the network path's sustainable capacity and congestion signals. |
+| Head-of-line blocking | Later deliverable work waits behind earlier missing or unfinished work in an ordered dependency scope. |
+| MTU | Maximum transmission unit on a link/path; fragmentation and encapsulation affect payload budgets. |
+| RTO | Retransmission timeout, chosen under a protocol's RTT/variance/backoff rules. |
+| SSE | Server-Sent Events: HTTP server-to-client event stream with browser reconnect/ID mechanisms. |
+| QUIC | Secure multiplexed transport over UDP with reliable streams and specified loss/flow/congestion machinery. |
+| STUN / ICE / TURN | Address-discovery/connectivity-check/relay mechanisms used in establishing reachable paths; not application authorization. |
