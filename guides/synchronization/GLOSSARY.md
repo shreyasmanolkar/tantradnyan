@@ -99,3 +99,16 @@ Corrections to common conflations: message delivery is not commit; convergence i
 | SSE | Server-Sent Events: HTTP server-to-client event stream with browser reconnect/ID mechanisms. |
 | QUIC | Secure multiplexed transport over UDP with reliable streams and specified loss/flow/congestion machinery. |
 | STUN / ICE / TURN | Address-discovery/connectivity-check/relay mechanisms used in establishing reachable paths; not application authorization. |
+
+## Engine and messaging boundaries
+
+- **Accepted outcome:** durable result of a logical operation; response delivery may still fail.
+- **Outbox:** transaction-coupled publication work retained with the accepted effect. Publication can repeat unless its downstream boundary prevents repetition.
+- **Inbox:** unique consumed-event identity committed with a consumer's local effect.
+- **Sent cursor:** volatile progress queued by a sender; it does not certify receiver application.
+- **Applied checkpoint:** prefix incorporated into a receiver projection; durable recovery requires storing it atomically with that projection.
+- **High-water boundary:** source head observed in a particular read, distinct from projection progress.
+- **Stream epoch:** generation identifier fencing old cursors after recreation/reset.
+- **Publisher confirm:** broker evidence to a publisher; not proof of recipient processing.
+- **Consumer acknowledgment:** consumer evidence to its broker under a declared processing policy.
+- **Presence lease:** expiring session liveness evidence, not proof that a person is available.

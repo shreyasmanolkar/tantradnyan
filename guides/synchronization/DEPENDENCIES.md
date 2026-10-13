@@ -29,3 +29,7 @@ flowchart TD
 The arrows are learning dependencies, not software call edges. Mathematics is introduced where needed and consolidated in its reference. Java memory ordering is a separate local concurrency branch: learn state transitions and linearization first, then connect atomic server/database operations to distributed protocols.
 
 Implementation dependencies: A establishes atomic acceptance; B adds durable delivery; C adds disconnected writes; D adds a text merge model; E tests replicated algebra independently; F adds simulated time and latency hiding; G tests every branch. Project D does not depend on implementing a CRDT sequence from scratch.
+
+## Installment 5 implementation path
+
+Database atomicity + networking → [engine lifecycle](08-sync-engine/README.md) → [messaging](09-messaging/README.md) → [Project B](../../examples/synchronization/b-durable-chat/README.md). Project C will add durable client state/outbox and reset recovery; Project B proves only the server acceptance and history-delivery branch.

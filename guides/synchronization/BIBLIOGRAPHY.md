@@ -71,3 +71,17 @@ Evidence checked 2026-10-13. This covers installments 1–4, not yet the full co
 Original Jupiter 1995 and selected complete OT implementation/control proof; Fidge vector-clock original (located but full-text fetch failed); session and causal consistency papers; Broker and durable WebSocket application documentation; full Java memory-model specification; Pinned Yjs/Automerge implementations, persistence/provider integration and protocol source; Figma/Linear/Notion/Google responsible-team accounts; Slack/Discord delivery and storage accounts; Valve/Unity/Epic/GGPO game networking sources; local-first and encrypted synchronization research; failure testing and recovery literature.
 
 These are research targets, not verified citations. Add exact titles, dates, versions, claim boundaries and links when the corresponding chapter is researched.
+
+## Synchronization engines and messaging: installment 5
+
+Checked 2026-10-13; implementation versions and executed boundaries are recorded in chapter research notes.
+
+- [IndexedDB specification](https://www.w3.org/TR/IndexedDB/) and [SQLite atomic commit](https://www.sqlite.org/atomiccommit.html): local transaction lifecycle and crash-boundary reasoning; neither promises indefinite browser retention.
+- [PostgreSQL 18 LISTEN](https://www.postgresql.org/docs/18/sql-listen.html), [NOTIFY](https://www.postgresql.org/docs/18/sql-notify.html) and [ORDER BY](https://www.postgresql.org/docs/18/queries-order.html): live/history initialization and transaction behavior; output aliases explain a reproduced pagination defect.
+- [node-postgres transactions](https://node-postgres.com/features/transactions) and [queries](https://node-postgres.com/features/queries): checked-out connection scope and parameterized values; identifiers need separate validation.
+- [Redis Pub/Sub](https://redis.io/docs/latest/develop/pubsub/): transient at-most-once subscriber delivery; read before making broadcasts authoritative.
+- [RabbitMQ confirms/acknowledgments](https://www.rabbitmq.com/docs/confirms), documentation version 4.3: names the distinct publisher and consumer proof boundaries.
+- [Kafka 4.1 design](https://kafka.apache.org/41/design/design/): partition order and explicitly scoped processing guarantees; external effects need cooperation.
+- [ws 8.22.0 source README](https://github.com/websockets/ws/blob/8.22.0/README.md) and [node-redis source](https://github.com/redis/node-redis): actual transport/broker client APIs used in Project B.
+- [CQRS](https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs) and [event sourcing](https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing): useful pattern boundaries, not requirements for chat.
+- [RFC 9420: MLS](https://www.rfc-editor.org/rfc/rfc9420.html), July 2023: group-key protocol; distinguish key security from application state and authorization semantics.

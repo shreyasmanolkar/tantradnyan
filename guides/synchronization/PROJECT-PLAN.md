@@ -61,6 +61,8 @@ Third installment adds detailed OT and CRDT guides and two runnable labs. OT inc
 
 Fourth installment adds database concurrency and networking guides, Project A and a real loopback networking lab. PostgreSQL 18.4 passed 14 SQL scenarios (15 reported tests including the parent); Java 25.0.1 passed embedded CAS assertions; Node networking passed 13 tests. The isolated lab container/volume were removed after validation. Power/storage loss, replication/failover, TLS/QUIC/NAT deployment and the later durable chat/sync engine projects remain outstanding. The next installment is synchronization-engine architecture and messaging, with Project B.
 
+Fifth installment adds synchronization-engine and messaging guides plus Project B. Sixteen reported tests pass on PostgreSQL 18.4, Redis 7.4.3 and Node 26.7.0, including actual gateway SIGKILL before commit and after commit/before ACK. The demo verifies stable-ID replay and incremental catch-up. The client remains memory-only; snapshot reset, actual pruning, broker/database outage, WAN/load tests and production authentication remain outstanding. Next: local-first guide and Project C durable client queue.
+
 Reviewer: pending technically informed reader.
 Review date: pending.
 Open issues: planned chapters and projects; technical review; full-text checks recorded in chapter research notes.
