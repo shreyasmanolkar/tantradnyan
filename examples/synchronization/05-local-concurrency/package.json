@@ -1,0 +1,1 @@
+{"name":"synchronization-local-concurrency-lab","version":"0.1.0","private":true,"type":"module","engines":{"node":">=22"},"scripts":{"test:js":"node workers.mjs"}}
