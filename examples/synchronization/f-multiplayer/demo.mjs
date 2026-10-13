@@ -1,0 +1,5 @@
+import {World} from './simulation.mjs';import {Predictor,Interpolator} from './prediction.mjs';import {FaultLink} from './faults.mjs';
+const world=new World();world.join('M');const m=new Predictor('M',world.snapshot('M'),{lead:0});for(let i=0;i<3;i++)m.input(1);world.receive('M',m.packet());
+console.log(`predicted before confirmation=${m.predicted}mm`);for(let i=0;i<3;i++)world.step();const corrected=m.reconcile(world.snapshot('M'));console.log(`authoritative=${m.confirmed}mm; correction=${corrected.error}mm; pending=${m.pending.size}`);
+const interpolation=new Interpolator(),a=world.snapshot('M');interpolation.push({...a,tick:4,ack:4,players:[{id:'M',x:0},{id:'D',x:0}]});interpolation.push({...a,tick:6,ack:6,players:[{id:'M',x:0},{id:'D',x:100}]});console.log(`remote at tick5=${interpolation.sample('D',5).x}mm`);
+const link=new FaultLink({seed:7,loss:0.25,duplicate:0.3,maxDelay:3});for(let i=0;i<10;i++)link.send(i,{i},()=>{});link.deliver(20);console.log(`seeded link: sent=${link.stats.sent}; dropped=${link.stats.dropped}; duplicated=${link.stats.duplicated}`);

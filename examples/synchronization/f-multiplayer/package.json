@@ -1,0 +1,5 @@
+{
+ "name":"synchronization-authoritative-game-lab", "version":"0.1.0", "private":true,
+ "type":"module", "engines":{"node":">=22"},
+ "scripts":{"test":"node --test game.test.mjs", "demo":"node demo.mjs", "serve":"node cli.mjs serve", "client":"node cli.mjs client"}
+}
