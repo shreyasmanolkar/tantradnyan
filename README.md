@@ -19,3 +19,7 @@ The current issue and access instructions are published by the [ASD-STE100 Maint
 ## Ready for readers
 
 A guide is ready when a reviewer can trace important claims to reliable sources, follow the explanation from first principles through application, and use its examples without guessing at missing steps. Mark unresolved version, safety, or scope limitations plainly. The template's review questions are the release gate.
+
+## Completed learning resources
+
+- [Synchronization, distributed state and multiplayer systems](guides/synchronization/README.md): eighteen guides, shared references and runnable Projects A–G. [Release review](guides/synchronization/REVIEW.md) records the AI review, tested examples and scope limits.
