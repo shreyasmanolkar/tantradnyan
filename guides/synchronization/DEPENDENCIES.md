@@ -37,3 +37,11 @@ Database atomicity + networking → [engine lifecycle](08-sync-engine/README.md)
 ## Installment 6 implementation path
 
 [Engine commit boundaries](08-sync-engine/README.md) + [conflict policies](03-conflict-resolution/README.md) → [local-first recovery](10-local-first/README.md) → [Project C](../../examples/synchronization/c-offline-engine/README.md). Project C adds actual local file persistence, snapshot/outcome reconciliation and client crashes. Rich text, browser storage, cryptographic membership and production retention require their own mechanisms.
+
+## Installment 7 implementation path
+
+OT/CRDT mechanics + engine/local-first boundaries → [application contracts](11-collaboration/README.md) → [Project D](../../examples/synchronization/d-collaborative-text/README.md). Shared source editing is a different domain from execution/terminal control. The next branch is fixed-step multiplayer simulation and its prediction/reconciliation contract.
+
+## Installment 8 implementation path
+
+Transport/latency + speculative-state boundaries → [multiplayer timelines](12-multiplayer/README.md) → [Project F](../../examples/synchronization/f-multiplayer/README.md). Deterministic lockstep/rollback additionally need complete deterministic state and reproducible transitions; persistent economy/world recovery additionally needs database/durable-outcome mechanisms. The seeded link is an initial adverse-schedule component, not completion of the general Project G harness.

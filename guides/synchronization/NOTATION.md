@@ -35,3 +35,11 @@ Project B uses `opId` for a logical submission across retries, `requestId` for o
 ## Offline state and incorporation
 
 Project C distinguishes confirmed projection `B`, applied cursor `c`, ordered pending intents `P` and retained outcomes/conflicts `R`. Pending accepted operations remain active until the installed confirmed prefix covers their accepted sequence. A snapshot must reconcile original pending identities at the same boundary to avoid double overlay. `dependsOn` names a predecessor outcome in the same actor/authority epoch, not just a matching version number. The lab bounds numbers to JavaScript safe integers, unlike Project B's bigint decimal-string protocol; production protocols must choose explicit ranges.
+
+## Collaborative editor boundaries
+
+Project D distinguishes Yjs internal item/client clocks, authenticated actor/session, an exact binary blob's SHA-256 ID and the server's durable acceptance sequence. A blob ACK certifies retained bytes/snapshot, not that missing dependencies integrated or every peer applied them. Y.Text offsets count UTF-16 units; relative positions resolve against a specific compatible Y.Doc. Transaction origins identify local editor/undo versus remote provider changes. Equal insertion state vectors do not alone prove deletion evidence matches.
+
+## Multiplayer timeline and finality
+
+Project F uses server tick `k`, fixed timestep `Delta=50 ms`, session start tick `b`, and input slot `q` assigned to tick `b+q`. Its `ack=k-b` finalizes slots, including missing slots executed as neutral; it is not packet receipt or disk durability. Datagram `packetSeq`, input `seq`, match epoch, actor session and render sample time have distinct scopes. Motion uses integer millimetres; interpolation can yield fractional display positions. Pending game input expires under this timeline instead of replaying indefinitely like offline document work.

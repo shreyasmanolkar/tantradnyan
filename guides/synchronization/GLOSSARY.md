@@ -121,3 +121,26 @@ Corrections to common conflations: message delivery is not commit; convergence i
 - **Synchronization lease:** bounded eligibility for an offline replica to rejoin/replay under a stated retention policy; not an automatic authorization guarantee.
 - **Snapshot staging:** collect/validate a complete versioned snapshot before atomically selecting it as the active projection.
 - **Review quarantine:** preserve obsolete-generation work without automatically resubmitting effects whose prior history is no longer known.
+
+## Application collaboration
+
+- **Editor binding:** adapter between editor transactions/selections and a replicated datatype, including remote-origin handling and indexing conventions.
+- **Relative position:** identity/context-based sequence anchor resolved against a compatible replica, rather than a context-free integer offset.
+- **Selective undo:** new contextual work reversing scoped local contributions while accounting for subsequent concurrent evidence.
+- **Transaction origin:** local marker identifying how a library transaction arose; useful for echo suppression and undo scope, not authorization.
+- **Execution epoch:** incarnation identifier fencing commands intended for an older running process/session.
+- **Property atomicity:** declared boundary of a graphics/record mutation; splitting coupled values can create invalid combinations.
+- **Render ancestry / permission ancestry:** presentation references versus authoritative access-inheritance links; they need not be the same graph.
+
+## Multiplayer simulation
+
+- **Simulation tick:** one discrete rule transition at a declared timestep; separate from render frame and packet transmission.
+- **Client prediction:** speculative local simulation using retained input/context before authoritative confirmation.
+- **Server reconciliation:** restore a matching authoritative boundary, discard finalized inputs and replay compatible remaining inputs.
+- **Snapshot interpolation:** sample a delayed presentation timeline between authoritative observations; not collision authority.
+- **Input finality:** declared decision that a simulation slot can no longer change, including a missing-input fallback.
+- **Lag compensation:** bounded historical evaluation, such as hitbox queries, accounting for a player's delayed view.
+- **Deterministic lockstep:** execute equivalent state transitions with an agreed complete input history under determinism assumptions.
+- **Rollback networking:** revise speculative simulation by restoring saved state before a late-input mismatch and replaying corrected frames.
+- **Interest management:** choose relevant/authorized replicated entities and update priorities; spatial proximity alone is not permission.
+- **Delta baseline:** precisely identified receiver state against which a difference is encoded; unknown baseline needs recovery.

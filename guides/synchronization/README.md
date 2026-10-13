@@ -1,6 +1,6 @@
 # Synchronization, distributed state, and multiplayer systems
 
-Status: **draft; installments 1–6**. Evidence checked: 2026-10-13. This index distinguishes written material from planned material. The full masterclass is not yet complete.
+Status: **draft; installments 1–8**. Evidence checked: 2026-10-14. This index distinguishes written material from planned material. The full masterclass is not yet complete.
 
 ## Reader, objective, and boundary
 
@@ -36,8 +36,8 @@ Start with state transitions and failure ambiguity. Learn causality before confl
 | 6 | [Synchronization engine](08-sync-engine/README.md): mutation lifecycle, durable queues, cursors, recovery, protocol evolution and ownership | Written; draft |
 | 7 | [Messaging](09-messaging/README.md): durable chat, ephemeral events, brokers, ordering, fan-out and recovery | Written; draft |
 | 7 | [Local-first software](10-local-first/README.md): durable offline work, snapshots, dependencies, retention, migrations, permissions and encryption | Written; draft |
-| 7 | `11-collaboration/README.md`: text, design graphs, task systems, shared code and terminals | Planned |
-| 7 | `12-multiplayer/README.md`: authoritative simulation, prediction, interpolation, rollback, fairness and game genres | Planned |
+| 7 | [Collaboration architectures](11-collaboration/README.md): text, design graphs, tasks/pages, shared code, execution and terminals | Written; draft |
+| 7 | [Multiplayer systems](12-multiplayer/README.md): authoritative ticks, prediction, interpolation, lag compensation, rollback and eight game genres | Written; draft |
 | 8 | `13-local-concurrency/README.md`: Java primitives, memory ordering, ABA, progress guarantees and distributed boundaries | Planned |
 | 8 | `14-security/README.md`: trust boundaries, revocation, tenant isolation, replay, validation and audit | Planned |
 | 9 | `15-production/README.md`: scaling, regional deployment, overload, observability, recovery and correctness testing | Planned |
@@ -53,6 +53,8 @@ Start with state transitions and failure ambiguity. Learn causality before confl
 | Experiment | [Networking lab](../../examples/synchronization/04-networking/README.md): TCP framing/reconnect, UDP loss/retry and stale snapshots | 13 tests passed; real loopback sockets |
 | Project | [B: durable chat](../../examples/synchronization/b-durable-chat/README.md): WebSockets, transactional acceptance, Redis hints and reconnect history | 16 tests passed; actual gateway crash/restart |
 | Project | [C: offline engine](../../examples/synchronization/c-offline-engine/README.md): SQLite outbox, retained outcomes, snapshot fallback and review | 25 tests passed; actual client/authority crashes |
+| Project | [D: collaborative text](../../examples/synchronization/d-collaborative-text/README.md): Yjs, durable provider, undo and relative cursor presence | 18 tests passed; actual WebSockets/server crashes |
+| Project | [F: multiplayer simulation](../../examples/synchronization/f-multiplayer/README.md): scheduled UDP inputs, prediction/replay, interpolation and fault schedules | 24 tests passed; actual UDP/server crash and logical adverse links |
 
 Read stages 1–3 before choosing OT or CRDTs. Read both algorithm chapters to compare them. Database and networking chapters can then be studied independently. The practical path interleaves A with databases, B with messaging, C with the engine, D with editing, E with CRDTs, F with games, and G throughout.
 
@@ -78,7 +80,9 @@ guides/synchronization/
   08-sync-engine/           engine ownership, commit boundaries and recovery
   09-messaging/             durable/ephemeral delivery and validation notes
   10-local-first/           offline divergence, local durability and evidence
-  11-collaboration/ ... 18-synthesis/  later chapters, created sequentially
+  11-collaboration/         application contracts, product evidence and editor lab
+  12-multiplayer/           game timelines, genre contracts and evidence
+  13-local-concurrency/ ... 18-synthesis/  later chapters, created sequentially
 examples/synchronization/
   00-foundations/           dependency-free executable experiments
   01-math-conflicts/        quantitative and merge experiments; 20 tests
@@ -88,9 +92,9 @@ examples/synchronization/
   a-versioned-store/        Project A: conditional records, Java and PostgreSQL
   b-durable-chat/           Project B: WebSockets, PostgreSQL, catch-up
   c-offline-engine/         Project C: SQLite outbox, snapshots and crash tests
-  d-collaborative-text/     Project D: document synchronization
+  d-collaborative-text/     Project D: Yjs CLI editor, durable server, undo/presence
   e-crdts/                 Project E: merge types and convergence tests
-  f-multiplayer/           Project F: authoritative simulation and clients
+  f-multiplayer/           Project F: authoritative UDP slots, replay and faults
   g-fault-harness/         Project G: seeded adverse schedules and crash tests
 ```
 

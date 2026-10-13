@@ -97,3 +97,30 @@ Checked 2026-10-13. Separate user aspirations, storage guarantees and protocol c
 - [RFC 9700](https://www.rfc-editor.org/rfc/rfc9700.html), January 2025: current OAuth security practice; Project C uses public fixture tokens and implements no real refresh flow.
 
 Read the local-first guide's [validation record](10-local-first/RESEARCH.md) alongside these sources to distinguish actual process-crash evidence from untested browser, media, migration and cryptographic behavior.
+
+## Collaborative application models and library integration: installment 7
+
+Checked 2026-10-13. Historical reports establish the described design at their publication date, not current complete internals.
+
+- [Figma multiplayer, Evan Wallace](https://www.figma.com/blog/how-figmas-multiplayer-technology-works/), 2019-10-16: property/object/tree decisions and the distinction between document synchronization and other application data.
+- [Notion data model, Jake Teton-Landis](https://www.notion.com/blog/data-model-behind-notion), 2021-05-18: blocks, rendering/permission links and grouped queued work.
+- [Linear sync-engine talk landing page](https://linear.app/now/scaling-the-linear-sync-engine), 2023-06-29: a further-viewing lead; its talk was not reviewed and no detailed algorithm is inferred from the landing page.
+- [Yjs updates](https://docs.yjs.dev/api/document-updates), [Y.Text](https://docs.yjs.dev/api/shared-types/y.text), [relative positions](https://docs.yjs.dev/api/relative-positions), [UndoManager](https://docs.yjs.dev/api/undo-manager), [Awareness](https://docs.yjs.dev/api/about-awareness): editor/provider API boundaries.
+- [Yjs 13.6.33 encoding source](https://github.com/yjs/yjs/blob/v13.6.33/src/utils/encoding.js): tagged implementation evidence for pending-structure/deletion encoding, checked alongside executable restart tests.
+- [Microsoft Live Share security](https://learn.microsoft.com/en-us/visualstudio/liveshare/reference/security), page reports last update 2022-11-21: code, debugging and terminal access have distinct consequences.
+
+Google's located 2010 official OT/protocol pages failed full-text fetch; their search excerpts do not establish present product behavior. See the [collaboration research record](11-collaboration/RESEARCH.md) for missing evidence and validated scope.
+
+## Multiplayer time, replication and transport: installment 8
+
+Checked 2026-10-14. Distinguish first-person examples and inspected source from universal game settings.
+
+- [Glenn Fiedler, Fix Your Timestep!](https://www.gafferongames.com/post/fix_your_timestep/), June 2004: fixed-step accumulation and catch-up overload.
+- [Snapshot Interpolation](https://www.gafferongames.com/post/snapshot_interpolation/), 2014-11-30, and [Snapshot Compression](https://www.gafferongames.com/post/snapshot_compression/): presentation buffering, approximation and explicit encoding/baseline choices.
+- [GGPO](https://www.ggpo.net/) and [save/load/frame callback source](https://github.com/pond3r/ggpo/blob/master/src/include/ggponet.h): rollback architecture and complete-state integration obligations; not installed in Project F.
+- [Valve Source SDK lag-compensation source](https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/server/player_lagcompensation.cpp): concrete bounded timing/history checks, inspected by date; not a claim about all present Valve products.
+- [RFC 8085](https://www.rfc-editor.org/rfc/rfc8085.html), March 2017: Internet UDP responsibilities.
+- [RFC 8445](https://www.rfc-editor.org/rfc/rfc8445.html), July 2018, and [RFC 8656](https://www.rfc-editor.org/rfc/rfc8656.html), February 2020: ICE connectivity and TURN relay roles.
+- [RFC 9221](https://www.rfc-editor.org/rfc/rfc9221.html), March 2022: QUIC unreliable datagrams within its transport context.
+
+The Valve networking wiki and Fiedler lockstep page were unavailable during this research. [Multiplayer evidence notes](12-multiplayer/RESEARCH.md) record that limit, logical versus real-socket faults and untested production mechanisms.
