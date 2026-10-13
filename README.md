@@ -20,6 +20,18 @@ The current issue and access instructions are published by the [ASD-STE100 Maint
 
 A guide is ready when a reviewer can trace important claims to reliable sources, follow the explanation from first principles through application, and use its examples without guessing at missing steps. Mark unresolved version, safety, or scope limitations plainly. The template's review questions are the release gate.
 
+## View the guides in the docs site
+
+The `docs-site/` Next.js app reads Markdown directly from `guides/`. With Node.js 22 or newer, run:
+
+```sh
+cd docs-site
+npm ci
+npm run dev
+```
+
+Open `http://localhost:3000`; it redirects to the guide index. See [`docs-site/README.md`](docs-site/README.md) for app details.
+
 ## Completed learning resources
 
 - [Synchronization, distributed state and multiplayer systems](guides/synchronization/README.md): eighteen guides, shared references and runnable Projects A–G. [Release review](guides/synchronization/REVIEW.md) records the AI review, tested examples and scope limits.
