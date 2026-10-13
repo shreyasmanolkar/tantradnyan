@@ -157,3 +157,15 @@ Corrections to common conflations: message delivery is not commit; convergence i
 - **Lock-free:** continuing system execution makes operation progress by some participant; individual starvation remains possible.
 - **Wait-free:** finite bounded own-step completion under the model, distinct from a wall-clock/runtime guarantee.
 - **k-mer:** length-k contiguous substring; a sequence-processing domain object, sometimes counted with concurrent CAS-based structures.
+
+## Security and production
+
+- **Authentication:** establish a principal using verified credentials and their context.
+- **Authorization:** decide whether that principal may perform a specific action on current scoped state.
+- **Fencing token:** authority-issued ordered generation checked at the protected resource to reject obsolete owners.
+- **Admission control:** bound accepted work before committing scarce resources or effects.
+- **Unknown outcome:** a missing response leaves acceptance uncertain; recover using the original operation identity.
+- **Audit anchor:** independently retained commitment used to detect alteration or removal relative to a known history boundary.
+- **RPO:** recovery point objective, the permitted age/gap of lost state under a declared recovery scenario.
+- **RTO:** recovery time objective, the target time to restore the specified service after a declared disruption.
+- **Fault oracle:** executable check of the permitted protocol outcome or history, rather than a throughput measurement.

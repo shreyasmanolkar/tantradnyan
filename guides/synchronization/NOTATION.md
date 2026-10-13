@@ -47,3 +47,7 @@ Project F uses server tick `k`, fixed timestep `Delta=50 ms`, session start tick
 ## Shared-memory access and histories
 
 Local Java CAS compares the actual AtomicReference identity, not record equals. A State value/version pair is immutable and published through one cell. Java happens-before is a language/runtime observation relation, distinct from message-carried causal metadata. In the local lab a recorded history has invocation/response ordinal markers and old-counter return values; its checker covers completed increment calls only. A stamp distinguishes reference history but needs coherent pair capture and a wrap/reuse policy.
+
+## Trust, ownership and fault evidence
+
+Authorization scope is a tuple such as `(tenant, object, actor, epoch, opId)` whose exact fields follow the protocol. Encoding the tuple without collisions does not authorize it. Owner epochs fence obsolete writers; authority/source epochs also identify history continuity, with distinct semantics. Project G uses virtual scheduling time for reproducible traces and OS time only for bounded integration waits. A journal anchor is `(seq, hash)` retained independently of the checked trace; an unsigned hash chain alone cannot authenticate its author or expose a valid truncated prefix.

@@ -138,3 +138,19 @@ Checked 2026-10-14; Java specification/API scope SE 25, runtime validation OpenJ
 - [Marçais/Kingsford Jellyfish paper](https://dna.cs.byu.edu/bio465/papers/fastparallel.pdf), 2011, and [authors' historical page](https://www.cs.cmu.edu/~ckingsf/software/jellyfish/): a concrete CAS-based k-mer workload; not a synchronization protocol or current release recommendation.
 
 Read [validation notes](13-local-concurrency/RESEARCH.md) to distinguish forced interleavings, finite stress, specification guarantees and missing cross-architecture/exhaustive evidence.
+
+## Security, production and failure testing: installment 10
+
+Checked 2026-10-14. Read security boundaries before selecting mechanisms; read the failure model before interpreting test coverage.
+
+- [RFC 9700](https://www.rfc-editor.org/rfc/rfc9700.html), January 2025, and [RFC 8725](https://www.rfc-editor.org/rfc/rfc8725.html), February 2020: OAuth and JWT security guidance; neither supplies an application object ACL.
+- [RFC 8446](https://www.rfc-editor.org/rfc/rfc8446.html), August 2018, and [RFC 6455](https://www.rfc-editor.org/rfc/rfc6455.html), December 2011: TLS and WebSocket transport/origin boundaries.
+- [RFC 9420](https://www.rfc-editor.org/rfc/rfc9420.html), July 2023: MLS group cryptographic membership; distinct from document merge and offline authorization.
+- [RFC 9162](https://www.rfc-editor.org/rfc/rfc9162.html), December 2021: Certificate Transparency authenticated tree/log mechanisms; Project G's unsigned hash chain is a smaller educational construction.
+- PostgreSQL 18 [row security](https://www.postgresql.org/docs/18/ddl-rowsecurity.html), [standbys](https://www.postgresql.org/docs/18/warm-standby.html), [logical decoding](https://www.postgresql.org/docs/18/logicaldecoding-explanation.html) and [PITR](https://www.postgresql.org/docs/18/continuous-archiving.html): policy exceptions, replication boundaries, CDC and actual backup recovery requirements.
+- Google SRE book (2016): [overload](https://sre.google/sre-book/handling-overload/), [cascading failures](https://sre.google/sre-book/addressing-cascading-failures/) and [frontend balancing](https://sre.google/sre-book/load-balancing-frontend/); workbook (2018): [SLO alerting](https://sre.google/workbook/alerting-on-slos/). Useful causal explanations for admission, retries and error-budget signals.
+- [FoundationDB SIGMOD paper](https://www.foundationdb.org/files/fdb-paper.pdf), 2021: deterministic simulation integrated into a real distributed database; Project G does not recreate its process/storage/network model.
+- [OpenTelemetry primer](https://opentelemetry.io/docs/concepts/observability-primer/): signals and distributed context; application identities and invariant checks still need explicit design.
+- [Jepsen linearizability model](https://jepsen.io/consistency/models/linearizable): concise history contract for appropriate objects; no Jepsen cluster run is claimed here.
+
+See [security evidence](14-security/RESEARCH.md), [production evidence](15-production/RESEARCH.md) and [Project G](../../examples/synchronization/g-fault-harness/README.md) for exact local validation and remaining review gaps.

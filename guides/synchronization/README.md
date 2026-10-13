@@ -1,6 +1,6 @@
 # Synchronization, distributed state, and multiplayer systems
 
-Status: **draft; installments 1–9**. Evidence checked: 2026-10-14. This index distinguishes written material from planned material. The full masterclass is not yet complete.
+Status: **draft; installments 1–10**. Evidence checked: 2026-10-14. This index distinguishes written material from planned material. The full masterclass is not yet complete.
 
 ## Reader, objective, and boundary
 
@@ -39,8 +39,8 @@ Start with state transitions and failure ambiguity. Learn causality before confl
 | 7 | [Collaboration architectures](11-collaboration/README.md): text, design graphs, tasks/pages, shared code, execution and terminals | Written; draft |
 | 7 | [Multiplayer systems](12-multiplayer/README.md): authoritative ticks, prediction, interpolation, lag compensation, rollback and eight game genres | Written; draft |
 | 8 | [Local concurrency](13-local-concurrency/README.md): Java atomics, publication, locks, ABA, progress and distributed boundaries; k-mer clarification | Written; draft |
-| 8 | `14-security/README.md`: trust boundaries, revocation, tenant isolation, replay, validation and audit | Planned |
-| 9 | `15-production/README.md`: scaling, regional deployment, overload, observability, recovery and correctness testing | Planned |
+| 8 | [Security](14-security/README.md): trust boundaries, revocation, tenant isolation, replay, validation and audit | Written; draft |
+| 9 | [Production](15-production/README.md): scaling, regional deployment, overload, observability, recovery and correctness testing | Written; draft |
 | 9 | `16-handbook/README.md`: executable projects A–G, setup, tests, walkthroughs and hardening | Planned |
 | 10 | `17-comparisons/README.md`: application architecture matrices with evidence labels | Planned |
 | 10 | `18-synthesis/README.md`: derive a new architecture and read unfamiliar systems independently | Planned |
@@ -56,6 +56,8 @@ Start with state transitions and failure ambiguity. Learn causality before confl
 | Project | [D: collaborative text](../../examples/synchronization/d-collaborative-text/README.md): Yjs, durable provider, undo and relative cursor presence | 18 tests passed; actual WebSockets/server crashes |
 | Project | [F: multiplayer simulation](../../examples/synchronization/f-multiplayer/README.md): scheduled UDP inputs, prediction/replay, interpolation and fault schedules | 24 tests passed; actual UDP/server crash and logical adverse links |
 | Experiment | [Local concurrency lab](../../examples/synchronization/05-local-concurrency/README.md): forced Java schedules, process boundary and Node shared workers | 20 Java scenarios + 1 JVM-boundary check; 3 Node checks passed |
+
+| Project | [G: failure harness](../../examples/synchronization/g-fault-harness/README.md): seeded schedules, HTTP faults, SQLite aborts and supervised crashes | 25 tests passed; local boundaries |
 
 Read stages 1–3 before choosing OT or CRDTs. Read both algorithm chapters to compare them. Database and networking chapters can then be studied independently. The practical path interleaves A with databases, B with messaging, C with the engine, D with editing, E with CRDTs, F with games, and G throughout.
 
@@ -84,7 +86,9 @@ guides/synchronization/
   11-collaboration/         application contracts, product evidence and editor lab
   12-multiplayer/           game timelines, genre contracts and evidence
   13-local-concurrency/     shared-memory contracts, progress and evidence
-  14-security/ ... 18-synthesis/  later chapters, created sequentially
+  14-security/             trust, authorization, replay, encryption and audit
+  15-production/           scaling, overload, recovery and correctness tests
+  16-handbook/ ... 18-synthesis/  later chapters, created sequentially
 examples/synchronization/
   00-foundations/           dependency-free executable experiments
   01-math-conflicts/        quantitative and merge experiments; 20 tests

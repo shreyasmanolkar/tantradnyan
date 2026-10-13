@@ -49,3 +49,7 @@ Transport/latency + speculative-state boundaries → [multiplayer timelines](12-
 ## Installment 9 implementation path
 
 Linearizable transitions + database/engine boundaries → [local concurrency](13-local-concurrency/README.md) → [Java/Node lab](../../examples/synchronization/05-local-concurrency/README.md). Publication and lifetime proofs precede relaxed memory modes or custom nonblocking structures. Local atomic state does not supply the durable/network authority needed by prior synchronization projects.
+
+## Installment 10 implementation path
+
+Engine/database acceptance + local-first recovery → [security boundaries](14-security/README.md) → [production ownership and recovery](15-production/README.md) → [Project G](../../examples/synchronization/g-fault-harness/README.md). A protocol oracle must precede its fault workload. Logical seeded schedules, real application-level HTTP faults, process crashes and full cluster/physical failures establish different evidence; success at one level does not prove the others.
