@@ -70,7 +70,8 @@ export async function startGateway(config,{port=0,pullMs=200,publish=true,crashB
     handleProtocols:protocols=>protocols.has(SUBPROTOCOL)?SUBPROTOCOL:false});
   server.on('upgrade',(request,socket,head)=>{
     const deny=code=>{socket.end(`HTTP/1.1 ${code}\r\nConnection: close\r\n\r\n`);};
-    const user=tokens.get(request.headers.authorization?.replace(/^Bearer /,''));
+    const match=typeof request.headers.authorization==='string'&&request.headers.authorization.match(/^Bearer ([A-Za-z0-9-]+)$/);
+    const user=match&&tokens.get(match[1]);
     if(!user)return deny('401 Unauthorized');
     if(request.url!=='/chat')return deny('404 Not Found');
     if(request.headers.origin&&!['http://127.0.0.1','http://localhost'].includes(request.headers.origin))return deny('403 Forbidden');

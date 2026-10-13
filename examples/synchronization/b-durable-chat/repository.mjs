@@ -77,7 +77,7 @@ export class Repository {
     }catch(e){await c.query('ROLLBACK;').catch(()=>{});throw e;}finally{c.release();}
   }
   async pendingNotifications(){
-    return (await this.pool.query(`SELECT channel_id AS channel,seq::text FROM ${this.p}outbox WHERE NOT published ORDER BY channel_id,seq LIMIT 20;`)).rows;
+    return (await this.pool.query(`SELECT channel_id AS channel,seq::text FROM ${this.p}outbox AS o WHERE NOT published ORDER BY o.channel_id,o.seq LIMIT 20;`)).rows;
   }
   async markPublished(channel,seq){await this.pool.query(`UPDATE ${this.p}outbox SET published=true WHERE channel_id=$1 AND seq=$2;`,[channel,seq]);}
   // Test/setup control only; never exposed to WebSocket clients.
