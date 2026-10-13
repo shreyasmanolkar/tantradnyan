@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:18.4-alpine
+    container_name: sync-masterclass-chat-db
+    environment:
+      POSTGRES_USER: sync_chat
+      POSTGRES_DB: sync_chat
+      POSTGRES_PASSWORD: local-chat-lab-only
+    ports: ["127.0.0.1::5432"]
+    volumes: ["chat-data:/var/lib/postgresql"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sync_chat -d sync_chat"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+  broker:
+    image: redis:7.4.3-alpine
+    container_name: sync-masterclass-chat-broker
+    ports: ["127.0.0.1::6379"]
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+volumes:
+  chat-data:
