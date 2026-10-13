@@ -1,0 +1,10 @@
+import { insert, del, diamond, oneRound, tp2Witness } from './model.mjs';
+const d = diamond('cat', insert(1, 'X', 'M:1'), insert(2, 'Y', 'D:1'));
+console.log(`optimistic views: ${d.aLocal}, ${d.bLocal}`);
+console.log(`transformed results: ${d.aFinal}, ${d.bFinal}`);
+const bothDelete = diamond('cat', del(1, 'M:1'), del(1, 'D:1'));
+console.log(`same deletion: ${bothDelete.aFinal}; remote kind=${bothDelete.bAfterA.kind}`);
+const r = oneRound('cat', insert(1, 'X', 'M:1'), del(1, 'D:1'), 'b');
+console.log(`one-round server and clients: ${r.server}, ${r.aFinal}, ${r.bFinal}`);
+const w = tp2Witness();
+console.log(`TP2 counterexample: ${w.left} != ${w.right}`);
