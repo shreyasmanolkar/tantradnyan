@@ -1,0 +1,31 @@
+# Concept dependency map
+
+```mermaid
+flowchart TD
+  S[State machines and invariants] --> F[Failures and retries]
+  S --> C[Causality and order]
+  F --> G[Consistency and coordination]
+  C --> G
+  G --> X[Conflict policies]
+  X --> O[OT]
+  X --> R[CRDTs]
+  G --> D[Database atomicity and replication]
+  F --> N[Transport and delivery]
+  D --> E[Durable synchronization engine]
+  N --> E
+  O --> A[Collaborative applications]
+  R --> A
+  E --> A
+  E --> L[Local-first and messaging]
+  N --> M[Prediction and multiplayer simulation]
+  G --> M
+  E --> P[Security and production operation]
+  A --> P
+  L --> P
+  M --> P
+  P --> Y[Comparison and synthesis]
+```
+
+The arrows are learning dependencies, not software call edges. Mathematics is introduced where needed and consolidated in its reference. Java memory ordering is a separate local concurrency branch: learn state transitions and linearization first, then connect atomic server/database operations to distributed protocols.
+
+Implementation dependencies: A establishes atomic acceptance; B adds durable delivery; C adds disconnected writes; D adds a text merge model; E tests replicated algebra independently; F adds simulated time and latency hiding; G tests every branch. Project D does not depend on implementing a CRDT sequence from scratch.

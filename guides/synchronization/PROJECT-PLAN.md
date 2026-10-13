@@ -1,0 +1,60 @@
+# Authoring and implementation plan
+
+Status: draft. Scope date: 2026-10-13. Reader and objective: see the master index.
+
+This plan is stated before the guides. It adapts the repository template to a book-sized resource: individual chapters explain their own questions, worked example, alternatives, failures, security boundary, evidence, and open issues. Shared references prevent repeated definitions. A section may be omitted only when its reader need is met by an explicit cross-reference or does not apply.
+
+## Coherent example domain
+
+Mira and Dev edit a shared document in a workspace. The document has a title, text, comments, tags, and permissions. A task refers to the document. A channel contains messages about it. A game arena adds continuously simulated positions. These extensions deliberately change the state model; they do not pretend that text offsets, relational constraints, and physics are interchangeable.
+
+Each example names its actors, initial state, transition rule, network schedule, failure assumptions, observed state, expected outcome, and verification method. ASCII text precedes Unicode; rich text follows plain text; one object precedes cross-object constraints; two replicas precede multi-region deployment.
+
+## Chapter questions and coverage contract
+
+| Chapter | Questions it must answer before substantive completion |
+|---|---|
+| Foundations | What is shared state? What is an observation contract? Why are concurrent and failed histories ambiguous? What do retries, causal metadata, consistency and coordination establish? |
+| Mathematics | How do latency, bandwidth-delay product, Little's Law, retransmission probability, drift bounds, operation algebra and metadata complexity guide concrete decisions? Every equation needs variables, assumptions, derivation where useful, numbers and limits. |
+| Conflicts | How do LWW, three-way merge, CAS, version vectors, OT, CRDTs, transactions and human decisions differ in algorithm, correctness, intent, time/space cost and domain fit? Include nested edits, deletion, permissions and dependencies. |
+| OT | How do position transforms and pending queues work? Which TP1/TP2 or algorithm-specific obligations apply? How do insert/delete/replace, Unicode and structure change proofs? |
+| CRDTs | Why do join or commutativity rules converge? Implement G/2P/OR sets, G/PN counters, LWW/MV registers and maps; explain lists, rich text, tombstones and safe reclamation. |
+| Databases | How do ACID, MVCC, locks, conditional writes, serializability, WAL, CDC, primary/multi-primary replication, 2PC and consensus differ? Include SQL histories and whole-transaction retries. |
+| Networking | What do IP, TCP, UDP, WebSockets, SSE and polling guarantee? Explain packet identity, congestion, secure transport, NAT/relays and selective reliability. |
+| Engine | Who owns each of the 18 lifecycle responsibilities in the request? Trace local write through validation, commit, broadcast, catch-up, snapshots and garbage collection. |
+| Messaging | What differs between messages, edits, reactions, typing, presence, receipts and game inputs? Explain durable logs, queues, pub/sub, streams, partitions, groups, fan-out, cursors, backpressure, CQRS and replay. |
+| Local-first | What happens after days offline, auth expiry, revocation, migration, deletion and crash? What can an encrypted server validate? Why does local-first not require peer-to-peer? |
+| Collaboration | How do text, design graphs, tasks/pages, shared source, execution and terminals differ? Separate persistent state, presence, control authority and confirmed product evidence. |
+| Games | How do ticks, frame rate, prediction, reconciliation, interpolation, extrapolation, lag compensation, rollback and lockstep work? Compare all eight requested genres and implement a movement timeline. |
+| Local concurrency | How do Java CAS, fetch-and-add, barriers, locks, condition variables, ABA and tagged versions work? Distinguish lock-free from wait-free and local linearization from distributed authority. Investigate k-mer terminology without assuming a connection. |
+| Security | Where are authentication, authorization, validation, tenant isolation, replay protection, transport integrity, E2EE and audit enforced? What happens to revoked offline clients? |
+| Production | How do gateways, hot partitions, presence, regions, overload, snapshots, rolling versions, storms and disaster recovery behave? Which tests detect wrong histories, rather than only throughput? |
+| Handbook | Can a fresh checkout run A–G, verify expected outputs, inject failures and understand simplifications? Include directory maps, critical function walkthroughs, performance limits and hardening. |
+| Comparisons | Compare all 11 requested application classes across state, authority, consistency, conflicts, delivery, offline use, latency, durability, failures, security and trade-offs. |
+| Synthesis | Can the reader derive a new protocol from invariants and failure assumptions and critically read a paper or implementation? |
+
+## Evidence workflow
+
+Use original papers for established properties; versioned specifications and runtime/database documentation for behavior; responsible-team reports and source code for product internals. Search snippets are leads, not a substitute for reading the relevant source. Record unavailable full text and do not claim its detailed proof has been checked. Citation placement must distinguish an established result from this guide's original illustrative example.
+
+Product facts will carry a date and source. Google Docs, Figma, Linear, Notion, Slack, and Discord are application categories until a primary source establishes a specific implementation. Historical engineering reports are evidence of that historical design, not proof of today's whole architecture.
+
+## Project design and verification
+
+A: versioned record, stale-write rejection, atomic increment, Java CAS, SQL serializable retry.
+B: durable transaction for message and idempotency key; reconnect by channel sequence; broker fan-out as an optimization.
+C: atomic local update plus outbox; atomic server mutation plus dedup result and change log; snapshot fallback after cursor expiry.
+D: choose and pin a CRDT library after current-source research; explain protocol and library-specific limits separately.
+E: state-based types first, then observed-remove causal metadata; property checks over deterministic permutations.
+F: fixed-step server, sequenced inputs, acknowledged input snapshots, client replay and remote interpolation.
+G: seeded fault scheduler; test eventual catch-up, invariant preservation, replay safety and durable commit across real process restarts.
+
+Node examples use JavaScript modules unless TypeScript adds enough value to justify tooling. Pin network dependencies and record versions when installing. PostgreSQL examples identify an explicit supported major version. Java examples identify a JDK version. Tests must include histories that would fail a plausible incorrect implementation. Integration tests must distinguish in-memory simulation from actual disk/process/network boundaries.
+
+## Review ledger
+
+First installment covers structure, foundation, shared vocabulary, initial bibliography and a foundation lab. It does not satisfy the complete masterclass or projects A–G. Full algorithms, product research, quantitative reference and production implementations remain outstanding.
+
+Reviewer: pending technically informed reader.
+Review date: pending.
+Open issues: planned chapters and projects; technical review; full-text checks recorded in chapter research notes.
