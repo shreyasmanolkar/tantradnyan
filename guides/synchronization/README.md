@@ -1,6 +1,6 @@
 # Synchronization, distributed state, and multiplayer systems
 
-Status: **draft; installments 1–2**. Evidence checked: 2026-10-13. This index distinguishes written material from planned material. The full masterclass is not yet complete.
+Status: **draft; installments 1–3**. Evidence checked: 2026-10-13. This index distinguishes written material from planned material. The full masterclass is not yet complete.
 
 ## Reader, objective, and boundary
 
@@ -29,8 +29,8 @@ Start with state transitions and failure ambiguity. Learn causality before confl
 | 1 | [Distributed state](01-distributed-state/README.md): unified model, failures, retries, clocks, consistency, coordination, design choices | Written; draft |
 | 2 | [Mathematical foundations](02-mathematics/README.md): quantitative reference; proofs, queueing, reliability, bounds and complexity | Written; draft |
 | 3 | [Conflict resolution](03-conflict-resolution/README.md): compare merge policies using identical histories and domain invariants | Written; draft |
-| 4 | `04-ot/README.md`: transformations, correctness conditions, client/server state and structured text | Planned |
-| 4 | `05-crdts/README.md`: semilattices, causal operations, concrete data types, deletion and compaction | Planned |
+| 4 | [Operational transformation](04-ot/README.md): transforms, TP1/TP2, client/server control, Unicode and structured text | Written; draft |
+| 4 | [CRDTs](05-crdts/README.md): semilattices, datatype implementations, causal context, sequences, rich text and reclamation | Written; draft |
 | 5 | `06-database-concurrency/README.md`: transactions, MVCC, CAS, WAL, replication, consensus and distributed commit | Planned |
 | 5 | `07-networking/README.md`: transport, delivery, congestion, latency budgets, packet protocols and NAT | Planned |
 | 6 | `08-sync-engine/README.md`: mutation lifecycle, durable queues, cursors, recovery, protocol evolution and ownership | Planned |
@@ -47,6 +47,8 @@ Start with state transitions and failure ambiguity. Learn causality before confl
 | Reference | [Notation](NOTATION.md), [glossary](GLOSSARY.md), [bibliography](BIBLIOGRAPHY.md), [dependency map](DEPENDENCIES.md) | Written; expands with chapters |
 | Experiment | [Foundation lab](../../examples/synchronization/00-foundations/README.md): lost updates, retries, causal comparisons and noncommuting text edits | Runnable source and tests written; see validation record |
 | Experiment | [Math/conflict lab](../../examples/synchronization/01-math-conflicts/README.md): quantitative models, LWW, three-way merge, causal frontiers and observed-remove tags | 20 tests passed; memory-only |
+| Experiment | [OT lab](../../examples/synchronization/02-ot/README.md): pairwise transforms, bounded round, cursors and TP2 counterexample | 10 tests passed; 220 pair cases |
+| Experiment | [CRDT lab](../../examples/synchronization/03-crdts/README.md): sets, counters, registers, maps, sequences and explicit rich-text marks | 23 tests passed; memory-only |
 
 Read stages 1–3 before choosing OT or CRDTs. Read both algorithm chapters to compare them. Database and networking chapters can then be studied independently. The practical path interleaves A with databases, B with messaging, C with the engine, D with editing, E with CRDTs, F with games, and G throughout.
 
@@ -65,10 +67,14 @@ guides/synchronization/
     RESEARCH.md             evidence boundaries and review gaps
   02-mathematics/            quantitative reference and evidence notes
   03-conflict-resolution/   merge policies, worked histories and evidence notes
-  04-ot/ ... 18-synthesis/   later chapters, created sequentially
+  04-ot/                   transformation and control guide; evidence notes
+  05-crdts/                convergent datatype guide; evidence notes
+  06-database-concurrency/ ... 18-synthesis/  later chapters, created sequentially
 examples/synchronization/
   00-foundations/           dependency-free executable experiments
   01-math-conflicts/        quantitative and merge experiments; 20 tests
+  02-ot/                   bounded pairwise transforms; 10 tests
+  03-crdts/                replicated types and semantic limits; 23 tests
   a-versioned-store/        Project A: conditional records, Java and PostgreSQL
   b-durable-chat/           Project B: WebSockets, PostgreSQL, catch-up
   c-offline-engine/         Project C: durable local outbox and replay

@@ -57,6 +57,8 @@ First installment covers structure, foundation, shared vocabulary, initial bibli
 
 Second installment adds the mathematical foundations reference, conflict-resolution guide and a dependency-free lab with 20 passing tests. It covers numerical models, explicit merge policies, causal alternatives, deletion and invariant counterexamples. Full OT/CRDT chapters and projects A–G remain outstanding; the educational lab does not replace durable/networked integration work.
 
+Third installment adds detailed OT and CRDT guides and two runnable labs. OT includes 220 pair cases and a documented TP2 counterexample; CRDTs include a compact dot/context MV register, fixed-key map, retained insertion tree and explicitly limited rich-text marks. Ten OT and 23 CRDT tests passed. These labs do not replace full networked/durable Projects D, E and G; database concurrency and networking are next.
+
 Reviewer: pending technically informed reader.
 Review date: pending.
 Open issues: planned chapters and projects; technical review; full-text checks recorded in chapter research notes.

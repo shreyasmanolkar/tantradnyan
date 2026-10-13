@@ -56,3 +56,22 @@ Corrections to common conflations: message delivery is not commit; convergence i
 | Domain invariant | Application rule required of accepted states or histories; convergence alone does not enforce it. |
 | Conflict resolution | A defined decision to combine, transform, select, retain or reject competing operations/state. |
 | Intention preservation | A context-dependent requirement that merged effects reflect specified user operation meaning; deterministic agreement alone does not establish it. |
+
+## Editing and replicated datatype terms
+
+| Term | Meaning |
+|---|---|
+| Inclusion transformation | Adjust an operation to a context that includes another operation's effect. |
+| Operation context | The state/history in which an operation's coordinates and preconditions are meaningful. |
+| TP1 | Pairwise transform obligation that complementary execution paths produce equivalent states. |
+| TP2 | Path-independence obligation for transforming a third operation through two equivalent concurrent paths. Applicable paths depend on the control algorithm. |
+| Control algorithm | Protocol that selects transformation/delivery contexts and admissible histories around the datatype operations. |
+| Confirmed shadow | Client representation of its known authoritative accepted prefix, distinct from speculative visible state. |
+| Cursor affinity | Policy deciding whether a boundary stays before or moves after text inserted exactly at it. |
+| Dot | Actor/counter identity of one event/write in a specified object/history scope. |
+| Causal context | Evidence of observed history, retained even when obsolete values are pruned. |
+| Delta-state | Joinable state fragment governed by a delta-CRDT's dissemination/causality rules. |
+| Causal stability | Protocol evidence that relevant participants have incorporated required causal history; reclamation also depends on references and return/restore rules. |
+| Sequence anchor | Stable element identity used to place another insertion or resolve a position. |
+| Grapheme cluster | Unicode segmentation unit approximating a user-perceived character; may contain multiple scalars/code units. |
+| Writer incarnation | Exclusive generation of a writer identity whose operation/counter namespace cannot be rolled back or reused. |
