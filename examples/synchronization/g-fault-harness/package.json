@@ -1,0 +1,1 @@
+{"name":"synchronization-fault-harness","version":"0.1.0","private":true,"type":"module","engines":{"node":">=26.7.0"},"scripts":{"test":"node --test harness.test.mjs","demo":"node demo.mjs"}}
