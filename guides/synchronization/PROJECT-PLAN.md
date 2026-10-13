@@ -63,6 +63,8 @@ Fourth installment adds database concurrency and networking guides, Project A an
 
 Fifth installment adds synchronization-engine and messaging guides plus Project B. Sixteen reported tests pass on PostgreSQL 18.4, Redis 7.4.3 and Node 26.7.0, including actual gateway SIGKILL before commit and after commit/before ACK. The demo verifies stable-ID replay and incremental catch-up. The client remains memory-only; snapshot reset, actual pruning, broker/database outage, WAN/load tests and production authentication remain outstanding. Next: local-first guide and Project C durable client queue.
 
+Sixth installment adds the local-first guide and Project C. Twenty-five tests pass on Node 26.7.0 / SQLite 3.53.4 with file-backed stores, loopback HTTP and actual client/authority SIGKILL. The protocol reconciles retained outcomes atomically with snapshots, preserves conflicts, checks conditional dependencies, propagates tombstones and fences obsolete epochs. It prunes the change log but retains outcomes; browser storage, implemented migrations, encrypted payloads, safe outcome GC and production identity remain outside the lab. Next: application-specific collaboration architectures and Project D collaborative text.
+
 Reviewer: pending technically informed reader.
 Review date: pending.
 Open issues: planned chapters and projects; technical review; full-text checks recorded in chapter research notes.

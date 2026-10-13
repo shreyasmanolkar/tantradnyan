@@ -1,6 +1,6 @@
 # Synchronization, distributed state, and multiplayer systems
 
-Status: **draft; installments 1–5**. Evidence checked: 2026-10-13. This index distinguishes written material from planned material. The full masterclass is not yet complete.
+Status: **draft; installments 1–6**. Evidence checked: 2026-10-13. This index distinguishes written material from planned material. The full masterclass is not yet complete.
 
 ## Reader, objective, and boundary
 
@@ -35,7 +35,7 @@ Start with state transitions and failure ambiguity. Learn causality before confl
 | 5 | [Networking](07-networking/README.md): TCP/UDP, web transports, QUIC, framing, congestion, secure establishment and NAT | Written; draft |
 | 6 | [Synchronization engine](08-sync-engine/README.md): mutation lifecycle, durable queues, cursors, recovery, protocol evolution and ownership | Written; draft |
 | 7 | [Messaging](09-messaging/README.md): durable chat, ephemeral events, brokers, ordering, fan-out and recovery | Written; draft |
-| 7 | `10-local-first/README.md`: offline state, days-long divergence, migrations, permissions and encrypted synchronization | Planned |
+| 7 | [Local-first software](10-local-first/README.md): durable offline work, snapshots, dependencies, retention, migrations, permissions and encryption | Written; draft |
 | 7 | `11-collaboration/README.md`: text, design graphs, task systems, shared code and terminals | Planned |
 | 7 | `12-multiplayer/README.md`: authoritative simulation, prediction, interpolation, rollback, fairness and game genres | Planned |
 | 8 | `13-local-concurrency/README.md`: Java primitives, memory ordering, ABA, progress guarantees and distributed boundaries | Planned |
@@ -51,8 +51,8 @@ Start with state transitions and failure ambiguity. Learn causality before confl
 | Experiment | [CRDT lab](../../examples/synchronization/03-crdts/README.md): sets, counters, registers, maps, sequences and explicit rich-text marks | 23 tests passed; memory-only |
 | Project | [A: versioned store](../../examples/synchronization/a-versioned-store/README.md): PostgreSQL transactions/replay plus Java CAS | 14 SQL scenarios passed; Java assertions passed |
 | Experiment | [Networking lab](../../examples/synchronization/04-networking/README.md): TCP framing/reconnect, UDP loss/retry and stale snapshots | 13 tests passed; real loopback sockets |
-
 | Project | [B: durable chat](../../examples/synchronization/b-durable-chat/README.md): WebSockets, transactional acceptance, Redis hints and reconnect history | 16 tests passed; actual gateway crash/restart |
+| Project | [C: offline engine](../../examples/synchronization/c-offline-engine/README.md): SQLite outbox, retained outcomes, snapshot fallback and review | 25 tests passed; actual client/authority crashes |
 
 Read stages 1–3 before choosing OT or CRDTs. Read both algorithm chapters to compare them. Database and networking chapters can then be studied independently. The practical path interleaves A with databases, B with messaging, C with the engine, D with editing, E with CRDTs, F with games, and G throughout.
 
@@ -77,7 +77,8 @@ guides/synchronization/
   07-networking/            protocol guide and socket validation notes
   08-sync-engine/           engine ownership, commit boundaries and recovery
   09-messaging/             durable/ephemeral delivery and validation notes
-  10-local-first/ ... 18-synthesis/  later chapters, created sequentially
+  10-local-first/           offline divergence, local durability and evidence
+  11-collaboration/ ... 18-synthesis/  later chapters, created sequentially
 examples/synchronization/
   00-foundations/           dependency-free executable experiments
   01-math-conflicts/        quantitative and merge experiments; 20 tests
@@ -86,7 +87,7 @@ examples/synchronization/
   04-networking/           real TCP/UDP loopback and parser tests
   a-versioned-store/        Project A: conditional records, Java and PostgreSQL
   b-durable-chat/           Project B: WebSockets, PostgreSQL, catch-up
-  c-offline-engine/         Project C: durable local outbox and replay
+  c-offline-engine/         Project C: SQLite outbox, snapshots and crash tests
   d-collaborative-text/     Project D: document synchronization
   e-crdts/                 Project E: merge types and convergence tests
   f-multiplayer/           Project F: authoritative simulation and clients

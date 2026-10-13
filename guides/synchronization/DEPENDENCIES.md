@@ -33,3 +33,7 @@ Implementation dependencies: A establishes atomic acceptance; B adds durable del
 ## Installment 5 implementation path
 
 Database atomicity + networking → [engine lifecycle](08-sync-engine/README.md) → [messaging](09-messaging/README.md) → [Project B](../../examples/synchronization/b-durable-chat/README.md). Project C will add durable client state/outbox and reset recovery; Project B proves only the server acceptance and history-delivery branch.
+
+## Installment 6 implementation path
+
+[Engine commit boundaries](08-sync-engine/README.md) + [conflict policies](03-conflict-resolution/README.md) → [local-first recovery](10-local-first/README.md) → [Project C](../../examples/synchronization/c-offline-engine/README.md). Project C adds actual local file persistence, snapshot/outcome reconciliation and client crashes. Rich text, browser storage, cryptographic membership and production retention require their own mechanisms.

@@ -112,3 +112,12 @@ Corrections to common conflations: message delivery is not commit; convergence i
 - **Publisher confirm:** broker evidence to a publisher; not proof of recipient processing.
 - **Consumer acknowledgment:** consumer evidence to its broker under a declared processing policy.
 - **Presence lease:** expiring session liveness evidence, not proof that a person is available.
+
+## Offline work and retention
+
+- **Confirmed base:** locally retained shared projection through an applied checkpoint, separate from speculative pending work.
+- **Private conflict:** retained user proposal that failed shared acceptance and remains available for review/export.
+- **Unknown success:** a possibly committed operation whose acknowledgment was not retained; reconcile its original identity before replay or overlay reset.
+- **Synchronization lease:** bounded eligibility for an offline replica to rejoin/replay under a stated retention policy; not an automatic authorization guarantee.
+- **Snapshot staging:** collect/validate a complete versioned snapshot before atomically selecting it as the active projection.
+- **Review quarantine:** preserve obsolete-generation work without automatically resubmitting effects whose prior history is no longer known.

@@ -85,3 +85,15 @@ Checked 2026-10-13; implementation versions and executed boundaries are recorded
 - [ws 8.22.0 source README](https://github.com/websockets/ws/blob/8.22.0/README.md) and [node-redis source](https://github.com/redis/node-redis): actual transport/broker client APIs used in Project B.
 - [CQRS](https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs) and [event sourcing](https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing): useful pattern boundaries, not requirements for chat.
 - [RFC 9420: MLS](https://www.rfc-editor.org/rfc/rfc9420.html), July 2023: group-key protocol; distinguish key security from application state and authorization semantics.
+
+## Local-first software and offline durability: installment 6
+
+Checked 2026-10-13. Separate user aspirations, storage guarantees and protocol choices.
+
+- [Kleppmann et al., Local-first software](https://www.inkandswitch.com/essay/local-first/), 2019: responsiveness, ownership and collaborative/offline goals; a research agenda rather than a complete production protocol.
+- [Node 26.7.0 SQLite API](https://nodejs.org/download/release/v26.7.0/docs/api/sqlite.html): versioned DatabaseSync API used in Project C, avoiding assumptions from newer unversioned documentation.
+- [SQLite transaction semantics](https://www.sqlite.org/lang_transaction.html), [WAL](https://www.sqlite.org/wal.html), [synchronous setting](https://www.sqlite.org/pragma.html#pragma_synchronous) and [online backup](https://www.sqlite.org/backup.html): local atomicity, storage assumptions and coherent backup.
+- [WHATWG Storage](https://storage.spec.whatwg.org/) and [IndexedDB 3.0](https://www.w3.org/TR/IndexedDB/): browser persistence, quotas and transaction lifecycle; persistent origin storage is not an off-device backup.
+- [RFC 9700](https://www.rfc-editor.org/rfc/rfc9700.html), January 2025: current OAuth security practice; Project C uses public fixture tokens and implements no real refresh flow.
+
+Read the local-first guide's [validation record](10-local-first/RESEARCH.md) alongside these sources to distinguish actual process-crash evidence from untested browser, media, migration and cryptographic behavior.

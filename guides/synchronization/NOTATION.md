@@ -31,3 +31,7 @@ Networking notation: byte-stream frames, IP packets, UDP datagrams, operation ID
 ## Messaging identity and progress
 
 Project B uses `opId` for a logical submission across retries, `requestId` for one RPC correlation, `messageId` for accepted content, and `(channel, epoch, seq)` for stream location. Sequences are bigint values serialized as decimal strings; order comparisons remain numeric. The server's sent cursor, the client's applied checkpoint and a page's source high-water boundary denote different facts. An acceptance ACK alone advances none of the client's stream projection.
+
+## Offline state and incorporation
+
+Project C distinguishes confirmed projection `B`, applied cursor `c`, ordered pending intents `P` and retained outcomes/conflicts `R`. Pending accepted operations remain active until the installed confirmed prefix covers their accepted sequence. A snapshot must reconcile original pending identities at the same boundary to avoid double overlay. `dependsOn` names a predecessor outcome in the same actor/authority epoch, not just a matching version number. The lab bounds numbers to JavaScript safe integers, unlike Project B's bigint decimal-string protocol; production protocols must choose explicit ranges.
