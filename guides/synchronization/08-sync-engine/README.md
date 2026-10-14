@@ -149,15 +149,15 @@ sequenceDiagram
   L-->>M: Local transaction complete
   M->>M: Render provisional state
   M->>A: Original opId/base/dependencies
-  A->>DB: Authorize/validate; commit state + outcome + log/outbox
+  A->>DB: Authorize and validate, then commit state + outcome + log/outbox
   DB-->>A: Chosen durable commit complete
   A-->>M: Accepted opId and original result
   M->>L: Atomically reconcile outcome and retire pending work
   DB->>B: Committed outbox publisher sends hint/event
-  B-->>D: Change available; may be duplicated or missed
+  B-->>D: Change available, possibly duplicated or missed
   D->>A: Fetch authorized changes after applied cursor
   A-->>D: Page through declared high-water mark
-  D->>D: Validate; atomically persist projection + applied checkpoint
+  D->>D: Validate, then atomically persist projection + applied checkpoint
 ```
 
 The four points are local intent persistence, authoritative accepted commit, sender outcome reconciliation, and receiver applied-checkpoint persistence. A broker send is another boundary but does not substitute for any of them.
@@ -201,7 +201,7 @@ stateDiagram-v2
   Live --> Offline: connection or process fails
   CatchingUp --> NeedsReset: history expired or generation changed
   Replaying --> NeedsReview: obsolete or unauthorized work
-  NeedsReset --> CatchingUp: preserve pending work; install valid boundary
+  NeedsReset --> CatchingUp: preserve pending work and install valid boundary
   NeedsReview --> Replaying: authorized resolution with new evidence
 ```
 

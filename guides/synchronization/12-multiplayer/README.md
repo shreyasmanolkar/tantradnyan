@@ -155,7 +155,7 @@ sequenceDiagram
   participant S as Authority
   C->>C: sample input / predict movement
   C->>S: input sequence and simulation context
-  Note over C,S: transport delay; client may predict more steps
+  Note over C,S: Transport delay means the client may predict more steps
   S->>S: validate / execute assigned tick
   S-->>C: authoritative state + finalized frontier
   C->>C: discard finalized inputs / restore / replay remainder

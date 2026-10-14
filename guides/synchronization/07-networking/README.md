@@ -244,7 +244,7 @@ sequenceDiagram
   participant C as Client
   participant G as New connection/gateway
   participant A as Authority and durable log
-  C->>G: Authenticate; protocol version; stream generation; durable cursor
+  C->>G: Authenticate with protocol version, stream generation, and durable cursor
   G->>A: Reauthorize scope and validate cursor/retention
   A-->>C: Snapshot/reset boundary or changes through declared high-water mark
   C->>C: Atomically apply catch-up and persist checkpoint

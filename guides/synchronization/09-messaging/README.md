@@ -73,7 +73,7 @@ sequenceDiagram
   D-->>G: ordered page
   G-->>C: page(epoch, entries, nextCursor)
   C->>C: validate and apply contiguous page
-  Note over P,D: Mark published after publishing; crash can repeat hint
+  Note over P,D: Mark published after publishing. A crash can repeat the hint.
 ```
 
 The submit ACK proves acceptance under the database's configured durability assumptions. It proves neither recipient delivery nor recipient storage. A successful socket send may mean bytes entered a buffer. A recipient application ACK can mean projection applied, persisted, displayed or explicitly read; the protocol must say which.

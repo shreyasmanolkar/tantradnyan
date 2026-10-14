@@ -201,7 +201,7 @@ sequenceDiagram
   S--xM: Application ACK lost
   M->>S: Replay exactly M:1 with same request
   S->>DB: Check current authorization, retrieve recorded outcome
-  DB-->>S: Original acceptance; no repeated mutation
+  DB-->>S: Original acceptance, with no repeated mutation
   S-->>M: Original value 1 / version 1
 ```
 

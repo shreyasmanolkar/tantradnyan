@@ -238,8 +238,8 @@ sequenceDiagram
   M->>L: Atomic local mutation + outbox(opId, baseVersion, payload)
   L-->>M: Local durability confirmed
   M->>S: Submit operation
-  S->>B: Begin; authenticate/authorize against current policy; check opId
-  S->>B: Validate base/invariants; apply; record result and log entry
+  S->>B: Begin, authenticate/authorize against current policy, and check opId
+  S->>B: Validate base and invariants, apply, and record result and log entry
   B-->>S: Transaction committed under storage contract
   S-->>M: Accepted(opId, version, cursor)
   M->>L: Persist result and remove pending entry atomically
