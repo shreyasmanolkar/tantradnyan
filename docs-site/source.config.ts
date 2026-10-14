@@ -32,6 +32,12 @@ export const { docs, meta } = defineDocs({
     schema: (context) =>
       pageSchema.extend({
         title: z.string().default(inferTitle(context.path, context.source)),
+        read_time: z.union([z.number(), z.string()]).optional(),
+        source_type: z.string().optional(),
+        topics: z.union([z.array(z.string()), z.string()]).optional(),
+        resource_link: z.string().optional(),
+        status: z.string().optional(),
+        consumed: z.boolean().optional(),
       }),
     postprocess: {
       includeProcessedMarkdown: true,

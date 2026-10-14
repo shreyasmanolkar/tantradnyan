@@ -61,16 +61,22 @@ export default async function ReaderPage({ params, searchParams }: ReaderPagePro
   const stack = openPanes.map((item) => item.href);
   const readerPanes: ReaderPane[] = openPanes.map(({ page, href, hash }, index) => {
     const MDXContent = page.data.body;
-    const components = getMDXComponents({
-      a: createRepoAwareLink(
-        page.url,
-        createRelativeLink(
-          source,
-          page,
-          createPaneReaderLink(page, { stack, index }),
+    const components = getMDXComponents(
+      {
+        a: createRepoAwareLink(
+          page.url,
+          createRelativeLink(
+            source,
+            page,
+            createPaneReaderLink(page, { stack, index }),
+          ),
         ),
-      ),
-    });
+      },
+      {
+        pageTitle: page.data.title ?? '',
+        noteMetadata: page.data,
+      },
+    );
 
     return {
       key: href,

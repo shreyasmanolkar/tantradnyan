@@ -7,13 +7,19 @@ import {
   type ReactNode,
 } from 'react';
 import {
+  hasNoteMetadata,
+  NoteMetadata,
+  type NoteMetadataValues,
+} from '@/components/note-metadata';
+import {
   MarkdownCopyButton,
   ViewOptionsPopover,
 } from 'fumadocs-ui/layouts/docs/page';
 
-type PageActions = {
-  pageTitle: string;
-  markdownUrl: string;
+type PageOptions = {
+  pageTitle?: string;
+  markdownUrl?: string;
+  noteMetadata?: NoteMetadataValues;
 };
 
 function textContent(value: ReactNode): string {
@@ -29,14 +35,20 @@ function textContent(value: ReactNode): string {
 
 export function getMDXComponents(
   components?: MDXComponents,
-  pageActions?: PageActions,
+  pageOptions?: PageOptions,
 ): MDXComponents {
   const resolved: MDXComponents = {
     ...defaultMdxComponents,
     ...components,
   };
 
-  if (!pageActions) return resolved;
+  const pageTitle = pageOptions?.pageTitle ?? '';
+  const markdownUrl = pageOptions?.markdownUrl;
+  const noteMetadata = pageOptions?.noteMetadata;
+  const showPageActions = Boolean(markdownUrl);
+  const showNoteMetadata =
+    noteMetadata !== undefined && hasNoteMetadata(noteMetadata);
+  if (!showPageActions && !showNoteMetadata) return resolved;
 
   const DefaultHeading = (resolved.h1 ?? 'h1') as ComponentType<
     ComponentProps<'h1'>
@@ -46,19 +58,32 @@ export function getMDXComponents(
   >;
   let pageHeadingSeen = false;
   let pageActionsInserted = false;
+  let noteMetadataInserted = false;
 
   return {
     ...resolved,
     h1: (props) => {
-      if (textContent(props.children).trim() === pageActions.pageTitle) {
+      const matchesPageTitle = textContent(props.children).trim() === pageTitle;
+      const isPageTitle = matchesPageTitle || !pageHeadingSeen;
+      if (isPageTitle) {
         pageHeadingSeen = true;
         pageActionsInserted = false;
       }
 
-      return <DefaultHeading {...props} />;
+      const insertMetadata =
+        isPageTitle && showNoteMetadata && !noteMetadataInserted;
+      if (insertMetadata) noteMetadataInserted = true;
+
+      return (
+        <>
+          <DefaultHeading {...props} />
+          {insertMetadata && noteMetadata && <NoteMetadata {...noteMetadata} />}
+        </>
+      );
     },
     p: (props) => {
-      const insertActions = pageHeadingSeen && !pageActionsInserted;
+      const insertActions =
+        showPageActions && pageHeadingSeen && !pageActionsInserted;
       if (insertActions) pageActionsInserted = true;
 
       return (
@@ -66,8 +91,8 @@ export function getMDXComponents(
           <DefaultParagraph {...props} />
           {insertActions && (
             <div className="not-prose flex flex-row items-center gap-2 border-b pt-2 pb-6">
-              <MarkdownCopyButton markdownUrl={pageActions.markdownUrl} />
-              <ViewOptionsPopover markdownUrl={pageActions.markdownUrl} />
+              <MarkdownCopyButton markdownUrl={markdownUrl!} />
+              <ViewOptionsPopover markdownUrl={markdownUrl!} />
             </div>
           )}
         </>

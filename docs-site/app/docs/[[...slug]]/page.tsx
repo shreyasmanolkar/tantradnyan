@@ -31,6 +31,7 @@ export default async function Page({ params }: PageProps) {
     {
       pageTitle: page.data.title ?? '',
       markdownUrl,
+      noteMetadata: page.data,
     },
   );
 

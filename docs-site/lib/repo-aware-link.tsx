@@ -1,4 +1,4 @@
-import type { ComponentProps, ComponentType } from 'react';
+import type { ComponentProps, ComponentType, ReactElement } from 'react';
 
 const repositoryFileUrl = 'https://github.com/shreyasmanolkar/tantradnyan-v2/blob/main';
 const localOrigin = 'https://tantradnyan.invalid';
@@ -6,8 +6,8 @@ const localOrigin = 'https://tantradnyan.invalid';
 export function createRepoAwareLink(
   pageUrl: string,
   fallback: ComponentType<ComponentProps<'a'>>,
-): ComponentType<ComponentProps<'a'>> {
-  return function RepoAwareLink(props) {
+): (props: ComponentProps<'a'>) => ReactElement {
+  return function RepoAwareLink(props): ReactElement {
     if (props.href) {
       const target = new URL(props.href, new URL(pageUrl, localOrigin));
       let repositoryPath: string | undefined;
