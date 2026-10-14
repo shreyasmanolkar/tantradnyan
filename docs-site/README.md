@@ -4,7 +4,7 @@ This Next.js app renders the Markdown and MDX files directly from `../guides`. G
 
 ## Run the site
 
-Use Node.js 22 or newer.
+Use Node.js 22.12 or newer.
 
 ```sh
 cd docs-site

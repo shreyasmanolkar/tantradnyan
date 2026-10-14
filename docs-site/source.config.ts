@@ -1,4 +1,5 @@
 import { pageSchema } from 'fumadocs-core/source/schema';
+import { remarkMdxMermaid } from 'fumadocs-core/mdx-plugins/remark-mdx-mermaid';
 import { defineConfig, defineDocs } from 'fumadocs-mdx/config';
 import { z } from 'zod';
 
@@ -62,4 +63,8 @@ export const { docs, meta } = defineDocs({
   },
 });
 
-export default defineConfig({});
+export default defineConfig({
+  mdxOptions: {
+    remarkPlugins: [remarkMdxMermaid],
+  },
+});
