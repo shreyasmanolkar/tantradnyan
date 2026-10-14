@@ -1,6 +1,13 @@
-# Comparison evidence
+---
+status: ready
+source_type: Evidence record
+last_reviewed: 2026-10-14
+reviewer: "Codex (AI technical/editorial review)"
+review_date: 2026-10-14
+release_scope: "Educational comparison evidence; no measured capacity or inferred current proprietary mechanisms"
+---
 
-Status: ready (educational evidence record). Checked 2026-10-14. Reviewer: Codex (AI technical/editorial review), 2026-10-14.
+# Comparison evidence
 
 The three aligned category tables are authored reference designs. Every requested attribute is covered: state, authority, consistency/invariants, conflicts, transport, offline use, latency, persistence, failures, security and trade-offs. Eleven category rows recur in the same order. No latency benchmarks or current proprietary choices are inferred.
 

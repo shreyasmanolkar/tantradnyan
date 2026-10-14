@@ -23,6 +23,7 @@ export type NoteMetadataValues = {
   resource_link?: string;
   status?: string;
   consumed?: boolean;
+  topic?: string;
   audience?: string;
   prerequisites?: MetadataListValue;
   last_reviewed?: string;
@@ -87,6 +88,7 @@ export function hasNoteMetadata(metadata: NoteMetadataValues): boolean {
     Boolean(metadata.resource_link) ||
     Boolean(metadata.status) ||
     metadata.consumed !== undefined ||
+    Boolean(metadata.topic) ||
     Boolean(metadata.audience) ||
     Boolean(metadata.prerequisites) ||
     Boolean(metadata.last_reviewed) ||
@@ -106,6 +108,7 @@ export function NoteMetadata({
   resource_link: resourceLink,
   status,
   consumed,
+  topic,
   audience,
   prerequisites,
   last_reviewed: lastReviewed,
@@ -127,6 +130,7 @@ export function NoteMetadata({
     !resourceLink &&
     !status &&
     consumed === undefined &&
+    !topic &&
     !audience &&
     !prerequisites &&
     !lastReviewed &&
@@ -172,6 +176,9 @@ export function NoteMetadata({
               ))}
             </span>
           </MetadataRow>
+        )}
+        {topic && (
+          <MetadataRow icon={List} label="Topic">{topic}</MetadataRow>
         )}
         {resourceLink && (
           <MetadataRow icon={Link2} label="Resource Link">

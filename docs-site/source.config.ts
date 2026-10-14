@@ -42,6 +42,7 @@ export const { docs, meta } = defineDocs({
         resource_link: z.string().optional(),
         status: z.string().optional(),
         consumed: z.boolean().optional(),
+        topic: z.string().optional(),
         audience: z.string().optional(),
         prerequisites: z.union([z.array(z.string()), z.string()]).optional(),
         last_reviewed: metadataDate.optional(),
