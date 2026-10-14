@@ -1,5 +1,6 @@
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import type { MDXComponents } from 'mdx/types';
+import { Mermaid } from '@/components/mermaid';
 import {
   isValidElement,
   type ComponentProps,
@@ -40,6 +41,7 @@ export function getMDXComponents(
   const resolved: MDXComponents = {
     ...defaultMdxComponents,
     ...components,
+    Mermaid,
   };
 
   const pageTitle = pageOptions?.pageTitle ?? '';
