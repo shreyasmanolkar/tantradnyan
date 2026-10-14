@@ -1,6 +1,19 @@
-# Authoring and implementation plan
+---
+title: "Authoring and implementation plan"
+description: "Completed plan for the synchronization guide's scope, chapter coverage, evidence workflow, and implementation sequence."
+status: ready
+topic: "Guide boundaries, chapter questions, evidence workflow, and project sequence"
+audience: "The synchronization guide's intended reader and objective are defined in README.md."
+last_reviewed: 2026-10-14
+technical_scope_as_of: "Historical plan scope through 2026-10-13; release review on 2026-10-14"
+asd_ste_reference: "Plain-language principles applied; official issue/dictionary not consulted; no compliance claim"
+reviewer: "Codex (AI technical/editorial review)"
+review_date: 2026-10-14
+open_issues: []
+release_scope: "Completed authoring plan; guide-wide validation status and limits are in REVIEW.md."
+---
 
-Status: ready; authoring plan completed. Release review: 2026-10-14, Codex (AI technical/editorial review). Reader and objective: see the master index. Historical scope date: 2026-10-13.
+# Authoring and implementation plan
 
 This plan is stated before the guides. It adapts the repository template to a book-sized resource: individual chapters explain their own questions, worked example, alternatives, failures, security boundary, evidence, and open issues. Shared references prevent repeated definitions. A section may be omitted only when its reader need is met by an explicit cross-reference or does not apply.
 

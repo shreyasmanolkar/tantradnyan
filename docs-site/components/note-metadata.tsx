@@ -17,6 +17,7 @@ import type { ReactNode } from 'react';
 type MetadataListValue = string[] | string;
 
 export type NoteMetadataValues = {
+  description?: string;
   read_time?: number | string;
   source_type?: string;
   topics?: string[] | string;
@@ -82,6 +83,7 @@ export function hasNoteMetadata(metadata: NoteMetadataValues): boolean {
     : Boolean(metadata.topics?.trim());
 
   return (
+    Boolean(metadata.description) ||
     metadata.read_time !== undefined ||
     Boolean(metadata.source_type) ||
     hasTopics ||
@@ -102,6 +104,7 @@ export function hasNoteMetadata(metadata: NoteMetadataValues): boolean {
 }
 
 export function NoteMetadata({
+  description,
   read_time: readTime,
   source_type: sourceType,
   topics,
@@ -124,6 +127,7 @@ export function NoteMetadata({
     : topics?.split(',').map((topic) => topic.trim()).filter(Boolean) ?? [];
 
   if (
+    !description &&
     readTime === undefined &&
     !sourceType &&
     topicList.length === 0 &&
@@ -147,6 +151,11 @@ export function NoteMetadata({
   return (
     <section className="not-prose mb-6 mt-3 w-full border-b border-fd-border px-8 pb-4 pt-3 max-sm:px-2">
       <dl className="m-0 flex flex-col">
+        {description && (
+          <MetadataRow icon={BookOpen} label="Description">
+            {description}
+          </MetadataRow>
+        )}
         {readTime !== undefined && (
           <MetadataRow icon={Hash} label="Read Time">
             {readTime}
