@@ -198,8 +198,17 @@ export function NoteMetadata({
         )}
         {status && (
           <MetadataRow icon={CircleDashed} label="Status">
-            <span className="inline-flex items-center gap-1.5 rounded bg-amber-100 px-2 py-0.5 text-xs text-amber-700 dark:bg-amber-950 dark:text-amber-300">
-              <span className="size-2 rounded-full bg-amber-500" aria-hidden="true" />
+            <span className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 text-xs ${
+              status.trim().toLowerCase() === 'ready'
+                ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300'
+                : 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300'
+            }`}>
+              <span
+                className={`size-2 rounded-full ${
+                  status.trim().toLowerCase() === 'ready' ? 'bg-emerald-500' : 'bg-amber-500'
+                }`}
+                aria-hidden="true"
+              />
               {status}
             </span>
           </MetadataRow>
