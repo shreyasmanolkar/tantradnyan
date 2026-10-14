@@ -1,6 +1,13 @@
-# Synthesis evidence and scope
+---
+status: ready
+source_type: Evidence record
+last_reviewed: 2026-10-14
+reviewer: "Codex (AI technical/editorial review)"
+review_date: 2026-10-14
+release_scope: "Educational evidence record; see this note for assumptions and validation limits"
+---
 
-Status: ready (educational evidence record). Checked 2026-10-14. Reviewer: Codex (AI technical/editorial review), 2026-10-14.
+# Synthesis evidence and scope
 
 The maintenance workspace is an authored design exercise. Its seven-day offline horizon and latency targets are proposed requirements; its 215 ms budget is an illustrative sum under explicitly stated nonoverlap/size/no-retry assumptions. It is not an implemented application or measured deployment.
 

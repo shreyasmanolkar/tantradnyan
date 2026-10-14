@@ -2,6 +2,10 @@ import { pageSchema } from 'fumadocs-core/source/schema';
 import { defineConfig, defineDocs } from 'fumadocs-mdx/config';
 import { z } from 'zod';
 
+const metadataDate = z.union([z.string(), z.date()]).transform((value) =>
+  value instanceof Date ? value.toISOString().slice(0, 10) : value,
+);
+
 function inferTitle(path: string, source: string): string {
   const heading = source.match(/^#\s+(.+?)\s*#*\s*$/m)?.[1]?.trim();
   if (heading) return heading;
@@ -38,6 +42,15 @@ export const { docs, meta } = defineDocs({
         resource_link: z.string().optional(),
         status: z.string().optional(),
         consumed: z.boolean().optional(),
+        audience: z.string().optional(),
+        prerequisites: z.union([z.array(z.string()), z.string()]).optional(),
+        last_reviewed: metadataDate.optional(),
+        technical_scope_as_of: z.string().optional(),
+        asd_ste_reference: z.string().optional(),
+        reviewer: z.string().optional(),
+        review_date: metadataDate.optional(),
+        open_issues: z.union([z.array(z.string()), z.string()]).optional(),
+        release_scope: z.string().optional(),
       }),
     postprocess: {
       includeProcessedMarkdown: true,

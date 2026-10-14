@@ -1,13 +1,20 @@
 import {
+  BookOpen,
+  CalendarDays,
+  CircleAlert,
   CircleDashed,
   Hash,
   Link2,
   List,
   ListChecks,
   SquareCheck,
+  UserRound,
+  Users,
   type LucideIcon,
 } from 'lucide-react';
 import type { ReactNode } from 'react';
+
+type MetadataListValue = string[] | string;
 
 export type NoteMetadataValues = {
   read_time?: number | string;
@@ -16,7 +23,28 @@ export type NoteMetadataValues = {
   resource_link?: string;
   status?: string;
   consumed?: boolean;
+  audience?: string;
+  prerequisites?: MetadataListValue;
+  last_reviewed?: string;
+  technical_scope_as_of?: string;
+  asd_ste_reference?: string;
+  reviewer?: string;
+  review_date?: string;
+  open_issues?: MetadataListValue;
+  release_scope?: string;
 };
+
+function MetadataList({ value }: { value: MetadataListValue }) {
+  const values = Array.isArray(value) ? value : [value];
+  if (values.length === 0) return <>None</>;
+  if (values.length === 1) return <>{values[0]}</>;
+
+  return (
+    <ul className="my-0 list-disc space-y-1 pl-4">
+      {values.map((item, index) => <li key={`${item}-${index}`}>{item}</li>)}
+    </ul>
+  );
+}
 
 function MetadataRow({
   icon: Icon,
@@ -28,8 +56,8 @@ function MetadataRow({
   children: ReactNode;
 }) {
   return (
-    <div className="grid min-h-8 grid-cols-[minmax(8rem,12rem)_minmax(0,1fr)] items-center gap-x-4 max-sm:grid-cols-[7.5rem_minmax(0,1fr)]">
-      <dt className="inline-flex items-center gap-2.5 text-sm text-fd-muted-foreground">
+    <div className="grid min-h-10 grid-cols-[12rem_minmax(0,1fr)] items-center gap-x-2 max-sm:grid-cols-[8rem_minmax(0,1fr)]">
+      <dt className="inline-flex min-w-0 items-center gap-2.5 text-sm text-fd-muted-foreground">
         <Icon aria-hidden="true" className="size-4 shrink-0" />
         {label}
       </dt>
@@ -57,7 +85,17 @@ export function hasNoteMetadata(metadata: NoteMetadataValues): boolean {
     Boolean(metadata.source_type) ||
     hasTopics ||
     Boolean(metadata.resource_link) ||
-    metadata.consumed !== undefined
+    Boolean(metadata.status) ||
+    metadata.consumed !== undefined ||
+    Boolean(metadata.audience) ||
+    Boolean(metadata.prerequisites) ||
+    Boolean(metadata.last_reviewed) ||
+    Boolean(metadata.technical_scope_as_of) ||
+    Boolean(metadata.asd_ste_reference) ||
+    Boolean(metadata.reviewer) ||
+    Boolean(metadata.review_date) ||
+    metadata.open_issues !== undefined ||
+    Boolean(metadata.release_scope)
   );
 }
 
@@ -68,6 +106,15 @@ export function NoteMetadata({
   resource_link: resourceLink,
   status,
   consumed,
+  audience,
+  prerequisites,
+  last_reviewed: lastReviewed,
+  technical_scope_as_of: technicalScopeAsOf,
+  asd_ste_reference: asdSteReference,
+  reviewer,
+  review_date: reviewDate,
+  open_issues: openIssues,
+  release_scope: releaseScope,
 }: NoteMetadataValues) {
   const topicList = Array.isArray(topics)
     ? topics
@@ -79,14 +126,23 @@ export function NoteMetadata({
     topicList.length === 0 &&
     !resourceLink &&
     !status &&
-    consumed === undefined
+    consumed === undefined &&
+    !audience &&
+    !prerequisites &&
+    !lastReviewed &&
+    !technicalScopeAsOf &&
+    !asdSteReference &&
+    !reviewer &&
+    !reviewDate &&
+    openIssues === undefined &&
+    !releaseScope
   ) {
     return null;
   }
 
   return (
-    <section className="not-prose mb-6 mt-3 w-full rounded-xl border border-fd-border bg-fd-card/50 px-5 py-4">
-      <dl className="m-0 flex flex-col gap-1.5">
+    <section className="not-prose mb-6 mt-3 w-full border-b border-fd-border px-8 pb-4 pt-3 max-sm:px-2">
+      <dl className="m-0 flex flex-col">
         {readTime !== undefined && (
           <MetadataRow icon={Hash} label="Read Time">
             {readTime}
@@ -151,6 +207,37 @@ export function NoteMetadata({
               type="checkbox"
             />
           </MetadataRow>
+        )}
+        {audience && (
+          <MetadataRow icon={Users} label="Audience">{audience}</MetadataRow>
+        )}
+        {prerequisites && (
+          <MetadataRow icon={ListChecks} label="Prerequisites">
+            <MetadataList value={prerequisites} />
+          </MetadataRow>
+        )}
+        {lastReviewed && (
+          <MetadataRow icon={CalendarDays} label="Last Reviewed">{lastReviewed}</MetadataRow>
+        )}
+        {technicalScopeAsOf && (
+          <MetadataRow icon={BookOpen} label="Technical Scope">{technicalScopeAsOf}</MetadataRow>
+        )}
+        {asdSteReference && (
+          <MetadataRow icon={BookOpen} label="ASD-STE Reference">{asdSteReference}</MetadataRow>
+        )}
+        {reviewer && (
+          <MetadataRow icon={UserRound} label="Reviewer">{reviewer}</MetadataRow>
+        )}
+        {reviewDate && (
+          <MetadataRow icon={CalendarDays} label="Review Date">{reviewDate}</MetadataRow>
+        )}
+        {openIssues !== undefined && (
+          <MetadataRow icon={CircleAlert} label="Open Issues">
+            <MetadataList value={openIssues} />
+          </MetadataRow>
+        )}
+        {releaseScope && (
+          <MetadataRow icon={BookOpen} label="Release Scope">{releaseScope}</MetadataRow>
         )}
       </dl>
     </section>
