@@ -6,10 +6,11 @@ export function readerPathForDocsUrl(docsUrl: string): string {
 }
 
 export function paneReaderUrl(stack: string[]): string {
-  const last = stack.at(-1) ?? '/docs/README';
   const query = new URLSearchParams();
   for (const page of stack) query.append('pane', page);
-  const path = readerPathForDocsUrl(last);
   const qs = query.toString();
-  return qs ? `${path}?${qs}` : path;
+
+  // Keep navigation on one route segment so Next.js can preserve the mounted
+  // pane reader while its server-rendered pane list changes.
+  return qs ? `/reader/README?${qs}` : '/reader/README';
 }

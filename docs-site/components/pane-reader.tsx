@@ -138,7 +138,7 @@ export function PaneReader({ panes }: { panes: ReaderPane[] }) {
   useEffect(() => {
     const container = viewport.current;
     if (!container) return;
-    container.scrollTo({ left: container.scrollWidth - container.clientWidth, behavior: scrollBehavior() });
+    container.scrollTo({ left: container.scrollWidth - container.clientWidth, behavior: 'instant' });
 
     for (const pane of container.querySelectorAll<HTMLElement>('[data-reader-hash]')) {
       const hash = pane.dataset.readerHash;
@@ -166,6 +166,13 @@ export function PaneReader({ panes }: { panes: ReaderPane[] }) {
     container.scrollTo({ left: index * (pane.offsetWidth - offset), behavior: scrollBehavior() });
   }
 
+  const paneOccurrences = new Map<string, number>();
+  const paneKeys = panes.map((pane) => {
+    const occurrence = paneOccurrences.get(pane.key) ?? 0;
+    paneOccurrences.set(pane.key, occurrence + 1);
+    return `${pane.key}-${occurrence}`;
+  });
+
   return (
     <main className="reader-theme flex min-h-0 min-w-0 flex-col overflow-hidden bg-fd-background text-fd-foreground scheme-light dark:scheme-dark [grid-area:main]">
       {fullscreenError && <p role="status" className="px-4 py-2">{fullscreenError}</p>}
@@ -175,7 +182,7 @@ export function PaneReader({ panes }: { panes: ReaderPane[] }) {
         <div className="flex h-full w-max min-w-full">
           {panes.map((pane, index) => (
             <section className="group/pane relative top-0 flex flex-col h-full w-[calc(100vw-40px)] shrink-0 basis-[calc(100vw-40px)] overflow-hidden border-l border-[var(--reader-pane-border)] bg-[var(--reader-pane-background)] shadow-[-3px_0_12px_rgb(0_0_0/8%)] max-md:left-0! md:sticky md:w-[750px] md:basis-[750px] [&:fullscreen]:left-0! [&:fullscreen]:h-screen [&:fullscreen]:w-screen [&:fullscreen]:text-fd-foreground" data-reader-pane data-pane-index={index} data-fullscreen={fullscreenIndex === String(index)} data-obscured={obscured.includes(index) && fullscreenIndex !== String(index)}
-              key={`${pane.key}-${index}`} style={{ left: index * spineWidth, zIndex: index + 1 }}
+              key={paneKeys[index]} style={{ left: index * spineWidth, zIndex: index + 1 }}
               aria-label={pane.title}>
               <div className="flex shrink-0 items-center justify-between border-b border-[var(--reader-pane-border)] px-3 py-2 group-data-[obscured=true]/pane:invisible">
                 <button type="button" className="cursor-pointer rounded p-2 hover:bg-[var(--reader-pane-hover)] focus-visible:outline-2 focus-visible:outline-[#0787f9]" title={fullscreenIndex === String(index) ? 'Exit fullscreen' : 'Enter fullscreen'} aria-label={`${fullscreenIndex === String(index) ? 'Exit fullscreen for' : 'Fullscreen'} ${pane.title}`} onClick={(event) => void toggleFullscreen(event.currentTarget.closest('section')!)}>
