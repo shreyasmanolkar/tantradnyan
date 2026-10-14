@@ -35,12 +35,15 @@ export function Mermaid({ chart }: MermaidProps) {
     setFailed(false);
 
     void loadMermaid()
-      .then((mermaid) =>
-        mermaid.render(
+      .then(async (mermaid) => {
+        const parsed = await mermaid.parse(chart);
+        if (!parsed) throw new Error('Invalid Mermaid diagram');
+
+        return mermaid.render(
           `mermaid-${reactId.replaceAll(/[^a-zA-Z0-9_-]/g, '')}`,
           chart,
-        ),
-      )
+        );
+      })
       .then(({ svg: renderedSvg }) => {
         if (active) setSvg(renderedSvg);
       })
