@@ -33,6 +33,57 @@ export function PaneReader({ panes }: { panes: ReaderPane[] }) {
     return () => document.removeEventListener('fullscreenchange', update);
   }, []);
 
+  useEffect(() => {
+    const layout = document.getElementById('nd-docs-layout');
+    if (!layout) return;
+
+    function openSidebarGuide(event: MouseEvent) {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
+
+      const target = event.target instanceof Element ? event.target : null;
+      const link = target?.closest<HTMLAnchorElement>('a[href]');
+      if (
+        !link ||
+        !link.hasAttribute('data-active') ||
+        !link.closest('#nd-sidebar, #nd-sidebar-mobile') ||
+        link.hasAttribute('download') ||
+        (link.target && link.target !== '_self')
+      ) {
+        return;
+      }
+
+      const destination = new URL(link.href, window.location.href);
+      if (
+        destination.origin !== window.location.origin ||
+        !destination.pathname.startsWith('/reader/')
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+      const docsUrl = [
+        `/docs${destination.pathname.slice('/reader'.length)}`,
+        destination.hash,
+      ].join('');
+      router.push(paneReaderUrl([...panes.map((pane) => pane.key), docsUrl]), {
+        scroll: false,
+      });
+    }
+
+    layout.addEventListener('click', openSidebarGuide, true);
+    return () => layout.removeEventListener('click', openSidebarGuide, true);
+  }, [panes, router]);
+
   async function toggleFullscreen(pane: HTMLElement) {
     setFullscreenError('');
     try {
